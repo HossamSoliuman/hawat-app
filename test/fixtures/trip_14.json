@@ -1,0 +1,55 @@
+{
+ "data": {
+  "id": 14,
+  "trip_number": "TR-2026-0014",
+  "status": "ملغاة",
+  "app_status": "ملغاة",
+  "progress_step": 0,
+  "sale_status": "لم يبدأ",
+  "can_sell": false,
+  "boat": {
+   "id": 4,
+   "name": "ريح الجنوب",
+   "boat_number": "B-2002"
+  },
+  "captain": {
+   "id": 7,
+   "name": "كابتن تجريبي",
+   "phone": "0500000002"
+  },
+  "counter": null,
+  "departure_port": {
+   "id": 8,
+   "name": "ميناء جيزان 22"
+  },
+  "return_port": {
+   "id": 8,
+   "name": "ميناء جيزان 22"
+  },
+  "trip_type": {
+   "id": 1,
+   "name": "الصيد التجاري"
+  },
+  "crew_count": 3,
+  "planned_days": 3,
+  "gear_type": "شبك خيشوم",
+  "license_number": "23222222",
+  "departure_time": "2026-09-20T22:11:00+00:00",
+  "started_at": null,
+  "return_time": null,
+  "catch_submitted_at": null,
+  "received_at": null,
+  "counted_at": null,
+  "cancelled_at": "2026-09-20T19:11:57+00:00",
+  "cancel_reason": "weather",
+  "duration_hours": null,
+  "captain_input_kg": null,
+  "actual_weight_kg": null,
+  "diff_kg": null,
+  "approved_kg": null,
+  "notes": null,
+  "catch_records": [],
+  "available_stock": [],
+  "created_at": "2026-09-20T19:11:33+00:00"
+ }
+}

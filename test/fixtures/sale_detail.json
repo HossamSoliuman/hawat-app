@@ -1,0 +1,69 @@
+{
+ "data": {
+  "id": 1,
+  "invoice_number": "26-09-000001",
+  "status": "مكتمل",
+  "trip": {
+   "id": 13,
+   "trip_number": "TR-2026-0013"
+  },
+  "customer": {
+   "id": 1,
+   "name": "سوق السمك المركزي",
+   "phone": "0555000001"
+  },
+  "payment_method": {
+   "id": 1,
+   "name": "نقدًا"
+  },
+  "payment_status": {
+   "id": 3,
+   "name": "مدفوع"
+  },
+  "subtotal": 6100,
+  "discount": 50,
+  "total": 6050,
+  "paid_amount": 6050,
+  "remaining": 0,
+  "commission_pct": 0,
+  "commission_amount": 0,
+  "wage_pct": 0,
+  "wage_amount": 0,
+  "owner_net": 6050,
+  "items_count": 2,
+  "total_kg": 120,
+  "items": [
+   {
+    "id": 1,
+    "species": {
+     "id": 5,
+     "name": "الحريد",
+     "name_sci": "Hipposcarus harid"
+    },
+    "weight_kg": 100,
+    "price_per_kg": 45,
+    "total": 4500,
+    "commission_amount": 0,
+    "wage_amount": 0,
+    "owner_net": 0
+   },
+   {
+    "id": 2,
+    "species": {
+     "id": 6,
+     "name": "الروبيان",
+     "name_sci": "Penaeus semisulcatus"
+    },
+    "weight_kg": 20,
+    "price_per_kg": 80,
+    "total": 1600,
+    "commission_amount": 0,
+    "wage_amount": 0,
+    "owner_net": 0
+   }
+  ],
+  "invoice_url": "http://hawat.test/invoices/1?signature=fe3e9a82d4fa2d46e5adcb9e493074d73ab2667488e8244fc52275430ab62069",
+  "sold_at": "2026-09-20T01:11:53+00:00",
+  "notes": null
+ }
+}

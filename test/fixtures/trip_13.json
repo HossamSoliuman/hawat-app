@@ -1,0 +1,99 @@
+{
+ "data": {
+  "id": 13,
+  "trip_number": "TR-2026-0013",
+  "status": "بانتظار الاعتماد",
+  "app_status": "اكتمل العد وجاهزة للبيع",
+  "progress_step": 4,
+  "sale_status": "قيد البيع",
+  "can_sell": true,
+  "boat": {
+   "id": 1,
+   "name": "نجم الخليج",
+   "boat_number": "B-1001"
+  },
+  "captain": {
+   "id": 7,
+   "name": "كابتن تجريبي",
+   "phone": "0500000002"
+  },
+  "counter": {
+   "id": 6,
+   "name": "مالك تجريبي"
+  },
+  "departure_port": {
+   "id": 1,
+   "name": "ميناء القطيف"
+  },
+  "return_port": {
+   "id": 1,
+   "name": "ميناء القطيف"
+  },
+  "trip_type": null,
+  "crew_count": 4,
+  "planned_days": 3,
+  "gear_type": null,
+  "license_number": null,
+  "departure_time": "2026-09-20T01:09:01+00:00",
+  "started_at": "2026-09-20T01:09:01+00:00",
+  "return_time": "2026-09-20T01:09:24+00:00",
+  "catch_submitted_at": "2026-09-20T01:09:24+00:00",
+  "received_at": null,
+  "counted_at": "2026-09-20T01:10:52+00:00",
+  "cancelled_at": null,
+  "cancel_reason": null,
+  "duration_hours": 0.01,
+  "captain_input_kg": 165.5,
+  "actual_weight_kg": 160,
+  "diff_kg": -5.5,
+  "approved_kg": null,
+  "notes": null,
+  "catch_records": [
+   {
+    "id": 49,
+    "species": {
+     "id": 5,
+     "name": "الحريد",
+     "name_sci": "Hipposcarus harid"
+    },
+    "captain_kg": 120,
+    "counted_kg": 120,
+    "quantity_kg": 120,
+    "captain_notes": null,
+    "counter_notes": null,
+    "verified": true,
+    "added_by": "مالك تجريبي",
+    "recorded_at": "2026-09-20"
+   },
+   {
+    "id": 50,
+    "species": {
+     "id": 6,
+     "name": "الروبيان",
+     "name_sci": "Penaeus semisulcatus"
+    },
+    "captain_kg": 45.5,
+    "counted_kg": 45.5,
+    "quantity_kg": 45.5,
+    "captain_notes": "صندوقان",
+    "counter_notes": null,
+    "verified": true,
+    "added_by": "مالك تجريبي",
+    "recorded_at": "2026-09-20"
+   }
+  ],
+  "available_stock": [
+   {
+    "species_id": 5,
+    "species": "الحريد",
+    "available_kg": 20
+   },
+   {
+    "species_id": 6,
+    "species": "الروبيان",
+    "available_kg": 25.5
+   }
+  ],
+  "created_at": "2026-09-20T01:08:32+00:00"
+ }
+}

@@ -1,0 +1,49 @@
+{
+ "data": {
+  "id": 7,
+  "trip_number": "TR-2026-0007",
+  "status": "عادت للميناء",
+  "app_status": "بانتظار العدّاد",
+  "progress_step": 2,
+  "sale_status": "لم يبدأ",
+  "can_sell": false,
+  "boat": {
+   "id": 2,
+   "name": "لؤلؤة الدمام",
+   "boat_number": "B-1002"
+  },
+  "captain": {
+   "id": null,
+   "name": "سالم القحطاني",
+   "phone": null
+  },
+  "counter": null,
+  "departure_port": {
+   "id": 3,
+   "name": "ميناء الدمام"
+  },
+  "return_port": null,
+  "trip_type": null,
+  "crew_count": 7,
+  "planned_days": null,
+  "gear_type": "سنارة",
+  "license_number": null,
+  "departure_time": "2026-07-27T04:30:00+00:00",
+  "started_at": null,
+  "return_time": "2026-07-27T14:30:00+00:00",
+  "catch_submitted_at": null,
+  "received_at": null,
+  "counted_at": null,
+  "cancelled_at": null,
+  "cancel_reason": null,
+  "duration_hours": 10,
+  "captain_input_kg": 1520,
+  "actual_weight_kg": null,
+  "diff_kg": null,
+  "approved_kg": null,
+  "notes": null,
+  "catch_records": [],
+  "available_stock": [],
+  "created_at": "2026-08-15T19:18:02+00:00"
+ }
+}

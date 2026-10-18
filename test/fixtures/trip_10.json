@@ -1,0 +1,49 @@
+{
+ "data": {
+  "id": 10,
+  "trip_number": "TR-2026-0010",
+  "status": "بانتظار الاعتماد",
+  "app_status": "اكتمل العد",
+  "progress_step": 4,
+  "sale_status": "لم يبدأ",
+  "can_sell": false,
+  "boat": {
+   "id": 4,
+   "name": "ريح الجنوب",
+   "boat_number": "B-2002"
+  },
+  "captain": {
+   "id": null,
+   "name": "فهد الزهراني",
+   "phone": null
+  },
+  "counter": null,
+  "departure_port": {
+   "id": 6,
+   "name": "ميناء الليث"
+  },
+  "return_port": null,
+  "trip_type": null,
+  "crew_count": 3,
+  "planned_days": null,
+  "gear_type": "سنارة",
+  "license_number": null,
+  "departure_time": "2026-07-18T04:30:00+00:00",
+  "started_at": null,
+  "return_time": "2026-07-18T14:30:00+00:00",
+  "catch_submitted_at": null,
+  "received_at": null,
+  "counted_at": null,
+  "cancelled_at": null,
+  "cancel_reason": null,
+  "duration_hours": 10,
+  "captain_input_kg": 1880,
+  "actual_weight_kg": 1880,
+  "diff_kg": 0,
+  "approved_kg": null,
+  "notes": null,
+  "catch_records": [],
+  "available_stock": [],
+  "created_at": "2026-08-15T19:18:02+00:00"
+ }
+}

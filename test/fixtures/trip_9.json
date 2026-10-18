@@ -1,0 +1,49 @@
+{
+ "data": {
+  "id": 9,
+  "trip_number": "TR-2026-0009",
+  "status": "تحت الإحصاء",
+  "app_status": "جارية العد",
+  "progress_step": 3,
+  "sale_status": "لم يبدأ",
+  "can_sell": false,
+  "boat": {
+   "id": 6,
+   "name": "درة فرسان",
+   "boat_number": "B-4001"
+  },
+  "captain": {
+   "id": null,
+   "name": "علي عسيري",
+   "phone": null
+  },
+  "counter": null,
+  "departure_port": {
+   "id": 8,
+   "name": "ميناء جيزان 22"
+  },
+  "return_port": null,
+  "trip_type": null,
+  "crew_count": 6,
+  "planned_days": null,
+  "gear_type": "خيط طويل",
+  "license_number": null,
+  "departure_time": "2026-07-21T04:30:00+00:00",
+  "started_at": null,
+  "return_time": "2026-07-21T14:30:00+00:00",
+  "catch_submitted_at": null,
+  "received_at": null,
+  "counted_at": null,
+  "cancelled_at": null,
+  "cancel_reason": null,
+  "duration_hours": 10,
+  "captain_input_kg": 1760,
+  "actual_weight_kg": null,
+  "diff_kg": null,
+  "approved_kg": null,
+  "notes": null,
+  "catch_records": [],
+  "available_stock": [],
+  "created_at": "2026-08-15T19:18:02+00:00"
+ }
+}
