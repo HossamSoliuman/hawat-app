@@ -262,10 +262,23 @@ class _CatchCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           SectionHead(title: l.sectionCatch, icon: Icons.set_meal_outlined),
-          if (records.isEmpty)
+          if (records.isEmpty && trip.captainInputKg == null)
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 14),
               child: Text(l.noCatchYet, style: text.bodyMedium?.copyWith(color: c.muted)),
+            )
+          else if (records.isEmpty)
+            // Older trips carry the totals without species lines.
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 12),
+              child: Wrap(
+                spacing: 18,
+                runSpacing: 6,
+                children: [
+                  _Total(label: l.declaredLabel, value: l.kg(trip.captainInputKg!)),
+                  if (trip.actualWeightKg != null) _Total(label: l.countedLabel, value: l.kg(trip.actualWeightKg!)),
+                ],
+              ),
             )
           else ...[
             const SizedBox(height: 6),

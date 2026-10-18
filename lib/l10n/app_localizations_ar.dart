@@ -775,7 +775,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get unpaidOnly => 'غير المحصّلة';
 
   @override
-  String get searchSales => 'رقم الفاتورة أو اسم الزبون';
+  String get searchSales => 'ابحث بالفاتورة أو الزبون';
 
   @override
   String get noSalesFound => 'لا فواتير';

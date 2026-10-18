@@ -1486,7 +1486,7 @@ abstract class AppLocalizations {
   /// No description provided for @searchSales.
   ///
   /// In ar, this message translates to:
-  /// **'رقم الفاتورة أو اسم الزبون'**
+  /// **'ابحث بالفاتورة أو الزبون'**
   String get searchSales;
 
   /// No description provided for @noSalesFound.

@@ -269,7 +269,7 @@
 
   "salesTitle": "المبيعات",
   "unpaidOnly": "غير المحصّلة",
-  "searchSales": "رقم الفاتورة أو اسم الزبون",
+  "searchSales": "ابحث بالفاتورة أو الزبون",
   "noSalesFound": "لا فواتير",
   "noUnpaidSales": "كل الفواتير محصّلة",
   "payPaid": "مدفوعة",
