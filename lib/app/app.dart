@@ -12,7 +12,7 @@ class HawatApp extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return MaterialApp.router(
-      title: 'حوات',
+      onGenerateTitle: (context) => AppLocalizations.of(context).appName,
       debugShowCheckedModeBanner: false,
       routerConfig: ref.watch(routerProvider),
       theme: HawatTheme.light(),
