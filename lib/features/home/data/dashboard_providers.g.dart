@@ -14,8 +14,7 @@ part of 'dashboard_providers.dart';
 final homePeriodProvider = HomePeriodProvider._();
 
 /// The selected period chip, remembered on the device.
-final class HomePeriodProvider
-    extends $NotifierProvider<HomePeriod, DashboardPeriod> {
+final class HomePeriodProvider extends $NotifierProvider<HomePeriod, DashboardPeriod> {
   /// The selected period chip, remembered on the device.
   HomePeriodProvider._()
     : super(
@@ -37,10 +36,7 @@ final class HomePeriodProvider
 
   /// {@macro riverpod.override_with_value}
   Override overrideWithValue(DashboardPeriod value) {
-    return $ProviderOverride(
-      origin: this,
-      providerOverride: $SyncValueProvider<DashboardPeriod>(value),
-    );
+    return $ProviderOverride(origin: this, providerOverride: $SyncValueProvider<DashboardPeriod>(value));
   }
 }
 
@@ -56,12 +52,7 @@ abstract class _$HomePeriod extends $Notifier<DashboardPeriod> {
     final ref = this.ref as $Ref<DashboardPeriod, DashboardPeriod>;
     final element =
         ref.element
-            as $ClassProviderElement<
-              AnyNotifier<DashboardPeriod, DashboardPeriod>,
-              DashboardPeriod,
-              Object?,
-              Object?
-            >;
+            as $ClassProviderElement<AnyNotifier<DashboardPeriod, DashboardPeriod>, DashboardPeriod, Object?, Object?>;
     return element.handleCreate(ref, build);
   }
 }
@@ -74,8 +65,7 @@ final dashboardControllerProvider = DashboardControllerFamily._();
 
 /// `GET /owner/dashboard?period=…`, stale-while-revalidate: the saved copy
 /// renders at once and the server's copy replaces it.
-final class DashboardControllerProvider
-    extends $AsyncNotifierProvider<DashboardController, HomeData> {
+final class DashboardControllerProvider extends $AsyncNotifierProvider<DashboardController, HomeData> {
   /// `GET /owner/dashboard?period=…`, stale-while-revalidate: the saved copy
   /// renders at once and the server's copy replaces it.
   DashboardControllerProvider._({
@@ -114,21 +104,14 @@ final class DashboardControllerProvider
   }
 }
 
-String _$dashboardControllerHash() =>
-    r'ab918026fec21ae8345eaece27859c5fe25a01cc';
+String _$dashboardControllerHash() => r'ab918026fec21ae8345eaece27859c5fe25a01cc';
 
 /// `GET /owner/dashboard?period=…`, stale-while-revalidate: the saved copy
 /// renders at once and the server's copy replaces it.
 
 final class DashboardControllerFamily extends $Family
     with
-        $ClassFamilyOverride<
-          DashboardController,
-          AsyncValue<HomeData>,
-          HomeData,
-          FutureOr<HomeData>,
-          DashboardPeriod
-        > {
+        $ClassFamilyOverride<DashboardController, AsyncValue<HomeData>, HomeData, FutureOr<HomeData>, DashboardPeriod> {
   DashboardControllerFamily._()
     : super(
         retry: null,

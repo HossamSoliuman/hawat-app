@@ -75,4 +75,30 @@ void main() {
 
     expect(find.text('المدة يجب ألا تتجاوز 90 يومًا.'), findsOneWidget);
   });
+
+  testWidgets('editing a scheduled trip loads its values and saves them back', (tester) async {
+    final trip = fixtureData<Map<String, dynamic>>('trip_16');
+    final api = ownerApi()
+      ..on(
+        'PUT',
+        '/owner/trips/16',
+        (request) => Reply({
+          'data': {...trip, 'planned_days': (request.data as Map)['planned_days']},
+        }),
+      );
+    await TestApp(api: api).pump(tester, const TripFormScreen(tripId: 16), size: const Size(360, 1600));
+    await tester.pumpAndSettle();
+
+    expect(find.text(ar.editTripTitle), findsOneWidget);
+    expect(find.text('${trip['planned_days']}'), findsWidgets);
+
+    await tester.enterText(find.byType(TextField).first, '5');
+    await tester.tap(find.text(ar.saveTrip));
+    await tester.pumpAndSettle();
+
+    final sent = api.sent('PUT', '/owner/trips/16').single.data as Map;
+    expect(sent['boat_id'], (trip['boat'] as Map)['id']);
+    expect(sent['captain_id'], (trip['captain'] as Map)['id'], reason: 'an edit keeps the captain unless changed');
+    expect(sent['planned_days'], 5);
+  });
 }

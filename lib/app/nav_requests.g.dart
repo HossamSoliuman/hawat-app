@@ -12,8 +12,7 @@ part of 'nav_requests.dart';
 @ProviderFor(TripsTabRequest)
 final tripsTabRequestProvider = TripsTabRequestProvider._();
 
-final class TripsTabRequestProvider
-    extends $NotifierProvider<TripsTabRequest, TabRequest<TripStage>?> {
+final class TripsTabRequestProvider extends $NotifierProvider<TripsTabRequest, TabRequest<TripStage>?> {
   TripsTabRequestProvider._()
     : super(
         from: null,
@@ -34,10 +33,7 @@ final class TripsTabRequestProvider
 
   /// {@macro riverpod.override_with_value}
   Override overrideWithValue(TabRequest<TripStage>? value) {
-    return $ProviderOverride(
-      origin: this,
-      providerOverride: $SyncValueProvider<TabRequest<TripStage>?>(value),
-    );
+    return $ProviderOverride(origin: this, providerOverride: $SyncValueProvider<TabRequest<TripStage>?>(value));
   }
 }
 
@@ -48,8 +44,7 @@ abstract class _$TripsTabRequest extends $Notifier<TabRequest<TripStage>?> {
   @$mustCallSuper
   @override
   WhenComplete runBuild() {
-    final ref =
-        this.ref as $Ref<TabRequest<TripStage>?, TabRequest<TripStage>?>;
+    final ref = this.ref as $Ref<TabRequest<TripStage>?, TabRequest<TripStage>?>;
     final element =
         ref.element
             as $ClassProviderElement<
@@ -68,8 +63,7 @@ abstract class _$TripsTabRequest extends $Notifier<TabRequest<TripStage>?> {
 final salesFilterRequestProvider = SalesFilterRequestProvider._();
 
 /// "Open the sales list with only the unpaid invoices" (or all of them).
-final class SalesFilterRequestProvider
-    extends $NotifierProvider<SalesFilterRequest, TabRequest<bool>?> {
+final class SalesFilterRequestProvider extends $NotifierProvider<SalesFilterRequest, TabRequest<bool>?> {
   /// "Open the sales list with only the unpaid invoices" (or all of them).
   SalesFilterRequestProvider._()
     : super(
@@ -91,15 +85,11 @@ final class SalesFilterRequestProvider
 
   /// {@macro riverpod.override_with_value}
   Override overrideWithValue(TabRequest<bool>? value) {
-    return $ProviderOverride(
-      origin: this,
-      providerOverride: $SyncValueProvider<TabRequest<bool>?>(value),
-    );
+    return $ProviderOverride(origin: this, providerOverride: $SyncValueProvider<TabRequest<bool>?>(value));
   }
 }
 
-String _$salesFilterRequestHash() =>
-    r'2da4f897c0e3425f267cb6b3b976b1fb369a2160';
+String _$salesFilterRequestHash() => r'2da4f897c0e3425f267cb6b3b976b1fb369a2160';
 
 /// "Open the sales list with only the unpaid invoices" (or all of them).
 

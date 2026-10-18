@@ -13,23 +13,16 @@ part of 'catch_log_providers.dart';
 final catchLogSummaryProvider = CatchLogSummaryFamily._();
 
 final class CatchLogSummaryProvider
-    extends
-        $FunctionalProvider<
-          AsyncValue<CatchLogSummary>,
-          CatchLogSummary,
-          FutureOr<CatchLogSummary>
-        >
+    extends $FunctionalProvider<AsyncValue<CatchLogSummary>, CatchLogSummary, FutureOr<CatchLogSummary>>
     with $FutureModifier<CatchLogSummary>, $FutureProvider<CatchLogSummary> {
-  CatchLogSummaryProvider._({
-    required CatchLogSummaryFamily super.from,
-    required CatchLogQuery super.argument,
-  }) : super(
-         retry: null,
-         name: r'catchLogSummaryProvider',
-         isAutoDispose: true,
-         dependencies: null,
-         $allTransitiveDependencies: null,
-       );
+  CatchLogSummaryProvider._({required CatchLogSummaryFamily super.from, required CatchLogQuery super.argument})
+    : super(
+        retry: null,
+        name: r'catchLogSummaryProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
 
   @override
   String debugGetCreateSourceHash() => _$catchLogSummaryHash();
@@ -43,9 +36,7 @@ final class CatchLogSummaryProvider
 
   @$internal
   @override
-  $FutureProviderElement<CatchLogSummary> $createElement(
-    $ProviderPointer pointer,
-  ) => $FutureProviderElement(pointer);
+  $FutureProviderElement<CatchLogSummary> $createElement($ProviderPointer pointer) => $FutureProviderElement(pointer);
 
   @override
   FutureOr<CatchLogSummary> create(Ref ref) {
@@ -77,8 +68,7 @@ final class CatchLogSummaryFamily extends $Family
         isAutoDispose: true,
       );
 
-  CatchLogSummaryProvider call(CatchLogQuery query) =>
-      CatchLogSummaryProvider._(argument: query, from: this);
+  CatchLogSummaryProvider call(CatchLogQuery query) => CatchLogSummaryProvider._(argument: query, from: this);
 
   @override
   String toString() => r'catchLogSummaryProvider';
@@ -87,18 +77,15 @@ final class CatchLogSummaryFamily extends $Family
 @ProviderFor(CatchLogEntries)
 final catchLogEntriesProvider = CatchLogEntriesFamily._();
 
-final class CatchLogEntriesProvider
-    extends $AsyncNotifierProvider<CatchLogEntries, PagedList<CatchLogEntry>> {
-  CatchLogEntriesProvider._({
-    required CatchLogEntriesFamily super.from,
-    required CatchLogQuery super.argument,
-  }) : super(
-         retry: null,
-         name: r'catchLogEntriesProvider',
-         isAutoDispose: true,
-         dependencies: null,
-         $allTransitiveDependencies: null,
-       );
+final class CatchLogEntriesProvider extends $AsyncNotifierProvider<CatchLogEntries, PagedList<CatchLogEntry>> {
+  CatchLogEntriesProvider._({required CatchLogEntriesFamily super.from, required CatchLogQuery super.argument})
+    : super(
+        retry: null,
+        name: r'catchLogEntriesProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
 
   @override
   String debugGetCreateSourceHash() => _$catchLogEntriesHash();
@@ -145,15 +132,13 @@ final class CatchLogEntriesFamily extends $Family
         isAutoDispose: true,
       );
 
-  CatchLogEntriesProvider call(CatchLogQuery query) =>
-      CatchLogEntriesProvider._(argument: query, from: this);
+  CatchLogEntriesProvider call(CatchLogQuery query) => CatchLogEntriesProvider._(argument: query, from: this);
 
   @override
   String toString() => r'catchLogEntriesProvider';
 }
 
-abstract class _$CatchLogEntries
-    extends $AsyncNotifier<PagedList<CatchLogEntry>> {
+abstract class _$CatchLogEntries extends $AsyncNotifier<PagedList<CatchLogEntry>> {
   late final _$args = ref.$arg as CatchLogQuery;
   CatchLogQuery get query => _$args;
 
@@ -161,19 +146,11 @@ abstract class _$CatchLogEntries
   @$mustCallSuper
   @override
   WhenComplete runBuild() {
-    final ref =
-        this.ref
-            as $Ref<
-              AsyncValue<PagedList<CatchLogEntry>>,
-              PagedList<CatchLogEntry>
-            >;
+    final ref = this.ref as $Ref<AsyncValue<PagedList<CatchLogEntry>>, PagedList<CatchLogEntry>>;
     final element =
         ref.element
             as $ClassProviderElement<
-              AnyNotifier<
-                AsyncValue<PagedList<CatchLogEntry>>,
-                PagedList<CatchLogEntry>
-              >,
+              AnyNotifier<AsyncValue<PagedList<CatchLogEntry>>, PagedList<CatchLogEntry>>,
               AsyncValue<PagedList<CatchLogEntry>>,
               Object?,
               Object?

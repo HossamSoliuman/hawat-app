@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../app/router.dart';
 import '../../../core/api/api_exception.dart';
 import '../../../core/auth/auth_repository.dart';
 import '../../../core/l10n.dart';
@@ -53,7 +54,7 @@ class _ChangePasswordScreenState extends ConsumerState<ChangePasswordScreen> {
           .changePassword(current: _current.text, password: _password.text, confirmation: _confirm.text);
       if (!mounted) return;
       showSnack(context, l.passwordChanged);
-      context.pop();
+      context.canPop() ? context.pop() : context.go(Routes.profile);
     } on ValidationException catch (e) {
       setState(() => _errors = {for (final entry in e.errors.entries) entry.key: entry.value.first});
     } on ApiException catch (e) {

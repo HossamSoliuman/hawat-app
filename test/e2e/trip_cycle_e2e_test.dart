@@ -29,9 +29,8 @@ void main() {
   Future<(ApiClient, String)> signIn(String phone) async {
     String? token;
     final client = ApiClient(baseUrl: base!, tokenProvider: () => token, onUnauthorized: () {}, dio: Dio());
-    final result = await AuthRepository(
-      client,
-    ).login(phone: phone, password: env['HAWAT_E2E_PASSWORD'] ?? '', deviceName: 'e2e');
+    final result = await AuthRepository(client)
+        .login(phone: phone, password: env['HAWAT_E2E_PASSWORD'] ?? '', deviceName: 'e2e');
     token = result.token;
     return (client, result.token);
   }
@@ -43,8 +42,12 @@ void main() {
 
     final counterPort = ((await counter.get('/auth/me'))['data'] as Map)['port'] as Map;
     final lookups = Lookups.fromJson((await owner.get('/lookups'))['data'] as Map<String, dynamic>);
-    final boat = Boat.fromJson(((await owner.get('/owner/boats', query: {'per_page': 1}))['data'] as List).first as Map<String, dynamic>);
-    final before = Dashboard.fromJson((await owner.get('/owner/dashboard', query: {'period': 'today'}))['data'] as Map<String, dynamic>);
+    final boat = Boat.fromJson(
+      ((await owner.get('/owner/boats', query: {'per_page': 1}))['data'] as List).first as Map<String, dynamic>,
+    );
+    final before = Dashboard.fromJson(
+      (await owner.get('/owner/dashboard', query: {'period': 'today'}))['data'] as Map<String, dynamic>,
+    );
     expect(before.period, 'today');
 
     // 1. New trip at the counter's port; the same key twice creates one trip.
@@ -74,7 +77,9 @@ void main() {
 
     // A second catch is refused with an Arabic message.
     await expectLater(
-      trips.submitCatch(created.id, [CatchLineInput(speciesId: a, weightKg: 1)], idempotencyKey: ApiClient.newIdempotencyKey()),
+      trips.submitCatch(created.id, [
+        CatchLineInput(speciesId: a, weightKg: 1),
+      ], idempotencyKey: ApiClient.newIdempotencyKey()),
       throwsA(isA<ValidationException>()),
     );
 
@@ -98,7 +103,9 @@ void main() {
     expect(counted.availableKg, 138);
     expect((await trips.list(stage: TripStage.forSale)).items.map((t) => t.id), contains(created.id));
 
-    final after = Dashboard.fromJson((await owner.get('/owner/dashboard', query: {'period': 'today'}))['data'] as Map<String, dynamic>);
+    final after = Dashboard.fromJson(
+      (await owner.get('/owner/dashboard', query: {'period': 'today'}))['data'] as Map<String, dynamic>,
+    );
     expect(after.kpis.catchKg, before.kpis.catchKg + 138);
     expect(after.actionItems.tripsToSell, before.actionItems.tripsToSell + 1);
   }, skip: skip);
@@ -106,7 +113,9 @@ void main() {
   test('cancelling needs a reason and only works before the catch', () async {
     final (owner, _) = await signIn(env['HAWAT_E2E_OWNER'] ?? '0500000001');
     final trips = TripsRepository(owner);
-    final boat = Boat.fromJson(((await owner.get('/owner/boats', query: {'per_page': 1}))['data'] as List).first as Map<String, dynamic>);
+    final boat = Boat.fromJson(
+      ((await owner.get('/owner/boats', query: {'per_page': 1}))['data'] as List).first as Map<String, dynamic>,
+    );
 
     final trip = await trips.create(TripInput(boatId: boat.id), idempotencyKey: ApiClient.newIdempotencyKey());
     await expectLater(

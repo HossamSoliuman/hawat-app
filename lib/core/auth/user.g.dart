@@ -11,9 +11,7 @@ _AppUser _$AppUserFromJson(Map<String, dynamic> json) => _AppUser(
   name: json['name'] as String,
   phone: json['phone'] as String,
   email: json['email'] as String?,
-  role: json['role'] == null
-      ? null
-      : UserRole.fromJson(json['role'] as Map<String, dynamic>),
+  role: json['role'] == null ? null : UserRole.fromJson(json['role'] as Map<String, dynamic>),
   active: json['active'] as bool? ?? true,
   avatarUrl: json['avatar_url'] as String?,
 );

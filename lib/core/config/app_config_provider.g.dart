@@ -18,8 +18,7 @@ final appConfigControllerProvider = AppConfigControllerProvider._();
 /// `GET /app/config` on every launch. The last copy answers at once and the
 /// fresh one replaces it; without either, the app waits a few seconds and
 /// falls back to [AppConfig.fallback]. Never fails.
-final class AppConfigControllerProvider
-    extends $AsyncNotifierProvider<AppConfigController, AppConfig> {
+final class AppConfigControllerProvider extends $AsyncNotifierProvider<AppConfigController, AppConfig> {
   /// `GET /app/config` on every launch. The last copy answers at once and the
   /// fresh one replaces it; without either, the app waits a few seconds and
   /// falls back to [AppConfig.fallback]. Never fails.
@@ -42,8 +41,7 @@ final class AppConfigControllerProvider
   AppConfigController create() => AppConfigController();
 }
 
-String _$appConfigControllerHash() =>
-    r'4420dccb142543d9129c41629bb16227204b04cd';
+String _$appConfigControllerHash() => r'4420dccb142543d9129c41629bb16227204b04cd';
 
 /// `GET /app/config` on every launch. The last copy answers at once and the
 /// fresh one replaces it; without either, the app waits a few seconds and
@@ -74,9 +72,7 @@ final appConfigProvider = AppConfigProvider._();
 
 /// The config once loaded, or the fallback while it loads.
 
-final class AppConfigProvider
-    extends $FunctionalProvider<AppConfig, AppConfig, AppConfig>
-    with $Provider<AppConfig> {
+final class AppConfigProvider extends $FunctionalProvider<AppConfig, AppConfig, AppConfig> with $Provider<AppConfig> {
   /// The config once loaded, or the fallback while it loads.
   AppConfigProvider._()
     : super(
@@ -94,8 +90,7 @@ final class AppConfigProvider
 
   @$internal
   @override
-  $ProviderElement<AppConfig> $createElement($ProviderPointer pointer) =>
-      $ProviderElement(pointer);
+  $ProviderElement<AppConfig> $createElement($ProviderPointer pointer) => $ProviderElement(pointer);
 
   @override
   AppConfig create(Ref ref) {
@@ -104,10 +99,7 @@ final class AppConfigProvider
 
   /// {@macro riverpod.override_with_value}
   Override overrideWithValue(AppConfig value) {
-    return $ProviderOverride(
-      origin: this,
-      providerOverride: $SyncValueProvider<AppConfig>(value),
-    );
+    return $ProviderOverride(origin: this, providerOverride: $SyncValueProvider<AppConfig>(value));
   }
 }
 

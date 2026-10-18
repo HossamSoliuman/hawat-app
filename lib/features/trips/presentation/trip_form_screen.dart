@@ -116,7 +116,11 @@ class _TripFormScreenState extends ConsumerState<TripFormScreen> {
         await actions.update(widget.tripId!, _input());
         if (!mounted) return;
         showSnack(context, l.tripSaved);
-        context.pop();
+        if (context.canPop()) {
+          context.pop();
+        } else {
+          context.go(Routes.trip(widget.tripId!));
+        }
       } else {
         final trip = await actions.create(_input(), idempotencyKey: _idempotencyKey);
         if (!mounted) return;
