@@ -941,7 +941,4 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get photoRemoved => 'أُزيلت الصورة';
-
-  @override
-  String get roleOwner => 'مالك';
 }

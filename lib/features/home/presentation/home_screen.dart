@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../app/nav_requests.dart';
 import '../../../app/router.dart';
 import '../../../core/auth/session.dart';
 import '../../../core/format/format.dart';
@@ -204,7 +205,7 @@ class _NeedsAction extends ConsumerWidget {
               tone: Tone.primary,
               label: l.actionTripsToStart,
               count: items.tripsToStart,
-              onTap: () => context.go(Routes.tripsAt(TripStage.scheduled)),
+              onTap: () => openTrips(context, ref, TripStage.scheduled),
             ),
             for (final trip in scheduled) _ScheduledTripRow(trip: trip),
           ],
@@ -214,7 +215,7 @@ class _NeedsAction extends ConsumerWidget {
               tone: Tone.success,
               label: l.actionTripsToSell,
               count: items.tripsToSell,
-              onTap: () => context.go(Routes.tripsAt(TripStage.forSale)),
+              onTap: () => openTrips(context, ref, TripStage.forSale),
             ),
           if (items.unpaidSales > 0)
             _ActionRow(
@@ -223,7 +224,7 @@ class _NeedsAction extends ConsumerWidget {
               label: l.actionUnpaid,
               count: items.unpaidSales,
               amount: l.sar(items.unpaidTotal),
-              onTap: () => context.go(Routes.unpaidSales()),
+              onTap: () => openSales(context, ref, unpaidOnly: true),
             ),
         ],
       ),
@@ -406,7 +407,7 @@ class _Indicators extends ConsumerWidget {
             unit: l.currencySar,
             icon: Icons.request_quote_outlined,
             tone: Tone.warning,
-            onTap: k.unpaid > 0 ? () => context.go(Routes.unpaidSales()) : null,
+            onTap: k.unpaid > 0 ? () => openSales(context, ref, unpaidOnly: true) : null,
           ),
         ),
       ],
@@ -461,13 +462,13 @@ class _PeriodSwitch extends ConsumerWidget {
 }
 
 /// Four counted stages; each opens the trips list on its tab.
-class _Pipeline extends StatelessWidget {
+class _Pipeline extends ConsumerWidget {
   const _Pipeline({required this.kpis});
 
   final DashboardKpis kpis;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final l = context.l10n;
     final c = HawatColors.of(context);
     final text = Theme.of(context).textTheme;
@@ -493,7 +494,7 @@ class _Pipeline extends StatelessWidget {
                   if (i > 0) const SizedBox(width: 6),
                   Expanded(
                     child: InkWell(
-                      onTap: () => context.go(Routes.tripsAt(stages[i].$4)),
+                      onTap: () => openTrips(context, ref, stages[i].$4),
                       child: Container(
                         padding: const EdgeInsets.fromLTRB(6, 10, 6, 10),
                         decoration: BoxDecoration(
@@ -527,13 +528,13 @@ class _Pipeline extends StatelessWidget {
   }
 }
 
-class _ActiveTrips extends StatelessWidget {
+class _ActiveTrips extends ConsumerWidget {
   const _ActiveTrips({required this.trips});
 
   final List<Trip> trips;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final l = context.l10n;
     final width = (MediaQuery.sizeOf(context).width * .8).clamp(260.0, 340.0);
     return Column(
@@ -543,7 +544,7 @@ class _ActiveTrips extends StatelessWidget {
           title: l.activeTripsTitle,
           icon: Icons.sailing_outlined,
           action: trips.isEmpty ? null : l.viewAll,
-          onAction: () => context.go(Routes.tripsAt(TripStage.inProgress)),
+          onAction: () => openTrips(context, ref, TripStage.inProgress),
         ),
         const SizedBox(height: 8),
         if (trips.isEmpty)
@@ -717,13 +718,13 @@ class _Stock extends StatelessWidget {
   }
 }
 
-class _RecentSales extends StatelessWidget {
+class _RecentSales extends ConsumerWidget {
   const _RecentSales({required this.dashboard});
 
   final Dashboard dashboard;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final l = context.l10n;
     final c = HawatColors.of(context);
     final sales = dashboard.recentSales.take(5).toList();
@@ -736,7 +737,7 @@ class _RecentSales extends StatelessWidget {
             title: l.recentSalesTitle,
             icon: Icons.receipt_long_outlined,
             action: sales.isEmpty ? null : l.viewAll,
-            onAction: () => context.go(Routes.sales),
+            onAction: () => openSales(context, ref),
           ),
           if (sales.isEmpty)
             Padding(

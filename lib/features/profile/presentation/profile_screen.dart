@@ -132,16 +132,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                   ),
                 ),
                 const SizedBox(width: 16),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(user.name, style: text.titleLarge),
-                      const SizedBox(height: 4),
-                      Text(user.isOwner ? l.roleOwner : (user.role?.name ?? ''), style: text.bodySmall),
-                    ],
-                  ),
-                ),
+                Expanded(child: Text(user.name, style: text.titleLarge)),
               ],
             ),
           ),

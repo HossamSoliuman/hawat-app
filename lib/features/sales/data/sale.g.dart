@@ -10,8 +10,12 @@ _Sale _$SaleFromJson(Map<String, dynamic> json) => _Sale(
   id: (json['id'] as num).toInt(),
   invoiceNumber: json['invoice_number'] as String,
   status: json['status'] as String?,
-  trip: json['trip'] == null ? null : TripNumberRef.fromJson(json['trip'] as Map<String, dynamic>),
-  customer: json['customer'] == null ? null : PersonRef.fromJson(json['customer'] as Map<String, dynamic>),
+  trip: json['trip'] == null
+      ? null
+      : TripNumberRef.fromJson(json['trip'] as Map<String, dynamic>),
+  customer: json['customer'] == null
+      ? null
+      : PersonRef.fromJson(json['customer'] as Map<String, dynamic>),
   paymentMethod: json['payment_method'] == null
       ? null
       : IdName.fromJson(json['payment_method'] as Map<String, dynamic>),
@@ -26,10 +30,14 @@ _Sale _$SaleFromJson(Map<String, dynamic> json) => _Sale(
   itemsCount: (json['items_count'] as num?)?.toInt(),
   totalKg: (json['total_kg'] as num?)?.toDouble(),
   items:
-      (json['items'] as List<dynamic>?)?.map((e) => SaleItem.fromJson(e as Map<String, dynamic>)).toList() ??
+      (json['items'] as List<dynamic>?)
+          ?.map((e) => SaleItem.fromJson(e as Map<String, dynamic>))
+          .toList() ??
       const <SaleItem>[],
   invoiceUrl: json['invoice_url'] as String?,
-  soldAt: json['sold_at'] == null ? null : DateTime.parse(json['sold_at'] as String),
+  soldAt: json['sold_at'] == null
+      ? null
+      : DateTime.parse(json['sold_at'] as String),
   notes: json['notes'] as String?,
 );
 
@@ -56,7 +64,9 @@ Map<String, dynamic> _$SaleToJson(_Sale instance) => <String, dynamic>{
 
 _SaleItem _$SaleItemFromJson(Map<String, dynamic> json) => _SaleItem(
   id: (json['id'] as num).toInt(),
-  species: json['species'] == null ? null : SpeciesRef.fromJson(json['species'] as Map<String, dynamic>),
+  species: json['species'] == null
+      ? null
+      : SpeciesRef.fromJson(json['species'] as Map<String, dynamic>),
   weightKg: (json['weight_kg'] as num?)?.toDouble() ?? 0,
   pricePerKg: (json['price_per_kg'] as num?)?.toDouble() ?? 0,
   total: (json['total'] as num?)?.toDouble() ?? 0,
@@ -74,18 +84,25 @@ _Consignment _$ConsignmentFromJson(Map<String, dynamic> json) => _Consignment(
   id: (json['id'] as num).toInt(),
   consignmentNumber: json['consignment_number'] as String,
   status: json['status'] as String?,
-  dalal: json['dalal'] == null ? null : PersonRef.fromJson(json['dalal'] as Map<String, dynamic>),
-  trip: json['trip'] == null ? null : TripNumberRef.fromJson(json['trip'] as Map<String, dynamic>),
+  dalal: json['dalal'] == null
+      ? null
+      : PersonRef.fromJson(json['dalal'] as Map<String, dynamic>),
+  trip: json['trip'] == null
+      ? null
+      : TripNumberRef.fromJson(json['trip'] as Map<String, dynamic>),
   totalKg: (json['total_kg'] as num?)?.toDouble() ?? 0,
-  sentAt: json['sent_at'] == null ? null : DateTime.parse(json['sent_at'] as String),
+  sentAt: json['sent_at'] == null
+      ? null
+      : DateTime.parse(json['sent_at'] as String),
 );
 
-Map<String, dynamic> _$ConsignmentToJson(_Consignment instance) => <String, dynamic>{
-  'id': instance.id,
-  'consignment_number': instance.consignmentNumber,
-  'status': instance.status,
-  'dalal': instance.dalal?.toJson(),
-  'trip': instance.trip?.toJson(),
-  'total_kg': instance.totalKg,
-  'sent_at': instance.sentAt?.toIso8601String(),
-};
+Map<String, dynamic> _$ConsignmentToJson(_Consignment instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'consignment_number': instance.consignmentNumber,
+      'status': instance.status,
+      'dalal': instance.dalal?.toJson(),
+      'trip': instance.trip?.toJson(),
+      'total_kg': instance.totalKg,
+      'sent_at': instance.sentAt?.toIso8601String(),
+    };

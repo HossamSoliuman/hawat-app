@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../app/nav_requests.dart';
 import '../../../app/router.dart';
 import '../../../core/l10n.dart';
 import '../../../core/theme/tokens.dart';
@@ -102,6 +103,9 @@ class _TripsScreenState extends ConsumerState<TripsScreen> with SingleTickerProv
   Widget build(BuildContext context) {
     final l = context.l10n;
     final c = HawatColors.of(context);
+    ref.listen(tripsTabRequestProvider, (_, request) {
+      if (request != null) _tabs.animateTo(request.value.index);
+    });
     final boatName = _boatId == null
         ? null
         : ref.watch(ownerBoatsProvider).value?.where((b) => b.id == _boatId).firstOrNull?.name;

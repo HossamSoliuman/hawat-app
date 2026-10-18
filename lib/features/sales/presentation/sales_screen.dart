@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../app/nav_requests.dart';
 import '../../../app/router.dart';
 import '../../../core/l10n.dart';
 import '../../../core/theme/tokens.dart';
@@ -52,6 +53,9 @@ class _SalesScreenState extends ConsumerState<SalesScreen> {
   @override
   Widget build(BuildContext context) {
     final l = context.l10n;
+    ref.listen(salesFilterRequestProvider, (_, request) {
+      if (request != null) setState(() => _unpaid = request.value);
+    });
     final query = SalesQuery(unpaidOnly: _unpaid, search: _query);
     final provider = salesListProvider(query);
     final state = ref.watch(provider);

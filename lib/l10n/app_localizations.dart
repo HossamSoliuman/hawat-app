@@ -1806,12 +1806,6 @@ abstract class AppLocalizations {
   /// In ar, this message translates to:
   /// **'أُزيلت الصورة'**
   String get photoRemoved;
-
-  /// No description provided for @roleOwner.
-  ///
-  /// In ar, this message translates to:
-  /// **'مالك'**
-  String get roleOwner;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

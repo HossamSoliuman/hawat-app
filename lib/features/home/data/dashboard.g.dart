@@ -18,20 +18,30 @@ _Dashboard _$DashboardFromJson(Map<String, dynamic> json) => _Dashboard(
           .toList() ??
       const <RevenuePoint>[],
   stock:
-      (json['stock'] as List<dynamic>?)?.map((e) => StockLine.fromJson(e as Map<String, dynamic>)).toList() ??
+      (json['stock'] as List<dynamic>?)
+          ?.map((e) => StockLine.fromJson(e as Map<String, dynamic>))
+          .toList() ??
       const <StockLine>[],
   scheduledTrips:
-      (json['scheduled_trips'] as List<dynamic>?)?.map((e) => Trip.fromJson(e as Map<String, dynamic>)).toList() ??
+      (json['scheduled_trips'] as List<dynamic>?)
+          ?.map((e) => Trip.fromJson(e as Map<String, dynamic>))
+          .toList() ??
       const <Trip>[],
   activeTrips:
-      (json['active_trips'] as List<dynamic>?)?.map((e) => Trip.fromJson(e as Map<String, dynamic>)).toList() ??
+      (json['active_trips'] as List<dynamic>?)
+          ?.map((e) => Trip.fromJson(e as Map<String, dynamic>))
+          .toList() ??
       const <Trip>[],
   recentSales:
-      (json['recent_sales'] as List<dynamic>?)?.map((e) => Sale.fromJson(e as Map<String, dynamic>)).toList() ??
+      (json['recent_sales'] as List<dynamic>?)
+          ?.map((e) => Sale.fromJson(e as Map<String, dynamic>))
+          .toList() ??
       const <Sale>[],
 );
 
-Map<String, dynamic> _$DashboardToJson(_Dashboard instance) => <String, dynamic>{
+Map<String, dynamic> _$DashboardToJson(
+  _Dashboard instance,
+) => <String, dynamic>{
   'period': instance.period,
   'kpis': instance.kpis.toJson(),
   'action_items': instance.actionItems.toJson(),
@@ -42,33 +52,35 @@ Map<String, dynamic> _$DashboardToJson(_Dashboard instance) => <String, dynamic>
   'recent_sales': instance.recentSales.map((e) => e.toJson()).toList(),
 };
 
-_DashboardKpis _$DashboardKpisFromJson(Map<String, dynamic> json) => _DashboardKpis(
-  revenue: (json['revenue'] as num?)?.toDouble() ?? 0,
-  catchKg: (json['catch_kg'] as num?)?.toDouble() ?? 0,
-  activeBoats: (json['active_boats'] as num?)?.toInt() ?? 0,
-  boats: (json['boats'] as num?)?.toInt() ?? 0,
-  tripsScheduled: (json['trips_scheduled'] as num?)?.toInt() ?? 0,
-  tripsAtSea: (json['trips_at_sea'] as num?)?.toInt() ?? 0,
-  tripsAwaitingCount: (json['trips_awaiting_count'] as num?)?.toInt() ?? 0,
-  tripsForSale: (json['trips_for_sale'] as num?)?.toInt() ?? 0,
-  salesCount: (json['sales_count'] as num?)?.toInt() ?? 0,
-  unpaid: (json['unpaid'] as num?)?.toDouble() ?? 0,
-  customers: (json['customers'] as num?)?.toInt() ?? 0,
-);
+_DashboardKpis _$DashboardKpisFromJson(Map<String, dynamic> json) =>
+    _DashboardKpis(
+      revenue: (json['revenue'] as num?)?.toDouble() ?? 0,
+      catchKg: (json['catch_kg'] as num?)?.toDouble() ?? 0,
+      activeBoats: (json['active_boats'] as num?)?.toInt() ?? 0,
+      boats: (json['boats'] as num?)?.toInt() ?? 0,
+      tripsScheduled: (json['trips_scheduled'] as num?)?.toInt() ?? 0,
+      tripsAtSea: (json['trips_at_sea'] as num?)?.toInt() ?? 0,
+      tripsAwaitingCount: (json['trips_awaiting_count'] as num?)?.toInt() ?? 0,
+      tripsForSale: (json['trips_for_sale'] as num?)?.toInt() ?? 0,
+      salesCount: (json['sales_count'] as num?)?.toInt() ?? 0,
+      unpaid: (json['unpaid'] as num?)?.toDouble() ?? 0,
+      customers: (json['customers'] as num?)?.toInt() ?? 0,
+    );
 
-Map<String, dynamic> _$DashboardKpisToJson(_DashboardKpis instance) => <String, dynamic>{
-  'revenue': instance.revenue,
-  'catch_kg': instance.catchKg,
-  'active_boats': instance.activeBoats,
-  'boats': instance.boats,
-  'trips_scheduled': instance.tripsScheduled,
-  'trips_at_sea': instance.tripsAtSea,
-  'trips_awaiting_count': instance.tripsAwaitingCount,
-  'trips_for_sale': instance.tripsForSale,
-  'sales_count': instance.salesCount,
-  'unpaid': instance.unpaid,
-  'customers': instance.customers,
-};
+Map<String, dynamic> _$DashboardKpisToJson(_DashboardKpis instance) =>
+    <String, dynamic>{
+      'revenue': instance.revenue,
+      'catch_kg': instance.catchKg,
+      'active_boats': instance.activeBoats,
+      'boats': instance.boats,
+      'trips_scheduled': instance.tripsScheduled,
+      'trips_at_sea': instance.tripsAtSea,
+      'trips_awaiting_count': instance.tripsAwaitingCount,
+      'trips_for_sale': instance.tripsForSale,
+      'sales_count': instance.salesCount,
+      'unpaid': instance.unpaid,
+      'customers': instance.customers,
+    };
 
 _ActionItems _$ActionItemsFromJson(Map<String, dynamic> json) => _ActionItems(
   tripsToStart: (json['trips_to_start'] as num?)?.toInt() ?? 0,
@@ -77,24 +89,27 @@ _ActionItems _$ActionItemsFromJson(Map<String, dynamic> json) => _ActionItems(
   unpaidTotal: (json['unpaid_total'] as num?)?.toDouble() ?? 0,
 );
 
-Map<String, dynamic> _$ActionItemsToJson(_ActionItems instance) => <String, dynamic>{
-  'trips_to_start': instance.tripsToStart,
-  'trips_to_sell': instance.tripsToSell,
-  'unpaid_sales': instance.unpaidSales,
-  'unpaid_total': instance.unpaidTotal,
-};
+Map<String, dynamic> _$ActionItemsToJson(_ActionItems instance) =>
+    <String, dynamic>{
+      'trips_to_start': instance.tripsToStart,
+      'trips_to_sell': instance.tripsToSell,
+      'unpaid_sales': instance.unpaidSales,
+      'unpaid_total': instance.unpaidTotal,
+    };
 
-_RevenuePoint _$RevenuePointFromJson(Map<String, dynamic> json) => _RevenuePoint(
-  month: json['month'] as String,
-  label: json['label'] as String?,
-  total: (json['total'] as num?)?.toDouble() ?? 0,
-);
+_RevenuePoint _$RevenuePointFromJson(Map<String, dynamic> json) =>
+    _RevenuePoint(
+      month: json['month'] as String,
+      label: json['label'] as String?,
+      total: (json['total'] as num?)?.toDouble() ?? 0,
+    );
 
-Map<String, dynamic> _$RevenuePointToJson(_RevenuePoint instance) => <String, dynamic>{
-  'month': instance.month,
-  'label': instance.label,
-  'total': instance.total,
-};
+Map<String, dynamic> _$RevenuePointToJson(_RevenuePoint instance) =>
+    <String, dynamic>{
+      'month': instance.month,
+      'label': instance.label,
+      'total': instance.total,
+    };
 
 _StockLine _$StockLineFromJson(Map<String, dynamic> json) => _StockLine(
   speciesId: (json['species_id'] as num).toInt(),
@@ -103,9 +118,10 @@ _StockLine _$StockLineFromJson(Map<String, dynamic> json) => _StockLine(
   weightKg: (json['weight_kg'] as num?)?.toDouble() ?? 0,
 );
 
-Map<String, dynamic> _$StockLineToJson(_StockLine instance) => <String, dynamic>{
-  'species_id': instance.speciesId,
-  'species': instance.species,
-  'name_sci': instance.nameSci,
-  'weight_kg': instance.weightKg,
-};
+Map<String, dynamic> _$StockLineToJson(_StockLine instance) =>
+    <String, dynamic>{
+      'species_id': instance.speciesId,
+      'species': instance.species,
+      'name_sci': instance.nameSci,
+      'weight_kg': instance.weightKg,
+    };
