@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -56,7 +58,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
     setState(() => _busy = true);
     try {
       await ref.read(sessionProvider.notifier).login(phone: phone, password: _password.text);
-      await HapticFeedback.lightImpact();
+      unawaited(HapticFeedback.lightImpact());
     } on ValidationException catch (e) {
       setState(() {
         _phoneError = e.fieldError('phone');
@@ -109,10 +111,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                         children: [
                           Text(l.loginTitle, style: text.headlineSmall),
                           const SizedBox(height: 18),
-                          if (notice != null) ...[
-                            _Notice(message: notice),
-                            const SizedBox(height: 14),
-                          ],
+                          if (notice != null) ...[_Notice(message: notice), const SizedBox(height: 14)],
                           FieldLabel(
                             label: l.phoneLabel,
                             child: TextField(
@@ -170,8 +169,9 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                       ),
                     ),
                     const SizedBox(height: 16),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
+                    Wrap(
+                      alignment: WrapAlignment.center,
+                      crossAxisAlignment: WrapCrossAlignment.center,
                       children: [
                         Text(l.noAccount, style: text.bodyMedium?.copyWith(color: c.muted)),
                         TextButton(onPressed: _requestAccount, child: Text(l.requestAccount)),

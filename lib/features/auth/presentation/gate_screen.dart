@@ -32,7 +32,11 @@ class GateScreen extends ConsumerWidget {
                   const SizedBox(height: 32),
                   Text(l.gateTitle, style: text.headlineSmall, textAlign: TextAlign.center),
                   const SizedBox(height: 10),
-                  Text(l.gateBody(role), style: text.bodyLarge?.copyWith(color: c.muted), textAlign: TextAlign.center),
+                  Text(
+                    l.gateBody(role),
+                    style: text.bodyLarge?.copyWith(color: c.muted),
+                    textAlign: TextAlign.center,
+                  ),
                   const SizedBox(height: 28),
                   PrimaryButton(
                     label: l.logout,

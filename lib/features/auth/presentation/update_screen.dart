@@ -35,7 +35,11 @@ class UpdateScreen extends ConsumerWidget {
                   const SizedBox(height: 14),
                   Text(l.updateRequiredTitle, style: text.headlineSmall, textAlign: TextAlign.center),
                   const SizedBox(height: 10),
-                  Text(l.updateRequiredBody, style: text.bodyLarge?.copyWith(color: c.muted), textAlign: TextAlign.center),
+                  Text(
+                    l.updateRequiredBody,
+                    style: text.bodyLarge?.copyWith(color: c.muted),
+                    textAlign: TextAlign.center,
+                  ),
                   const SizedBox(height: 28),
                   if (storeUrl != null)
                     PrimaryButton(

@@ -83,12 +83,20 @@ void main() {
 
   test('payment state reads the server amounts', () {
     expect(const Sale(id: 1, invoiceNumber: 'x', total: 100, paidAmount: 100).paymentState, PaymentState.paid);
-    expect(const Sale(id: 1, invoiceNumber: 'x', total: 100, paidAmount: 40, remaining: 60).paymentState, PaymentState.partial);
+    expect(
+      const Sale(id: 1, invoiceNumber: 'x', total: 100, paidAmount: 40, remaining: 60).paymentState,
+      PaymentState.partial,
+    );
     expect(const Sale(id: 1, invoiceNumber: 'x', total: 100, remaining: 100).paymentState, PaymentState.unpaid);
   });
 
   test('trip input sends UTC times and drops blank text', () {
-    final json = TripInput(boatId: 3, departureTime: DateTime.utc(2026, 10, 18, 4, 30), notes: '  ', gearType: 'شباك').toJson();
+    final json = TripInput(
+      boatId: 3,
+      departureTime: DateTime.utc(2026, 10, 18, 4, 30),
+      notes: '  ',
+      gearType: 'شباك',
+    ).toJson();
     expect(json['boat_id'], 3);
     expect(json['departure_time'], '2026-10-18T04:30:00.000Z');
     expect(json['notes'], isNull);

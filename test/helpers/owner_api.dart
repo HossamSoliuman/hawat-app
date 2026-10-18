@@ -46,7 +46,9 @@ FakeApi ownerApi() {
     ..on('GET', '/owner/trips', (request) {
       final stage = request.queryParameters['stage'] as String?;
       final search = (request.queryParameters['search'] as String?) ?? '';
-      return Reply(page(trips.where((t) => inStage(t, stage) && (t['trip_number'] as String).contains(search)).toList()));
+      return Reply(
+        page(trips.where((t) => inStage(t, stage) && (t['trip_number'] as String).contains(search)).toList()),
+      );
     })
     ..on('GET', '/owner/trips/*', (request) {
       final id = request.uri.pathSegments.last;

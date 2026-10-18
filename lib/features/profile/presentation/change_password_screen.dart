@@ -63,7 +63,12 @@ class _ChangePasswordScreenState extends ConsumerState<ChangePasswordScreen> {
     }
   }
 
-  Widget _field(String label, TextEditingController controller, String key, {TextInputAction action = TextInputAction.next}) {
+  Widget _field(
+    String label,
+    TextEditingController controller,
+    String key, {
+    TextInputAction action = TextInputAction.next,
+  }) {
     final l = context.l10n;
     return FieldLabel(
       label: label,
@@ -91,7 +96,9 @@ class _ChangePasswordScreenState extends ConsumerState<ChangePasswordScreen> {
     final l = context.l10n;
     return Scaffold(
       appBar: AppBar(title: Text(l.changePassword)),
-      bottomNavigationBar: PinnedAction(child: PrimaryButton(label: l.save, busy: _busy, onPressed: _save)),
+      bottomNavigationBar: PinnedAction(
+        child: PrimaryButton(label: l.save, busy: _busy, onPressed: _save),
+      ),
       body: ListView(
         padding: const EdgeInsets.all(Hud.gutter),
         children: [

@@ -177,7 +177,9 @@ class _TripFormScreenState extends ConsumerState<TripFormScreen> {
       return Scaffold(
         appBar: AppBar(title: Text(l.editTripTitle)),
         body: trip.when(
-          loading: () => const Skeleton(child: Padding(padding: EdgeInsets.all(Hud.gutter), child: SkeletonBox(height: 400))),
+          loading: () => const Skeleton(
+            child: Padding(padding: EdgeInsets.all(Hud.gutter), child: SkeletonBox(height: 400)),
+          ),
           error: (e, _) => ErrorState(error: e, onRetry: () => ref.invalidate(tripDetailProvider(widget.tripId!))),
           data: (trip) {
             WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -197,7 +199,9 @@ class _TripFormScreenState extends ConsumerState<TripFormScreen> {
 
     return Scaffold(
       appBar: AppBar(title: Text(_editing ? l.editTripTitle : l.newTripTitle)),
-      bottomNavigationBar: PinnedAction(child: PrimaryButton(label: l.saveTrip, busy: _busy, onPressed: _save)),
+      bottomNavigationBar: PinnedAction(
+        child: PrimaryButton(label: l.saveTrip, busy: _busy, onPressed: _save),
+      ),
       body: ListView(
         padding: const EdgeInsets.all(Hud.gutter),
         children: [
@@ -209,7 +213,11 @@ class _TripFormScreenState extends ConsumerState<TripFormScreen> {
                 label: l.fieldBoat,
                 required: true,
                 child: boatsState.hasError && boats.isEmpty
-                    ? ErrorState(error: boatsState.error!, compact: true, onRetry: () => ref.invalidate(ownerBoatsProvider))
+                    ? ErrorState(
+                        error: boatsState.error!,
+                        compact: true,
+                        onRetry: () => ref.invalidate(ownerBoatsProvider),
+                      )
                     : SearchSelect<int>(
                         hint: boatsState.isLoading ? '…' : l.chooseBoat,
                         title: l.chooseBoat,
@@ -222,7 +230,9 @@ class _TripFormScreenState extends ConsumerState<TripFormScreen> {
                               value: b.id,
                               label: b.name,
                               detail: b.boatNumber,
-                              trailing: b.isActive ? null : StatusChip(label: b.status ?? '', tone: Tone.warning, dense: true),
+                              trailing: b.isActive
+                                  ? null
+                                  : StatusChip(label: b.status ?? '', tone: Tone.warning, dense: true),
                             ),
                         ],
                         onChanged: (id) => setState(() {

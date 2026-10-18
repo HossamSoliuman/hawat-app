@@ -37,7 +37,9 @@ class SaleScreen extends ConsumerWidget {
       appBar: AppBar(title: sale == null ? Text(l.invoiceTitle) : LtrText(sale.invoiceNumber)),
       bottomNavigationBar: sale?.invoiceUrl == null ? null : _InvoiceActions(sale: sale!),
       body: state.when(
-        loading: () => const Skeleton(child: Padding(padding: EdgeInsets.all(Hud.gutter), child: SkeletonBox(height: 420))),
+        loading: () => const Skeleton(
+          child: Padding(padding: EdgeInsets.all(Hud.gutter), child: SkeletonBox(height: 420)),
+        ),
         error: (e, _) => e is NotFoundException
             ? EmptyState(icon: Icons.search_off, title: l.errorNotFound)
             : ErrorState(error: e, onRetry: () => ref.invalidate(saleDetailProvider(id))),
@@ -132,7 +134,10 @@ class _Lines extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(sale.items[i].species?.name ?? '—', style: text.bodyLarge?.copyWith(fontWeight: FontWeight.w700)),
+                        Text(
+                          sale.items[i].species?.name ?? '—',
+                          style: text.bodyLarge?.copyWith(fontWeight: FontWeight.w700),
+                        ),
                         const SizedBox(height: 2),
                         Text(
                           '${l.kg(sale.items[i].weightKg)}  ×  ${l.pricePerKg(Fmt.ltr(Fmt.money(sale.items[i].pricePerKg)))}',

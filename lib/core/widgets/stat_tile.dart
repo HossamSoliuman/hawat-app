@@ -31,18 +31,16 @@ class StatTile extends StatelessWidget {
 
     return Material(
       color: c.washOf(tone),
-      shape: RoundedRectangleBorder(borderRadius: radius, side: BorderSide(color: c.edgeOf(tone))),
+      shape: RoundedRectangleBorder(
+        borderRadius: radius,
+        side: BorderSide(color: c.edgeOf(tone)),
+      ),
       clipBehavior: Clip.antiAlias,
       child: InkWell(
         onTap: onTap,
         child: Stack(
           children: [
-            PositionedDirectional(
-              start: 0,
-              top: 14,
-              bottom: 14,
-              child: Container(width: 3, color: c.tone(tone)),
-            ),
+            PositionedDirectional(start: 0, top: 14, bottom: 14, child: Container(width: 3, color: c.tone(tone))),
             Padding(
               padding: const EdgeInsetsDirectional.fromSTEB(14, 12, 12, 12),
               child: Column(

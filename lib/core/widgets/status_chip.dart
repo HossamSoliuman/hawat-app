@@ -54,10 +54,8 @@ class CountBadge extends StatelessWidget {
       color: c.tone(tone),
       child: Text(
         '$count',
-        style: Theme.of(context).textTheme.labelSmall?.copyWith(
-          color: c.isDark ? c.background : Colors.white,
-          fontWeight: FontWeight.w700,
-        ),
+        style: Theme.of(context).textTheme.labelSmall
+            ?.copyWith(color: c.isDark ? c.background : Colors.white, fontWeight: FontWeight.w700),
       ),
     );
   }

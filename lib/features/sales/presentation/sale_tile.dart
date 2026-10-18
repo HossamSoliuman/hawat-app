@@ -40,7 +40,9 @@ class SaleTile extends StatelessWidget {
       onTap: onTap,
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: 11),
-        decoration: BoxDecoration(border: last ? null : Border(bottom: BorderSide(color: c.hair))),
+        decoration: BoxDecoration(
+          border: last ? null : Border(bottom: BorderSide(color: c.hair)),
+        ),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -60,7 +62,9 @@ class SaleTile extends StatelessWidget {
                       LtrText(sale.invoiceNumber, style: text.bodySmall),
                       if (showDate && sale.soldAt != null) ...[
                         Text('  ·  ', style: text.bodySmall),
-                        Flexible(child: Text(l.when(sale.soldAt!), style: text.bodySmall, overflow: TextOverflow.ellipsis)),
+                        Flexible(
+                          child: Text(l.when(sale.soldAt!), style: text.bodySmall, overflow: TextOverflow.ellipsis),
+                        ),
                       ],
                     ],
                   ),

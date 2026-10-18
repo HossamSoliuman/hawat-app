@@ -56,15 +56,30 @@ class _AppShellState extends ConsumerState<AppShell> {
     return Scaffold(
       body: widget.shell,
       bottomNavigationBar: DecoratedBox(
-        decoration: BoxDecoration(color: c.panel, border: Border(top: BorderSide(color: c.hair))),
+        decoration: BoxDecoration(
+          color: c.panel,
+          border: Border(top: BorderSide(color: c.hair)),
+        ),
         child: SafeArea(
           top: false,
           child: SizedBox(
             height: 64,
             child: Row(
               children: [
-                _NavItem(icon: Icons.space_dashboard_outlined, activeIcon: Icons.space_dashboard, label: l.navHome, selected: index == 0, onTap: () => _goBranch(0)),
-                _NavItem(icon: Icons.sailing_outlined, activeIcon: Icons.sailing, label: l.navTrips, selected: index == 1, onTap: () => _goBranch(1)),
+                _NavItem(
+                  icon: Icons.space_dashboard_outlined,
+                  activeIcon: Icons.space_dashboard,
+                  label: l.navHome,
+                  selected: index == 0,
+                  onTap: () => _goBranch(0),
+                ),
+                _NavItem(
+                  icon: Icons.sailing_outlined,
+                  activeIcon: Icons.sailing,
+                  label: l.navTrips,
+                  selected: index == 1,
+                  onTap: () => _goBranch(1),
+                ),
                 Expanded(
                   child: Center(
                     child: Semantics(
@@ -80,8 +95,20 @@ class _AppShellState extends ConsumerState<AppShell> {
                     ),
                   ),
                 ),
-                _NavItem(icon: Icons.receipt_long_outlined, activeIcon: Icons.receipt_long, label: l.navSales, selected: index == 2, onTap: () => _goBranch(2)),
-                _NavItem(icon: Icons.grid_view_outlined, activeIcon: Icons.grid_view_rounded, label: l.navMore, selected: index == 3, onTap: () => _goBranch(3)),
+                _NavItem(
+                  icon: Icons.receipt_long_outlined,
+                  activeIcon: Icons.receipt_long,
+                  label: l.navSales,
+                  selected: index == 2,
+                  onTap: () => _goBranch(2),
+                ),
+                _NavItem(
+                  icon: Icons.grid_view_outlined,
+                  activeIcon: Icons.grid_view_rounded,
+                  label: l.navMore,
+                  selected: index == 3,
+                  onTap: () => _goBranch(3),
+                ),
               ],
             ),
           ),
@@ -92,7 +119,13 @@ class _AppShellState extends ConsumerState<AppShell> {
 }
 
 class _NavItem extends StatelessWidget {
-  const _NavItem({required this.icon, required this.activeIcon, required this.label, required this.selected, required this.onTap});
+  const _NavItem({
+    required this.icon,
+    required this.activeIcon,
+    required this.label,
+    required this.selected,
+    required this.onTap,
+  });
 
   final IconData icon;
   final IconData activeIcon;
@@ -126,10 +159,8 @@ class _NavItem extends StatelessWidget {
                 label,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
-                style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                  color: color,
-                  fontWeight: selected ? FontWeight.w700 : FontWeight.w500,
-                ),
+                style: Theme.of(context).textTheme.labelSmall
+                    ?.copyWith(color: color, fontWeight: selected ? FontWeight.w700 : FontWeight.w500),
               ),
             ],
           ),

@@ -105,7 +105,10 @@ class PhoneInputFormatter extends TextInputFormatter {
   @override
   TextEditingValue formatEditUpdate(TextEditingValue oldValue, TextEditingValue newValue) {
     final normalized = Phone.normalize(newValue.text);
-    return TextEditingValue(text: normalized, selection: TextSelection.collapsed(offset: normalized.length));
+    return TextEditingValue(
+      text: normalized,
+      selection: TextSelection.collapsed(offset: normalized.length),
+    );
   }
 }
 
@@ -127,7 +130,10 @@ class DecimalInputFormatter extends TextInputFormatter {
       text = '${whole.isEmpty ? '0' : whole}.$fraction';
     }
     if (text == newValue.text) return newValue;
-    return TextEditingValue(text: text, selection: TextSelection.collapsed(offset: text.length));
+    return TextEditingValue(
+      text: text,
+      selection: TextSelection.collapsed(offset: text.length),
+    );
   }
 }
 
@@ -137,6 +143,9 @@ class IntegerInputFormatter extends TextInputFormatter {
   TextEditingValue formatEditUpdate(TextEditingValue oldValue, TextEditingValue newValue) {
     final text = Phone.toWesternDigits(newValue.text).replaceAll(RegExp(r'\D'), '');
     if (text == newValue.text) return newValue;
-    return TextEditingValue(text: text, selection: TextSelection.collapsed(offset: text.length));
+    return TextEditingValue(
+      text: text,
+      selection: TextSelection.collapsed(offset: text.length),
+    );
   }
 }

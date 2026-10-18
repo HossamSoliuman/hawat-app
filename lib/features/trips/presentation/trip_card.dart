@@ -36,10 +36,7 @@ class TripCard extends StatelessWidget {
           Row(
             children: [
               Expanded(
-                child: LtrText(
-                  trip.tripNumber,
-                  style: text.labelLarge?.copyWith(fontSize: 14, color: c.muted),
-                ),
+                child: LtrText(trip.tripNumber, style: text.labelLarge?.copyWith(fontSize: 14, color: c.muted)),
               ),
               TripPhaseChip(trip: trip),
             ],
@@ -53,15 +50,15 @@ class TripCard extends StatelessWidget {
           ),
           if (moment != null || _catchLine(l) != null) ...[
             const SizedBox(height: 4),
-            Text(
-              [moment, _catchLine(l)].whereType<String>().join('   ·   '),
-              style: text.bodySmall,
-              maxLines: 2,
-            ),
+            Text([moment, _catchLine(l)].whereType<String>().join('   ·   '), style: text.bodySmall, maxLines: 2),
           ],
           if (phase != TripPhase.cancelled) ...[
             const SizedBox(height: 12),
-            SegmentProgress(current: phase.step, allDone: phase.isFinished, tone: c.tone(phase.tone == Tone.muted ? Tone.primary : phase.tone)),
+            SegmentProgress(
+              current: phase.step,
+              allDone: phase.isFinished,
+              tone: c.tone(phase.tone == Tone.muted ? Tone.primary : phase.tone),
+            ),
           ],
           if (trailing != null) ...[const SizedBox(height: 12), trailing!],
         ],
@@ -74,8 +71,8 @@ class TripCard extends StatelessWidget {
     return switch (trip.phase) {
       TripPhase.scheduled when trip.departureTime != null => '${l.fieldDepartureTime}: ${l.when(trip.departureTime!)}',
       TripPhase.atSea when trip.startedAt != null => '${l.fieldStartedAt} ${l.when(trip.startedAt!)}',
-      TripPhase.awaitingCounter || TripPhase.counting when trip.returnTime != null =>
-        '${l.fieldReturnedAt} ${l.when(trip.returnTime!)}',
+      TripPhase.awaitingCounter ||
+      TripPhase.counting when trip.returnTime != null => '${l.fieldReturnedAt} ${l.when(trip.returnTime!)}',
       TripPhase.cancelled when trip.cancelReason != null => trip.cancelReason,
       _ => null,
     };
@@ -97,12 +94,21 @@ class TripCardSkeleton extends StatelessWidget {
     final c = HawatColors.of(context);
     return Container(
       height: 128,
-      decoration: BoxDecoration(color: c.panel, border: Border.all(color: c.hair)),
+      decoration: BoxDecoration(
+        color: c.panel,
+        border: Border.all(color: c.hair),
+      ),
       padding: const EdgeInsets.all(14),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(children: [Container(width: 110, height: 12, color: c.mutedSurface), const Spacer(), Container(width: 64, height: 18, color: c.mutedSurface)]),
+          Row(
+            children: [
+              Container(width: 110, height: 12, color: c.mutedSurface),
+              const Spacer(),
+              Container(width: 64, height: 18, color: c.mutedSurface),
+            ],
+          ),
           const SizedBox(height: 14),
           Container(width: 180, height: 16, color: c.mutedSurface),
           const SizedBox(height: 10),

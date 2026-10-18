@@ -14,7 +14,10 @@ class PinnedAction extends StatelessWidget {
   Widget build(BuildContext context) {
     final c = HawatColors.of(context);
     return DecoratedBox(
-      decoration: BoxDecoration(color: c.background, border: Border(top: BorderSide(color: c.hair))),
+      decoration: BoxDecoration(
+        color: c.background,
+        border: Border(top: BorderSide(color: c.hair)),
+      ),
       child: SafeArea(
         top: false,
         child: Padding(padding: const EdgeInsets.fromLTRB(Hud.gutter, 10, Hud.gutter, 10), child: child),
@@ -125,7 +128,11 @@ void showSnack(BuildContext context, String message, {bool error = false}) {
       SnackBar(
         content: Row(
           children: [
-            Icon(error ? Icons.error_outline : Icons.check_circle_outline, size: 20, color: error ? c.danger : c.success),
+            Icon(
+              error ? Icons.error_outline : Icons.check_circle_outline,
+              size: 20,
+              color: error ? c.danger : c.success,
+            ),
             const SizedBox(width: 10),
             Expanded(child: Text(message)),
           ],

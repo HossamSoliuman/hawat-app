@@ -44,11 +44,17 @@ class NotificationsScreen extends ConsumerWidget {
         onRefresh: () => ref.refresh(notificationsListProvider.future),
         child: state.when(
           skipLoadingOnReload: true,
-          loading: () => const Skeleton(child: Padding(padding: EdgeInsets.all(Hud.gutter), child: SkeletonBox(height: 300))),
-          error: (e, _) => ListView(children: [ErrorState(error: e, onRetry: () => ref.invalidate(notificationsListProvider))]),
+          loading: () => const Skeleton(
+            child: Padding(padding: EdgeInsets.all(Hud.gutter), child: SkeletonBox(height: 300)),
+          ),
+          error: (e, _) => ListView(
+            children: [ErrorState(error: e, onRetry: () => ref.invalidate(notificationsListProvider))],
+          ),
           data: (data) {
             if (data.unread.isEmpty && data.earlier.isEmpty) {
-              return ListView(children: [EmptyState(icon: Icons.notifications_none, title: l.noNotifications)]);
+              return ListView(
+                children: [EmptyState(icon: Icons.notifications_none, title: l.noNotifications)],
+              );
             }
             return NotificationListener<ScrollNotification>(
               onNotification: (n) {
@@ -161,7 +167,10 @@ class _NotificationTile extends ConsumerWidget {
                     ),
                     if (notification.body.isNotEmpty) ...[
                       const SizedBox(height: 4),
-                      Text(Fmt.isolateCodes(notification.body), style: text.bodyMedium?.copyWith(color: c.muted, height: 1.5)),
+                      Text(
+                        Fmt.isolateCodes(notification.body),
+                        style: text.bodyMedium?.copyWith(color: c.muted, height: 1.5),
+                      ),
                     ],
                   ],
                 ),

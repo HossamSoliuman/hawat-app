@@ -15,7 +15,8 @@ sealed class ApiException implements Exception {
     UnauthorizedException() => l.sessionExpired,
     ForbiddenException() => serverMessage ?? l.errorForbidden,
     NotFoundException() => l.errorNotFound,
-    ConflictException(:final currentVersion) => currentVersion != null ? l.errorConflict : (serverMessage ?? l.errorBusy),
+    ConflictException(:final currentVersion) =>
+      currentVersion != null ? l.errorConflict : (serverMessage ?? l.errorBusy),
     ValidationException(:final firstError) => firstError ?? serverMessage ?? l.errorUnknown,
     RateLimitedException() => l.errorRateLimited,
     ServerException() => l.errorServer,

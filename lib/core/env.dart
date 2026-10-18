@@ -4,10 +4,7 @@
 abstract final class Env {
   static const flavor = String.fromEnvironment('FLAVOR', defaultValue: 'staging');
 
-  static const apiBaseUrl = String.fromEnvironment(
-    'API_BASE_URL',
-    defaultValue: 'https://hawat.sa/staging/api/v1',
-  );
+  static const apiBaseUrl = String.fromEnvironment('API_BASE_URL', defaultValue: 'https://hawat.sa/staging/api/v1');
 
   static bool get isProduction => flavor == 'production';
 }

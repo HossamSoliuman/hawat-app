@@ -6,7 +6,14 @@ import '../theme/tokens.dart';
 
 /// Nothing to show: an icon, one line, and an optional action.
 class EmptyState extends StatelessWidget {
-  const EmptyState({super.key, required this.icon, required this.title, this.action, this.onAction, this.compact = false});
+  const EmptyState({
+    super.key,
+    required this.icon,
+    required this.title,
+    this.action,
+    this.onAction,
+    this.compact = false,
+  });
 
   final IconData icon;
   final String title;
@@ -92,7 +99,9 @@ class OfflineBanner extends StatelessWidget {
         child: Container(
           constraints: const BoxConstraints(minHeight: 40),
           padding: const EdgeInsets.symmetric(horizontal: Hud.gutter, vertical: 8),
-          decoration: BoxDecoration(border: Border(bottom: BorderSide(color: c.warning.withValues(alpha: .35)))),
+          decoration: BoxDecoration(
+            border: Border(bottom: BorderSide(color: c.warning.withValues(alpha: .35))),
+          ),
           child: Row(
             children: [
               Icon(Icons.cloud_off_outlined, size: 18, color: c.toneText(Tone.warning)),

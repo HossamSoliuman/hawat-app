@@ -36,10 +36,7 @@ Future<void> showSupportSheet(BuildContext context, WidgetRef ref, {bool forgotP
             children: [
               Text(forgotPassword ? l.forgotTitle : l.supportTitle, style: text.titleMedium),
               const SizedBox(height: 8),
-              Text(
-                forgotPassword ? l.forgotBody : l.supportBody,
-                style: text.bodyMedium?.copyWith(color: c.muted),
-              ),
+              Text(forgotPassword ? l.forgotBody : l.supportBody, style: text.bodyMedium?.copyWith(color: c.muted)),
               const SizedBox(height: 20),
               if (phone != null)
                 FilledButton.icon(

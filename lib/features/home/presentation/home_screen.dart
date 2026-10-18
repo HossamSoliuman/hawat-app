@@ -50,7 +50,9 @@ class HomeScreen extends ConsumerWidget {
             slivers: [
               const SliverToBoxAdapter(child: _TopBar()),
               if (data?.refreshError != null)
-                SliverToBoxAdapter(child: OfflineBanner(savedAt: data!.savedAt, onRetry: refresh)),
+                SliverToBoxAdapter(
+                  child: OfflineBanner(savedAt: data!.savedAt, onRetry: refresh),
+                ),
               if (data != null)
                 SliverPadding(
                   padding: const EdgeInsets.fromLTRB(Hud.gutter, 4, Hud.gutter, Hud.gutter),
@@ -148,7 +150,8 @@ class _TopBar extends ConsumerWidget {
                       color: c.danger,
                       child: Text(
                         unread > 99 ? '99+' : '$unread',
-                        style: Theme.of(context).textTheme.labelSmall?.copyWith(color: Colors.white, fontSize: 10.5, height: 1),
+                        style: Theme.of(context).textTheme.labelSmall
+                            ?.copyWith(color: Colors.white, fontSize: 10.5, height: 1),
                       ),
                     ),
                   ),
@@ -188,7 +191,10 @@ class _NeedsAction extends ConsumerWidget {
                 children: [
                   Icon(Icons.task_alt, color: c.success, size: 22),
                   const SizedBox(width: 10),
-                  Text(l.nothingPending, style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.w600)),
+                  Text(
+                    l.nothingPending,
+                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.w600),
+                  ),
                 ],
               ),
             ),
@@ -251,13 +257,20 @@ class _ActionRow extends StatelessWidget {
       child: Container(
         constraints: const BoxConstraints(minHeight: 52),
         padding: const EdgeInsets.symmetric(vertical: 8),
-        decoration: BoxDecoration(border: Border(top: BorderSide(color: c.hair))),
+        decoration: BoxDecoration(
+          border: Border(top: BorderSide(color: c.hair)),
+        ),
         child: Row(
           children: [
             ToneIcon(icon: icon, tone: tone, size: 30, iconSize: 17),
             const SizedBox(width: 12),
-            Expanded(child: Text(label, style: text.bodyLarge?.copyWith(fontWeight: FontWeight.w700))),
-            if (amount != null) ...[Text(amount!, style: text.labelLarge?.copyWith(color: c.toneText(tone))), const SizedBox(width: 10)],
+            Expanded(
+              child: Text(label, style: text.bodyLarge?.copyWith(fontWeight: FontWeight.w700)),
+            ),
+            if (amount != null) ...[
+              Text(amount!, style: text.labelLarge?.copyWith(color: c.toneText(tone))),
+              const SizedBox(width: 10),
+            ],
             CountBadge(count: count, tone: tone),
             const SizedBox(width: 4),
             Icon(Icons.chevron_right, color: c.muted),
@@ -287,7 +300,12 @@ class _ScheduledTripRow extends ConsumerWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(boatAndCaptain(trip), style: text.bodyMedium?.copyWith(fontWeight: FontWeight.w600), maxLines: 1, overflow: TextOverflow.ellipsis),
+                  Text(
+                    boatAndCaptain(trip),
+                    style: text.bodyMedium?.copyWith(fontWeight: FontWeight.w600),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
                   Text(
                     trip.departureTime == null ? Fmt.ltr(trip.tripNumber) : l.when(trip.departureTime!),
                     style: text.bodySmall,
@@ -298,7 +316,10 @@ class _ScheduledTripRow extends ConsumerWidget {
             const SizedBox(width: 8),
             FilledButton.icon(
               onPressed: () => startTripFlow(context, ref, trip),
-              style: FilledButton.styleFrom(minimumSize: const Size(84, 40), padding: const EdgeInsets.symmetric(horizontal: 12)),
+              style: FilledButton.styleFrom(
+                minimumSize: const Size(84, 40),
+                padding: const EdgeInsets.symmetric(horizontal: 12),
+              ),
               icon: const Icon(Icons.play_arrow, size: 18),
               label: Text(l.startShort),
             ),
@@ -333,7 +354,11 @@ class _Indicators extends ConsumerWidget {
     Widget pair(Widget a, Widget b) => IntrinsicHeight(
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [Expanded(child: a), const SizedBox(width: 10), Expanded(child: b)],
+        children: [
+          Expanded(child: a),
+          const SizedBox(width: 10),
+          Expanded(child: b),
+        ],
       ),
     );
 
@@ -345,7 +370,12 @@ class _Indicators extends ConsumerWidget {
             const ToneIcon(icon: Icons.insights, size: 28, iconSize: 15),
             const SizedBox(width: 10),
             Expanded(
-              child: Text(l.indicatorsTitle, style: Theme.of(context).textTheme.titleSmall, maxLines: 1, overflow: TextOverflow.ellipsis),
+              child: Text(
+                l.indicatorsTitle,
+                style: Theme.of(context).textTheme.titleSmall,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+              ),
             ),
             const SizedBox(width: 8),
             _PeriodSwitch(period: period),
@@ -353,12 +383,23 @@ class _Indicators extends ConsumerWidget {
         ),
         const SizedBox(height: 8),
         pair(
-          StatTile(label: revenueLabel, value: Fmt.money(k.revenue), unit: l.currencySar, icon: Icons.payments_outlined, tone: Tone.success),
+          StatTile(
+            label: revenueLabel,
+            value: Fmt.money(k.revenue),
+            unit: l.currencySar,
+            icon: Icons.payments_outlined,
+            tone: Tone.success,
+          ),
           StatTile(label: catchLabel, value: Fmt.kg(k.catchKg), unit: l.unitKg, icon: Icons.set_meal_outlined),
         ),
         const SizedBox(height: 10),
         pair(
-          StatTile(label: l.statActiveBoats, value: '${k.activeBoats} / ${k.boats}', icon: Icons.directions_boat_outlined, tone: Tone.info),
+          StatTile(
+            label: l.statActiveBoats,
+            value: '${k.activeBoats} / ${k.boats}',
+            icon: Icons.directions_boat_outlined,
+            tone: Tone.info,
+          ),
           StatTile(
             label: l.statUnpaid,
             value: Fmt.money(k.unpaid),
@@ -383,7 +424,11 @@ class _PeriodSwitch extends ConsumerWidget {
     final l = context.l10n;
     final c = HawatColors.of(context);
     final text = Theme.of(context).textTheme;
-    final labels = {DashboardPeriod.today: l.periodToday, DashboardPeriod.month: l.periodMonth, DashboardPeriod.year: l.periodYear};
+    final labels = {
+      DashboardPeriod.today: l.periodToday,
+      DashboardPeriod.month: l.periodMonth,
+      DashboardPeriod.year: l.periodYear,
+    };
 
     return Container(
       decoration: BoxDecoration(border: Border.all(color: c.border)),
@@ -462,7 +507,11 @@ class _Pipeline extends StatelessWidget {
                               style: text.headlineSmall?.copyWith(color: stages[i].$2 > 0 ? c.foreground : c.muted),
                             ),
                             const SizedBox(height: 4),
-                            Text(stages[i].$1, style: text.labelSmall?.copyWith(color: c.muted), textAlign: TextAlign.center),
+                            Text(
+                              stages[i].$1,
+                              style: text.labelSmall?.copyWith(color: c.muted),
+                              textAlign: TextAlign.center,
+                            ),
                           ],
                         ),
                       ),
@@ -498,7 +547,9 @@ class _ActiveTrips extends StatelessWidget {
         ),
         const SizedBox(height: 8),
         if (trips.isEmpty)
-          HudCard(child: EmptyState(icon: Icons.sailing_outlined, title: l.noActiveTrips, compact: true))
+          HudCard(
+            child: EmptyState(icon: Icons.sailing_outlined, title: l.noActiveTrips, compact: true),
+          )
         else
           SizedBox(
             height: 196,
@@ -507,7 +558,10 @@ class _ActiveTrips extends StatelessWidget {
               clipBehavior: Clip.none,
               itemCount: trips.length,
               separatorBuilder: (_, _) => const SizedBox(width: 10),
-              itemBuilder: (context, i) => SizedBox(width: width, child: _ActiveTripCard(trip: trips[i])),
+              itemBuilder: (context, i) => SizedBox(
+                width: width,
+                child: _ActiveTripCard(trip: trips[i]),
+              ),
             ),
           ),
       ],
@@ -531,7 +585,10 @@ class _ActiveTripCard extends ConsumerWidget {
     final Widget next = switch (phase) {
       TripPhase.atSea => OutlinedButton.icon(
         onPressed: () => context.push(Routes.submitCatch(trip.id)),
-        style: OutlinedButton.styleFrom(minimumSize: const Size.fromHeight(44), side: BorderSide(color: c.primary)),
+        style: OutlinedButton.styleFrom(
+          minimumSize: const Size.fromHeight(44),
+          side: BorderSide(color: c.primary),
+        ),
         icon: const Icon(Icons.scale_outlined, size: 18),
         label: Text(l.quickSubmitCatch, overflow: TextOverflow.ellipsis),
       ),
@@ -555,7 +612,9 @@ class _ActiveTripCard extends ConsumerWidget {
         children: [
           Row(
             children: [
-              Expanded(child: LtrText(trip.tripNumber, style: text.labelMedium?.copyWith(color: c.muted))),
+              Expanded(
+                child: LtrText(trip.tripNumber, style: text.labelMedium?.copyWith(color: c.muted)),
+              ),
               TripPhaseChip(trip: trip, dense: true),
             ],
           ),
@@ -632,7 +691,9 @@ class _Stock extends StatelessWidget {
                 children: [
                   Row(
                     children: [
-                      Expanded(child: Text(line.species ?? '—', style: text.bodyMedium?.copyWith(fontWeight: FontWeight.w600))),
+                      Expanded(
+                        child: Text(line.species ?? '—', style: text.bodyMedium?.copyWith(fontWeight: FontWeight.w600)),
+                      ),
                       Text(l.kg(line.weightKg), style: text.labelLarge),
                     ],
                   ),
@@ -701,9 +762,21 @@ class _HomeSkeleton extends StatelessWidget {
         children: [
           SkeletonBox(height: 120),
           SizedBox(height: Hud.gap),
-          Row(children: [Expanded(child: SkeletonBox(height: 96)), SizedBox(width: 10), Expanded(child: SkeletonBox(height: 96))]),
+          Row(
+            children: [
+              Expanded(child: SkeletonBox(height: 96)),
+              SizedBox(width: 10),
+              Expanded(child: SkeletonBox(height: 96)),
+            ],
+          ),
           SizedBox(height: 10),
-          Row(children: [Expanded(child: SkeletonBox(height: 96)), SizedBox(width: 10), Expanded(child: SkeletonBox(height: 96))]),
+          Row(
+            children: [
+              Expanded(child: SkeletonBox(height: 96)),
+              SizedBox(width: 10),
+              Expanded(child: SkeletonBox(height: 96)),
+            ],
+          ),
           SizedBox(height: Hud.gap),
           SkeletonBox(height: 110),
           SizedBox(height: Hud.gap),

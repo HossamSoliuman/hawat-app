@@ -1,0 +1,49 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.47.6'
+          channel: stable
+          cache: true
+
+      - name: Dependencies
+        run: flutter pub get
+
+      - name: Generated code is up to date
+        run: |
+          flutter gen-l10n
+          dart run build_runner build
+          git diff --exit-code -- lib
+
+      - name: Analyze
+        run: flutter analyze
+
+      - name: Tests
+        # Goldens are rendered on Windows; e2e needs a test server.
+        run: flutter test --exclude-tags golden,e2e
+
+      - name: Staging APK
+        run: flutter build apk --flavor staging --dart-define-from-file=env/staging.json
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: hawat-staging-apk
+          path: build/app/outputs/flutter-apk/app-staging-release.apk
+          retention-days: 14

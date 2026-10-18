@@ -36,8 +36,16 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            ListTile(leading: const Icon(Icons.photo_library_outlined), title: Text(l.pickFromGallery), onTap: () => Navigator.pop(context, 'gallery')),
-            ListTile(leading: const Icon(Icons.photo_camera_outlined), title: Text(l.takePhoto), onTap: () => Navigator.pop(context, 'camera')),
+            ListTile(
+              leading: const Icon(Icons.photo_library_outlined),
+              title: Text(l.pickFromGallery),
+              onTap: () => Navigator.pop(context, 'gallery'),
+            ),
+            ListTile(
+              leading: const Icon(Icons.photo_camera_outlined),
+              title: Text(l.takePhoto),
+              onTap: () => Navigator.pop(context, 'camera'),
+            ),
             if (hasPhoto)
               ListTile(
                 leading: Icon(Icons.delete_outline, color: HawatColors.of(context).danger),
@@ -113,7 +121,10 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                           color: c.foreground,
                           alignment: Alignment.center,
                           child: _uploading
-                              ? SizedBox.square(dimension: 14, child: CircularProgressIndicator(strokeWidth: 2, color: c.background))
+                              ? SizedBox.square(
+                                  dimension: 14,
+                                  child: CircularProgressIndicator(strokeWidth: 2, color: c.background),
+                                )
                               : Icon(Icons.photo_camera_outlined, size: 15, color: c.background),
                         ),
                       ),
@@ -139,7 +150,10 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
             padding: const EdgeInsets.fromLTRB(14, 4, 14, 4),
             child: Column(
               children: [
-                InfoRow(label: l.phoneLabel, child: LtrText(user.phone, style: text.bodyMedium?.copyWith(fontWeight: FontWeight.w600))),
+                InfoRow(
+                  label: l.phoneLabel,
+                  child: LtrText(user.phone, style: text.bodyMedium?.copyWith(fontWeight: FontWeight.w600)),
+                ),
                 InfoRow(label: l.emailLabel, value: user.email, last: true),
               ],
             ),
@@ -150,7 +164,11 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
             child: Column(
               children: [
                 MenuRow(icon: Icons.edit_outlined, label: l.editProfile, onTap: () => context.push(Routes.editProfile)),
-                MenuRow(icon: Icons.lock_outline, label: l.changePassword, onTap: () => context.push(Routes.changePassword)),
+                MenuRow(
+                  icon: Icons.lock_outline,
+                  label: l.changePassword,
+                  onTap: () => context.push(Routes.changePassword),
+                ),
               ],
             ),
           ),

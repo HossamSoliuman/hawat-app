@@ -28,9 +28,11 @@ class AppConfigController extends _$AppConfigController {
 
     if (saved != null) {
       unawaited(
-        fresh.then((config) {
-          if (ref.mounted) state = AsyncData(config);
-        }).catchError((Object _) {}),
+        fresh
+            .then((config) {
+              if (ref.mounted) state = AsyncData(config);
+            })
+            .catchError((Object _) {}),
       );
       try {
         return AppConfig.fromJson((jsonDecode(saved) as Map).cast<String, dynamic>());

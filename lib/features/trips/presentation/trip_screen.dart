@@ -94,7 +94,9 @@ class _TripMenu extends ConsumerWidget {
         if (trip.canEdit)
           PopupMenuItem(
             value: 'edit',
-            child: Row(children: [const Icon(Icons.edit_outlined, size: 20), const SizedBox(width: 12), Text(l.menuEditTrip)]),
+            child: Row(
+              children: [const Icon(Icons.edit_outlined, size: 20), const SizedBox(width: 12), Text(l.menuEditTrip)],
+            ),
           ),
         if (trip.canCancel)
           PopupMenuItem(
@@ -212,7 +214,11 @@ class _Captain extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         Flexible(
-          child: Text(name ?? '—', textAlign: TextAlign.end, style: text.bodyMedium?.copyWith(fontWeight: FontWeight.w600)),
+          child: Text(
+            name ?? '—',
+            textAlign: TextAlign.end,
+            style: text.bodyMedium?.copyWith(fontWeight: FontWeight.w600),
+          ),
         ),
         if (phone != null && phone.isNotEmpty)
           SizedBox(
@@ -273,13 +279,20 @@ class _CatchCard extends StatelessWidget {
             for (final record in records)
               Container(
                 padding: const EdgeInsets.symmetric(vertical: 10),
-                decoration: BoxDecoration(border: Border(bottom: BorderSide(color: c.hair))),
+                decoration: BoxDecoration(
+                  border: Border(bottom: BorderSide(color: c.hair)),
+                ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     Row(
                       children: [
-                        cell(record.species?.name ?? '—', style: text.bodyMedium?.copyWith(fontWeight: FontWeight.w600), flex: 4, end: false),
+                        cell(
+                          record.species?.name ?? '—',
+                          style: text.bodyMedium?.copyWith(fontWeight: FontWeight.w600),
+                          flex: 4,
+                          end: false,
+                        ),
                         cell(Fmt.ltr(Fmt.kg(record.declaredKg)), style: text.bodyMedium),
                         if (counted)
                           cell(
@@ -377,7 +390,10 @@ class _TripSalesCard extends ConsumerWidget {
     return HudCard(
       padding: const EdgeInsets.fromLTRB(14, 8, 14, 8),
       child: state.when(
-        loading: () => const Padding(padding: EdgeInsets.all(20), child: Center(child: CircularProgressIndicator(strokeWidth: 2))),
+        loading: () => const Padding(
+          padding: EdgeInsets.all(20),
+          child: Center(child: CircularProgressIndicator(strokeWidth: 2)),
+        ),
         error: (e, _) => ErrorState(error: e, compact: true, onRetry: () => ref.invalidate(tripSalesProvider(tripId))),
         data: (result) {
           final (sales, consignments) = result;
@@ -434,7 +450,8 @@ class _NextAction extends ConsumerWidget {
             Expanded(
               child: Text(
                 message,
-                style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: c.toneText(tone), fontWeight: FontWeight.w700),
+                style: Theme.of(context).textTheme.bodyMedium
+                    ?.copyWith(color: c.toneText(tone), fontWeight: FontWeight.w700),
               ),
             ),
           ],

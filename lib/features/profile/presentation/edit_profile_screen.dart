@@ -64,7 +64,9 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
     final l = context.l10n;
     return Scaffold(
       appBar: AppBar(title: Text(l.editProfile)),
-      bottomNavigationBar: PinnedAction(child: PrimaryButton(label: l.save, busy: _busy, onPressed: _save)),
+      bottomNavigationBar: PinnedAction(
+        child: PrimaryButton(label: l.save, busy: _busy, onPressed: _save),
+      ),
       body: ListView(
         padding: const EdgeInsets.all(Hud.gutter),
         children: [

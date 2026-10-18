@@ -56,13 +56,26 @@ void main() {
           'total': [4800, 1250.5, 9600, 2300][i],
           'paid_amount': [4800, 0, 6000, 2300][i],
           'remaining': [0, 1250.5, 3600, 0][i],
-          'customer': {'id': i, 'name': ['سوق القطيف المركزي', 'محل أبو خالد للأسماك', 'مطعم البحر', 'سالم الدوسري'][i], 'phone': null},
+          'customer': {
+            'id': i,
+            'name': ['سوق القطيف المركزي', 'محل أبو خالد للأسماك', 'مطعم البحر', 'سالم الدوسري'][i],
+            'phone': null,
+          },
         },
     ];
     return api..json('GET', '/owner/dashboard', dashboard);
   }
 
-  Future<void> shot(WidgetTester tester, String name, Widget screen, {FakeApi? api, bool dark = false, double height = 780, double textScale = 1, SessionState? session}) async {
+  Future<void> shot(
+    WidgetTester tester,
+    String name,
+    Widget screen, {
+    FakeApi? api,
+    bool dark = false,
+    double height = 780,
+    double textScale = 1,
+    SessionState? session,
+  }) async {
     final app = TestApp(api: api ?? ownerApi(), user: session is SignedOut ? null : owner);
     await app.pump(tester, screen, dark: dark, size: Size(360, height), textScale: textScale);
     await tester.pumpAndSettle();
@@ -78,18 +91,39 @@ void main() {
   }
 
   testWidgets('login', (tester) => shot(tester, 'login', const LoginScreen(), session: const SignedOut()));
-  testWidgets('login dark', (tester) => shot(tester, 'login_dark', const LoginScreen(), dark: true, session: const SignedOut()));
+  testWidgets(
+    'login dark',
+    (tester) => shot(tester, 'login_dark', const LoginScreen(), dark: true, session: const SignedOut()),
+  );
   testWidgets('home', (tester) => shot(tester, 'home', const HomeScreen(), api: busyOwner(), height: 2300));
-  testWidgets('home dark', (tester) => shot(tester, 'home_dark', const HomeScreen(), api: busyOwner(), dark: true, height: 2300));
+  testWidgets(
+    'home dark',
+    (tester) => shot(tester, 'home_dark', const HomeScreen(), api: busyOwner(), dark: true, height: 2300),
+  );
   testWidgets('home first screen', (tester) => shot(tester, 'home_fold', const HomeScreen(), api: busyOwner()));
-  testWidgets('home text 1.3', (tester) => shot(tester, 'home_text_1_3', const HomeScreen(), api: busyOwner(), height: 2700, textScale: 1.3));
-  testWidgets('trips', (tester) => shot(tester, 'trips', const TripsScreen(initialStage: TripStage.inProgress), height: 1400));
-  testWidgets('trips for sale', (tester) => shot(tester, 'trips_for_sale', const TripsScreen(initialStage: TripStage.forSale)));
+  testWidgets(
+    'home text 1.3',
+    (tester) => shot(tester, 'home_text_1_3', const HomeScreen(), api: busyOwner(), height: 2700, textScale: 1.3),
+  );
+  testWidgets(
+    'trips',
+    (tester) => shot(tester, 'trips', const TripsScreen(initialStage: TripStage.inProgress), height: 1400),
+  );
+  testWidgets(
+    'trips for sale',
+    (tester) => shot(tester, 'trips_for_sale', const TripsScreen(initialStage: TripStage.forSale)),
+  );
   testWidgets('trip scheduled', (tester) => shot(tester, 'trip_scheduled', const TripScreen(id: 16), height: 1200));
   testWidgets('trip at sea', (tester) => shot(tester, 'trip_at_sea', const TripScreen(id: 15), height: 1200));
-  testWidgets('trip awaiting counter', (tester) => shot(tester, 'trip_awaiting', const TripScreen(id: 8), height: 1200));
+  testWidgets(
+    'trip awaiting counter',
+    (tester) => shot(tester, 'trip_awaiting', const TripScreen(id: 8), height: 1200),
+  );
   testWidgets('trip for sale', (tester) => shot(tester, 'trip_for_sale', const TripScreen(id: 12), height: 2000));
-  testWidgets('trip for sale dark', (tester) => shot(tester, 'trip_for_sale_dark', const TripScreen(id: 12), dark: true, height: 2000));
+  testWidgets(
+    'trip for sale dark',
+    (tester) => shot(tester, 'trip_for_sale_dark', const TripScreen(id: 12), dark: true, height: 2000),
+  );
   testWidgets('trip cancelled', (tester) => shot(tester, 'trip_cancelled', const TripScreen(id: 14), height: 1200));
   testWidgets('new trip', (tester) => shot(tester, 'trip_new', const TripFormScreen(), height: 1500));
   testWidgets('catch', (tester) => shot(tester, 'catch', const CatchScreen(tripId: 15)));

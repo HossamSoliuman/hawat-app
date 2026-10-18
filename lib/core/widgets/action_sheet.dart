@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -51,7 +53,7 @@ class _ActionSheetState extends State<_ActionSheet> {
     });
     try {
       await widget.run(_key);
-      await HapticFeedback.lightImpact();
+      unawaited(HapticFeedback.lightImpact());
       if (mounted) Navigator.of(context).pop(true);
     } on ApiException catch (e) {
       if (mounted) setState(() => _error = e.userMessage(context.l10n));

@@ -18,15 +18,14 @@ _AppConfig _$AppConfigFromJson(Map<String, dynamic> json) => _AppConfig(
   termsUrl: json['terms_url'] as String?,
 );
 
-Map<String, dynamic> _$AppConfigToJson(_AppConfig instance) =>
-    <String, dynamic>{
-      'min_version': instance.minVersion,
-      'latest_version': instance.latestVersion,
-      'store_url': instance.storeUrl,
-      'sms_enabled': instance.smsEnabled,
-      'support_phone': instance.supportPhone,
-      'support_whatsapp': instance.supportWhatsapp,
-      'join_url': instance.joinUrl,
-      'privacy_url': instance.privacyUrl,
-      'terms_url': instance.termsUrl,
-    };
+Map<String, dynamic> _$AppConfigToJson(_AppConfig instance) => <String, dynamic>{
+  'min_version': instance.minVersion,
+  'latest_version': instance.latestVersion,
+  'store_url': instance.storeUrl,
+  'sms_enabled': instance.smsEnabled,
+  'support_phone': instance.supportPhone,
+  'support_whatsapp': instance.supportWhatsapp,
+  'join_url': instance.joinUrl,
+  'privacy_url': instance.privacyUrl,
+  'terms_url': instance.termsUrl,
+};

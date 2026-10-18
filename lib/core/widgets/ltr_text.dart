@@ -16,9 +16,7 @@ class LtrText extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Text(
     Fmt.ltr(value),
-    style: (style ?? DefaultTextStyle.of(context).style).copyWith(
-      fontFeatures: const [FontFeature.tabularFigures()],
-    ),
+    style: (style ?? DefaultTextStyle.of(context).style).copyWith(fontFeatures: const [FontFeature.tabularFigures()]),
     textAlign: textAlign,
     maxLines: maxLines,
     overflow: overflow,

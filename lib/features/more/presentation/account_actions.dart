@@ -14,7 +14,14 @@ import '../../auth/presentation/support_sheet.dart';
 
 /// A tappable row with an icon, in a list card.
 class MenuRow extends StatelessWidget {
-  const MenuRow({super.key, required this.icon, required this.label, required this.onTap, this.danger = false, this.trailing});
+  const MenuRow({
+    super.key,
+    required this.icon,
+    required this.label,
+    required this.onTap,
+    this.danger = false,
+    this.trailing,
+  });
 
   final IconData icon;
   final String label;
@@ -31,12 +38,19 @@ class MenuRow extends StatelessWidget {
       child: Container(
         constraints: const BoxConstraints(minHeight: 54),
         padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
-        decoration: BoxDecoration(border: Border(bottom: BorderSide(color: c.hair))),
+        decoration: BoxDecoration(
+          border: Border(bottom: BorderSide(color: c.hair)),
+        ),
         child: Row(
           children: [
             Icon(icon, size: 22, color: danger ? color : c.muted),
             const SizedBox(width: 14),
-            Expanded(child: Text(label, style: Theme.of(context).textTheme.bodyLarge?.copyWith(color: color, fontWeight: FontWeight.w600))),
+            Expanded(
+              child: Text(
+                label,
+                style: Theme.of(context).textTheme.bodyLarge?.copyWith(color: color, fontWeight: FontWeight.w600),
+              ),
+            ),
             ?trailing,
             if (!danger) Icon(Icons.chevron_right, color: c.muted),
           ],
@@ -67,7 +81,8 @@ class AccountActions extends ConsumerWidget {
         children: [
           ...leading,
           MenuRow(icon: Icons.support_agent, label: l.supportTitle, onTap: () => showSupportSheet(context, ref)),
-          if (config.termsUrl != null) MenuRow(icon: Icons.gavel_outlined, label: l.termsTitle, onTap: () => open(config.termsUrl!)),
+          if (config.termsUrl != null)
+            MenuRow(icon: Icons.gavel_outlined, label: l.termsTitle, onTap: () => open(config.termsUrl!)),
           if (config.privacyUrl != null)
             MenuRow(icon: Icons.privacy_tip_outlined, label: l.privacyTitle, onTap: () => open(config.privacyUrl!)),
           MenuRow(

@@ -120,12 +120,30 @@ abstract final class HawatTheme {
         floatingLabelStyle: text.bodyMedium?.copyWith(color: c.primary, fontWeight: FontWeight.w600),
         errorStyle: text.bodySmall?.copyWith(color: c.danger, height: 1.35),
         errorMaxLines: 3,
-        border: OutlineInputBorder(borderRadius: BorderRadius.zero, borderSide: BorderSide(color: c.border)),
-        enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.zero, borderSide: BorderSide(color: c.border)),
-        focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.zero, borderSide: BorderSide(color: c.primary, width: 1.5)),
-        errorBorder: OutlineInputBorder(borderRadius: BorderRadius.zero, borderSide: BorderSide(color: c.danger)),
-        focusedErrorBorder: OutlineInputBorder(borderRadius: BorderRadius.zero, borderSide: BorderSide(color: c.danger, width: 1.5)),
-        disabledBorder: OutlineInputBorder(borderRadius: BorderRadius.zero, borderSide: BorderSide(color: c.hair)),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.zero,
+          borderSide: BorderSide(color: c.border),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.zero,
+          borderSide: BorderSide(color: c.border),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.zero,
+          borderSide: BorderSide(color: c.primary, width: 1.5),
+        ),
+        errorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.zero,
+          borderSide: BorderSide(color: c.danger),
+        ),
+        focusedErrorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.zero,
+          borderSide: BorderSide(color: c.danger, width: 1.5),
+        ),
+        disabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.zero,
+          borderSide: BorderSide(color: c.hair),
+        ),
       ),
       bottomSheetTheme: BottomSheetThemeData(
         backgroundColor: c.panel,

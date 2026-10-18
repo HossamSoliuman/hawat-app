@@ -24,7 +24,12 @@ class SectionHead extends StatelessWidget {
           const SizedBox(width: 10),
           Flexible(
             flex: 4,
-            child: Text(title, style: Theme.of(context).textTheme.titleSmall, maxLines: 1, overflow: TextOverflow.ellipsis),
+            child: Text(
+              title,
+              style: Theme.of(context).textTheme.titleSmall,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+            ),
           ),
           const SizedBox(width: 10),
           Expanded(

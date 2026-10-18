@@ -48,7 +48,11 @@ class MoreScreen extends ConsumerWidget {
           const SizedBox(height: 8),
           HudCard(
             padding: EdgeInsets.zero,
-            child: MenuRow(icon: Icons.list_alt_outlined, label: l.catchLogTitle, onTap: () => context.push(Routes.catchLog)),
+            child: MenuRow(
+              icon: Icons.list_alt_outlined,
+              label: l.catchLogTitle,
+              onTap: () => context.push(Routes.catchLog),
+            ),
           ),
           const SizedBox(height: Hud.gap),
           SectionHead(title: l.groupAccount, icon: Icons.person_outline),

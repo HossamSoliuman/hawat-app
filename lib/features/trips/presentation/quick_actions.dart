@@ -95,14 +95,19 @@ class _QuickActionsSheetState extends ConsumerState<_QuickActionsSheet> {
                         onTap: () => Navigator.of(context).pop(trip),
                         child: Container(
                           padding: const EdgeInsets.symmetric(horizontal: Hud.gutter, vertical: 12),
-                          decoration: BoxDecoration(border: Border(bottom: BorderSide(color: c.hair))),
+                          decoration: BoxDecoration(
+                            border: Border(bottom: BorderSide(color: c.hair)),
+                          ),
                           child: Row(
                             children: [
                               Expanded(
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text(boatAndCaptain(trip), style: text.bodyLarge?.copyWith(fontWeight: FontWeight.w700)),
+                                    Text(
+                                      boatAndCaptain(trip),
+                                      style: text.bodyLarge?.copyWith(fontWeight: FontWeight.w700),
+                                    ),
                                     const SizedBox(height: 2),
                                     LtrText(trip.tripNumber, style: text.bodySmall),
                                   ],
@@ -196,12 +201,16 @@ class _QuickRow extends StatelessWidget {
       child: Container(
         constraints: const BoxConstraints(minHeight: 60),
         padding: const EdgeInsets.symmetric(horizontal: Hud.gutter, vertical: 10),
-        decoration: BoxDecoration(border: Border(bottom: BorderSide(color: c.hair))),
+        decoration: BoxDecoration(
+          border: Border(bottom: BorderSide(color: c.hair)),
+        ),
         child: Row(
           children: [
             ToneIcon(icon: icon, size: 36, iconSize: 20),
             const SizedBox(width: 14),
-            Expanded(child: Text(label, style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.w700))),
+            Expanded(
+              child: Text(label, style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.w700)),
+            ),
             if (loading)
               const SizedBox.square(dimension: 20, child: CircularProgressIndicator(strokeWidth: 2))
             else ...[

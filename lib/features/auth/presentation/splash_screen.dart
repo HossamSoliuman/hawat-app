@@ -31,7 +31,11 @@ class SplashScreen extends ConsumerWidget {
                 if (session case SessionRestoreFailed(:final error)) ...[
                   Text(l.startupFailedTitle, style: text.titleMedium, textAlign: TextAlign.center),
                   const SizedBox(height: 8),
-                  Text(error.userMessage(l), style: text.bodyMedium?.copyWith(color: c.muted), textAlign: TextAlign.center),
+                  Text(
+                    error.userMessage(l),
+                    style: text.bodyMedium?.copyWith(color: c.muted),
+                    textAlign: TextAlign.center,
+                  ),
                   const SizedBox(height: 20),
                   OutlinedButton.icon(
                     onPressed: () => ref.read(sessionProvider.notifier).restore(),

@@ -23,7 +23,13 @@ class FieldLabel extends StatelessWidget {
           child: Text.rich(
             TextSpan(
               text: label,
-              children: [if (required) TextSpan(text: ' *', style: TextStyle(color: c.danger))],
+              children: [
+                if (required)
+                  TextSpan(
+                    text: ' *',
+                    style: TextStyle(color: c.danger),
+                  ),
+              ],
             ),
             style: Theme.of(context).textTheme.labelMedium?.copyWith(color: c.muted),
           ),
@@ -114,12 +120,8 @@ class SearchSelect<T> extends StatelessWidget {
     final result = await showModalBottomSheet<_Picked<T>>(
       context: context,
       isScrollControlled: true,
-      builder: (context) => _SearchSheet<T>(
-        options: options,
-        selected: value,
-        title: title ?? hint,
-        emptyLabel: emptyLabel,
-      ),
+      builder: (context) =>
+          _SearchSheet<T>(options: options, selected: value, title: title ?? hint, emptyLabel: emptyLabel),
     );
     if (result != null) onChanged(result.value);
   }
@@ -203,7 +205,11 @@ class _SearchSheetState<T> extends State<_SearchSheet<T>> {
                     if (filtered.isEmpty)
                       Padding(
                         padding: const EdgeInsets.all(24),
-                        child: Text(l.noResults, textAlign: TextAlign.center, style: text.bodyMedium?.copyWith(color: c.muted)),
+                        child: Text(
+                          l.noResults,
+                          textAlign: TextAlign.center,
+                          style: text.bodyMedium?.copyWith(color: c.muted),
+                        ),
                       ),
                   ],
                 ),
@@ -270,17 +276,23 @@ class InfoRow extends StatelessWidget {
     final text = Theme.of(context).textTheme;
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 11),
-      decoration: BoxDecoration(border: last ? null : Border(bottom: BorderSide(color: c.hair))),
+      decoration: BoxDecoration(
+        border: last ? null : Border(bottom: BorderSide(color: c.hair)),
+      ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Expanded(flex: 4, child: Text(label, style: text.bodyMedium?.copyWith(color: c.muted))),
+          Expanded(
+            flex: 4,
+            child: Text(label, style: text.bodyMedium?.copyWith(color: c.muted)),
+          ),
           const SizedBox(width: 12),
           Expanded(
             flex: 6,
             child: Align(
               alignment: AlignmentDirectional.centerEnd,
-              child: child ??
+              child:
+                  child ??
                   Text(
                     value ?? '—',
                     textAlign: TextAlign.end,

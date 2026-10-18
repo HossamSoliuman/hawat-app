@@ -93,7 +93,9 @@ GoRouter router(Ref ref) {
       StatefulShellRoute.indexedStack(
         builder: (context, state, shell) => AppShell(shell: shell),
         branches: [
-          StatefulShellBranch(routes: [GoRoute(path: Routes.home, builder: (_, _) => const HomeScreen())]),
+          StatefulShellBranch(
+            routes: [GoRoute(path: Routes.home, builder: (_, _) => const HomeScreen())],
+          ),
           StatefulShellBranch(
             routes: [
               GoRoute(
@@ -110,7 +112,9 @@ GoRouter router(Ref ref) {
               ),
             ],
           ),
-          StatefulShellBranch(routes: [GoRoute(path: Routes.more, builder: (_, _) => const MoreScreen())]),
+          StatefulShellBranch(
+            routes: [GoRoute(path: Routes.more, builder: (_, _) => const MoreScreen())],
+          ),
         ],
       ),
       GoRoute(path: Routes.notifications, builder: (_, _) => const NotificationsScreen()),
@@ -123,11 +127,20 @@ GoRouter router(Ref ref) {
         path: '/trip/:id',
         builder: (_, state) => TripScreen(id: _id(state)),
         routes: [
-          GoRoute(path: 'edit', builder: (_, state) => TripFormScreen(tripId: _id(state))),
-          GoRoute(path: 'catch', builder: (_, state) => CatchScreen(tripId: _id(state))),
+          GoRoute(
+            path: 'edit',
+            builder: (_, state) => TripFormScreen(tripId: _id(state)),
+          ),
+          GoRoute(
+            path: 'catch',
+            builder: (_, state) => CatchScreen(tripId: _id(state)),
+          ),
         ],
       ),
-      GoRoute(path: '/sale/:id', builder: (_, state) => SaleScreen(id: _id(state))),
+      GoRoute(
+        path: '/sale/:id',
+        builder: (_, state) => SaleScreen(id: _id(state)),
+      ),
     ],
   );
   ref.onDispose(router.dispose);

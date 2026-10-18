@@ -114,8 +114,7 @@ class AppLocalizationsAr extends AppLocalizations {
   }
 
   @override
-  String get errorNetwork =>
-      'تعذّر الاتصال بالخادم. تحقق من الإنترنت ثم أعد المحاولة.';
+  String get errorNetwork => 'تعذّر الاتصال بالخادم. تحقق من الإنترنت ثم أعد المحاولة.';
 
   @override
   String get errorServer => 'حدث خطأ في الخادم. أعد المحاولة بعد قليل.';
@@ -127,15 +126,13 @@ class AppLocalizationsAr extends AppLocalizations {
   String get errorForbidden => 'لا تملك صلاحية هذا الإجراء.';
 
   @override
-  String get errorConflict =>
-      'تغيّر هذا السجل من جهاز آخر. أعد تحميله ثم عدّل.';
+  String get errorConflict => 'تغيّر هذا السجل من جهاز آخر. أعد تحميله ثم عدّل.';
 
   @override
   String get errorRateLimited => 'محاولات كثيرة. انتظر دقيقة ثم أعد المحاولة.';
 
   @override
-  String get errorBusy =>
-      'الطلب السابق ما زال قيد التنفيذ. أعد المحاولة بعد لحظات.';
+  String get errorBusy => 'الطلب السابق ما زال قيد التنفيذ. أعد المحاولة بعد لحظات.';
 
   @override
   String get errorUnknown => 'حدث خطأ غير متوقع.';
@@ -161,8 +158,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get updateRequiredTitle => 'يلزم تحديث التطبيق';
 
   @override
-  String get updateRequiredBody =>
-      'هذه النسخة من حوات لم تعد مدعومة. حدّث التطبيق من المتجر لتتابع عملك.';
+  String get updateRequiredBody => 'هذه النسخة من حوات لم تعد مدعومة. حدّث التطبيق من المتجر لتتابع عملك.';
 
   @override
   String get updateNow => 'تحديث الآن';
@@ -216,8 +212,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get forgotTitle => 'نسيت كلمة المرور؟';
 
   @override
-  String get forgotBody =>
-      'تواصل مع الدعم الفني، وسيعيد ضبط كلمة المرور لحسابك.';
+  String get forgotBody => 'تواصل مع الدعم الفني، وسيعيد ضبط كلمة المرور لحسابك.';
 
   @override
   String get supportTitle => 'الدعم الفني';
@@ -246,8 +241,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get logoutConfirmTitle => 'تسجيل الخروج من حوات؟';
 
   @override
-  String get logoutConfirmBody =>
-      'ستحتاج رقم جوالك وكلمة المرور للدخول مرة أخرى.';
+  String get logoutConfirmBody => 'ستحتاج رقم جوالك وكلمة المرور للدخول مرة أخرى.';
 
   @override
   String get navHome => 'الرئيسية';
@@ -593,7 +587,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get cancelReasonHint => 'اكتب سبب الإلغاء';
 
   @override
-  String get cancelReasonRequired => 'اكتب سبب الإلغاء';
+  String get cancelReasonRequired => 'سبب الإلغاء مطلوب';
 
   @override
   String get reasonWeather => 'سوء الأحوال الجوية';
@@ -668,12 +662,10 @@ class AppLocalizationsAr extends AppLocalizations {
   String get setupWarnings => 'تنبيهات القارب';
 
   @override
-  String get setupAdvisory =>
-      'يمكنك إنشاء الرحلة، لكن أكمل إعداد القارب قبل انطلاقه.';
+  String get setupAdvisory => 'يمكنك إنشاء الرحلة، لكن أكمل إعداد القارب قبل انطلاقه.';
 
   @override
-  String get noBoatsYet =>
-      'لا قوارب مسجّلة. أضف قاربك من بوابة حوات على الويب أولًا.';
+  String get noBoatsYet => 'لا قوارب مسجّلة. أضف قاربك من بوابة حوات على الويب أولًا.';
 
   @override
   String get plannedDaysInvalid => 'من 1 إلى 90 يومًا';
@@ -715,8 +707,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get catchSummaryTitle => 'ملخص المصيد';
 
   @override
-  String get catchSummaryNote =>
-      'بعد التسليم تنتظر الرحلة العداد، ولا يمكن تعديل المصيد.';
+  String get catchSummaryNote => 'بعد التسليم تنتظر الرحلة العداد، ولا يمكن تعديل المصيد.';
 
   @override
   String get submitCatch => 'تسليم المصيد';
@@ -728,10 +719,10 @@ class AppLocalizationsAr extends AppLocalizations {
   String get catchSubmitted => 'سُلّم المصيد، والرحلة بانتظار العداد';
 
   @override
-  String get lineSpeciesRequired => 'اختر الصنف';
+  String get lineSpeciesRequired => 'الصنف مطلوب';
 
   @override
-  String get lineWeightRequired => 'أدخل الوزن';
+  String get lineWeightRequired => 'الوزن مطلوب';
 
   @override
   String get lineWeightInvalid => 'الوزن أكبر من صفر';
@@ -928,8 +919,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get passwordsMismatch => 'كلمتا المرور غير متطابقتين';
 
   @override
-  String get passwordChanged =>
-      'غُيّرت كلمة المرور، وخرجت أجهزتك الأخرى من الحساب.';
+  String get passwordChanged => 'غُيّرت كلمة المرور، وخرجت أجهزتك الأخرى من الحساب.';
 
   @override
   String get profileSaved => 'حُفظت بياناتك';

@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../app/router.dart';
 import '../../../core/api/api_client.dart';
 import '../../../core/api/api_exception.dart';
 import '../../../core/format/format.dart';
@@ -97,7 +98,9 @@ class _CatchScreenState extends ConsumerState<CatchScreen> {
     setState(() => _formError = null);
     _saveDraft?.cancel();
     _saveDraft = Timer(const Duration(milliseconds: 400), () {
-      _store.writeJson(CacheKeys.catchDraft(widget.tripId), {'lines': [for (final l in _lines) l.toJson()]});
+      _store.writeJson(CacheKeys.catchDraft(widget.tripId), {
+        'lines': [for (final l in _lines) l.toJson()],
+      });
     });
   }
 
@@ -173,7 +176,11 @@ class _CatchScreenState extends ConsumerState<CatchScreen> {
     await _store.remove(CacheKeys.catchDraft(widget.tripId));
     if (!mounted) return;
     showSnack(context, context.l10n.catchSubmitted);
-    context.pop();
+    if (context.canPop()) {
+      context.pop();
+    } else {
+      context.go(Routes.trip(widget.tripId));
+    }
   }
 
   @override
@@ -206,7 +213,9 @@ class _CatchScreenState extends ConsumerState<CatchScreen> {
               ),
             ),
       body: tripState.when(
-        loading: () => const Skeleton(child: Padding(padding: EdgeInsets.all(Hud.gutter), child: SkeletonBox(height: 260))),
+        loading: () => const Skeleton(
+          child: Padding(padding: EdgeInsets.all(Hud.gutter), child: SkeletonBox(height: 260)),
+        ),
         error: (e, _) => ErrorState(error: e, onRetry: () => ref.invalidate(tripDetailProvider(widget.tripId))),
         data: (trip) {
           if (!trip.canSubmitCatch) {
@@ -312,9 +321,7 @@ class _LineCard extends StatelessWidget {
                   hint: l.chooseSpecies,
                   value: line.speciesId,
                   errorText: line.speciesError,
-                  options: [
-                    for (final s in species) SelectOption(value: s.id, label: s.name),
-                  ],
+                  options: [for (final s in species) SelectOption(value: s.id, label: s.name)],
                   onChanged: (id) {
                     line
                       ..speciesId = id
@@ -370,7 +377,10 @@ class _LineCard extends StatelessWidget {
                         line.showNotes = true;
                         onChanged();
                       },
-                      style: TextButton.styleFrom(minimumSize: const Size(48, 40), padding: const EdgeInsets.symmetric(horizontal: 6)),
+                      style: TextButton.styleFrom(
+                        minimumSize: const Size(48, 40),
+                        padding: const EdgeInsets.symmetric(horizontal: 6),
+                      ),
                       icon: const Icon(Icons.add, size: 18),
                       label: Text(l.addNote),
                     ),
@@ -384,7 +394,12 @@ class _LineCard extends StatelessWidget {
 
 /// Per-species totals (repeated species merged, as the server will) and the delivery.
 class _SummarySheet extends ConsumerStatefulWidget {
-  const _SummarySheet({required this.trip, required this.lines, required this.speciesNames, required this.idempotencyKey});
+  const _SummarySheet({
+    required this.trip,
+    required this.lines,
+    required this.speciesNames,
+    required this.idempotencyKey,
+  });
 
   final Trip trip;
   final List<CatchLineInput> lines;
@@ -405,8 +420,10 @@ class _SummarySheetState extends ConsumerState<_SummarySheet> {
       _error = null;
     });
     try {
-      await ref.read(tripActionsProvider).submitCatch(widget.trip.id, widget.lines, idempotencyKey: widget.idempotencyKey);
-      await HapticFeedback.mediumImpact();
+      await ref
+          .read(tripActionsProvider)
+          .submitCatch(widget.trip.id, widget.lines, idempotencyKey: widget.idempotencyKey);
+      unawaited(HapticFeedback.mediumImpact());
       if (mounted) Navigator.of(context).pop(true);
     } on ApiException catch (e) {
       if (mounted) setState(() => _error = e.userMessage(context.l10n));
@@ -480,4 +497,3 @@ class _SummarySheetState extends ConsumerState<_SummarySheet> {
     );
   }
 }
-

@@ -99,7 +99,9 @@ class _SalesScreenState extends ConsumerState<SalesScreen> {
           loading: () => const Skeleton(
             child: Padding(padding: EdgeInsets.all(Hud.gutter), child: SkeletonBox(height: 360)),
           ),
-          error: (e, _) => ListView(children: [ErrorState(error: e, onRetry: () => ref.invalidate(provider))]),
+          error: (e, _) => ListView(
+            children: [ErrorState(error: e, onRetry: () => ref.invalidate(provider))],
+          ),
           data: (page) {
             if (page.isEmpty) {
               return ListView(

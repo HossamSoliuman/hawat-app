@@ -39,7 +39,11 @@ class FakeApi implements HttpClientAdapter {
   );
 
   @override
-  Future<ResponseBody> fetch(RequestOptions options, Stream<Uint8List>? requestStream, Future<void>? cancelFuture) async {
+  Future<ResponseBody> fetch(
+    RequestOptions options,
+    Stream<Uint8List>? requestStream,
+    Future<void>? cancelFuture,
+  ) async {
     requests.add(options);
     final path = options.uri.path.replaceFirst('/api/v1', '');
     Handler? handler = _routes['${options.method} $path'];

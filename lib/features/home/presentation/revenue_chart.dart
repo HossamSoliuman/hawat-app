@@ -32,7 +32,10 @@ class RevenueChart extends StatelessWidget {
             maxY: top,
             minY: 0,
             alignment: BarChartAlignment.spaceAround,
-            borderData: FlBorderData(show: true, border: Border(bottom: BorderSide(color: c.border))),
+            borderData: FlBorderData(
+              show: true,
+              border: Border(bottom: BorderSide(color: c.border)),
+            ),
             gridData: FlGridData(
               drawVerticalLine: false,
               horizontalInterval: top / 4,
@@ -77,7 +80,12 @@ class RevenueChart extends StatelessWidget {
                 getTooltipItem: (group, _, rod, _) => BarTooltipItem(
                   '${Fmt.monthName(points[group.x].month)}\n',
                   text.labelSmall!.copyWith(color: c.background.withValues(alpha: .75)),
-                  children: [TextSpan(text: l.sar(rod.toY), style: text.labelMedium!.copyWith(color: c.background))],
+                  children: [
+                    TextSpan(
+                      text: l.sar(rod.toY),
+                      style: text.labelMedium!.copyWith(color: c.background),
+                    ),
+                  ],
                   textDirection: TextDirection.rtl,
                 ),
               ),
@@ -92,7 +100,11 @@ class RevenueChart extends StatelessWidget {
                       width: 18,
                       color: c.primary,
                       borderRadius: BorderRadius.zero,
-                      backDrawRodData: BackgroundBarChartRodData(show: true, toY: top, color: c.mutedSurface.withValues(alpha: .45)),
+                      backDrawRodData: BackgroundBarChartRodData(
+                        show: true,
+                        toY: top,
+                        color: c.mutedSurface.withValues(alpha: .45),
+                      ),
                     ),
                   ],
                 ),

@@ -10,12 +10,8 @@ typedef Json = Map<String, dynamic>;
 /// The one door to `/api/v1`. Adds the token, the Arabic locale and the
 /// Idempotency-Key, and turns every failure into an [ApiException].
 class ApiClient {
-  ApiClient({
-    required String baseUrl,
-    required this.tokenProvider,
-    required this.onUnauthorized,
-    Dio? dio,
-  }) : dio = dio ?? Dio() {
+  ApiClient({required String baseUrl, required this.tokenProvider, required this.onUnauthorized, Dio? dio})
+    : dio = dio ?? Dio() {
     this.dio.options
       ..baseUrl = baseUrl
       ..connectTimeout = const Duration(seconds: 15)
@@ -64,19 +60,13 @@ class ApiClient {
     }
   }
 
-  Future<Json> put(String path, {Object? data}) =>
-      _send(() => dio.put<Object?>(path, data: data, options: _options()));
+  Future<Json> put(String path, {Object? data}) => _send(() => dio.put<Object?>(path, data: data, options: _options()));
 
   Future<Json> delete(String path) => _send(() => dio.delete<Object?>(path, options: _options()));
 
   Options _options({String? idempotencyKey}) {
     final token = tokenProvider();
-    return Options(
-      headers: {
-        if (token != null) 'Authorization': 'Bearer $token',
-        'Idempotency-Key': ?idempotencyKey,
-      },
-    );
+    return Options(headers: {if (token != null) 'Authorization': 'Bearer $token', 'Idempotency-Key': ?idempotencyKey});
   }
 
   Future<Json> _send(Future<Response<Object?>> Function() request) async {

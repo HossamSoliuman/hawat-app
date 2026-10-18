@@ -26,10 +26,17 @@ class SalesList extends _$SalesList {
   Future<PagedList<Sale>> build(SalesQuery query) async => PagedList.first(await _fetch(1));
 
   Future<PageResult<Sale>> _fetch(int page) async {
-    final json = await ref.read(apiClientProvider).get(
-      '/owner/sales',
-      query: {'unpaid': query.unpaidOnly ? true : null, 'search': query.search.trim(), 'page': page, 'per_page': perPage},
-    );
+    final json = await ref
+        .read(apiClientProvider)
+        .get(
+          '/owner/sales',
+          query: {
+            'unpaid': query.unpaidOnly ? true : null,
+            'search': query.search.trim(),
+            'page': page,
+            'per_page': perPage,
+          },
+        );
     return PageResult.fromJson(json, Sale.fromJson);
   }
 

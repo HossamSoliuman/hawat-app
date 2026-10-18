@@ -127,7 +127,10 @@ abstract class Trip with _$Trip {
   /// One line per species, even if an old count recorded a species twice.
   List<AvailableLine> get availableLines {
     final seen = <int>{};
-    return [for (final line in availableStock) if (seen.add(line.speciesId)) line];
+    return [
+      for (final line in availableStock)
+        if (seen.add(line.speciesId)) line,
+    ];
   }
 
   double get availableKg => availableLines.fold(0, (sum, line) => sum + line.availableKg);

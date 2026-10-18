@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -70,7 +72,7 @@ class _CancelSheetState extends ConsumerState<_CancelSheet> {
     });
     try {
       await ref.read(tripActionsProvider).cancel(widget.trip.id, reason, idempotencyKey: _key);
-      await HapticFeedback.lightImpact();
+      unawaited(HapticFeedback.lightImpact());
       if (mounted) Navigator.of(context).pop(true);
     } on ValidationException catch (e) {
       setState(() => _error = e.fieldError('reason') ?? e.userMessage(l));

@@ -5,7 +5,13 @@ import '../theme/tokens.dart';
 /// The trip's five steps: مجدولة → في البحر → بانتظار العداد → جارية العد → جاهزة للبيع.
 /// Steps before [current] are done, [current] is ringed, the rest wait.
 class StepProgress extends StatelessWidget {
-  const StepProgress({super.key, required this.labels, required this.current, this.allDone = false, this.dimmed = false});
+  const StepProgress({
+    super.key,
+    required this.labels,
+    required this.current,
+    this.allDone = false,
+    this.dimmed = false,
+  });
 
   final List<String> labels;
   final int current;
@@ -33,9 +39,13 @@ class StepProgress extends StatelessWidget {
                   height: 28,
                   child: Row(
                     children: [
-                      Expanded(child: _line(c, visible: i > 0, done: i <= current)),
+                      Expanded(
+                        child: _line(c, visible: i > 0, done: i <= current),
+                      ),
                       _dot(c, text, i),
-                      Expanded(child: _line(c, visible: i < n - 1, done: i < current || (allDone && i < n - 1))),
+                      Expanded(
+                        child: _line(c, visible: i < n - 1, done: i < current || (allDone && i < n - 1)),
+                      ),
                     ],
                   ),
                 ),

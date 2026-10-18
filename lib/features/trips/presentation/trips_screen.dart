@@ -177,7 +177,9 @@ class _TripsScreenState extends ConsumerState<TripsScreen> with SingleTickerProv
         controller: _tabs,
         children: [
           for (final stage in TripStage.values)
-            _TripsTab(query: TripsQuery(stage: stage, search: _query, boatId: _boatId)),
+            _TripsTab(
+              query: TripsQuery(stage: stage, search: _query, boatId: _boatId),
+            ),
         ],
       ),
     );

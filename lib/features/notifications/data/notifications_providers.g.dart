@@ -14,8 +14,7 @@ part of 'notifications_providers.dart';
 final unreadCountProvider = UnreadCountProvider._();
 
 /// The bell's badge. Refreshed on resume, after reading, and with the home.
-final class UnreadCountProvider
-    extends $AsyncNotifierProvider<UnreadCount, int> {
+final class UnreadCountProvider extends $AsyncNotifierProvider<UnreadCount, int> {
   /// The bell's badge. Refreshed on resume, after reading, and with the home.
   UnreadCountProvider._()
     : super(
@@ -47,13 +46,7 @@ abstract class _$UnreadCount extends $AsyncNotifier<int> {
   WhenComplete runBuild() {
     final ref = this.ref as $Ref<AsyncValue<int>, int>;
     final element =
-        ref.element
-            as $ClassProviderElement<
-              AnyNotifier<AsyncValue<int>, int>,
-              AsyncValue<int>,
-              Object?,
-              Object?
-            >;
+        ref.element as $ClassProviderElement<AnyNotifier<AsyncValue<int>, int>, AsyncValue<int>, Object?, Object?>;
     return element.handleCreate(ref, build);
   }
 }
@@ -61,8 +54,7 @@ abstract class _$UnreadCount extends $AsyncNotifier<int> {
 @ProviderFor(NotificationsList)
 final notificationsListProvider = NotificationsListProvider._();
 
-final class NotificationsListProvider
-    extends $AsyncNotifierProvider<NotificationsList, NotificationsData> {
+final class NotificationsListProvider extends $AsyncNotifierProvider<NotificationsList, NotificationsData> {
   NotificationsListProvider._()
     : super(
         from: null,
@@ -89,8 +81,7 @@ abstract class _$NotificationsList extends $AsyncNotifier<NotificationsData> {
   @$mustCallSuper
   @override
   WhenComplete runBuild() {
-    final ref =
-        this.ref as $Ref<AsyncValue<NotificationsData>, NotificationsData>;
+    final ref = this.ref as $Ref<AsyncValue<NotificationsData>, NotificationsData>;
     final element =
         ref.element
             as $ClassProviderElement<

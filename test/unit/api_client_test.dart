@@ -26,7 +26,10 @@ void main() {
         },
       }, status: 422);
 
-    final error = await api.client(token: null).post('/auth/login').then<Object?>((_) => null, onError: (Object e) => e);
+    final error = await api
+        .client(token: null)
+        .post('/auth/login')
+        .then<Object?>((_) => null, onError: (Object e) => e);
     expect(error, isA<ValidationException>());
     expect((error! as ValidationException).fieldError('phone'), 'بيانات الدخول غير صحيحة.');
     expect((error as ValidationException).userMessage(ar), 'بيانات الدخول غير صحيحة.');
@@ -78,7 +81,10 @@ void main() {
 
   test('empty query values are left out', () async {
     final api = FakeApi()..json('GET', '/owner/trips', {'data': []});
-    await api.client().get('/owner/trips', query: {'stage': 'scheduled', 'search': '', 'boat_id': null, 'active': true});
+    await api.client().get(
+      '/owner/trips',
+      query: {'stage': 'scheduled', 'search': '', 'boat_id': null, 'active': true},
+    );
     expect(api.requests.single.uri.queryParameters, {'stage': 'scheduled', 'active': '1'});
   });
 

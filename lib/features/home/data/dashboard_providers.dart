@@ -80,9 +80,7 @@ class DashboardController extends _$DashboardController {
       if (ref.mounted) state = AsyncData(fresh);
     } catch (e, st) {
       if (!ref.mounted) return;
-      state = current != null
-          ? AsyncData(current.copyWith(refreshing: false, refreshError: e))
-          : AsyncError(e, st);
+      state = current != null ? AsyncData(current.copyWith(refreshing: false, refreshError: e)) : AsyncError(e, st);
     }
   }
 }

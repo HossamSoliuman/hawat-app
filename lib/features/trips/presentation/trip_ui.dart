@@ -49,8 +49,13 @@ extension TripStageUi on TripStage {
   };
 }
 
-List<String> tripStepLabels(AppLocalizations l) =>
-    [l.stepScheduled, l.stepAtSea, l.stepAwaitingCounter, l.stepCounting, l.stepForSale];
+List<String> tripStepLabels(AppLocalizations l) => [
+  l.stepScheduled,
+  l.stepAtSea,
+  l.stepAwaitingCounter,
+  l.stepCounting,
+  l.stepForSale,
+];
 
 class TripPhaseChip extends StatelessWidget {
   const TripPhaseChip({super.key, required this.trip, this.dense = false});

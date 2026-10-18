@@ -11,6 +11,7 @@ import 'package:hawat_app/core/auth/session.dart';
 import 'package:hawat_app/core/auth/user.dart';
 import 'package:hawat_app/core/providers.dart';
 import 'package:hawat_app/core/storage/local_store.dart';
+import 'package:hawat_app/core/storage/token_store.dart';
 import 'package:hawat_app/core/theme/theme.dart';
 import 'package:hawat_app/l10n/app_localizations.dart';
 import 'package:intl/date_symbol_data_local.dart';
@@ -50,7 +51,12 @@ Future<void> loadAppFonts() async {
   }
 }
 
-const owner = AppUser(id: 1, name: 'محمود الزهراني', phone: '0500000001', role: UserRole(key: 'owner', name: 'مالك القارب'));
+const owner = AppUser(
+  id: 1,
+  name: 'محمود الزهراني',
+  phone: '0500000001',
+  role: UserRole(key: 'owner', name: 'مالك القارب'),
+);
 
 class FakeSession extends Session {
   FakeSession(this.initial);
@@ -64,11 +70,17 @@ class FakeSession extends Session {
 /// Pumps [screen] as the app would show it: RTL Arabic, the HUD theme, the
 /// fake API, a signed-in owner, and a router that records where it went.
 class TestApp {
-  TestApp({FakeApi? api, this.user = owner, LocalStore? store}) : api = api ?? FakeApi(), store = store ?? MemoryLocalStore();
+  TestApp({FakeApi? api, this.user = owner, LocalStore? store, this.realSession = false})
+    : api = api ?? FakeApi(),
+      store = store ?? MemoryLocalStore();
 
   final FakeApi api;
   final AppUser? user;
   final LocalStore store;
+
+  /// Use the real session (login screen tests) instead of a signed-in owner.
+  final bool realSession;
+  final tokens = MemoryTokenStore();
   final List<String> visited = [];
   late GoRouter router;
   late ProviderContainer container;
@@ -86,17 +98,32 @@ class TestApp {
       ..devicePixelRatio = 3;
     addTearDown(tester.view.reset);
 
+    Widget recorder(BuildContext _, GoRouterState state) {
+      visited.add(state.uri.toString());
+      return Scaffold(body: Center(child: Text('route:${state.uri}')));
+    }
+
     router = GoRouter(
       initialLocation: '/',
       routes: [
         GoRoute(path: '/', builder: (_, _) => screen),
-        GoRoute(
-          path: '/:rest(.*)',
-          builder: (_, state) {
-            visited.add(state.uri.toString());
-            return Scaffold(body: Center(child: Text('route:${state.uri}')));
-          },
-        ),
+        for (final path in const [
+          '/home',
+          '/trips',
+          '/sales',
+          '/more',
+          '/notifications',
+          '/profile',
+          '/profile/edit',
+          '/profile/password',
+          '/catch-log',
+          '/trip/new',
+          '/trip/:id',
+          '/trip/:id/edit',
+          '/trip/:id/catch',
+          '/sale/:id',
+        ])
+          GoRoute(path: path, builder: recorder),
       ],
     );
 
@@ -104,9 +131,16 @@ class TestApp {
       ProviderScope(
         retry: (_, _) => null,
         overrides: [
-          apiClientProvider.overrideWithValue(api.client()),
+          apiClientProvider.overrideWith(
+            (ref) => api.client(
+              token: realSession ? null : 'test-token',
+              onUnauthorized: () => ref.read(sessionProvider.notifier).expire(),
+            ),
+          ),
           localStoreProvider.overrideWithValue(store),
-          sessionProvider.overrideWith(() => FakeSession(user == null ? const SignedOut() : SignedIn(user!))),
+          tokenStoreProvider.overrideWithValue(tokens),
+          if (!realSession)
+            sessionProvider.overrideWith(() => FakeSession(user == null ? const SignedOut() : SignedIn(user!))),
           ...overrides,
         ],
         child: Consumer(

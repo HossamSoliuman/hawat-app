@@ -46,12 +46,8 @@ class PagedList<T> {
 
   bool get isEmpty => items.isEmpty;
 
-  PagedList<T> append(PageResult<T> next) => PagedList(
-    items: [...items, ...next.items],
-    page: next.page,
-    lastPage: next.lastPage,
-    total: next.total,
-  );
+  PagedList<T> append(PageResult<T> next) =>
+      PagedList(items: [...items, ...next.items], page: next.page, lastPage: next.lastPage, total: next.total);
 
   PagedList<T> copyWith({List<T>? items, bool? loadingMore, Object? loadMoreError, bool clearError = false}) =>
       PagedList(

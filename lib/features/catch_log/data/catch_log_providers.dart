@@ -33,10 +33,9 @@ class CatchLogEntries extends _$CatchLogEntries {
   Future<PagedList<CatchLogEntry>> build(CatchLogQuery query) async => PagedList.first(await _fetch(1));
 
   Future<PageResult<CatchLogEntry>> _fetch(int page) async {
-    final json = await ref.read(apiClientProvider).get(
-      '/owner/catch-log',
-      query: {...query.params, 'page': page, 'per_page': perPage},
-    );
+    final json = await ref
+        .read(apiClientProvider)
+        .get('/owner/catch-log', query: {...query.params, 'page': page, 'per_page': perPage});
     return PageResult.fromJson(json, CatchLogEntry.fromJson);
   }
 
