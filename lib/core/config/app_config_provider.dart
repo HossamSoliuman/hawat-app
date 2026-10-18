@@ -25,6 +25,8 @@ class AppConfigController extends _$AppConfigController {
       await store.setPref(_prefKey, jsonEncode(data));
       return AppConfig.fromJson(data);
     });
+    // A reply that arrives after the timeout below must not surface as an error.
+    fresh.ignore();
 
     if (saved != null) {
       unawaited(

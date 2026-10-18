@@ -17,7 +17,8 @@ part 'lookups_repository.g.dart';
 class LookupsController extends _$LookupsController {
   @override
   Future<Lookups> build() async {
-    ref.watch(currentUserProvider.select((u) => u?.id));
+    // Read again for the next account; nothing to read while signed out.
+    if (ref.watch(currentUserProvider.select((u) => u?.id)) == null) return const Lookups();
     final store = ref.read(localStoreProvider);
     final cached = store.readJson(CacheKeys.lookups);
     if (cached != null) {

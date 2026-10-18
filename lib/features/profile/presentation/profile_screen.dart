@@ -68,16 +68,18 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
       }
       final file = await ImagePicker().pickImage(
         source: choice == 'camera' ? ImageSource.camera : ImageSource.gallery,
-        maxWidth: 1024,
-        maxHeight: 1024,
+        maxWidth: 512,
+        maxHeight: 512,
       );
       if (file == null) return;
-      // A profile photo needs no more than 512px; smaller uploads survive a weak signal.
+      // At most 512px a side (picked that size), re-encoded as a small JPEG so the
+      // upload survives a weak signal at the port.
       final bytes = await FlutterImageCompress.compressWithList(
         await file.readAsBytes(),
         minWidth: 512,
         minHeight: 512,
         quality: 82,
+        format: CompressFormat.jpeg,
       );
       await ref.read(sessionProvider.notifier).updateUser(await auth.uploadAvatar(bytes, 'avatar.jpg'));
       if (mounted) showSnack(context, l.photoUpdated);
