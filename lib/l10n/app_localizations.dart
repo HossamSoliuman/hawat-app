@@ -379,6 +379,12 @@ abstract class AppLocalizations {
   /// **'اطلب حسابًا'**
   String get requestAccount;
 
+  /// No description provided for @quickLogin.
+  ///
+  /// In ar, this message translates to:
+  /// **'دخول سريع'**
+  String get quickLogin;
+
   /// No description provided for @phoneRequired.
   ///
   /// In ar, this message translates to:

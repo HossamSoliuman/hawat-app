@@ -200,6 +200,9 @@ class AppLocalizationsAr extends AppLocalizations {
   String get requestAccount => 'اطلب حسابًا';
 
   @override
+  String get quickLogin => 'دخول سريع';
+
+  @override
   String get phoneRequired => 'أدخل رقم الجوال';
 
   @override

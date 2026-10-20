@@ -62,6 +62,7 @@
   "forgotPassword": "نسيت كلمة المرور؟",
   "noAccount": "ليس لديك حساب؟",
   "requestAccount": "اطلب حسابًا",
+  "quickLogin": "دخول سريع",
   "phoneRequired": "أدخل رقم الجوال",
   "phoneInvalid": "رقم الجوال يبدأ بـ 05 ويتكوّن من 10 أرقام",
   "passwordRequired": "أدخل كلمة المرور",

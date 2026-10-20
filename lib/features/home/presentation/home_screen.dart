@@ -8,7 +8,6 @@ import '../../../core/auth/session.dart';
 import '../../../core/format/format.dart';
 import '../../../core/l10n.dart';
 import '../../../core/theme/tokens.dart';
-import '../../../core/widgets/avatar.dart';
 import '../../../core/widgets/hud_card.dart';
 import '../../../core/widgets/ltr_text.dart';
 import '../../../core/widgets/section_head.dart';
@@ -119,11 +118,6 @@ class _TopBar extends ConsumerWidget {
       padding: const EdgeInsets.fromLTRB(Hud.gutter, 10, 8, 10),
       child: Row(
         children: [
-          InkWell(
-            onTap: () => context.push(Routes.profile),
-            child: HudAvatar(name: user?.name ?? '', url: user?.avatarUrl, size: 42),
-          ),
-          const SizedBox(width: 12),
           Expanded(
             child: Text(
               greeting,

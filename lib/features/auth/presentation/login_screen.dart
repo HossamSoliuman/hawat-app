@@ -8,6 +8,7 @@ import 'package:url_launcher/url_launcher.dart';
 import '../../../core/api/api_exception.dart';
 import '../../../core/auth/session.dart';
 import '../../../core/config/app_config_provider.dart';
+import '../../../core/env.dart';
 import '../../../core/format/format.dart';
 import '../../../core/l10n.dart';
 import '../../../core/theme/tokens.dart';
@@ -72,6 +73,12 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
     }
   }
 
+  void _quickLogin() {
+    _phone.text = Env.demoPhone;
+    _password.text = Env.demoPassword;
+    _submit();
+  }
+
   Future<void> _requestAccount() async {
     final url = ref.read(appConfigProvider).joinUrl;
     if (url == null) return;
@@ -101,9 +108,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     const Center(child: BrandLogo(height: 56)),
-                    const SizedBox(height: 10),
-                    const Center(child: EnvironmentBadge()),
-                    const SizedBox(height: 22),
+                    const SizedBox(height: 32),
                     HudCard(
                       padding: const EdgeInsets.fromLTRB(18, 20, 18, 18),
                       child: Column(
@@ -177,6 +182,14 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                         TextButton(onPressed: _requestAccount, child: Text(l.requestAccount)),
                       ],
                     ),
+                    if (!Env.isProduction) ...[
+                      const SizedBox(height: 8),
+                      OutlinedButton.icon(
+                        onPressed: _busy ? null : _quickLogin,
+                        icon: const Icon(Icons.bolt),
+                        label: Text(l.quickLogin),
+                      ),
+                    ],
                   ],
                 ),
               ),
