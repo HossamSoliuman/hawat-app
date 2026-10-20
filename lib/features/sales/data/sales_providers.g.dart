@@ -14,16 +14,19 @@ part of 'sales_providers.dart';
 final salesListProvider = SalesListFamily._();
 
 /// `GET /owner/sales`: newest first, optionally only the invoices with money still due.
-final class SalesListProvider extends $AsyncNotifierProvider<SalesList, PagedList<Sale>> {
+final class SalesListProvider
+    extends $AsyncNotifierProvider<SalesList, PagedList<Sale>> {
   /// `GET /owner/sales`: newest first, optionally only the invoices with money still due.
-  SalesListProvider._({required SalesListFamily super.from, required SalesQuery super.argument})
-    : super(
-        retry: null,
-        name: r'salesListProvider',
-        isAutoDispose: true,
-        dependencies: null,
-        $allTransitiveDependencies: null,
-      );
+  SalesListProvider._({
+    required SalesListFamily super.from,
+    required SalesQuery super.argument,
+  }) : super(
+         retry: null,
+         name: r'salesListProvider',
+         isAutoDispose: true,
+         dependencies: null,
+         $allTransitiveDependencies: null,
+       );
 
   @override
   String debugGetCreateSourceHash() => _$salesListHash();
@@ -50,7 +53,7 @@ final class SalesListProvider extends $AsyncNotifierProvider<SalesList, PagedLis
   }
 }
 
-String _$salesListHash() => r'0421224d12c1d333d96cab423f5797fb75f27b80';
+String _$salesListHash() => r'21bd4b299e1c21b46fe7eb29ed2be0fee3413091';
 
 /// `GET /owner/sales`: newest first, optionally only the invoices with money still due.
 
@@ -74,7 +77,8 @@ final class SalesListFamily extends $Family
 
   /// `GET /owner/sales`: newest first, optionally only the invoices with money still due.
 
-  SalesListProvider call(SalesQuery query) => SalesListProvider._(argument: query, from: this);
+  SalesListProvider call(SalesQuery query) =>
+      SalesListProvider._(argument: query, from: this);
 
   @override
   String toString() => r'salesListProvider';
@@ -103,19 +107,25 @@ abstract class _$SalesList extends $AsyncNotifier<PagedList<Sale>> {
   }
 }
 
-@ProviderFor(saleDetail)
+/// One invoice with its lines.
+
+@ProviderFor(SaleDetail)
 final saleDetailProvider = SaleDetailFamily._();
 
-final class SaleDetailProvider extends $FunctionalProvider<AsyncValue<Sale>, Sale, FutureOr<Sale>>
-    with $FutureModifier<Sale>, $FutureProvider<Sale> {
-  SaleDetailProvider._({required SaleDetailFamily super.from, required int super.argument})
-    : super(
-        retry: null,
-        name: r'saleDetailProvider',
-        isAutoDispose: true,
-        dependencies: null,
-        $allTransitiveDependencies: null,
-      );
+/// One invoice with its lines.
+final class SaleDetailProvider
+    extends $AsyncNotifierProvider<SaleDetail, Sale> {
+  /// One invoice with its lines.
+  SaleDetailProvider._({
+    required SaleDetailFamily super.from,
+    required int super.argument,
+  }) : super(
+         retry: null,
+         name: r'saleDetailProvider',
+         isAutoDispose: true,
+         dependencies: null,
+         $allTransitiveDependencies: null,
+       );
 
   @override
   String debugGetCreateSourceHash() => _$saleDetailHash();
@@ -129,13 +139,7 @@ final class SaleDetailProvider extends $FunctionalProvider<AsyncValue<Sale>, Sal
 
   @$internal
   @override
-  $FutureProviderElement<Sale> $createElement($ProviderPointer pointer) => $FutureProviderElement(pointer);
-
-  @override
-  FutureOr<Sale> create(Ref ref) {
-    final argument = this.argument as int;
-    return saleDetail(ref, argument);
-  }
+  SaleDetail create() => SaleDetail();
 
   @override
   bool operator ==(Object other) {
@@ -148,9 +152,19 @@ final class SaleDetailProvider extends $FunctionalProvider<AsyncValue<Sale>, Sal
   }
 }
 
-String _$saleDetailHash() => r'84db26b99443e7749957b0402c31a80699c3ff52';
+String _$saleDetailHash() => r'1bd798ed3885b62b068b266cf8f44e213e8431ec';
 
-final class SaleDetailFamily extends $Family with $FunctionalFamilyOverride<FutureOr<Sale>, int> {
+/// One invoice with its lines.
+
+final class SaleDetailFamily extends $Family
+    with
+        $ClassFamilyOverride<
+          SaleDetail,
+          AsyncValue<Sale>,
+          Sale,
+          FutureOr<Sale>,
+          int
+        > {
   SaleDetailFamily._()
     : super(
         retry: null,
@@ -160,8 +174,34 @@ final class SaleDetailFamily extends $Family with $FunctionalFamilyOverride<Futu
         isAutoDispose: true,
       );
 
-  SaleDetailProvider call(int id) => SaleDetailProvider._(argument: id, from: this);
+  /// One invoice with its lines.
+
+  SaleDetailProvider call(int id) =>
+      SaleDetailProvider._(argument: id, from: this);
 
   @override
   String toString() => r'saleDetailProvider';
+}
+
+/// One invoice with its lines.
+
+abstract class _$SaleDetail extends $AsyncNotifier<Sale> {
+  late final _$args = ref.$arg as int;
+  int get id => _$args;
+
+  FutureOr<Sale> build(int id);
+  @$mustCallSuper
+  @override
+  WhenComplete runBuild() {
+    final ref = this.ref as $Ref<AsyncValue<Sale>, Sale>;
+    final element =
+        ref.element
+            as $ClassProviderElement<
+              AnyNotifier<AsyncValue<Sale>, Sale>,
+              AsyncValue<Sale>,
+              Object?,
+              Object?
+            >;
+    return element.handleCreate(ref, () => build(_$args));
+  }
 }

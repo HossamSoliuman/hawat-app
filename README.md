@@ -11,12 +11,12 @@ Version 1 lets only owners in. Other roles see a screen that points them to the 
 | Foundation | splash, login (phone + password), forgot password → support sheet, non-owner screen, forced update |
 | Home and account | home (needs action, indicators by period, trip pipeline, active trips, available fish, revenue, latest sales), bottom bar with the + quick actions, notifications, profile (photo, details, password), المزيد |
 | Trips | trips list (مجدولة / جارية / للبيع / مكتملة / ملغاة, search, boat filter), trip screen with the next action, new and edit trip, start, cancel with a reason, record the catch (kept on the device until delivered), catch log |
-| Sales (read only for now) | sales list (unpaid filter, search), invoice screen with the printable invoice and sharing |
+| Selling and stock | sale wizard from a trip for sale (customer with quick add, lines capped at the available kg, payment, review), invoice screen with collecting what is due, the printable invoice and sharing, sales list (totals, unpaid filter, period, search), sending catch to a dalal, consignments list and detail, stock by species and its movements, dalals with the commission request |
 
 ## Requirements
 
 - Flutter 3.47 (Dart 3.13), Android SDK 36, JDK 17
-- The Hawat API 1.8.0 or later (`GET /app/config`, dashboard `period` and `action_items`, trips `stage`, sales `unpaid`)
+- The Hawat API 1.9.0 or later (`GET /app/config`, dashboard `period` and `action_items`, trips `stage`, sales `unpaid` and `totals`, `POST /owner/sales/{sale}/payments`)
 
 ## Run
 
@@ -58,12 +58,12 @@ Without it, release builds are signed with the debug key.
 lib/
   app/        app, router (auth redirect), shell (bottom bar)
   core/       API client, session, config, storage, theme (HUD tokens), widgets, formatting
-  features/   auth, home, trips, catch_log, sales, notifications, profile, more, lookups, fleet
+  features/   auth, home, trips, catch_log, sales, consignments, stock, dalals, contacts, notifications, profile, more, lookups, fleet
   l10n/       app_ar.arb (every string the owner reads)
 ```
 
 - State: Riverpod with code generation. Models: freezed + json_serializable, written by hand from `docs/api/openapi.yaml` in the server repo.
-- After changing a model or a provider: `dart run build_runner build`. After changing `app_ar.arb`: `flutter gen-l10n`. Generated files are committed.
+- After changing a model or a provider: `dart run build_runner build`. After changing `app_ar.arb`: `flutter gen-l10n`. Generated files are committed exactly as the generators write them (don't run `dart format` over them; CI compares).
 - Every POST that creates or changes something carries an `Idempotency-Key` per tap, reused on retry, so a lost reply never acts twice.
 - Read screens render their last saved copy at once and refresh behind it.
 - Trip numbers, invoice numbers and dates are wrapped in Unicode isolates (`Fmt.ltr`) so they never reverse inside Arabic text.

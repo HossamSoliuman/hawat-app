@@ -277,6 +277,12 @@ class AppLocalizationsAr extends AppLocalizations {
   String get quickNoAtSea => 'لا رحلات في البحر الآن';
 
   @override
+  String get quickSell => 'تسجيل بيع';
+
+  @override
+  String get quickConsign => 'إرسال للدلال';
+
+  @override
   String get pickTripTitle => 'اختر الرحلة';
 
   @override
@@ -439,6 +445,12 @@ class AppLocalizationsAr extends AppLocalizations {
   String availableForSale(String amount) {
     return 'المتاح للبيع $amount كجم';
   }
+
+  @override
+  String get actionSell => 'بيع لزبون';
+
+  @override
+  String get actionConsign => 'إرسال للدلال';
 
   @override
   String get tripsTitle => 'الرحلات';
@@ -848,6 +860,242 @@ class AppLocalizationsAr extends AppLocalizations {
   }
 
   @override
+  String get periodFilter => 'الفترة';
+
+  @override
+  String get totalsInvoices => 'الفواتير';
+
+  @override
+  String get newSaleTitle => 'بيع لزبون';
+
+  @override
+  String get stepCustomer => 'الزبون';
+
+  @override
+  String get stepLines => 'الأصناف';
+
+  @override
+  String get stepPayment => 'الدفع';
+
+  @override
+  String get stepReview => 'المراجعة';
+
+  @override
+  String get chooseCustomer => 'اختر الزبون';
+
+  @override
+  String get newCustomer => 'زبون جديد';
+
+  @override
+  String get addCustomer => 'إضافة الزبون';
+
+  @override
+  String get customerAdded => 'أُضيف الزبون';
+
+  @override
+  String availableAmount(String amount) {
+    return 'المتاح: $amount';
+  }
+
+  @override
+  String get pricePerKgLabel => 'سعر الكيلو';
+
+  @override
+  String get useAll => 'الكل';
+
+  @override
+  String cappedAt(String amount) {
+    return 'هذا كل المتاح: $amount';
+  }
+
+  @override
+  String get linePriceRequired => 'سعر الكيلو مطلوب';
+
+  @override
+  String get linePriceInvalid => 'السعر أكبر من صفر';
+
+  @override
+  String lineOverAvailable(String amount) {
+    return 'يتجاوز المتاح ($amount)';
+  }
+
+  @override
+  String get paidInFull => 'مدفوع بالكامل';
+
+  @override
+  String get paidAmountLabel => 'المبلغ المدفوع';
+
+  @override
+  String get paidAmountRequired => 'أدخل المبلغ المدفوع';
+
+  @override
+  String get discountTooHigh => 'الخصم أكبر من المجموع';
+
+  @override
+  String get paidTooHigh => 'المدفوع أكبر من الإجمالي';
+
+  @override
+  String get nextStep => 'التالي';
+
+  @override
+  String get finishSale => 'إنهاء البيع';
+
+  @override
+  String get saleCreated => 'سُجّلت الفاتورة';
+
+  @override
+  String get notSellable => 'مصيد هذه الرحلة غير متاح للبيع';
+
+  @override
+  String get collectPayment => 'تحصيل';
+
+  @override
+  String get collectTitle => 'تحصيل دفعة';
+
+  @override
+  String get amountLabel => 'المبلغ';
+
+  @override
+  String get fullRemaining => 'المتبقي كاملًا';
+
+  @override
+  String get amountRequired => 'أدخل المبلغ';
+
+  @override
+  String amountTooHigh(String amount) {
+    return 'أكبر من المتبقي ($amount)';
+  }
+
+  @override
+  String get recordPayment => 'تسجيل الدفعة';
+
+  @override
+  String get paymentRecorded => 'سُجّلت الدفعة';
+
+  @override
+  String get consignTitle => 'إرسال للدلال';
+
+  @override
+  String get dalalLabel => 'الدلال';
+
+  @override
+  String get chooseDalal => 'اختر الدلال';
+
+  @override
+  String get dalalRequired => 'اختر الدلال';
+
+  @override
+  String commissionShort(String pct) {
+    return 'عمولة $pct';
+  }
+
+  @override
+  String get noAgreement => 'بلا اتفاق';
+
+  @override
+  String get reviewConsign => 'مراجعة الإرسال';
+
+  @override
+  String get consignSummaryTitle => 'ملخص الإرسال';
+
+  @override
+  String get consignSummaryNote => 'يخرج الوزن من مخزونك إلى مخزون الدلال، ويبيعه الدلال من دكته.';
+
+  @override
+  String get consignConfirm => 'إرسال';
+
+  @override
+  String get consignSent => 'أُرسل المصيد إلى الدلال';
+
+  @override
+  String get consignmentsTitle => 'الإرسال للدلال';
+
+  @override
+  String get noConsignments => 'لا إرسال للدلالين بعد';
+
+  @override
+  String get stockScreenTitle => 'المخزون';
+
+  @override
+  String get totalStock => 'إجمالي المخزون';
+
+  @override
+  String get movementsTitle => 'حركات الصنف';
+
+  @override
+  String get allSpecies => 'كل الأصناف';
+
+  @override
+  String get noMovements => 'لا حركات بعد';
+
+  @override
+  String balanceAfter(String amount) {
+    return 'الرصيد $amount';
+  }
+
+  @override
+  String get dalalsTitle => 'الدلالون';
+
+  @override
+  String get searchDalals => 'ابحث باسم الدلال';
+
+  @override
+  String get noDalals => 'لا دلالين مفعّلين';
+
+  @override
+  String get agreementAccepted => 'معتمد';
+
+  @override
+  String get agreementPending => 'بانتظار الرد';
+
+  @override
+  String get agreementRejected => 'مرفوض';
+
+  @override
+  String agreementTerms(String commission, String wage) {
+    return 'عمولة $commission · أجور $wage';
+  }
+
+  @override
+  String get agreementLabel => 'الاتفاق';
+
+  @override
+  String get rejectReasonLabel => 'سبب الرفض';
+
+  @override
+  String get proposalTitle => 'طلب التعامل';
+
+  @override
+  String get commissionLabel => 'العمولة %';
+
+  @override
+  String get wageLabel => 'الأجور %';
+
+  @override
+  String get messageLabel => 'رسالة';
+
+  @override
+  String get commissionRequired => 'أدخل العمولة';
+
+  @override
+  String get pctInvalid => 'من 0 إلى 100';
+
+  @override
+  String get sendRequest => 'إرسال الطلب';
+
+  @override
+  String get updateRequest => 'تعديل الطلب';
+
+  @override
+  String get resendRequest => 'إعادة الطلب';
+
+  @override
+  String get requestSent => 'أُرسل الطلب إلى الدلال';
+
+  @override
+  String get callLabel => 'اتصال';
+
+  @override
   String get moreTitle => 'المزيد';
 
   @override
@@ -855,6 +1103,9 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get groupCatch => 'الصيد';
+
+  @override
+  String get groupContacts => 'الجهات';
 
   @override
   String get groupAccount => 'الحساب';

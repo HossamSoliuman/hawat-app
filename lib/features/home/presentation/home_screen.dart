@@ -672,7 +672,12 @@ class _Stock extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          SectionHead(title: l.stockTitle, icon: Icons.set_meal_outlined),
+          SectionHead(
+            title: l.stockTitle,
+            icon: Icons.set_meal_outlined,
+            action: top.isEmpty ? null : l.viewAll,
+            onAction: () => context.push(Routes.stock),
+          ),
           if (top.isEmpty)
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 12),

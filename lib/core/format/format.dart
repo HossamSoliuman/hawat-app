@@ -15,6 +15,16 @@ abstract final class Fmt {
 
   static String count(num value) => _int.format(value);
 
+  /// A number as typed into a field: no grouping, at most two decimals,
+  /// no trailing zeros (120 → "120", 120.50 → "120.5").
+  static String plain(num value) {
+    final fixed = value.toStringAsFixed(2);
+    return fixed.contains('.') ? fixed.replaceFirst(RegExp(r'\.?0+$'), '') : fixed;
+  }
+
+  /// "5%", isolated so the sign stays after the number inside Arabic text.
+  static String pct(num value) => ltr('${plain(value)}%');
+
   /// Wraps a left-to-right value (trip or invoice number, phone, date with
   /// digits) in a Unicode isolate so it keeps its order inside Arabic text.
   static String ltr(String value) => '$_lri$value$_pdi';

@@ -1,12 +1,18 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:hawat_app/core/api/page.dart';
 import 'package:hawat_app/core/auth/user.dart';
 import 'package:hawat_app/core/config/app_config.dart';
 import 'package:hawat_app/features/catch_log/data/catch_log.dart';
+import 'package:hawat_app/features/consignments/data/consignment.dart';
+import 'package:hawat_app/features/contacts/data/customer.dart';
+import 'package:hawat_app/features/dalals/data/dalal.dart';
 import 'package:hawat_app/features/fleet/data/fleet.dart';
 import 'package:hawat_app/features/home/data/dashboard.dart';
 import 'package:hawat_app/features/lookups/data/lookups.dart';
 import 'package:hawat_app/features/notifications/data/app_notification.dart';
 import 'package:hawat_app/features/sales/data/sale.dart';
+import 'package:hawat_app/features/sales/data/sales_providers.dart';
+import 'package:hawat_app/features/stock/data/stock.dart';
 import 'package:hawat_app/features/trips/data/trip.dart';
 
 import '../helpers/fake_api.dart';
@@ -27,6 +33,81 @@ void main() {
     expect(rows('catch_log').map(CatchLogEntry.fromJson), isNotEmpty);
     expect(CatchLogSummary.fromJson(fixtureData('catch_summary')).bySpecies, isNotEmpty);
     expect(Sale.fromJson(fixtureData('sale_detail')).items, isNotEmpty);
+    expect(rows('consignments').map(Consignment.fromJson).first.items, isNotEmpty);
+    expect(Consignment.fromJson(fixtureData('consignment_detail')).dalal?.name, isNotEmpty);
+    expect(rows('stock').map(StockLine.fromJson), isNotEmpty);
+    expect(rows('stock_movements').map(StockMovement.fromJson), isNotEmpty);
+    expect(rows('customers').map(Customer.fromJson), isNotEmpty);
+    expect(rows('dalals').map(Dalal.fromJson), isNotEmpty);
+  });
+
+  test('the sales list keeps the totals of every matching invoice', () {
+    final list = PagedList.first(PageResult.fromJson(fixture('sales'), Sale.fromJson));
+    final totals = salesTotalsOf(list)!;
+    expect(totals.count, list.total);
+    expect(totals.total, 6050);
+    expect(totals.remaining, 0);
+    final more = list.append(PageResult.fromJson({'data': const [], 'meta': const {}}, Sale.fromJson));
+    expect(salesTotalsOf(more), totals, reason: 'later pages keep the first page totals');
+  });
+
+  test('stock moves in and out, and a dalal deal is read from its partnership', () {
+    final moves = rows('stock_movements').map(StockMovement.fromJson).toList();
+    expect(moves.any((m) => m.isIn), isTrue);
+    expect(moves.any((m) => !m.isIn), isTrue);
+
+    final dalals = rows('dalals').map(Dalal.fromJson).toList();
+    expect(dalals.where((d) => d.hasAgreement), hasLength(1));
+    final agreed = dalals.firstWhere((d) => d.hasAgreement).partnership!;
+    expect(agreed.commissionPct, 5);
+    expect(agreed.wagePct, 2);
+    expect(dalals.where((d) => d.partnership == null), hasLength(1));
+  });
+
+  test('a sale and a consignment send what the server reads', () {
+    const sale = SaleInput(
+      tripId: 12,
+      customerId: 3,
+      paymentMethodId: 1,
+      discount: 50,
+      paidAmount: 1000,
+      notes: '  ',
+      items: [
+        SaleLineInput(speciesId: 4, weightKg: 100, pricePerKg: 45),
+        SaleLineInput(speciesId: 4, weightKg: 20.5, pricePerKg: 40),
+      ],
+    );
+    expect(sale.toJson(), {
+      'trip_id': 12,
+      'customer_id': 3,
+      'payment_method_id': 1,
+      'discount': 50.0,
+      'paid_amount': 1000.0,
+      'items': [
+        {'species_id': 4, 'weight_kg': 100.0, 'price_per_kg': 45.0},
+        {'species_id': 4, 'weight_kg': 20.5, 'price_per_kg': 40.0},
+      ],
+    });
+    // Paid in full and no discount: the server defaults them.
+    expect(
+      const SaleInput(tripId: 1, items: []).toJson().keys,
+      isNot(containsAll(['discount', 'paid_amount', 'notes'])),
+    );
+
+    const consignment = ConsignmentInput(
+      tripId: 12,
+      dalalId: 10,
+      notes: 'دفعة الصباح',
+      items: [ConsignLineInput(speciesId: 4, weightKg: 30)],
+    );
+    expect(consignment.toJson(), {
+      'trip_id': 12,
+      'dalal_id': 10,
+      'notes': 'دفعة الصباح',
+      'items': [
+        {'species_id': 4, 'weight_kg': 30.0},
+      ],
+    });
   });
 
   test('the dashboard carries period, action items and the trips the home shows', () {

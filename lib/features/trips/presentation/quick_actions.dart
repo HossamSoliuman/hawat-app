@@ -16,7 +16,7 @@ import '../data/trips_repository.dart';
 import 'trip_actions_ui.dart';
 import 'trip_ui.dart';
 
-/// The center + of the bottom bar: the day's trip actions, one tap from anywhere.
+/// The center + of the bottom bar: the day's trip and selling actions, one tap from anywhere.
 Future<void> showQuickActions(BuildContext context, WidgetRef ref) {
   return showModalBottomSheet<void>(context: context, builder: (_) => const _QuickActionsSheet());
 }
@@ -32,9 +32,13 @@ class _QuickActionsSheetState extends ConsumerState<_QuickActionsSheet> {
   String? _loading;
 
   /// Counts from the home as last loaded; the list itself is read fresh on tap.
-  ({int scheduled, int atSea}) _counts() {
-    final kpis = ref.read(dashboardControllerProvider(ref.read(homePeriodProvider))).value?.dashboard.kpis;
-    return (scheduled: kpis?.tripsScheduled ?? 0, atSea: kpis?.tripsAtSea ?? 0);
+  ({int scheduled, int atSea, int forSale}) _counts() {
+    final dashboard = ref.read(dashboardControllerProvider(ref.read(homePeriodProvider))).value?.dashboard;
+    return (
+      scheduled: dashboard?.kpis.tripsScheduled ?? 0,
+      atSea: dashboard?.kpis.tripsAtSea ?? 0,
+      forSale: dashboard?.actionItems.tripsToSell ?? 0,
+    );
   }
 
   Future<void> _pickAndRun({
@@ -175,6 +179,31 @@ class _QuickActionsSheetState extends ConsumerState<_QuickActionsSheet> {
                 where: (t) => t.canSubmitCatch,
                 none: l.quickNoAtSea,
                 run: (trip) async => router.push(Routes.submitCatch(trip.id)),
+              ),
+            ),
+            _QuickRow(
+              icon: Icons.point_of_sale_outlined,
+              label: l.quickSell,
+              count: counts.forSale,
+              loading: _loading == 'sell',
+              onTap: () => _pickAndRun(
+                id: 'sell',
+                stage: TripStage.forSale,
+                where: (t) => t.canSell,
+                none: l.noTripsForSale,
+                run: (trip) async => router.push(Routes.newSale(trip.id)),
+              ),
+            ),
+            _QuickRow(
+              icon: Icons.local_shipping_outlined,
+              label: l.quickConsign,
+              loading: _loading == 'consign',
+              onTap: () => _pickAndRun(
+                id: 'consign',
+                stage: TripStage.forSale,
+                where: (t) => t.canSell,
+                none: l.noTripsForSale,
+                run: (trip) async => router.push(Routes.newConsignment(trip.id)),
               ),
             ),
           ],

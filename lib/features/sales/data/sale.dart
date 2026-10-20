@@ -54,17 +54,48 @@ abstract class SaleItem with _$SaleItem {
   factory SaleItem.fromJson(Map<String, dynamic> json) => _$SaleItemFromJson(json);
 }
 
+/// `totals` of `GET /owner/sales`: every invoice matching the filters, not one page.
 @freezed
-abstract class Consignment with _$Consignment {
-  const factory Consignment({
-    required int id,
-    required String consignmentNumber,
-    String? status,
-    PersonRef? dalal,
-    TripNumberRef? trip,
-    @Default(0) double totalKg,
-    DateTime? sentAt,
-  }) = _Consignment;
+abstract class SalesTotals with _$SalesTotals {
+  const factory SalesTotals({@Default(0) int count, @Default(0) double total, @Default(0) double remaining}) =
+      _SalesTotals;
 
-  factory Consignment.fromJson(Map<String, dynamic> json) => _$ConsignmentFromJson(json);
+  factory SalesTotals.fromJson(Map<String, dynamic> json) => _$SalesTotalsFromJson(json);
+}
+
+/// The body of `POST /owner/sales`. Lines of one species may carry different prices.
+@freezed
+abstract class SaleInput with _$SaleInput {
+  const factory SaleInput({
+    required int tripId,
+    int? customerId,
+    int? paymentMethodId,
+    double? discount,
+
+    /// Null = paid in full.
+    double? paidAmount,
+    String? notes,
+    required List<SaleLineInput> items,
+  }) = _SaleInput;
+}
+
+@freezed
+abstract class SaleLineInput with _$SaleLineInput {
+  const factory SaleLineInput({required int speciesId, required double weightKg, required double pricePerKg}) =
+      _SaleLineInput;
+}
+
+extension SaleInputJson on SaleInput {
+  Map<String, dynamic> toJson() => {
+    'trip_id': tripId,
+    'customer_id': customerId,
+    'payment_method_id': paymentMethodId,
+    if (discount != null && discount! > 0) 'discount': discount,
+    'paid_amount': ?paidAmount,
+    if (notes?.trim().isNotEmpty ?? false) 'notes': notes!.trim(),
+    'items': [
+      for (final line in items)
+        {'species_id': line.speciesId, 'weight_kg': line.weightKg, 'price_per_kg': line.pricePerKg},
+    ],
+  };
 }

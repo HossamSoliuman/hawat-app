@@ -13,7 +13,7 @@ import '../data/app_notification.dart';
 import '../data/notifications_providers.dart';
 
 /// الإشعارات: new ones first, then the earlier ones. A tap marks it read and
-/// opens what it is about (a trip or an invoice); others stay on the list.
+/// opens what it is about (a trip, an invoice, the dalals); others stay on the list.
 class NotificationsScreen extends ConsumerWidget {
   const NotificationsScreen({super.key});
 
@@ -104,10 +104,12 @@ class _NotificationTile extends ConsumerWidget {
   final AppNotification notification;
 
   /// Where a notification leads. Targets of screens this version doesn't have
-  /// (stock, dalals, partnerships, dalal invoices) stay on the list.
+  /// (dalal invoices to review) stay on the list.
   String? _route() {
     if (notification.tripId != null) return Routes.trip(notification.tripId!);
     if (notification.target == 'sale' && notification.saleId != null) return Routes.sale(notification.saleId!);
+    // A dalal answered a request, sold from the owner's catch, or paid: the dalals list.
+    if (notification.target == 'dalals') return Routes.dalals;
     return null;
   }
 

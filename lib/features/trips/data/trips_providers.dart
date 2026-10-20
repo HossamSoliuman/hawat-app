@@ -1,6 +1,7 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../../core/api/page.dart';
+import '../../consignments/data/consignment.dart';
 import '../../home/data/dashboard_providers.dart';
 import '../../sales/data/sale.dart';
 import 'trip.dart';

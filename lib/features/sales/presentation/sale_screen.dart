@@ -18,6 +18,7 @@ import '../../../core/widgets/states.dart';
 import '../../../core/widgets/status_chip.dart';
 import '../data/sale.dart';
 import '../data/sales_providers.dart';
+import 'collect_sheet.dart';
 import 'sale_tile.dart';
 
 /// One invoice: who bought, the lines, the totals, what is still due, and the
@@ -35,7 +36,9 @@ class SaleScreen extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(title: sale == null ? Text(l.invoiceTitle) : LtrText(sale.invoiceNumber)),
-      bottomNavigationBar: sale?.invoiceUrl == null ? null : _InvoiceActions(sale: sale!),
+      bottomNavigationBar: sale == null || (sale.invoiceUrl == null && sale.remaining <= 0.004)
+          ? null
+          : _InvoiceActions(sale: sale),
       body: state.when(
         loading: () => const Skeleton(
           child: Padding(padding: EdgeInsets.all(Hud.gutter), child: SkeletonBox(height: 420)),
@@ -189,6 +192,7 @@ class _Totals extends StatelessWidget {
   }
 }
 
+/// What is due comes first ("تحصيل"), then the printable invoice to open or share.
 class _InvoiceActions extends StatelessWidget {
   const _InvoiceActions({required this.sale});
 
@@ -197,29 +201,57 @@ class _InvoiceActions extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l = context.l10n;
-    final url = sale.invoiceUrl!;
+    final url = sale.invoiceUrl;
+    final due = sale.remaining > 0.004;
+
+    Future<void> open() async {
+      final ok = await launchUrl(Uri.parse(url!), mode: LaunchMode.inAppBrowserView);
+      if (!ok && context.mounted) showSnack(context, l.errorUnknown, error: true);
+    }
+
+    final share = SizedBox(
+      height: Hud.primaryButtonHeight,
+      child: OutlinedButton.icon(
+        onPressed: url == null
+            ? null
+            : () => SharePlus.instance.share(ShareParams(text: l.shareInvoiceText(sale.invoiceNumber, url))),
+        icon: const Icon(Icons.share_outlined),
+        label: Text(l.shareInvoice),
+      ),
+    );
+
     return PinnedAction(
-      child: Row(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Expanded(
-            child: PrimaryButton(
-              label: l.openInvoice,
-              icon: Icons.description_outlined,
-              onPressed: () async {
-                final ok = await launchUrl(Uri.parse(url), mode: LaunchMode.inAppBrowserView);
-                if (!ok && context.mounted) showSnack(context, l.errorUnknown, error: true);
-              },
+          if (due) ...[
+            PrimaryButton(
+              label: '${l.collectPayment} · ${l.sar(sale.remaining)}',
+              icon: Icons.payments_outlined,
+              onPressed: () => showCollectSheet(context, sale),
             ),
-          ),
-          const SizedBox(width: 10),
-          SizedBox(
-            height: Hud.primaryButtonHeight,
-            child: OutlinedButton.icon(
-              onPressed: () => SharePlus.instance.share(ShareParams(text: l.shareInvoiceText(sale.invoiceNumber, url))),
-              icon: const Icon(Icons.share_outlined),
-              label: Text(l.shareInvoice),
+            if (url != null) const SizedBox(height: 10),
+          ],
+          if (url != null)
+            Row(
+              children: [
+                Expanded(
+                  child: due
+                      ? SizedBox(
+                          height: Hud.primaryButtonHeight,
+                          child: OutlinedButton.icon(
+                            onPressed: open,
+                            icon: const Icon(Icons.description_outlined),
+                            label: Text(l.openInvoice),
+                          ),
+                        )
+                      : PrimaryButton(label: l.openInvoice, icon: Icons.description_outlined, onPressed: open),
+                ),
+                const SizedBox(width: 10),
+                share,
+              ],
             ),
-          ),
         ],
       ),
     );

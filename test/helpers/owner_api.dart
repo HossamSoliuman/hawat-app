@@ -36,7 +36,15 @@ FakeApi ownerApi() {
     ..json('GET', '/owner/boats', fixture('boats'))
     ..json('GET', '/owner/captains', fixture('captains'))
     ..json('GET', '/owner/sales', fixture('sales'))
-    ..json('GET', '/owner/consignments', page(const []))
+    ..on('GET', '/owner/consignments', (request) {
+      // A trip's own consignments are empty in the fixtures; the full list is captured.
+      return Reply(request.queryParameters['trip_id'] == null ? fixture('consignments') : page(const []));
+    })
+    ..on('GET', '/owner/consignments/*', (_) => Reply(fixture('consignment_detail')))
+    ..json('GET', '/owner/stock', fixture('stock'))
+    ..json('GET', '/owner/stock/movements', fixture('stock_movements'))
+    ..json('GET', '/owner/dalals', fixture('dalals'))
+    ..json('GET', '/owner/customers', fixture('customers'))
     ..json('GET', '/owner/catch-log', fixture('catch_log'))
     ..json('GET', '/owner/catch-log/summary', fixture('catch_summary'))
     ..json('GET', '/notifications', fixture('notifications'))

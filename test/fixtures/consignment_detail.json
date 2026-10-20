@@ -1,0 +1,1 @@
+{"data":{"id":1,"consignment_number":"CN-2026-0001","status":"مرسلة","dalal":{"id":10,"name":"دلال تجريبي","phone":"0500000004"},"trip":{"id":1,"trip_number":"TR-2026-0001"},"total_kg":2611,"items":[{"id":1,"species":{"id":1,"name":"الهامور"},"weight_kg":2611}],"sent_at":"2026-09-24T04:29:04+00:00","notes":null}}

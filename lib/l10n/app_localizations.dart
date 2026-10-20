@@ -529,6 +529,18 @@ abstract class AppLocalizations {
   /// **'لا رحلات في البحر الآن'**
   String get quickNoAtSea;
 
+  /// No description provided for @quickSell.
+  ///
+  /// In ar, this message translates to:
+  /// **'تسجيل بيع'**
+  String get quickSell;
+
+  /// No description provided for @quickConsign.
+  ///
+  /// In ar, this message translates to:
+  /// **'إرسال للدلال'**
+  String get quickConsign;
+
   /// No description provided for @pickTripTitle.
   ///
   /// In ar, this message translates to:
@@ -840,6 +852,18 @@ abstract class AppLocalizations {
   /// In ar, this message translates to:
   /// **'المتاح للبيع {amount} كجم'**
   String availableForSale(String amount);
+
+  /// No description provided for @actionSell.
+  ///
+  /// In ar, this message translates to:
+  /// **'بيع لزبون'**
+  String get actionSell;
+
+  /// No description provided for @actionConsign.
+  ///
+  /// In ar, this message translates to:
+  /// **'إرسال للدلال'**
+  String get actionConsign;
 
   /// No description provided for @tripsTitle.
   ///
@@ -1621,6 +1645,450 @@ abstract class AppLocalizations {
   /// **'فاتورة حوات رقم {number}\n{url}'**
   String shareInvoiceText(String number, String url);
 
+  /// No description provided for @periodFilter.
+  ///
+  /// In ar, this message translates to:
+  /// **'الفترة'**
+  String get periodFilter;
+
+  /// No description provided for @totalsInvoices.
+  ///
+  /// In ar, this message translates to:
+  /// **'الفواتير'**
+  String get totalsInvoices;
+
+  /// No description provided for @newSaleTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'بيع لزبون'**
+  String get newSaleTitle;
+
+  /// No description provided for @stepCustomer.
+  ///
+  /// In ar, this message translates to:
+  /// **'الزبون'**
+  String get stepCustomer;
+
+  /// No description provided for @stepLines.
+  ///
+  /// In ar, this message translates to:
+  /// **'الأصناف'**
+  String get stepLines;
+
+  /// No description provided for @stepPayment.
+  ///
+  /// In ar, this message translates to:
+  /// **'الدفع'**
+  String get stepPayment;
+
+  /// No description provided for @stepReview.
+  ///
+  /// In ar, this message translates to:
+  /// **'المراجعة'**
+  String get stepReview;
+
+  /// No description provided for @chooseCustomer.
+  ///
+  /// In ar, this message translates to:
+  /// **'اختر الزبون'**
+  String get chooseCustomer;
+
+  /// No description provided for @newCustomer.
+  ///
+  /// In ar, this message translates to:
+  /// **'زبون جديد'**
+  String get newCustomer;
+
+  /// No description provided for @addCustomer.
+  ///
+  /// In ar, this message translates to:
+  /// **'إضافة الزبون'**
+  String get addCustomer;
+
+  /// No description provided for @customerAdded.
+  ///
+  /// In ar, this message translates to:
+  /// **'أُضيف الزبون'**
+  String get customerAdded;
+
+  /// No description provided for @availableAmount.
+  ///
+  /// In ar, this message translates to:
+  /// **'المتاح: {amount}'**
+  String availableAmount(String amount);
+
+  /// No description provided for @pricePerKgLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'سعر الكيلو'**
+  String get pricePerKgLabel;
+
+  /// No description provided for @useAll.
+  ///
+  /// In ar, this message translates to:
+  /// **'الكل'**
+  String get useAll;
+
+  /// No description provided for @cappedAt.
+  ///
+  /// In ar, this message translates to:
+  /// **'هذا كل المتاح: {amount}'**
+  String cappedAt(String amount);
+
+  /// No description provided for @linePriceRequired.
+  ///
+  /// In ar, this message translates to:
+  /// **'سعر الكيلو مطلوب'**
+  String get linePriceRequired;
+
+  /// No description provided for @linePriceInvalid.
+  ///
+  /// In ar, this message translates to:
+  /// **'السعر أكبر من صفر'**
+  String get linePriceInvalid;
+
+  /// No description provided for @lineOverAvailable.
+  ///
+  /// In ar, this message translates to:
+  /// **'يتجاوز المتاح ({amount})'**
+  String lineOverAvailable(String amount);
+
+  /// No description provided for @paidInFull.
+  ///
+  /// In ar, this message translates to:
+  /// **'مدفوع بالكامل'**
+  String get paidInFull;
+
+  /// No description provided for @paidAmountLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'المبلغ المدفوع'**
+  String get paidAmountLabel;
+
+  /// No description provided for @paidAmountRequired.
+  ///
+  /// In ar, this message translates to:
+  /// **'أدخل المبلغ المدفوع'**
+  String get paidAmountRequired;
+
+  /// No description provided for @discountTooHigh.
+  ///
+  /// In ar, this message translates to:
+  /// **'الخصم أكبر من المجموع'**
+  String get discountTooHigh;
+
+  /// No description provided for @paidTooHigh.
+  ///
+  /// In ar, this message translates to:
+  /// **'المدفوع أكبر من الإجمالي'**
+  String get paidTooHigh;
+
+  /// No description provided for @nextStep.
+  ///
+  /// In ar, this message translates to:
+  /// **'التالي'**
+  String get nextStep;
+
+  /// No description provided for @finishSale.
+  ///
+  /// In ar, this message translates to:
+  /// **'إنهاء البيع'**
+  String get finishSale;
+
+  /// No description provided for @saleCreated.
+  ///
+  /// In ar, this message translates to:
+  /// **'سُجّلت الفاتورة'**
+  String get saleCreated;
+
+  /// No description provided for @notSellable.
+  ///
+  /// In ar, this message translates to:
+  /// **'مصيد هذه الرحلة غير متاح للبيع'**
+  String get notSellable;
+
+  /// No description provided for @collectPayment.
+  ///
+  /// In ar, this message translates to:
+  /// **'تحصيل'**
+  String get collectPayment;
+
+  /// No description provided for @collectTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'تحصيل دفعة'**
+  String get collectTitle;
+
+  /// No description provided for @amountLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'المبلغ'**
+  String get amountLabel;
+
+  /// No description provided for @fullRemaining.
+  ///
+  /// In ar, this message translates to:
+  /// **'المتبقي كاملًا'**
+  String get fullRemaining;
+
+  /// No description provided for @amountRequired.
+  ///
+  /// In ar, this message translates to:
+  /// **'أدخل المبلغ'**
+  String get amountRequired;
+
+  /// No description provided for @amountTooHigh.
+  ///
+  /// In ar, this message translates to:
+  /// **'أكبر من المتبقي ({amount})'**
+  String amountTooHigh(String amount);
+
+  /// No description provided for @recordPayment.
+  ///
+  /// In ar, this message translates to:
+  /// **'تسجيل الدفعة'**
+  String get recordPayment;
+
+  /// No description provided for @paymentRecorded.
+  ///
+  /// In ar, this message translates to:
+  /// **'سُجّلت الدفعة'**
+  String get paymentRecorded;
+
+  /// No description provided for @consignTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'إرسال للدلال'**
+  String get consignTitle;
+
+  /// No description provided for @dalalLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'الدلال'**
+  String get dalalLabel;
+
+  /// No description provided for @chooseDalal.
+  ///
+  /// In ar, this message translates to:
+  /// **'اختر الدلال'**
+  String get chooseDalal;
+
+  /// No description provided for @dalalRequired.
+  ///
+  /// In ar, this message translates to:
+  /// **'اختر الدلال'**
+  String get dalalRequired;
+
+  /// No description provided for @commissionShort.
+  ///
+  /// In ar, this message translates to:
+  /// **'عمولة {pct}'**
+  String commissionShort(String pct);
+
+  /// No description provided for @noAgreement.
+  ///
+  /// In ar, this message translates to:
+  /// **'بلا اتفاق'**
+  String get noAgreement;
+
+  /// No description provided for @reviewConsign.
+  ///
+  /// In ar, this message translates to:
+  /// **'مراجعة الإرسال'**
+  String get reviewConsign;
+
+  /// No description provided for @consignSummaryTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'ملخص الإرسال'**
+  String get consignSummaryTitle;
+
+  /// No description provided for @consignSummaryNote.
+  ///
+  /// In ar, this message translates to:
+  /// **'يخرج الوزن من مخزونك إلى مخزون الدلال، ويبيعه الدلال من دكته.'**
+  String get consignSummaryNote;
+
+  /// No description provided for @consignConfirm.
+  ///
+  /// In ar, this message translates to:
+  /// **'إرسال'**
+  String get consignConfirm;
+
+  /// No description provided for @consignSent.
+  ///
+  /// In ar, this message translates to:
+  /// **'أُرسل المصيد إلى الدلال'**
+  String get consignSent;
+
+  /// No description provided for @consignmentsTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'الإرسال للدلال'**
+  String get consignmentsTitle;
+
+  /// No description provided for @noConsignments.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا إرسال للدلالين بعد'**
+  String get noConsignments;
+
+  /// No description provided for @stockScreenTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'المخزون'**
+  String get stockScreenTitle;
+
+  /// No description provided for @totalStock.
+  ///
+  /// In ar, this message translates to:
+  /// **'إجمالي المخزون'**
+  String get totalStock;
+
+  /// No description provided for @movementsTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'حركات الصنف'**
+  String get movementsTitle;
+
+  /// No description provided for @allSpecies.
+  ///
+  /// In ar, this message translates to:
+  /// **'كل الأصناف'**
+  String get allSpecies;
+
+  /// No description provided for @noMovements.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا حركات بعد'**
+  String get noMovements;
+
+  /// No description provided for @balanceAfter.
+  ///
+  /// In ar, this message translates to:
+  /// **'الرصيد {amount}'**
+  String balanceAfter(String amount);
+
+  /// No description provided for @dalalsTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'الدلالون'**
+  String get dalalsTitle;
+
+  /// No description provided for @searchDalals.
+  ///
+  /// In ar, this message translates to:
+  /// **'ابحث باسم الدلال'**
+  String get searchDalals;
+
+  /// No description provided for @noDalals.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا دلالين مفعّلين'**
+  String get noDalals;
+
+  /// No description provided for @agreementAccepted.
+  ///
+  /// In ar, this message translates to:
+  /// **'معتمد'**
+  String get agreementAccepted;
+
+  /// No description provided for @agreementPending.
+  ///
+  /// In ar, this message translates to:
+  /// **'بانتظار الرد'**
+  String get agreementPending;
+
+  /// No description provided for @agreementRejected.
+  ///
+  /// In ar, this message translates to:
+  /// **'مرفوض'**
+  String get agreementRejected;
+
+  /// No description provided for @agreementTerms.
+  ///
+  /// In ar, this message translates to:
+  /// **'عمولة {commission} · أجور {wage}'**
+  String agreementTerms(String commission, String wage);
+
+  /// No description provided for @agreementLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'الاتفاق'**
+  String get agreementLabel;
+
+  /// No description provided for @rejectReasonLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'سبب الرفض'**
+  String get rejectReasonLabel;
+
+  /// No description provided for @proposalTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'طلب التعامل'**
+  String get proposalTitle;
+
+  /// No description provided for @commissionLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'العمولة %'**
+  String get commissionLabel;
+
+  /// No description provided for @wageLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'الأجور %'**
+  String get wageLabel;
+
+  /// No description provided for @messageLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'رسالة'**
+  String get messageLabel;
+
+  /// No description provided for @commissionRequired.
+  ///
+  /// In ar, this message translates to:
+  /// **'أدخل العمولة'**
+  String get commissionRequired;
+
+  /// No description provided for @pctInvalid.
+  ///
+  /// In ar, this message translates to:
+  /// **'من 0 إلى 100'**
+  String get pctInvalid;
+
+  /// No description provided for @sendRequest.
+  ///
+  /// In ar, this message translates to:
+  /// **'إرسال الطلب'**
+  String get sendRequest;
+
+  /// No description provided for @updateRequest.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعديل الطلب'**
+  String get updateRequest;
+
+  /// No description provided for @resendRequest.
+  ///
+  /// In ar, this message translates to:
+  /// **'إعادة الطلب'**
+  String get resendRequest;
+
+  /// No description provided for @requestSent.
+  ///
+  /// In ar, this message translates to:
+  /// **'أُرسل الطلب إلى الدلال'**
+  String get requestSent;
+
+  /// No description provided for @callLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'اتصال'**
+  String get callLabel;
+
   /// No description provided for @moreTitle.
   ///
   /// In ar, this message translates to:
@@ -1638,6 +2106,12 @@ abstract class AppLocalizations {
   /// In ar, this message translates to:
   /// **'الصيد'**
   String get groupCatch;
+
+  /// No description provided for @groupContacts.
+  ///
+  /// In ar, this message translates to:
+  /// **'الجهات'**
+  String get groupContacts;
 
   /// No description provided for @groupAccount.
   ///

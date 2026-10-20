@@ -27,8 +27,26 @@ void main() {
     expect(app.visited.last, '/trip/${(tripNote['trip'] as Map)['id']}');
   });
 
-  testWidgets('a notification about a screen not in the app stays on the list', (tester) async {
+  testWidgets('a dalal notification opens the dalals', (tester) async {
     final api = ownerApi()..json('POST', '/notifications/*', {'data': {}});
+    final app = TestApp(api: api);
+    await app.pump(tester, const NotificationsScreen());
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.text('دفعة من الدلال').first);
+    await tester.pumpAndSettle();
+
+    expect(app.visited.last, '/dalals');
+  });
+
+  testWidgets('a notification about a screen not in the app stays on the list', (tester) async {
+    final notes = fixture('notifications');
+    for (final n in (notes['data'] as List).cast<Map<String, dynamic>>()) {
+      if ((n['payload'] as Map?)?['target'] == 'dalals') (n['payload'] as Map)['target'] = 'dalal_invoice';
+    }
+    final api = ownerApi()
+      ..json('GET', '/notifications', notes)
+      ..json('POST', '/notifications/*', {'data': {}});
     final app = TestApp(api: api);
     await app.pump(tester, const NotificationsScreen());
     await tester.pumpAndSettle();

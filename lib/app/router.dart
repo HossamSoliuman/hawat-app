@@ -10,14 +10,21 @@ import '../features/auth/presentation/login_screen.dart';
 import '../features/auth/presentation/splash_screen.dart';
 import '../features/auth/presentation/update_screen.dart';
 import '../features/catch_log/presentation/catch_log_screen.dart';
+import '../features/consignments/presentation/consign_screen.dart';
+import '../features/consignments/presentation/consignment_screen.dart';
+import '../features/consignments/presentation/consignments_screen.dart';
+import '../features/dalals/presentation/dalals_screen.dart';
 import '../features/home/presentation/home_screen.dart';
 import '../features/more/presentation/more_screen.dart';
 import '../features/notifications/presentation/notifications_screen.dart';
 import '../features/profile/presentation/change_password_screen.dart';
 import '../features/profile/presentation/edit_profile_screen.dart';
 import '../features/profile/presentation/profile_screen.dart';
+import '../features/sales/presentation/sale_form_screen.dart';
 import '../features/sales/presentation/sale_screen.dart';
 import '../features/sales/presentation/sales_screen.dart';
+import '../features/stock/presentation/stock_movements_screen.dart';
+import '../features/stock/presentation/stock_screen.dart';
 import '../features/trips/data/trip.dart';
 import '../features/trips/presentation/catch_screen.dart';
 import '../features/trips/presentation/trip_form_screen.dart';
@@ -43,6 +50,9 @@ abstract final class Routes {
   static const changePassword = '/profile/password';
   static const newTrip = '/trip/new';
   static const catchLog = '/catch-log';
+  static const consignments = '/consignments';
+  static const stock = '/stock';
+  static const dalals = '/dalals';
 
   static String tripsAt(TripStage stage) => '$trips?stage=${stage.apiValue}';
   static String unpaidSales() => '$sales?unpaid=1';
@@ -50,6 +60,11 @@ abstract final class Routes {
   static String editTrip(int id) => '/trip/$id/edit';
   static String submitCatch(int id) => '/trip/$id/catch';
   static String sale(int id) => '/sale/$id';
+  static String newSale(int tripId) => '/sale/new?trip=$tripId';
+  static String newConsignment(int tripId) => '/consign/new?trip=$tripId';
+  static String consignment(int id) => '/consignment/$id';
+  static String stockMovements({int? speciesId}) =>
+      speciesId == null ? '$stock/movements' : '$stock/movements?species=$speciesId';
 
   static const _outside = {splash, login, gate, update};
 }
@@ -137,10 +152,35 @@ GoRouter router(Ref ref) {
           ),
         ],
       ),
+      // Before '/sale/:id', or "new" would be read as an invoice id.
+      GoRoute(
+        path: '/sale/new',
+        builder: (_, state) => SaleFormScreen(tripId: _query(state, 'trip') ?? 0),
+      ),
       GoRoute(
         path: '/sale/:id',
         builder: (_, state) => SaleScreen(id: _id(state)),
       ),
+      GoRoute(
+        path: '/consign/new',
+        builder: (_, state) => ConsignScreen(tripId: _query(state, 'trip') ?? 0),
+      ),
+      GoRoute(path: Routes.consignments, builder: (_, _) => const ConsignmentsScreen()),
+      GoRoute(
+        path: '/consignment/:id',
+        builder: (_, state) => ConsignmentScreen(id: _id(state)),
+      ),
+      GoRoute(
+        path: Routes.stock,
+        builder: (_, _) => const StockScreen(),
+        routes: [
+          GoRoute(
+            path: 'movements',
+            builder: (_, state) => StockMovementsScreen(speciesId: _query(state, 'species')),
+          ),
+        ],
+      ),
+      GoRoute(path: Routes.dalals, builder: (_, _) => const DalalsScreen()),
     ],
   );
   ref.onDispose(router.dispose);
@@ -148,3 +188,5 @@ GoRouter router(Ref ref) {
 }
 
 int _id(GoRouterState state) => int.tryParse(state.pathParameters['id'] ?? '') ?? 0;
+
+int? _query(GoRouterState state, String key) => int.tryParse(state.uri.queryParameters[key] ?? '');

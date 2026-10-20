@@ -15,7 +15,9 @@ final deviceNameProvider = DeviceNameProvider._();
 
 /// The device name sent with the login, so the owner can tell sessions apart.
 
-final class DeviceNameProvider extends $FunctionalProvider<String, String, String> with $Provider<String> {
+final class DeviceNameProvider
+    extends $FunctionalProvider<String, String, String>
+    with $Provider<String> {
   /// The device name sent with the login, so the owner can tell sessions apart.
   DeviceNameProvider._()
     : super(
@@ -33,7 +35,8 @@ final class DeviceNameProvider extends $FunctionalProvider<String, String, Strin
 
   @$internal
   @override
-  $ProviderElement<String> $createElement($ProviderPointer pointer) => $ProviderElement(pointer);
+  $ProviderElement<String> $createElement($ProviderPointer pointer) =>
+      $ProviderElement(pointer);
 
   @override
   String create(Ref ref) {
@@ -42,7 +45,10 @@ final class DeviceNameProvider extends $FunctionalProvider<String, String, Strin
 
   /// {@macro riverpod.override_with_value}
   Override overrideWithValue(String value) {
-    return $ProviderOverride(origin: this, providerOverride: $SyncValueProvider<String>(value));
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<String>(value),
+    );
   }
 }
 
@@ -79,7 +85,10 @@ final class SessionProvider extends $NotifierProvider<Session, SessionState> {
 
   /// {@macro riverpod.override_with_value}
   Override overrideWithValue(SessionState value) {
-    return $ProviderOverride(origin: this, providerOverride: $SyncValueProvider<SessionState>(value));
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<SessionState>(value),
+    );
   }
 }
 
@@ -95,7 +104,13 @@ abstract class _$Session extends $Notifier<SessionState> {
   WhenComplete runBuild() {
     final ref = this.ref as $Ref<SessionState, SessionState>;
     final element =
-        ref.element as $ClassProviderElement<AnyNotifier<SessionState, SessionState>, SessionState, Object?, Object?>;
+        ref.element
+            as $ClassProviderElement<
+              AnyNotifier<SessionState, SessionState>,
+              SessionState,
+              Object?,
+              Object?
+            >;
     return element.handleCreate(ref, build);
   }
 }
@@ -107,7 +122,9 @@ final currentUserProvider = CurrentUserProvider._();
 
 /// The signed-in owner; screens behind the router's auth gate can rely on it.
 
-final class CurrentUserProvider extends $FunctionalProvider<AppUser?, AppUser?, AppUser?> with $Provider<AppUser?> {
+final class CurrentUserProvider
+    extends $FunctionalProvider<AppUser?, AppUser?, AppUser?>
+    with $Provider<AppUser?> {
   /// The signed-in owner; screens behind the router's auth gate can rely on it.
   CurrentUserProvider._()
     : super(
@@ -125,7 +142,8 @@ final class CurrentUserProvider extends $FunctionalProvider<AppUser?, AppUser?, 
 
   @$internal
   @override
-  $ProviderElement<AppUser?> $createElement($ProviderPointer pointer) => $ProviderElement(pointer);
+  $ProviderElement<AppUser?> $createElement($ProviderPointer pointer) =>
+      $ProviderElement(pointer);
 
   @override
   AppUser? create(Ref ref) {
@@ -134,7 +152,10 @@ final class CurrentUserProvider extends $FunctionalProvider<AppUser?, AppUser?, 
 
   /// {@macro riverpod.override_with_value}
   Override overrideWithValue(AppUser? value) {
-    return $ProviderOverride(origin: this, providerOverride: $SyncValueProvider<AppUser?>(value));
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<AppUser?>(value),
+    );
   }
 }
 

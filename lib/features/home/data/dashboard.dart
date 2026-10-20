@@ -1,7 +1,10 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../../sales/data/sale.dart';
+import '../../stock/data/stock.dart';
 import '../../trips/data/trip.dart';
+
+export '../../stock/data/stock.dart' show StockLine;
 
 part 'dashboard.freezed.dart';
 part 'dashboard.g.dart';
@@ -77,12 +80,4 @@ abstract class RevenuePoint with _$RevenuePoint {
   const factory RevenuePoint({required String month, String? label, @Default(0) double total}) = _RevenuePoint;
 
   factory RevenuePoint.fromJson(Map<String, dynamic> json) => _$RevenuePointFromJson(json);
-}
-
-@freezed
-abstract class StockLine with _$StockLine {
-  const factory StockLine({required int speciesId, String? species, String? nameSci, @Default(0) double weightKg}) =
-      _StockLine;
-
-  factory StockLine.fromJson(Map<String, dynamic> json) => _$StockLineFromJson(json);
 }

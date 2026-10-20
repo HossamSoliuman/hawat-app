@@ -15,7 +15,8 @@ final localStoreProvider = LocalStoreProvider._();
 
 /// Opened once in `main` (Hive) and overridden there; tests use [MemoryLocalStore].
 
-final class LocalStoreProvider extends $FunctionalProvider<LocalStore, LocalStore, LocalStore>
+final class LocalStoreProvider
+    extends $FunctionalProvider<LocalStore, LocalStore, LocalStore>
     with $Provider<LocalStore> {
   /// Opened once in `main` (Hive) and overridden there; tests use [MemoryLocalStore].
   LocalStoreProvider._()
@@ -34,7 +35,8 @@ final class LocalStoreProvider extends $FunctionalProvider<LocalStore, LocalStor
 
   @$internal
   @override
-  $ProviderElement<LocalStore> $createElement($ProviderPointer pointer) => $ProviderElement(pointer);
+  $ProviderElement<LocalStore> $createElement($ProviderPointer pointer) =>
+      $ProviderElement(pointer);
 
   @override
   LocalStore create(Ref ref) {
@@ -43,7 +45,10 @@ final class LocalStoreProvider extends $FunctionalProvider<LocalStore, LocalStor
 
   /// {@macro riverpod.override_with_value}
   Override overrideWithValue(LocalStore value) {
-    return $ProviderOverride(origin: this, providerOverride: $SyncValueProvider<LocalStore>(value));
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<LocalStore>(value),
+    );
   }
 }
 
@@ -52,7 +57,8 @@ String _$localStoreHash() => r'31b7a25d3fe344c1c6e8198c8f1ad7a10bf3887a';
 @ProviderFor(tokenStore)
 final tokenStoreProvider = TokenStoreProvider._();
 
-final class TokenStoreProvider extends $FunctionalProvider<TokenStore, TokenStore, TokenStore>
+final class TokenStoreProvider
+    extends $FunctionalProvider<TokenStore, TokenStore, TokenStore>
     with $Provider<TokenStore> {
   TokenStoreProvider._()
     : super(
@@ -70,7 +76,8 @@ final class TokenStoreProvider extends $FunctionalProvider<TokenStore, TokenStor
 
   @$internal
   @override
-  $ProviderElement<TokenStore> $createElement($ProviderPointer pointer) => $ProviderElement(pointer);
+  $ProviderElement<TokenStore> $createElement($ProviderPointer pointer) =>
+      $ProviderElement(pointer);
 
   @override
   TokenStore create(Ref ref) {
@@ -79,7 +86,10 @@ final class TokenStoreProvider extends $FunctionalProvider<TokenStore, TokenStor
 
   /// {@macro riverpod.override_with_value}
   Override overrideWithValue(TokenStore value) {
-    return $ProviderOverride(origin: this, providerOverride: $SyncValueProvider<TokenStore>(value));
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<TokenStore>(value),
+    );
   }
 }
 
@@ -92,7 +102,9 @@ final appVersionProvider = AppVersionProvider._();
 
 /// The installed version (`1.0.0`), read once in `main` from the package info.
 
-final class AppVersionProvider extends $FunctionalProvider<String, String, String> with $Provider<String> {
+final class AppVersionProvider
+    extends $FunctionalProvider<String, String, String>
+    with $Provider<String> {
   /// The installed version (`1.0.0`), read once in `main` from the package info.
   AppVersionProvider._()
     : super(
@@ -110,7 +122,8 @@ final class AppVersionProvider extends $FunctionalProvider<String, String, Strin
 
   @$internal
   @override
-  $ProviderElement<String> $createElement($ProviderPointer pointer) => $ProviderElement(pointer);
+  $ProviderElement<String> $createElement($ProviderPointer pointer) =>
+      $ProviderElement(pointer);
 
   @override
   String create(Ref ref) {
@@ -119,7 +132,10 @@ final class AppVersionProvider extends $FunctionalProvider<String, String, Strin
 
   /// {@macro riverpod.override_with_value}
   Override overrideWithValue(String value) {
-    return $ProviderOverride(origin: this, providerOverride: $SyncValueProvider<String>(value));
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<String>(value),
+    );
   }
 }
 
@@ -153,7 +169,10 @@ final class AuthTokenProvider extends $NotifierProvider<AuthToken, String?> {
 
   /// {@macro riverpod.override_with_value}
   Override overrideWithValue(String? value) {
-    return $ProviderOverride(origin: this, providerOverride: $SyncValueProvider<String?>(value));
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<String?>(value),
+    );
   }
 }
 
@@ -167,7 +186,14 @@ abstract class _$AuthToken extends $Notifier<String?> {
   @override
   WhenComplete runBuild() {
     final ref = this.ref as $Ref<String?, String?>;
-    final element = ref.element as $ClassProviderElement<AnyNotifier<String?, String?>, String?, Object?, Object?>;
+    final element =
+        ref.element
+            as $ClassProviderElement<
+              AnyNotifier<String?, String?>,
+              String?,
+              Object?,
+              Object?
+            >;
     return element.handleCreate(ref, build);
   }
 }
@@ -175,7 +201,9 @@ abstract class _$AuthToken extends $Notifier<String?> {
 @ProviderFor(apiClient)
 final apiClientProvider = ApiClientProvider._();
 
-final class ApiClientProvider extends $FunctionalProvider<ApiClient, ApiClient, ApiClient> with $Provider<ApiClient> {
+final class ApiClientProvider
+    extends $FunctionalProvider<ApiClient, ApiClient, ApiClient>
+    with $Provider<ApiClient> {
   ApiClientProvider._()
     : super(
         from: null,
@@ -192,7 +220,8 @@ final class ApiClientProvider extends $FunctionalProvider<ApiClient, ApiClient, 
 
   @$internal
   @override
-  $ProviderElement<ApiClient> $createElement($ProviderPointer pointer) => $ProviderElement(pointer);
+  $ProviderElement<ApiClient> $createElement($ProviderPointer pointer) =>
+      $ProviderElement(pointer);
 
   @override
   ApiClient create(Ref ref) {
@@ -201,7 +230,10 @@ final class ApiClientProvider extends $FunctionalProvider<ApiClient, ApiClient, 
 
   /// {@macro riverpod.override_with_value}
   Override overrideWithValue(ApiClient value) {
-    return $ProviderOverride(origin: this, providerOverride: $SyncValueProvider<ApiClient>(value));
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<ApiClient>(value),
+    );
   }
 }
 

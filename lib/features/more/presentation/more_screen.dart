@@ -13,7 +13,7 @@ import '../../notifications/data/notifications_providers.dart';
 import 'account_actions.dart';
 
 /// المزيد: section headings with rows, no captions. Each phase adds its
-/// tiles here (fleet and contacts, stock, consignments) as they ship.
+/// tiles here as they ship (fleet and the other contacts come with M4).
 class MoreScreen extends ConsumerWidget {
   const MoreScreen({super.key});
 
@@ -44,14 +44,44 @@ class MoreScreen extends ConsumerWidget {
               ),
             ),
           const SizedBox(height: Hud.gap),
-          SectionHead(title: l.groupCatch, icon: Icons.set_meal_outlined),
+          SectionHead(title: l.groupStockCatch, icon: Icons.set_meal_outlined),
+          const SizedBox(height: 8),
+          HudCard(
+            padding: EdgeInsets.zero,
+            child: Column(
+              children: [
+                MenuRow(
+                  icon: Icons.inventory_2_outlined,
+                  label: l.stockScreenTitle,
+                  onTap: () => context.push(Routes.stock),
+                ),
+                MenuRow(
+                  icon: Icons.swap_vert,
+                  label: l.movementsTitle,
+                  onTap: () => context.push(Routes.stockMovements()),
+                ),
+                MenuRow(
+                  icon: Icons.list_alt_outlined,
+                  label: l.catchLogTitle,
+                  onTap: () => context.push(Routes.catchLog),
+                ),
+                MenuRow(
+                  icon: Icons.local_shipping_outlined,
+                  label: l.consignmentsTitle,
+                  onTap: () => context.push(Routes.consignments),
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(height: Hud.gap),
+          SectionHead(title: l.groupContacts, icon: Icons.groups_outlined),
           const SizedBox(height: 8),
           HudCard(
             padding: EdgeInsets.zero,
             child: MenuRow(
-              icon: Icons.list_alt_outlined,
-              label: l.catchLogTitle,
-              onTap: () => context.push(Routes.catchLog),
+              icon: Icons.storefront_outlined,
+              label: l.dalalsTitle,
+              onTap: () => context.push(Routes.dalals),
             ),
           ),
           const SizedBox(height: Hud.gap),

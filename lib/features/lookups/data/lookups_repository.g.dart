@@ -16,7 +16,8 @@ final lookupsControllerProvider = LookupsControllerProvider._();
 
 /// Reference lists (species, ports, trip types, gear): the saved copy answers
 /// at once and a fresh copy replaces it in the background.
-final class LookupsControllerProvider extends $AsyncNotifierProvider<LookupsController, Lookups> {
+final class LookupsControllerProvider
+    extends $AsyncNotifierProvider<LookupsController, Lookups> {
   /// Reference lists (species, ports, trip types, gear): the saved copy answers
   /// at once and a fresh copy replaces it in the background.
   LookupsControllerProvider._()
@@ -38,7 +39,7 @@ final class LookupsControllerProvider extends $AsyncNotifierProvider<LookupsCont
   LookupsController create() => LookupsController();
 }
 
-String _$lookupsControllerHash() => r'7429b933ec24aa67558de96135907274a46ce5ba';
+String _$lookupsControllerHash() => r'4522bde230aef09dfc8714586af3194fb10a26c4';
 
 /// Reference lists (species, ports, trip types, gear): the saved copy answers
 /// at once and a fresh copy replaces it in the background.
@@ -51,7 +52,12 @@ abstract class _$LookupsController extends $AsyncNotifier<Lookups> {
     final ref = this.ref as $Ref<AsyncValue<Lookups>, Lookups>;
     final element =
         ref.element
-            as $ClassProviderElement<AnyNotifier<AsyncValue<Lookups>, Lookups>, AsyncValue<Lookups>, Object?, Object?>;
+            as $ClassProviderElement<
+              AnyNotifier<AsyncValue<Lookups>, Lookups>,
+              AsyncValue<Lookups>,
+              Object?,
+              Object?
+            >;
     return element.handleCreate(ref, build);
   }
 }
@@ -63,7 +69,13 @@ final ownerBoatsProvider = OwnerBoatsProvider._();
 
 /// The owner's boats and captains, for the trip form and the list filters.
 
-final class OwnerBoatsProvider extends $FunctionalProvider<AsyncValue<List<Boat>>, List<Boat>, FutureOr<List<Boat>>>
+final class OwnerBoatsProvider
+    extends
+        $FunctionalProvider<
+          AsyncValue<List<Boat>>,
+          List<Boat>,
+          FutureOr<List<Boat>>
+        >
     with $FutureModifier<List<Boat>>, $FutureProvider<List<Boat>> {
   /// The owner's boats and captains, for the trip form and the list filters.
   OwnerBoatsProvider._()
@@ -82,7 +94,8 @@ final class OwnerBoatsProvider extends $FunctionalProvider<AsyncValue<List<Boat>
 
   @$internal
   @override
-  $FutureProviderElement<List<Boat>> $createElement($ProviderPointer pointer) => $FutureProviderElement(pointer);
+  $FutureProviderElement<List<Boat>> $createElement($ProviderPointer pointer) =>
+      $FutureProviderElement(pointer);
 
   @override
   FutureOr<List<Boat>> create(Ref ref) {
@@ -96,7 +109,12 @@ String _$ownerBoatsHash() => r'ffb121363e84f831d11b5c68ec57feeaffc59214';
 final ownerCaptainsProvider = OwnerCaptainsProvider._();
 
 final class OwnerCaptainsProvider
-    extends $FunctionalProvider<AsyncValue<List<Captain>>, List<Captain>, FutureOr<List<Captain>>>
+    extends
+        $FunctionalProvider<
+          AsyncValue<List<Captain>>,
+          List<Captain>,
+          FutureOr<List<Captain>>
+        >
     with $FutureModifier<List<Captain>>, $FutureProvider<List<Captain>> {
   OwnerCaptainsProvider._()
     : super(
@@ -114,7 +132,9 @@ final class OwnerCaptainsProvider
 
   @$internal
   @override
-  $FutureProviderElement<List<Captain>> $createElement($ProviderPointer pointer) => $FutureProviderElement(pointer);
+  $FutureProviderElement<List<Captain>> $createElement(
+    $ProviderPointer pointer,
+  ) => $FutureProviderElement(pointer);
 
   @override
   FutureOr<List<Captain>> create(Ref ref) {

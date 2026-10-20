@@ -743,105 +743,77 @@ $SpeciesRefCopyWith<$Res>? get species {
 
 
 /// @nodoc
-mixin _$Consignment {
+mixin _$SalesTotals {
 
- int get id; String get consignmentNumber; String? get status; PersonRef? get dalal; TripNumberRef? get trip; double get totalKg; DateTime? get sentAt;
-/// Create a copy of Consignment
+ int get count; double get total; double get remaining;
+/// Create a copy of SalesTotals
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-$ConsignmentCopyWith<Consignment> get copyWith => _$ConsignmentCopyWithImpl<Consignment>(this as Consignment, _$identity);
+$SalesTotalsCopyWith<SalesTotals> get copyWith => _$SalesTotalsCopyWithImpl<SalesTotals>(this as SalesTotals, _$identity);
 
-  /// Serializes this Consignment to a JSON map.
+  /// Serializes this SalesTotals to a JSON map.
   Map<String, dynamic> toJson();
 
 
 @override
 bool operator ==(Object other) {
-  final _this = this as Consignment;
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Consignment&&(identical(other.id, _this.id) || other.id == _this.id)&&(identical(other.consignmentNumber, _this.consignmentNumber) || other.consignmentNumber == _this.consignmentNumber)&&(identical(other.status, _this.status) || other.status == _this.status)&&(identical(other.dalal, _this.dalal) || other.dalal == _this.dalal)&&(identical(other.trip, _this.trip) || other.trip == _this.trip)&&(identical(other.totalKg, _this.totalKg) || other.totalKg == _this.totalKg)&&(identical(other.sentAt, _this.sentAt) || other.sentAt == _this.sentAt));
+  final _this = this as SalesTotals;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is SalesTotals&&(identical(other.count, _this.count) || other.count == _this.count)&&(identical(other.total, _this.total) || other.total == _this.total)&&(identical(other.remaining, _this.remaining) || other.remaining == _this.remaining));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
 int get hashCode {
-  final _this = this as Consignment;
-  return Object.hash(runtimeType,_this.id,_this.consignmentNumber,_this.status,_this.dalal,_this.trip,_this.totalKg,_this.sentAt);
+  final _this = this as SalesTotals;
+  return Object.hash(runtimeType,_this.count,_this.total,_this.remaining);
 }
 
 @override
 String toString() {
-  final _this = this as Consignment;
-  return 'Consignment(id: ${_this.id}, consignmentNumber: ${_this.consignmentNumber}, status: ${_this.status}, dalal: ${_this.dalal}, trip: ${_this.trip}, totalKg: ${_this.totalKg}, sentAt: ${_this.sentAt})';
+  final _this = this as SalesTotals;
+  return 'SalesTotals(count: ${_this.count}, total: ${_this.total}, remaining: ${_this.remaining})';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class $ConsignmentCopyWith<$Res>  {
-  factory $ConsignmentCopyWith(Consignment value, $Res Function(Consignment) _then) = _$ConsignmentCopyWithImpl;
+abstract mixin class $SalesTotalsCopyWith<$Res>  {
+  factory $SalesTotalsCopyWith(SalesTotals value, $Res Function(SalesTotals) _then) = _$SalesTotalsCopyWithImpl;
 @useResult
 $Res call({
- int id, String consignmentNumber, String? status, PersonRef? dalal, TripNumberRef? trip, double totalKg, DateTime? sentAt
+ int count, double total, double remaining
 });
 
 
-$PersonRefCopyWith<$Res>? get dalal;$TripNumberRefCopyWith<$Res>? get trip;
+
 
 }
 /// @nodoc
-class _$ConsignmentCopyWithImpl<$Res>
-    implements $ConsignmentCopyWith<$Res> {
-  _$ConsignmentCopyWithImpl(this._self, this._then);
+class _$SalesTotalsCopyWithImpl<$Res>
+    implements $SalesTotalsCopyWith<$Res> {
+  _$SalesTotalsCopyWithImpl(this._self, this._then);
 
-  final Consignment _self;
-  final $Res Function(Consignment) _then;
+  final SalesTotals _self;
+  final $Res Function(SalesTotals) _then;
 
-/// Create a copy of Consignment
+/// Create a copy of SalesTotals
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? consignmentNumber = null,Object? status = freezed,Object? dalal = freezed,Object? trip = freezed,Object? totalKg = null,Object? sentAt = freezed,}) {
-  return _then(Consignment(
-id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
-as int,consignmentNumber: null == consignmentNumber ? _self.consignmentNumber : consignmentNumber // ignore: cast_nullable_to_non_nullable
-as String,status: freezed == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
-as String?,dalal: freezed == dalal ? _self.dalal : dalal // ignore: cast_nullable_to_non_nullable
-as PersonRef?,trip: freezed == trip ? _self.trip : trip // ignore: cast_nullable_to_non_nullable
-as TripNumberRef?,totalKg: null == totalKg ? _self.totalKg : totalKg // ignore: cast_nullable_to_non_nullable
-as double,sentAt: freezed == sentAt ? _self.sentAt : sentAt // ignore: cast_nullable_to_non_nullable
-as DateTime?,
+@pragma('vm:prefer-inline') @override $Res call({Object? count = null,Object? total = null,Object? remaining = null,}) {
+  return _then(SalesTotals(
+count: null == count ? _self.count : count // ignore: cast_nullable_to_non_nullable
+as int,total: null == total ? _self.total : total // ignore: cast_nullable_to_non_nullable
+as double,remaining: null == remaining ? _self.remaining : remaining // ignore: cast_nullable_to_non_nullable
+as double,
   ));
 }
-/// Create a copy of Consignment
-/// with the given fields replaced by the non-null parameter values.
-@override
-@pragma('vm:prefer-inline')
-$PersonRefCopyWith<$Res>? get dalal {
-    if (_self.dalal == null) {
-    return null;
-  }
 
-  return $PersonRefCopyWith<$Res>(_self.dalal!, (value) {
-    return _then(_self.copyWith(dalal: value));
-  });
-}/// Create a copy of Consignment
-/// with the given fields replaced by the non-null parameter values.
-@override
-@pragma('vm:prefer-inline')
-$TripNumberRefCopyWith<$Res>? get trip {
-    if (_self.trip == null) {
-    return null;
-  }
-
-  return $TripNumberRefCopyWith<$Res>(_self.trip!, (value) {
-    return _then(_self.copyWith(trip: value));
-  });
-}
 }
 
 
-/// Adds pattern-matching-related methods to [Consignment].
-extension ConsignmentPatterns on Consignment {
+/// Adds pattern-matching-related methods to [SalesTotals].
+extension SalesTotalsPatterns on SalesTotals {
 /// A variant of `map` that fallback to returning `orElse`.
 ///
 /// It is equivalent to doing:
@@ -854,10 +826,10 @@ extension ConsignmentPatterns on Consignment {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _Consignment value)?  $default,{required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _SalesTotals value)?  $default,{required TResult orElse(),}){
 final _that = this;
 switch (_that) {
-case _Consignment() when $default != null:
+case _SalesTotals() when $default != null:
 return $default(_that);case _:
   return orElse();
 
@@ -876,10 +848,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _Consignment value)  $default,){
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _SalesTotals value)  $default,){
 final _that = this;
 switch (_that) {
-case _Consignment():
+case _SalesTotals():
 return $default(_that);case _:
   throw StateError('Unexpected subclass');
 
@@ -897,10 +869,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _Consignment value)?  $default,){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _SalesTotals value)?  $default,){
 final _that = this;
 switch (_that) {
-case _Consignment() when $default != null:
+case _SalesTotals() when $default != null:
 return $default(_that);case _:
   return null;
 
@@ -918,10 +890,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int id,  String consignmentNumber,  String? status,  PersonRef? dalal,  TripNumberRef? trip,  double totalKg,  DateTime? sentAt)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int count,  double total,  double remaining)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
-case _Consignment() when $default != null:
-return $default(_that.id,_that.consignmentNumber,_that.status,_that.dalal,_that.trip,_that.totalKg,_that.sentAt);case _:
+case _SalesTotals() when $default != null:
+return $default(_that.count,_that.total,_that.remaining);case _:
   return orElse();
 
 }
@@ -939,10 +911,10 @@ return $default(_that.id,_that.consignmentNumber,_that.status,_that.dalal,_that.
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int id,  String consignmentNumber,  String? status,  PersonRef? dalal,  TripNumberRef? trip,  double totalKg,  DateTime? sentAt)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int count,  double total,  double remaining)  $default,) {final _that = this;
 switch (_that) {
-case _Consignment():
-return $default(_that.id,_that.consignmentNumber,_that.status,_that.dalal,_that.trip,_that.totalKg,_that.sentAt);case _:
+case _SalesTotals():
+return $default(_that.count,_that.total,_that.remaining);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -959,10 +931,10 @@ return $default(_that.id,_that.consignmentNumber,_that.status,_that.dalal,_that.
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int id,  String consignmentNumber,  String? status,  PersonRef? dalal,  TripNumberRef? trip,  double totalKg,  DateTime? sentAt)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int count,  double total,  double remaining)?  $default,) {final _that = this;
 switch (_that) {
-case _Consignment() when $default != null:
-return $default(_that.id,_that.consignmentNumber,_that.status,_that.dalal,_that.trip,_that.totalKg,_that.sentAt);case _:
+case _SalesTotals() when $default != null:
+return $default(_that.count,_that.total,_that.remaining);case _:
   return null;
 
 }
@@ -973,108 +945,636 @@ return $default(_that.id,_that.consignmentNumber,_that.status,_that.dalal,_that.
 /// @nodoc
 @JsonSerializable()
 
-class _Consignment implements Consignment {
-  const _Consignment({required this.id, required this.consignmentNumber, this.status, this.dalal, this.trip, this.totalKg = 0, this.sentAt});
-  factory _Consignment.fromJson(Map<String, dynamic> json) => _$ConsignmentFromJson(json);
+class _SalesTotals implements SalesTotals {
+  const _SalesTotals({this.count = 0, this.total = 0, this.remaining = 0});
+  factory _SalesTotals.fromJson(Map<String, dynamic> json) => _$SalesTotalsFromJson(json);
 
-@override final  int id;
-@override final  String consignmentNumber;
-@override final  String? status;
-@override final  PersonRef? dalal;
-@override final  TripNumberRef? trip;
-@override@JsonKey() final  double totalKg;
-@override final  DateTime? sentAt;
+@override@JsonKey() final  int count;
+@override@JsonKey() final  double total;
+@override@JsonKey() final  double remaining;
 
-/// Create a copy of Consignment
+/// Create a copy of SalesTotals
 /// with the given fields replaced by the non-null parameter values.
 @override @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-_$ConsignmentCopyWith<_Consignment> get copyWith => __$ConsignmentCopyWithImpl<_Consignment>(this, _$identity);
+_$SalesTotalsCopyWith<_SalesTotals> get copyWith => __$SalesTotalsCopyWithImpl<_SalesTotals>(this, _$identity);
 
 @override
 Map<String, dynamic> toJson() {
-  return _$ConsignmentToJson(this, );
+  return _$SalesTotalsToJson(this, );
 }
 
 @override
 bool operator ==(Object other) {
-    return identical(this, other) || (other.runtimeType == runtimeType&&other is _Consignment&&(identical(other.id, id) || other.id == id)&&(identical(other.consignmentNumber, consignmentNumber) || other.consignmentNumber == consignmentNumber)&&(identical(other.status, status) || other.status == status)&&(identical(other.dalal, dalal) || other.dalal == dalal)&&(identical(other.trip, trip) || other.trip == trip)&&(identical(other.totalKg, totalKg) || other.totalKg == totalKg)&&(identical(other.sentAt, sentAt) || other.sentAt == sentAt));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _SalesTotals&&(identical(other.count, count) || other.count == count)&&(identical(other.total, total) || other.total == total)&&(identical(other.remaining, remaining) || other.remaining == remaining));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
 int get hashCode {
-    return Object.hash(runtimeType,id,consignmentNumber,status,dalal,trip,totalKg,sentAt);
+    return Object.hash(runtimeType,count,total,remaining);
 }
 
 @override
 String toString() {
-    return 'Consignment(id: $id, consignmentNumber: $consignmentNumber, status: $status, dalal: $dalal, trip: $trip, totalKg: $totalKg, sentAt: $sentAt)';
+    return 'SalesTotals(count: $count, total: $total, remaining: $remaining)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class _$ConsignmentCopyWith<$Res> implements $ConsignmentCopyWith<$Res> {
-  factory _$ConsignmentCopyWith(_Consignment value, $Res Function(_Consignment) _then) = __$ConsignmentCopyWithImpl;
+abstract mixin class _$SalesTotalsCopyWith<$Res> implements $SalesTotalsCopyWith<$Res> {
+  factory _$SalesTotalsCopyWith(_SalesTotals value, $Res Function(_SalesTotals) _then) = __$SalesTotalsCopyWithImpl;
 @override @useResult
 $Res call({
- int id, String consignmentNumber, String? status, PersonRef? dalal, TripNumberRef? trip, double totalKg, DateTime? sentAt
+ int count, double total, double remaining
 });
 
 
-@override $PersonRefCopyWith<$Res>? get dalal;@override $TripNumberRefCopyWith<$Res>? get trip;
+
 
 }
 /// @nodoc
-class __$ConsignmentCopyWithImpl<$Res>
-    implements _$ConsignmentCopyWith<$Res> {
-  __$ConsignmentCopyWithImpl(this._self, this._then);
+class __$SalesTotalsCopyWithImpl<$Res>
+    implements _$SalesTotalsCopyWith<$Res> {
+  __$SalesTotalsCopyWithImpl(this._self, this._then);
 
-  final _Consignment _self;
-  final $Res Function(_Consignment) _then;
+  final _SalesTotals _self;
+  final $Res Function(_SalesTotals) _then;
 
-/// Create a copy of Consignment
+/// Create a copy of SalesTotals
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? consignmentNumber = null,Object? status = freezed,Object? dalal = freezed,Object? trip = freezed,Object? totalKg = null,Object? sentAt = freezed,}) {
-  return _then(_Consignment(
-id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
-as int,consignmentNumber: null == consignmentNumber ? _self.consignmentNumber : consignmentNumber // ignore: cast_nullable_to_non_nullable
-as String,status: freezed == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
-as String?,dalal: freezed == dalal ? _self.dalal : dalal // ignore: cast_nullable_to_non_nullable
-as PersonRef?,trip: freezed == trip ? _self.trip : trip // ignore: cast_nullable_to_non_nullable
-as TripNumberRef?,totalKg: null == totalKg ? _self.totalKg : totalKg // ignore: cast_nullable_to_non_nullable
-as double,sentAt: freezed == sentAt ? _self.sentAt : sentAt // ignore: cast_nullable_to_non_nullable
-as DateTime?,
+@override @pragma('vm:prefer-inline') $Res call({Object? count = null,Object? total = null,Object? remaining = null,}) {
+  return _then(_SalesTotals(
+count: null == count ? _self.count : count // ignore: cast_nullable_to_non_nullable
+as int,total: null == total ? _self.total : total // ignore: cast_nullable_to_non_nullable
+as double,remaining: null == remaining ? _self.remaining : remaining // ignore: cast_nullable_to_non_nullable
+as double,
   ));
 }
 
-/// Create a copy of Consignment
-/// with the given fields replaced by the non-null parameter values.
-@override
-@pragma('vm:prefer-inline')
-$PersonRefCopyWith<$Res>? get dalal {
-    if (_self.dalal == null) {
-    return null;
-  }
 
-  return $PersonRefCopyWith<$Res>(_self.dalal!, (value) {
-    return _then(_self.copyWith(dalal: value));
-  });
-}/// Create a copy of Consignment
-/// with the given fields replaced by the non-null parameter values.
-@override
-@pragma('vm:prefer-inline')
-$TripNumberRefCopyWith<$Res>? get trip {
-    if (_self.trip == null) {
-    return null;
-  }
-
-  return $TripNumberRefCopyWith<$Res>(_self.trip!, (value) {
-    return _then(_self.copyWith(trip: value));
-  });
 }
+
+/// @nodoc
+mixin _$SaleInput {
+
+ int get tripId; int? get customerId; int? get paymentMethodId; double? get discount;/// Null = paid in full.
+ double? get paidAmount; String? get notes; List<SaleLineInput> get items;
+/// Create a copy of SaleInput
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$SaleInputCopyWith<SaleInput> get copyWith => _$SaleInputCopyWithImpl<SaleInput>(this as SaleInput, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  final _this = this as SaleInput;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is SaleInput&&(identical(other.tripId, _this.tripId) || other.tripId == _this.tripId)&&(identical(other.customerId, _this.customerId) || other.customerId == _this.customerId)&&(identical(other.paymentMethodId, _this.paymentMethodId) || other.paymentMethodId == _this.paymentMethodId)&&(identical(other.discount, _this.discount) || other.discount == _this.discount)&&(identical(other.paidAmount, _this.paidAmount) || other.paidAmount == _this.paidAmount)&&(identical(other.notes, _this.notes) || other.notes == _this.notes)&&const DeepCollectionEquality().equals(other.items, _this.items));
+}
+
+
+@override
+int get hashCode {
+  final _this = this as SaleInput;
+  return Object.hash(runtimeType,_this.tripId,_this.customerId,_this.paymentMethodId,_this.discount,_this.paidAmount,_this.notes,const DeepCollectionEquality().hash(_this.items));
+}
+
+@override
+String toString() {
+  final _this = this as SaleInput;
+  return 'SaleInput(tripId: ${_this.tripId}, customerId: ${_this.customerId}, paymentMethodId: ${_this.paymentMethodId}, discount: ${_this.discount}, paidAmount: ${_this.paidAmount}, notes: ${_this.notes}, items: ${_this.items})';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $SaleInputCopyWith<$Res>  {
+  factory $SaleInputCopyWith(SaleInput value, $Res Function(SaleInput) _then) = _$SaleInputCopyWithImpl;
+@useResult
+$Res call({
+ int tripId, int? customerId, int? paymentMethodId, double? discount, double? paidAmount, String? notes, List<SaleLineInput> items
+});
+
+
+
+
+}
+/// @nodoc
+class _$SaleInputCopyWithImpl<$Res>
+    implements $SaleInputCopyWith<$Res> {
+  _$SaleInputCopyWithImpl(this._self, this._then);
+
+  final SaleInput _self;
+  final $Res Function(SaleInput) _then;
+
+/// Create a copy of SaleInput
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? tripId = null,Object? customerId = freezed,Object? paymentMethodId = freezed,Object? discount = freezed,Object? paidAmount = freezed,Object? notes = freezed,Object? items = null,}) {
+  return _then(SaleInput(
+tripId: null == tripId ? _self.tripId : tripId // ignore: cast_nullable_to_non_nullable
+as int,customerId: freezed == customerId ? _self.customerId : customerId // ignore: cast_nullable_to_non_nullable
+as int?,paymentMethodId: freezed == paymentMethodId ? _self.paymentMethodId : paymentMethodId // ignore: cast_nullable_to_non_nullable
+as int?,discount: freezed == discount ? _self.discount : discount // ignore: cast_nullable_to_non_nullable
+as double?,paidAmount: freezed == paidAmount ? _self.paidAmount : paidAmount // ignore: cast_nullable_to_non_nullable
+as double?,notes: freezed == notes ? _self.notes : notes // ignore: cast_nullable_to_non_nullable
+as String?,items: null == items ? _self.items : items // ignore: cast_nullable_to_non_nullable
+as List<SaleLineInput>,
+  ));
+}
+
+}
+
+
+/// Adds pattern-matching-related methods to [SaleInput].
+extension SaleInputPatterns on SaleInput {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _SaleInput value)?  $default,{required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _SaleInput() when $default != null:
+return $default(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _SaleInput value)  $default,){
+final _that = this;
+switch (_that) {
+case _SaleInput():
+return $default(_that);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _SaleInput value)?  $default,){
+final _that = this;
+switch (_that) {
+case _SaleInput() when $default != null:
+return $default(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int tripId,  int? customerId,  int? paymentMethodId,  double? discount,  double? paidAmount,  String? notes,  List<SaleLineInput> items)?  $default,{required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _SaleInput() when $default != null:
+return $default(_that.tripId,_that.customerId,_that.paymentMethodId,_that.discount,_that.paidAmount,_that.notes,_that.items);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int tripId,  int? customerId,  int? paymentMethodId,  double? discount,  double? paidAmount,  String? notes,  List<SaleLineInput> items)  $default,) {final _that = this;
+switch (_that) {
+case _SaleInput():
+return $default(_that.tripId,_that.customerId,_that.paymentMethodId,_that.discount,_that.paidAmount,_that.notes,_that.items);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int tripId,  int? customerId,  int? paymentMethodId,  double? discount,  double? paidAmount,  String? notes,  List<SaleLineInput> items)?  $default,) {final _that = this;
+switch (_that) {
+case _SaleInput() when $default != null:
+return $default(_that.tripId,_that.customerId,_that.paymentMethodId,_that.discount,_that.paidAmount,_that.notes,_that.items);case _:
+  return null;
+
+}
+}
+
+}
+
+/// @nodoc
+
+
+class _SaleInput implements SaleInput {
+  const _SaleInput({required this.tripId, this.customerId, this.paymentMethodId, this.discount, this.paidAmount, this.notes, required  List<SaleLineInput> items}): _items = items;
+  
+
+@override final  int tripId;
+@override final  int? customerId;
+@override final  int? paymentMethodId;
+@override final  double? discount;
+/// Null = paid in full.
+@override final  double? paidAmount;
+@override final  String? notes;
+ final  List<SaleLineInput> _items;
+@override List<SaleLineInput> get items {
+  if (_items is EqualUnmodifiableListView) return _items;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_items);
+}
+
+
+/// Create a copy of SaleInput
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$SaleInputCopyWith<_SaleInput> get copyWith => __$SaleInputCopyWithImpl<_SaleInput>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _SaleInput&&(identical(other.tripId, tripId) || other.tripId == tripId)&&(identical(other.customerId, customerId) || other.customerId == customerId)&&(identical(other.paymentMethodId, paymentMethodId) || other.paymentMethodId == paymentMethodId)&&(identical(other.discount, discount) || other.discount == discount)&&(identical(other.paidAmount, paidAmount) || other.paidAmount == paidAmount)&&(identical(other.notes, notes) || other.notes == notes)&&const DeepCollectionEquality().equals(other.items, _items));
+}
+
+
+@override
+int get hashCode {
+    return Object.hash(runtimeType,tripId,customerId,paymentMethodId,discount,paidAmount,notes,const DeepCollectionEquality().hash(_items));
+}
+
+@override
+String toString() {
+    return 'SaleInput(tripId: $tripId, customerId: $customerId, paymentMethodId: $paymentMethodId, discount: $discount, paidAmount: $paidAmount, notes: $notes, items: $items)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$SaleInputCopyWith<$Res> implements $SaleInputCopyWith<$Res> {
+  factory _$SaleInputCopyWith(_SaleInput value, $Res Function(_SaleInput) _then) = __$SaleInputCopyWithImpl;
+@override @useResult
+$Res call({
+ int tripId, int? customerId, int? paymentMethodId, double? discount, double? paidAmount, String? notes, List<SaleLineInput> items
+});
+
+
+
+
+}
+/// @nodoc
+class __$SaleInputCopyWithImpl<$Res>
+    implements _$SaleInputCopyWith<$Res> {
+  __$SaleInputCopyWithImpl(this._self, this._then);
+
+  final _SaleInput _self;
+  final $Res Function(_SaleInput) _then;
+
+/// Create a copy of SaleInput
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? tripId = null,Object? customerId = freezed,Object? paymentMethodId = freezed,Object? discount = freezed,Object? paidAmount = freezed,Object? notes = freezed,Object? items = null,}) {
+  return _then(_SaleInput(
+tripId: null == tripId ? _self.tripId : tripId // ignore: cast_nullable_to_non_nullable
+as int,customerId: freezed == customerId ? _self.customerId : customerId // ignore: cast_nullable_to_non_nullable
+as int?,paymentMethodId: freezed == paymentMethodId ? _self.paymentMethodId : paymentMethodId // ignore: cast_nullable_to_non_nullable
+as int?,discount: freezed == discount ? _self.discount : discount // ignore: cast_nullable_to_non_nullable
+as double?,paidAmount: freezed == paidAmount ? _self.paidAmount : paidAmount // ignore: cast_nullable_to_non_nullable
+as double?,notes: freezed == notes ? _self.notes : notes // ignore: cast_nullable_to_non_nullable
+as String?,items: null == items ? _self._items : items // ignore: cast_nullable_to_non_nullable
+as List<SaleLineInput>,
+  ));
+}
+
+
+}
+
+/// @nodoc
+mixin _$SaleLineInput {
+
+ int get speciesId; double get weightKg; double get pricePerKg;
+/// Create a copy of SaleLineInput
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$SaleLineInputCopyWith<SaleLineInput> get copyWith => _$SaleLineInputCopyWithImpl<SaleLineInput>(this as SaleLineInput, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  final _this = this as SaleLineInput;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is SaleLineInput&&(identical(other.speciesId, _this.speciesId) || other.speciesId == _this.speciesId)&&(identical(other.weightKg, _this.weightKg) || other.weightKg == _this.weightKg)&&(identical(other.pricePerKg, _this.pricePerKg) || other.pricePerKg == _this.pricePerKg));
+}
+
+
+@override
+int get hashCode {
+  final _this = this as SaleLineInput;
+  return Object.hash(runtimeType,_this.speciesId,_this.weightKg,_this.pricePerKg);
+}
+
+@override
+String toString() {
+  final _this = this as SaleLineInput;
+  return 'SaleLineInput(speciesId: ${_this.speciesId}, weightKg: ${_this.weightKg}, pricePerKg: ${_this.pricePerKg})';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $SaleLineInputCopyWith<$Res>  {
+  factory $SaleLineInputCopyWith(SaleLineInput value, $Res Function(SaleLineInput) _then) = _$SaleLineInputCopyWithImpl;
+@useResult
+$Res call({
+ int speciesId, double weightKg, double pricePerKg
+});
+
+
+
+
+}
+/// @nodoc
+class _$SaleLineInputCopyWithImpl<$Res>
+    implements $SaleLineInputCopyWith<$Res> {
+  _$SaleLineInputCopyWithImpl(this._self, this._then);
+
+  final SaleLineInput _self;
+  final $Res Function(SaleLineInput) _then;
+
+/// Create a copy of SaleLineInput
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? speciesId = null,Object? weightKg = null,Object? pricePerKg = null,}) {
+  return _then(SaleLineInput(
+speciesId: null == speciesId ? _self.speciesId : speciesId // ignore: cast_nullable_to_non_nullable
+as int,weightKg: null == weightKg ? _self.weightKg : weightKg // ignore: cast_nullable_to_non_nullable
+as double,pricePerKg: null == pricePerKg ? _self.pricePerKg : pricePerKg // ignore: cast_nullable_to_non_nullable
+as double,
+  ));
+}
+
+}
+
+
+/// Adds pattern-matching-related methods to [SaleLineInput].
+extension SaleLineInputPatterns on SaleLineInput {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _SaleLineInput value)?  $default,{required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _SaleLineInput() when $default != null:
+return $default(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _SaleLineInput value)  $default,){
+final _that = this;
+switch (_that) {
+case _SaleLineInput():
+return $default(_that);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _SaleLineInput value)?  $default,){
+final _that = this;
+switch (_that) {
+case _SaleLineInput() when $default != null:
+return $default(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int speciesId,  double weightKg,  double pricePerKg)?  $default,{required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _SaleLineInput() when $default != null:
+return $default(_that.speciesId,_that.weightKg,_that.pricePerKg);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int speciesId,  double weightKg,  double pricePerKg)  $default,) {final _that = this;
+switch (_that) {
+case _SaleLineInput():
+return $default(_that.speciesId,_that.weightKg,_that.pricePerKg);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int speciesId,  double weightKg,  double pricePerKg)?  $default,) {final _that = this;
+switch (_that) {
+case _SaleLineInput() when $default != null:
+return $default(_that.speciesId,_that.weightKg,_that.pricePerKg);case _:
+  return null;
+
+}
+}
+
+}
+
+/// @nodoc
+
+
+class _SaleLineInput implements SaleLineInput {
+  const _SaleLineInput({required this.speciesId, required this.weightKg, required this.pricePerKg});
+  
+
+@override final  int speciesId;
+@override final  double weightKg;
+@override final  double pricePerKg;
+
+/// Create a copy of SaleLineInput
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$SaleLineInputCopyWith<_SaleLineInput> get copyWith => __$SaleLineInputCopyWithImpl<_SaleLineInput>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _SaleLineInput&&(identical(other.speciesId, speciesId) || other.speciesId == speciesId)&&(identical(other.weightKg, weightKg) || other.weightKg == weightKg)&&(identical(other.pricePerKg, pricePerKg) || other.pricePerKg == pricePerKg));
+}
+
+
+@override
+int get hashCode {
+    return Object.hash(runtimeType,speciesId,weightKg,pricePerKg);
+}
+
+@override
+String toString() {
+    return 'SaleLineInput(speciesId: $speciesId, weightKg: $weightKg, pricePerKg: $pricePerKg)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$SaleLineInputCopyWith<$Res> implements $SaleLineInputCopyWith<$Res> {
+  factory _$SaleLineInputCopyWith(_SaleLineInput value, $Res Function(_SaleLineInput) _then) = __$SaleLineInputCopyWithImpl;
+@override @useResult
+$Res call({
+ int speciesId, double weightKg, double pricePerKg
+});
+
+
+
+
+}
+/// @nodoc
+class __$SaleLineInputCopyWithImpl<$Res>
+    implements _$SaleLineInputCopyWith<$Res> {
+  __$SaleLineInputCopyWithImpl(this._self, this._then);
+
+  final _SaleLineInput _self;
+  final $Res Function(_SaleLineInput) _then;
+
+/// Create a copy of SaleLineInput
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? speciesId = null,Object? weightKg = null,Object? pricePerKg = null,}) {
+  return _then(_SaleLineInput(
+speciesId: null == speciesId ? _self.speciesId : speciesId // ignore: cast_nullable_to_non_nullable
+as int,weightKg: null == weightKg ? _self.weightKg : weightKg // ignore: cast_nullable_to_non_nullable
+as double,pricePerKg: null == pricePerKg ? _self.pricePerKg : pricePerKg // ignore: cast_nullable_to_non_nullable
+as double,
+  ));
+}
+
+
 }
 
 // dart format on

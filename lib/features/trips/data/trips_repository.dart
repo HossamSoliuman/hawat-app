@@ -3,6 +3,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import '../../../core/api/api_client.dart';
 import '../../../core/api/page.dart';
 import '../../../core/providers.dart';
+import '../../consignments/data/consignment.dart';
 import '../../sales/data/sale.dart';
 import 'trip.dart';
 

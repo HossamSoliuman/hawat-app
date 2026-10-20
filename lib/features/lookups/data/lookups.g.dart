@@ -8,19 +8,29 @@ part of 'lookups.dart';
 
 _Lookups _$LookupsFromJson(Map<String, dynamic> json) => _Lookups(
   species:
-      (json['species'] as List<dynamic>?)?.map((e) => Species.fromJson(e as Map<String, dynamic>)).toList() ??
+      (json['species'] as List<dynamic>?)
+          ?.map((e) => Species.fromJson(e as Map<String, dynamic>))
+          .toList() ??
       const <Species>[],
   ports:
-      (json['ports'] as List<dynamic>?)?.map((e) => Port.fromJson(e as Map<String, dynamic>)).toList() ??
+      (json['ports'] as List<dynamic>?)
+          ?.map((e) => Port.fromJson(e as Map<String, dynamic>))
+          .toList() ??
       const <Port>[],
   gearTypes:
-      (json['gear_types'] as List<dynamic>?)?.map((e) => IdName.fromJson(e as Map<String, dynamic>)).toList() ??
+      (json['gear_types'] as List<dynamic>?)
+          ?.map((e) => IdName.fromJson(e as Map<String, dynamic>))
+          .toList() ??
       const <IdName>[],
   tripTypes:
-      (json['trip_types'] as List<dynamic>?)?.map((e) => IdName.fromJson(e as Map<String, dynamic>)).toList() ??
+      (json['trip_types'] as List<dynamic>?)
+          ?.map((e) => IdName.fromJson(e as Map<String, dynamic>))
+          .toList() ??
       const <IdName>[],
   paymentMethods:
-      (json['payment_methods'] as List<dynamic>?)?.map((e) => IdName.fromJson(e as Map<String, dynamic>)).toList() ??
+      (json['payment_methods'] as List<dynamic>?)
+          ?.map((e) => IdName.fromJson(e as Map<String, dynamic>))
+          .toList() ??
       const <IdName>[],
 );
 
@@ -60,14 +70,16 @@ Map<String, dynamic> _$PortToJson(_Port instance) => <String, dynamic>{
   'governorate': instance.governorate?.toJson(),
 };
 
-_PortGovernorate _$PortGovernorateFromJson(Map<String, dynamic> json) => _PortGovernorate(
-  id: (json['id'] as num?)?.toInt(),
-  name: json['name'] as String?,
-  region: json['region'] as String?,
-);
+_PortGovernorate _$PortGovernorateFromJson(Map<String, dynamic> json) =>
+    _PortGovernorate(
+      id: (json['id'] as num?)?.toInt(),
+      name: json['name'] as String?,
+      region: json['region'] as String?,
+    );
 
-Map<String, dynamic> _$PortGovernorateToJson(_PortGovernorate instance) => <String, dynamic>{
-  'id': instance.id,
-  'name': instance.name,
-  'region': instance.region,
-};
+Map<String, dynamic> _$PortGovernorateToJson(_PortGovernorate instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'name': instance.name,
+      'region': instance.region,
+    };

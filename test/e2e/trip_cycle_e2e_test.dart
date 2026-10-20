@@ -8,15 +8,21 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:hawat_app/core/api/api_client.dart';
 import 'package:hawat_app/core/api/api_exception.dart';
 import 'package:hawat_app/core/auth/auth_repository.dart';
+import 'package:hawat_app/features/consignments/data/consignment.dart';
+import 'package:hawat_app/features/consignments/data/consignments_repository.dart';
+import 'package:hawat_app/features/dalals/data/dalals_repository.dart';
 import 'package:hawat_app/features/fleet/data/fleet.dart';
 import 'package:hawat_app/features/home/data/dashboard.dart';
 import 'package:hawat_app/features/lookups/data/lookups.dart';
+import 'package:hawat_app/features/sales/data/sale.dart';
+import 'package:hawat_app/features/sales/data/sales_repository.dart';
 import 'package:hawat_app/features/trips/data/trip.dart';
 import 'package:hawat_app/features/trips/data/trips_repository.dart';
 
 /// The whole trip cycle against a real server, through the app's own
 /// repositories: create → start → deliver the catch → the port's counter
-/// counts it → the trip is for sale with the counted kg.
+/// counts it → the trip is for sale with the counted kg → part of it is sold
+/// (once, whatever the retries) and collected → the rest goes to a dalal.
 ///
 /// Runs only when pointed at a server with test accounts (never production):
 ///   HAWAT_E2E_API=http://hawat.test/api/v1 HAWAT_E2E_OWNER=0500000001 \
@@ -108,6 +114,64 @@ void main() {
     );
     expect(after.kpis.catchKg, before.kpis.catchKg + 138);
     expect(after.actionItems.tripsToSell, before.actionItems.tripsToSell + 1);
+
+    // 6. Never more than the trip has: the 422 names the line.
+    final sales = SalesRepository(owner);
+    await expectLater(
+      sales.create(
+        SaleInput(
+          tripId: created.id,
+          items: [SaleLineInput(speciesId: a, weightKg: 99, pricePerKg: 50)],
+        ),
+        idempotencyKey: ApiClient.newIdempotencyKey(),
+      ),
+      throwsA(isA<ValidationException>().having((e) => e.fieldError('items.0.weight_kg'), 'line 1', isNotNull)),
+    );
+
+    // 7. A sale paid in part; the same key sent twice (a double tap, a lost reply) sells once.
+    final saleKey = ApiClient.newIdempotencyKey();
+    final saleInput = SaleInput(
+      tripId: created.id,
+      paidAmount: 1000,
+      items: [SaleLineInput(speciesId: a, weightKg: 90, pricePerKg: 50)],
+    );
+    final sale = await sales.create(saleInput, idempotencyKey: saleKey);
+    final replayed = await sales.create(saleInput, idempotencyKey: saleKey);
+    expect(replayed.id, sale.id);
+    expect(sale.total, 4500);
+    expect(sale.remaining, 3500);
+    expect(sale.invoiceUrl, contains('/invoices/${sale.id}'));
+    expect((await trips.get(created.id)).availableKg, 48);
+
+    // 8. Collect the rest: never above what is due.
+    final partly = await sales.collect(sale.id, 1500, idempotencyKey: ApiClient.newIdempotencyKey());
+    expect(partly.remaining, 2000);
+    expect(partly.paymentState, PaymentState.partial);
+    await expectLater(
+      sales.collect(sale.id, 2000.5, idempotencyKey: ApiClient.newIdempotencyKey()),
+      throwsA(isA<ValidationException>().having((e) => e.fieldError('amount'), 'amount', isNotNull)),
+    );
+    final paid = await sales.collect(sale.id, 2000, idempotencyKey: ApiClient.newIdempotencyKey());
+    expect(paid.remaining, 0);
+    expect(paid.paymentState, PaymentState.paid);
+
+    // 9. The rest goes to a dalal: the trip is sold out.
+    final dalal = (await DalalsRepository(owner).list()).first;
+    final consignment = await ConsignmentsRepository(owner).create(
+      ConsignmentInput(
+        tripId: created.id,
+        dalalId: dalal.id,
+        items: [
+          ConsignLineInput(speciesId: a, weightKg: 8),
+          ConsignLineInput(speciesId: b, weightKg: 40),
+        ],
+      ),
+      idempotencyKey: ApiClient.newIdempotencyKey(),
+    );
+    expect(consignment.totalKg, 48);
+    final soldOut = await trips.get(created.id);
+    expect(soldOut.phase, TripPhase.sold);
+    expect(soldOut.availableKg, 0);
   }, skip: skip);
 
   test('cancelling needs a reason and only works before the catch', () async {

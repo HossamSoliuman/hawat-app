@@ -15,6 +15,7 @@ import '../../../core/widgets/ltr_text.dart';
 import '../../../core/widgets/section_head.dart';
 import '../../../core/widgets/states.dart';
 import '../../../core/widgets/step_progress.dart';
+import '../../consignments/presentation/consignments_screen.dart';
 import '../../sales/presentation/sale_tile.dart';
 import '../data/trip.dart';
 import '../data/trips_providers.dart';
@@ -423,10 +424,11 @@ class _TripSalesCard extends ConsumerWidget {
               if (consignments.isNotEmpty) ...[
                 const SizedBox(height: 8),
                 SectionHead(title: l.sectionConsignments, icon: Icons.local_shipping_outlined),
-                for (final item in consignments)
-                  InfoRow(
-                    label: item.dalal?.name ?? '—',
-                    child: Text(l.kg(item.totalKg), style: text.bodyMedium?.copyWith(fontWeight: FontWeight.w700)),
+                for (var i = 0; i < consignments.length; i++)
+                  ConsignmentTile(
+                    consignment: consignments[i],
+                    last: i == consignments.length - 1,
+                    onTap: () => context.push(Routes.consignment(consignments[i].id)),
                   ),
               ],
             ],
@@ -493,10 +495,27 @@ class _NextAction extends ConsumerWidget {
         Tone.warning,
       ),
       TripPhase.counting => info(Icons.fact_check_outlined, l.countingNow, Tone.warning),
-      TripPhase.forSale when trip.availableLines.isNotEmpty => info(
-        Icons.inventory_2_outlined,
-        l.availableForSale(Fmt.ltr(Fmt.kg(trip.availableKg))),
-        Tone.success,
+      TripPhase.forSale when trip.canSell && trip.availableLines.isNotEmpty => PinnedAction(
+        child: Row(
+          children: [
+            Expanded(
+              child: PrimaryButton(
+                label: l.actionSell,
+                icon: Icons.point_of_sale_outlined,
+                onPressed: () => context.push(Routes.newSale(trip.id)),
+              ),
+            ),
+            const SizedBox(width: 10),
+            SizedBox(
+              height: Hud.primaryButtonHeight,
+              child: OutlinedButton.icon(
+                onPressed: () => context.push(Routes.newConsignment(trip.id)),
+                icon: const Icon(Icons.local_shipping_outlined),
+                label: Text(l.actionConsign),
+              ),
+            ),
+          ],
+        ),
       ),
       _ => const SizedBox.shrink(),
     };
