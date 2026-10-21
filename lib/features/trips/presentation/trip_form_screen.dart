@@ -10,8 +10,7 @@ import '../../../core/l10n.dart';
 import '../../../core/theme/tokens.dart';
 import '../../../core/widgets/actions.dart';
 import '../../../core/widgets/form_fields.dart';
-import '../../../core/widgets/hud_card.dart';
-import '../../../core/widgets/section_head.dart';
+import '../../../core/widgets/form_section.dart';
 import '../../../core/widgets/states.dart';
 import '../../../core/widgets/status_chip.dart';
 import '../../fleet/data/fleet.dart';
@@ -196,7 +195,7 @@ class _TripFormScreenState extends ConsumerState<TripFormScreen> {
     }
 
     final boatsState = ref.watch(ownerBoatsProvider);
-    final captains = ref.watch(ownerCaptainsProvider).value ?? const <Captain>[];
+    final captains = ref.watch(ownerCaptainsProvider).value ?? const <Fisher>[];
     final lookups = ref.watch(lookupsControllerProvider).value ?? const Lookups();
     final boats = boatsState.value ?? const <Boat>[];
     final boat = boats.where((b) => b.id == _boatId).firstOrNull;
@@ -209,7 +208,7 @@ class _TripFormScreenState extends ConsumerState<TripFormScreen> {
       body: ListView(
         padding: const EdgeInsets.all(Hud.gutter),
         children: [
-          _Section(
+          FormSection(
             title: l.sectionBoatCaptain,
             icon: Icons.directions_boat_outlined,
             children: [
@@ -274,7 +273,7 @@ class _TripFormScreenState extends ConsumerState<TripFormScreen> {
             ],
           ),
           const SizedBox(height: Hud.gap),
-          _Section(
+          FormSection(
             title: l.sectionPortsTime,
             icon: Icons.anchor_outlined,
             children: [
@@ -328,12 +327,12 @@ class _TripFormScreenState extends ConsumerState<TripFormScreen> {
               ),
               FieldLabel(
                 label: l.fieldPlannedDays,
-                child: _NumberField(controller: _plannedDays, error: _errors['planned_days']),
+                child: NumberField(controller: _plannedDays, error: _errors['planned_days']),
               ),
             ],
           ),
           const SizedBox(height: Hud.gap),
-          _Section(
+          FormSection(
             title: l.sectionPermit,
             icon: Icons.badge_outlined,
             children: [
@@ -382,7 +381,7 @@ class _TripFormScreenState extends ConsumerState<TripFormScreen> {
               ),
               FieldLabel(
                 label: l.fieldCrewCount,
-                child: _NumberField(
+                child: NumberField(
                   controller: _crewCount,
                   error: _errors['crew_count'],
                   hint: _editing || boat == null ? null : '${boat.crewCount}',
@@ -391,7 +390,7 @@ class _TripFormScreenState extends ConsumerState<TripFormScreen> {
             ],
           ),
           const SizedBox(height: Hud.gap),
-          _Section(
+          FormSection(
             title: l.fieldNotes,
             icon: Icons.notes_outlined,
             children: [
@@ -412,45 +411,6 @@ class _TripFormScreenState extends ConsumerState<TripFormScreen> {
   List<SelectOption<int>> _portOptions(List<Port> ports) => [
     for (final port in ports) SelectOption(value: port.id, label: port.name, detail: port.governorate?.name),
   ];
-}
-
-class _Section extends StatelessWidget {
-  const _Section({required this.title, required this.icon, required this.children});
-
-  final String title;
-  final IconData icon;
-  final List<Widget> children;
-
-  @override
-  Widget build(BuildContext context) => HudCard(
-    padding: const EdgeInsets.fromLTRB(14, 8, 14, 16),
-    child: Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        SectionHead(title: title, icon: icon),
-        const SizedBox(height: 8),
-        for (var i = 0; i < children.length; i++) ...[if (i > 0) const SizedBox(height: 14), children[i]],
-      ],
-    ),
-  );
-}
-
-class _NumberField extends StatelessWidget {
-  const _NumberField({required this.controller, this.error, this.hint});
-
-  final TextEditingController controller;
-  final String? error;
-  final String? hint;
-
-  @override
-  Widget build(BuildContext context) => TextField(
-    controller: controller,
-    keyboardType: TextInputType.number,
-    textDirection: TextDirection.ltr,
-    textAlign: TextAlign.right,
-    inputFormatters: [IntegerInputFormatter()],
-    decoration: InputDecoration(errorText: error, hintText: hint, hintTextDirection: TextDirection.ltr),
-  );
 }
 
 class _SetupNote extends StatelessWidget {

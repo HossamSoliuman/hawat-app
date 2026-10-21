@@ -2268,6 +2268,762 @@ abstract class AppLocalizations {
   /// In ar, this message translates to:
   /// **'أُزيلت الصورة'**
   String get photoRemoved;
+
+  /// No description provided for @groupFleet.
+  ///
+  /// In ar, this message translates to:
+  /// **'الأسطول'**
+  String get groupFleet;
+
+  /// No description provided for @addAction.
+  ///
+  /// In ar, this message translates to:
+  /// **'إضافة'**
+  String get addAction;
+
+  /// No description provided for @editAction.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعديل'**
+  String get editAction;
+
+  /// No description provided for @deleteAction.
+  ///
+  /// In ar, this message translates to:
+  /// **'حذف'**
+  String get deleteAction;
+
+  /// No description provided for @moreActions.
+  ///
+  /// In ar, this message translates to:
+  /// **'إجراءات'**
+  String get moreActions;
+
+  /// No description provided for @savedDone.
+  ///
+  /// In ar, this message translates to:
+  /// **'حُفظ'**
+  String get savedDone;
+
+  /// No description provided for @deletedDone.
+  ///
+  /// In ar, this message translates to:
+  /// **'حُذف'**
+  String get deletedDone;
+
+  /// No description provided for @deleteTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'حذف {name}؟'**
+  String deleteTitle(String name);
+
+  /// No description provided for @deleteBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا يمكن التراجع عن الحذف.'**
+  String get deleteBody;
+
+  /// No description provided for @statusLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'الحالة'**
+  String get statusLabel;
+
+  /// No description provided for @allStatuses.
+  ///
+  /// In ar, this message translates to:
+  /// **'كل الحالات'**
+  String get allStatuses;
+
+  /// No description provided for @expired.
+  ///
+  /// In ar, this message translates to:
+  /// **'منتهية'**
+  String get expired;
+
+  /// No description provided for @expiringSoon.
+  ///
+  /// In ar, this message translates to:
+  /// **'تنتهي قريبًا'**
+  String get expiringSoon;
+
+  /// No description provided for @overdue.
+  ///
+  /// In ar, this message translates to:
+  /// **'متأخر'**
+  String get overdue;
+
+  /// No description provided for @expiryBeforeStart.
+  ///
+  /// In ar, this message translates to:
+  /// **'الانتهاء لا يسبق البداية'**
+  String get expiryBeforeStart;
+
+  /// No description provided for @dateRequired.
+  ///
+  /// In ar, this message translates to:
+  /// **'اختر التاريخ'**
+  String get dateRequired;
+
+  /// No description provided for @portLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'الميناء'**
+  String get portLabel;
+
+  /// No description provided for @choosePort.
+  ///
+  /// In ar, this message translates to:
+  /// **'اختر الميناء'**
+  String get choosePort;
+
+  /// No description provided for @portRequired.
+  ///
+  /// In ar, this message translates to:
+  /// **'الميناء مطلوب'**
+  String get portRequired;
+
+  /// No description provided for @noBoat.
+  ///
+  /// In ar, this message translates to:
+  /// **'بلا قارب'**
+  String get noBoat;
+
+  /// No description provided for @tripsLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'الرحلات'**
+  String get tripsLabel;
+
+  /// No description provided for @totalCatchLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'إجمالي المصيد'**
+  String get totalCatchLabel;
+
+  /// No description provided for @sectionIdentity.
+  ///
+  /// In ar, this message translates to:
+  /// **'التعريف'**
+  String get sectionIdentity;
+
+  /// No description provided for @sectionSpecs.
+  ///
+  /// In ar, this message translates to:
+  /// **'المواصفات'**
+  String get sectionSpecs;
+
+  /// No description provided for @sectionLicense.
+  ///
+  /// In ar, this message translates to:
+  /// **'الرخصة'**
+  String get sectionLicense;
+
+  /// No description provided for @sectionDocuments.
+  ///
+  /// In ar, this message translates to:
+  /// **'الإقامة والرخصة'**
+  String get sectionDocuments;
+
+  /// No description provided for @sectionAssignment.
+  ///
+  /// In ar, this message translates to:
+  /// **'القارب والميناء'**
+  String get sectionAssignment;
+
+  /// No description provided for @sectionContact.
+  ///
+  /// In ar, this message translates to:
+  /// **'البيانات'**
+  String get sectionContact;
+
+  /// No description provided for @meters.
+  ///
+  /// In ar, this message translates to:
+  /// **'{value} م'**
+  String meters(String value);
+
+  /// No description provided for @tons.
+  ///
+  /// In ar, this message translates to:
+  /// **'{value} طن'**
+  String tons(String value);
+
+  /// No description provided for @yearsCount.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{لا خبرة مسجّلة} =1{سنة واحدة} =2{سنتان} few{{count} سنوات} many{{count} سنة} other{{count} سنة}}'**
+  String yearsCount(int count);
+
+  /// No description provided for @boatsTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'القوارب'**
+  String get boatsTitle;
+
+  /// No description provided for @boatTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'القارب'**
+  String get boatTitle;
+
+  /// No description provided for @newBoat.
+  ///
+  /// In ar, this message translates to:
+  /// **'قارب جديد'**
+  String get newBoat;
+
+  /// No description provided for @editBoat.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعديل القارب'**
+  String get editBoat;
+
+  /// No description provided for @searchBoats.
+  ///
+  /// In ar, this message translates to:
+  /// **'ابحث بالاسم أو رقم القارب'**
+  String get searchBoats;
+
+  /// No description provided for @noBoats.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا قوارب بعد'**
+  String get noBoats;
+
+  /// No description provided for @boatNameLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'اسم القارب'**
+  String get boatNameLabel;
+
+  /// No description provided for @boatNumberLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'رقم القارب'**
+  String get boatNumberLabel;
+
+  /// No description provided for @boatNumberRequired.
+  ///
+  /// In ar, this message translates to:
+  /// **'أدخل رقم القارب'**
+  String get boatNumberRequired;
+
+  /// No description provided for @fieldNameEn.
+  ///
+  /// In ar, this message translates to:
+  /// **'الاسم بالإنجليزية'**
+  String get fieldNameEn;
+
+  /// No description provided for @fieldCategory.
+  ///
+  /// In ar, this message translates to:
+  /// **'الفئة'**
+  String get fieldCategory;
+
+  /// No description provided for @fieldBoatType.
+  ///
+  /// In ar, this message translates to:
+  /// **'النوع'**
+  String get fieldBoatType;
+
+  /// No description provided for @fieldLength.
+  ///
+  /// In ar, this message translates to:
+  /// **'الطول (م)'**
+  String get fieldLength;
+
+  /// No description provided for @fieldWidth.
+  ///
+  /// In ar, this message translates to:
+  /// **'العرض (م)'**
+  String get fieldWidth;
+
+  /// No description provided for @fieldCapacity.
+  ///
+  /// In ar, this message translates to:
+  /// **'الحمولة (طن)'**
+  String get fieldCapacity;
+
+  /// No description provided for @fieldCrewCapacity.
+  ///
+  /// In ar, this message translates to:
+  /// **'سعة الطاقم'**
+  String get fieldCrewCapacity;
+
+  /// No description provided for @fieldColor.
+  ///
+  /// In ar, this message translates to:
+  /// **'اللون'**
+  String get fieldColor;
+
+  /// No description provided for @fieldHull.
+  ///
+  /// In ar, this message translates to:
+  /// **'رقم الهيكل'**
+  String get fieldHull;
+
+  /// No description provided for @fieldBodyType.
+  ///
+  /// In ar, this message translates to:
+  /// **'نوع البدن'**
+  String get fieldBodyType;
+
+  /// No description provided for @fieldSerial.
+  ///
+  /// In ar, this message translates to:
+  /// **'الرقم التسلسلي'**
+  String get fieldSerial;
+
+  /// No description provided for @fieldEngineType.
+  ///
+  /// In ar, this message translates to:
+  /// **'نوع المحرك'**
+  String get fieldEngineType;
+
+  /// No description provided for @fieldEnginePower.
+  ///
+  /// In ar, this message translates to:
+  /// **'قوة المحرك'**
+  String get fieldEnginePower;
+
+  /// No description provided for @fieldEngineStatus.
+  ///
+  /// In ar, this message translates to:
+  /// **'حالة المحرك'**
+  String get fieldEngineStatus;
+
+  /// No description provided for @fieldCallSign.
+  ///
+  /// In ar, this message translates to:
+  /// **'رمز النداء'**
+  String get fieldCallSign;
+
+  /// No description provided for @fieldNextInspection.
+  ///
+  /// In ar, this message translates to:
+  /// **'الفحص القادم'**
+  String get fieldNextInspection;
+
+  /// No description provided for @fieldLicenseType.
+  ///
+  /// In ar, this message translates to:
+  /// **'نوع الرخصة'**
+  String get fieldLicenseType;
+
+  /// No description provided for @fieldLicenseStatus.
+  ///
+  /// In ar, this message translates to:
+  /// **'حالة الرخصة'**
+  String get fieldLicenseStatus;
+
+  /// No description provided for @fieldLicenseProcess.
+  ///
+  /// In ar, this message translates to:
+  /// **'إجراء الترخيص'**
+  String get fieldLicenseProcess;
+
+  /// No description provided for @fieldLicenseArea.
+  ///
+  /// In ar, this message translates to:
+  /// **'منطقة الترخيص'**
+  String get fieldLicenseArea;
+
+  /// No description provided for @fieldLicenseDate.
+  ///
+  /// In ar, this message translates to:
+  /// **'بداية الرخصة'**
+  String get fieldLicenseDate;
+
+  /// No description provided for @fieldLicenseExpiry.
+  ///
+  /// In ar, this message translates to:
+  /// **'انتهاء الرخصة'**
+  String get fieldLicenseExpiry;
+
+  /// No description provided for @statusSetByTrips.
+  ///
+  /// In ar, this message translates to:
+  /// **'تتغيّر الحالة حين تنتهي الرحلة.'**
+  String get statusSetByTrips;
+
+  /// No description provided for @noSpecs.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا مواصفات مسجّلة'**
+  String get noSpecs;
+
+  /// No description provided for @deleteBoatBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا يُحذف قارب له رحلات. لا يمكن التراجع عن الحذف.'**
+  String get deleteBoatBody;
+
+  /// No description provided for @readinessTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'جاهزية القارب'**
+  String get readinessTitle;
+
+  /// No description provided for @boatReady.
+  ///
+  /// In ar, this message translates to:
+  /// **'القارب جاهز للرحلات'**
+  String get boatReady;
+
+  /// No description provided for @setupReady.
+  ///
+  /// In ar, this message translates to:
+  /// **'جاهز'**
+  String get setupReady;
+
+  /// No description provided for @setupMissingCount.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =1{ينقصه شيء} =2{ينقصه شيئان} few{ينقصه {count} أشياء} other{ينقصه {count} شيئًا}}'**
+  String setupMissingCount(int count);
+
+  /// No description provided for @setupWarningsCount.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =1{تنبيه واحد} =2{تنبيهان} few{{count} تنبيهات} other{{count} تنبيهًا}}'**
+  String setupWarningsCount(int count);
+
+  /// No description provided for @fixAssignCaptain.
+  ///
+  /// In ar, this message translates to:
+  /// **'إسناد كابتن'**
+  String get fixAssignCaptain;
+
+  /// No description provided for @fixOpenCaptain.
+  ///
+  /// In ar, this message translates to:
+  /// **'عرض الكابتن'**
+  String get fixOpenCaptain;
+
+  /// No description provided for @fixAddCrew.
+  ///
+  /// In ar, this message translates to:
+  /// **'إضافة طاقم'**
+  String get fixAddCrew;
+
+  /// No description provided for @fixReviewCrew.
+  ///
+  /// In ar, this message translates to:
+  /// **'مراجعة الطاقم'**
+  String get fixReviewCrew;
+
+  /// No description provided for @fixRenewLicense.
+  ///
+  /// In ar, this message translates to:
+  /// **'تحديث الرخصة'**
+  String get fixRenewLicense;
+
+  /// No description provided for @fixEditBoat.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعديل الحالة'**
+  String get fixEditBoat;
+
+  /// No description provided for @captainsTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'الكباتن'**
+  String get captainsTitle;
+
+  /// No description provided for @captainTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'كابتن'**
+  String get captainTitle;
+
+  /// No description provided for @newCaptain.
+  ///
+  /// In ar, this message translates to:
+  /// **'كابتن جديد'**
+  String get newCaptain;
+
+  /// No description provided for @editCaptain.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعديل الكابتن'**
+  String get editCaptain;
+
+  /// No description provided for @crewTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'الطاقم'**
+  String get crewTitle;
+
+  /// No description provided for @crewMemberTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'فرد طاقم'**
+  String get crewMemberTitle;
+
+  /// No description provided for @newCrewMember.
+  ///
+  /// In ar, this message translates to:
+  /// **'فرد طاقم جديد'**
+  String get newCrewMember;
+
+  /// No description provided for @editCrewMember.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعديل فرد الطاقم'**
+  String get editCrewMember;
+
+  /// No description provided for @searchFishers.
+  ///
+  /// In ar, this message translates to:
+  /// **'ابحث بالاسم أو الجوال أو الهوية'**
+  String get searchFishers;
+
+  /// No description provided for @noCaptains.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا كباتن بعد'**
+  String get noCaptains;
+
+  /// No description provided for @noCrew.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا طاقم بعد'**
+  String get noCrew;
+
+  /// No description provided for @nationalIdLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'رقم الهوية'**
+  String get nationalIdLabel;
+
+  /// No description provided for @nationalIdRequired.
+  ///
+  /// In ar, this message translates to:
+  /// **'أدخل رقم الهوية'**
+  String get nationalIdRequired;
+
+  /// No description provided for @idTypeLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'نوع الهوية'**
+  String get idTypeLabel;
+
+  /// No description provided for @nationalityLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'الجنسية'**
+  String get nationalityLabel;
+
+  /// No description provided for @experienceLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'سنوات الخبرة'**
+  String get experienceLabel;
+
+  /// No description provided for @crewRoleLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'المهمة'**
+  String get crewRoleLabel;
+
+  /// No description provided for @iqamaIssueLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'بداية الإقامة'**
+  String get iqamaIssueLabel;
+
+  /// No description provided for @iqamaExpiryLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'انتهاء الإقامة'**
+  String get iqamaExpiryLabel;
+
+  /// No description provided for @fishingLicenseLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'رقم رخصة الصيد'**
+  String get fishingLicenseLabel;
+
+  /// No description provided for @portOrBoatRequired.
+  ///
+  /// In ar, this message translates to:
+  /// **'اختر القارب أو الميناء'**
+  String get portOrBoatRequired;
+
+  /// No description provided for @documentExpired.
+  ///
+  /// In ar, this message translates to:
+  /// **'وثيقة منتهية'**
+  String get documentExpired;
+
+  /// No description provided for @deleteCaptainBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'يُرفع عن قاربه، ويبقى اسمه على رحلاته السابقة. لا يمكن التراجع عن الحذف.'**
+  String get deleteCaptainBody;
+
+  /// No description provided for @maintenanceTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'الصيانة'**
+  String get maintenanceTitle;
+
+  /// No description provided for @newMaintenance.
+  ///
+  /// In ar, this message translates to:
+  /// **'صيانة جديدة'**
+  String get newMaintenance;
+
+  /// No description provided for @editMaintenance.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعديل الصيانة'**
+  String get editMaintenance;
+
+  /// No description provided for @noMaintenance.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا صيانة مسجّلة'**
+  String get noMaintenance;
+
+  /// No description provided for @maintenanceTypeLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'نوع الصيانة'**
+  String get maintenanceTypeLabel;
+
+  /// No description provided for @technicianLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'الفني أو الورشة'**
+  String get technicianLabel;
+
+  /// No description provided for @estimatedCostLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'التكلفة المتوقعة'**
+  String get estimatedCostLabel;
+
+  /// No description provided for @actualCostLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'التكلفة الفعلية'**
+  String get actualCostLabel;
+
+  /// No description provided for @descriptionLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'الوصف'**
+  String get descriptionLabel;
+
+  /// No description provided for @maintenanceExpenseHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'حين تُحفظ مكتملة بتكلفة تُسجَّل مصروفًا على القارب.'**
+  String get maintenanceExpenseHint;
+
+  /// No description provided for @maintenanceExpensePosted.
+  ///
+  /// In ar, this message translates to:
+  /// **'سُجّلت مصروفًا'**
+  String get maintenanceExpensePosted;
+
+  /// No description provided for @deleteMaintenanceTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'حذف سجل الصيانة؟'**
+  String get deleteMaintenanceTitle;
+
+  /// No description provided for @customersTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'العملاء'**
+  String get customersTitle;
+
+  /// No description provided for @vendorsTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'الموردون'**
+  String get vendorsTitle;
+
+  /// No description provided for @employeesTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'الموظفون'**
+  String get employeesTitle;
+
+  /// No description provided for @editCustomer.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعديل الزبون'**
+  String get editCustomer;
+
+  /// No description provided for @newVendor.
+  ///
+  /// In ar, this message translates to:
+  /// **'مورد جديد'**
+  String get newVendor;
+
+  /// No description provided for @editVendor.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعديل المورد'**
+  String get editVendor;
+
+  /// No description provided for @newEmployee.
+  ///
+  /// In ar, this message translates to:
+  /// **'موظف جديد'**
+  String get newEmployee;
+
+  /// No description provided for @editEmployee.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعديل الموظف'**
+  String get editEmployee;
+
+  /// No description provided for @searchContacts.
+  ///
+  /// In ar, this message translates to:
+  /// **'ابحث بالاسم أو الجوال'**
+  String get searchContacts;
+
+  /// No description provided for @noCustomers.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا عملاء بعد'**
+  String get noCustomers;
+
+  /// No description provided for @noVendors.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا موردين بعد'**
+  String get noVendors;
+
+  /// No description provided for @noEmployees.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا موظفين بعد'**
+  String get noEmployees;
+
+  /// No description provided for @customerTypeLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'نوع الزبون'**
+  String get customerTypeLabel;
+
+  /// No description provided for @jobTitleLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'المسمى الوظيفي'**
+  String get jobTitleLabel;
+
+  /// No description provided for @idNumberLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'رقم الهوية'**
+  String get idNumberLabel;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

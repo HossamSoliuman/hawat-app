@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:go_router/go_router.dart';
 
 import '../l10n.dart';
 import '../theme/tokens.dart';
@@ -139,4 +140,14 @@ void showSnack(BuildContext context, String message, {bool error = false}) {
         ),
       ),
     );
+}
+
+/// Back to where the screen was opened from, or to [fallback] when it was
+/// opened directly (a link, a notification) and there is nothing behind it.
+void popOr(BuildContext context, String fallback) {
+  if (context.canPop()) {
+    context.pop();
+  } else {
+    context.go(fallback);
+  }
 }

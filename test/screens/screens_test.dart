@@ -16,6 +16,8 @@ import 'package:hawat_app/core/auth/user.dart';
 import 'package:hawat_app/core/providers.dart';
 import 'package:hawat_app/core/storage/local_store.dart';
 import 'package:hawat_app/core/storage/token_store.dart';
+import 'package:hawat_app/features/contacts/presentation/contacts_screens.dart';
+import 'package:hawat_app/features/fleet/data/fleet.dart';
 import 'package:hawat_app/features/lookups/data/lookups.dart';
 import 'package:hawat_app/features/trips/data/trip.dart';
 
@@ -96,7 +98,7 @@ void main() {
 
   // Home and the bottom bar.
   screen('06-home');
-  screen('07-quick-actions', sheet: true, before: (tester) => tap(tester, find.byIcon(Icons.add)));
+  screen('07-quick-actions', sheet: true, before: (tester) => tap(tester, find.byIcon(Icons.add_rounded)));
   screen('08-start-trip', sheet: true, before: (tester) => tap(tester, find.text(ar.startShort)));
   screen('09-notifications', push: '/notifications');
 
@@ -202,11 +204,28 @@ void main() {
     before: (tester) => tap(tester, find.text('دلال القطيف')),
   );
 
+  // Fleet and contacts.
+  screen('44-boats', push: Routes.boats);
+  screen('45-boat-setup', push: Routes.boat(4));
+  screen('46-boat-ready', push: Routes.boat(1));
+  screen('47-boat-edit', push: Routes.editBoat(1));
+  screen('48-captains', push: Routes.fishers(FisherKind.captain));
+  screen('49-captain', push: Routes.fisher(FisherKind.captain, 7));
+  screen('50-crew', push: Routes.fishers(FisherKind.crew));
+  screen('51-crew-new', push: Routes.newFisher(FisherKind.crew, boatId: 1));
+  screen('52-maintenance', push: Routes.maintenance());
+  screen('53-maintenance-new', push: Routes.newMaintenance(boatId: 1));
+  screen('54-customers', push: Routes.contacts(ContactKind.customer));
+  screen('55-customer-edit', push: Routes.contact(ContactKind.customer, 1));
+  screen('56-vendors', push: Routes.contacts(ContactKind.vendor));
+  screen('57-employees', push: Routes.contacts(ContactKind.employee));
+  screen('58-employee-edit', push: Routes.contact(ContactKind.employee, 1));
+
   // More and the account.
-  screen('44-more', go: Routes.more);
-  screen('45-profile', push: Routes.profile);
-  screen('46-profile-edit', push: Routes.editProfile);
-  screen('47-change-password', push: Routes.changePassword);
+  screen('59-more', go: Routes.more);
+  screen('60-profile', push: Routes.profile);
+  screen('61-profile-edit', push: Routes.editProfile);
+  screen('62-change-password', push: Routes.changePassword);
 }
 
 /// One screen, light and dark. The app opens on home (or wherever [session]

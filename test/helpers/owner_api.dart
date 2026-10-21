@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:dio/dio.dart';
+
 import 'fake_api.dart';
 
 /// Every owner endpoint the app reads, answered from the captured fixtures.
@@ -28,13 +30,44 @@ FakeApi ownerApi() {
     'meta': {'current_page': 1, 'last_page': 1, 'per_page': 25, 'total': rows.length, 'from': 1, 'to': rows.length},
   };
 
+  /// A record's own fixture when one was captured for it, else its list row.
+  Reply detail(RequestOptions request, String list, String? captured) {
+    final id = request.uri.pathSegments.last;
+    if (captured != null && '${fixtureData<Map<String, dynamic>>(captured)['id']}' == id) {
+      return Reply(fixture(captured));
+    }
+    final row = (fixture(list)['data'] as List)
+        .cast<Map<String, dynamic>>()
+        .where((r) => '${r['id']}' == id)
+        .firstOrNull;
+    return row == null ? const Reply({'message': 'غير موجود'}, status: 404) : Reply({'data': row});
+  }
+
   api
     ..json('GET', '/auth/me', fixture('me'))
     ..json('GET', '/app/config', fixture('app_config'))
     ..json('GET', '/lookups', fixture('lookups'))
     ..json('GET', '/owner/dashboard', fixture('dashboard'))
     ..json('GET', '/owner/boats', fixture('boats'))
+    ..on('GET', '/owner/boats/*', (request) => detail(request, 'boats', 'boat_detail'))
     ..json('GET', '/owner/captains', fixture('captains'))
+    ..on('GET', '/owner/captains/*', (request) => detail(request, 'captains', 'captain_detail'))
+    ..on('GET', '/owner/crew', (request) {
+      final boat = request.queryParameters['boat_id'];
+      final crew = (fixture('crew')['data'] as List).cast<Map<String, dynamic>>();
+      return Reply(page(crew.where((c) => boat == null || '${(c['boat'] as Map?)?['id']}' == '$boat').toList()));
+    })
+    ..on('GET', '/owner/crew/*', (request) => detail(request, 'crew', 'crew_detail'))
+    ..on('GET', '/owner/maintenance', (request) {
+      final boat = request.queryParameters['boat_id'];
+      final rows = (fixture('maintenance')['data'] as List).cast<Map<String, dynamic>>();
+      return Reply(page(rows.where((m) => boat == null || '${(m['boat'] as Map?)?['id']}' == '$boat').toList()));
+    })
+    ..on('GET', '/owner/customers/*', (request) => detail(request, 'customers', null))
+    ..json('GET', '/owner/vendors', fixture('vendors'))
+    ..on('GET', '/owner/vendors/*', (request) => detail(request, 'vendors', null))
+    ..json('GET', '/owner/employees', fixture('employees'))
+    ..on('GET', '/owner/employees/*', (request) => detail(request, 'employees', null))
     ..json('GET', '/owner/sales', fixture('sales'))
     ..on('GET', '/owner/consignments', (request) {
       // A trip's own consignments are empty in the fixtures; the full list is captured.

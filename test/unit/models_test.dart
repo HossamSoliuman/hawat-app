@@ -1,5 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hawat_app/core/api/page.dart';
+import 'package:hawat_app/core/api/resource_repository.dart';
 import 'package:hawat_app/core/auth/user.dart';
 import 'package:hawat_app/core/config/app_config.dart';
 import 'package:hawat_app/features/catch_log/data/catch_log.dart';
@@ -7,6 +8,7 @@ import 'package:hawat_app/features/consignments/data/consignment.dart';
 import 'package:hawat_app/features/contacts/data/customer.dart';
 import 'package:hawat_app/features/dalals/data/dalal.dart';
 import 'package:hawat_app/features/fleet/data/fleet.dart';
+import 'package:hawat_app/features/fleet/presentation/fleet_ui.dart';
 import 'package:hawat_app/features/home/data/dashboard.dart';
 import 'package:hawat_app/features/lookups/data/lookups.dart';
 import 'package:hawat_app/features/notifications/data/app_notification.dart';
@@ -29,7 +31,7 @@ void main() {
     expect(rows('sales').map(Sale.fromJson), isNotEmpty);
     expect(rows('notifications').map(AppNotification.fromJson), isNotEmpty);
     expect(rows('boats').map(Boat.fromJson).first.setup, isNotNull);
-    expect(rows('captains').map(Captain.fromJson), isNotEmpty);
+    expect(rows('captains').map(Fisher.fromJson), isNotEmpty);
     expect(rows('catch_log').map(CatchLogEntry.fromJson), isNotEmpty);
     expect(CatchLogSummary.fromJson(fixtureData('catch_summary')).bySpecies, isNotEmpty);
     expect(Sale.fromJson(fixtureData('sale_detail')).items, isNotEmpty);
@@ -39,6 +41,48 @@ void main() {
     expect(rows('stock_movements').map(StockMovement.fromJson), isNotEmpty);
     expect(rows('customers').map(Customer.fromJson), isNotEmpty);
     expect(rows('dalals').map(Dalal.fromJson), isNotEmpty);
+    expect(rows('crew').map(Fisher.fromJson).every((f) => !f.isCaptain && f.kind == FisherKind.crew), isTrue);
+    expect(rows('maintenance').map(Maintenance.fromJson).first.expense?.total, 2300);
+    expect(rows('vendors').map(Vendor.fromJson), isNotEmpty);
+    expect(rows('employees').map(Employee.fromJson).first.jobTitle?.name, isNotEmpty);
+  });
+
+  test('a boat and a fisher read every field the screens show', () {
+    final boat = Boat.fromJson(fixtureData('boat_detail'));
+    expect(boat.version, 1);
+    expect(boat.lengthM, 12.5);
+    expect(boat.nextInspectionDate, DateTime(2026, 10, 5));
+    expect(boat.license?.status, 'سارية');
+    expect(boat.setup?.ready, isTrue);
+    expect(boat.captain?.name, isNotEmpty);
+
+    final captain = Fisher.fromJson(fixtureData('captain_detail'));
+    expect(captain.isCaptain, isTrue);
+    expect(captain.kind, FisherKind.captain);
+    expect(captain.version, 1);
+    expect(captain.boat?.id, boat.id);
+
+    final customer = Customer.fromJson(rows('customers').first);
+    expect(customer.salesCount, 1);
+    expect(customer.salesTotal, 6050);
+    expect(Customer.fromJson(rows('customers').last).salesTotal, isNull);
+  });
+
+  test('form bodies: trimmed text, empty is null, dates without a time', () {
+    expect(Body.text('  قارب  '), 'قارب');
+    expect(Body.text('   '), isNull);
+    expect(Body.number('12.5'), 12.5);
+    expect(Body.integer(''), isNull);
+    expect(Body.date(DateTime(2026, 3, 7, 18, 30)), '2026-03-07');
+  });
+
+  test('a document ends: expired, within 30 days, or fine', () {
+    final now = DateTime(2026, 10, 21);
+    expect(ExpiryState.of(null, now: now), ExpiryState.none);
+    expect(ExpiryState.of(DateTime(2026, 10, 20), now: now), ExpiryState.expired);
+    expect(ExpiryState.of(DateTime(2026, 10, 21), now: now), ExpiryState.soon);
+    expect(ExpiryState.of(DateTime(2026, 11, 20), now: now), ExpiryState.soon);
+    expect(ExpiryState.of(DateTime(2026, 11, 21), now: now), ExpiryState.valid);
   });
 
   test('the sales list keeps the totals of every matching invoice', () {

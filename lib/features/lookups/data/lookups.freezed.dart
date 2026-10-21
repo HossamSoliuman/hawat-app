@@ -16,7 +16,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$Lookups {
 
- List<Species> get species; List<Port> get ports; List<IdName> get gearTypes; List<IdName> get tripTypes; List<IdName> get paymentMethods;
+ List<Species> get species; List<Port> get ports; List<IdName> get gearTypes; List<IdName> get tripTypes; List<IdName> get paymentMethods; List<IdName> get boatCategories; List<IdName> get boatTypes; List<IdName> get idTypes; List<IdName> get fisherRoles; List<IdName> get maintenanceTypes; List<IdName> get customerTypes; List<IdName> get jobTitles;
 /// Create a copy of Lookups
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -30,20 +30,20 @@ $LookupsCopyWith<Lookups> get copyWith => _$LookupsCopyWithImpl<Lookups>(this as
 @override
 bool operator ==(Object other) {
   final _this = this as Lookups;
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Lookups&&const DeepCollectionEquality().equals(other.species, _this.species)&&const DeepCollectionEquality().equals(other.ports, _this.ports)&&const DeepCollectionEquality().equals(other.gearTypes, _this.gearTypes)&&const DeepCollectionEquality().equals(other.tripTypes, _this.tripTypes)&&const DeepCollectionEquality().equals(other.paymentMethods, _this.paymentMethods));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Lookups&&const DeepCollectionEquality().equals(other.species, _this.species)&&const DeepCollectionEquality().equals(other.ports, _this.ports)&&const DeepCollectionEquality().equals(other.gearTypes, _this.gearTypes)&&const DeepCollectionEquality().equals(other.tripTypes, _this.tripTypes)&&const DeepCollectionEquality().equals(other.paymentMethods, _this.paymentMethods)&&const DeepCollectionEquality().equals(other.boatCategories, _this.boatCategories)&&const DeepCollectionEquality().equals(other.boatTypes, _this.boatTypes)&&const DeepCollectionEquality().equals(other.idTypes, _this.idTypes)&&const DeepCollectionEquality().equals(other.fisherRoles, _this.fisherRoles)&&const DeepCollectionEquality().equals(other.maintenanceTypes, _this.maintenanceTypes)&&const DeepCollectionEquality().equals(other.customerTypes, _this.customerTypes)&&const DeepCollectionEquality().equals(other.jobTitles, _this.jobTitles));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
 int get hashCode {
   final _this = this as Lookups;
-  return Object.hash(runtimeType,const DeepCollectionEquality().hash(_this.species),const DeepCollectionEquality().hash(_this.ports),const DeepCollectionEquality().hash(_this.gearTypes),const DeepCollectionEquality().hash(_this.tripTypes),const DeepCollectionEquality().hash(_this.paymentMethods));
+  return Object.hash(runtimeType,const DeepCollectionEquality().hash(_this.species),const DeepCollectionEquality().hash(_this.ports),const DeepCollectionEquality().hash(_this.gearTypes),const DeepCollectionEquality().hash(_this.tripTypes),const DeepCollectionEquality().hash(_this.paymentMethods),const DeepCollectionEquality().hash(_this.boatCategories),const DeepCollectionEquality().hash(_this.boatTypes),const DeepCollectionEquality().hash(_this.idTypes),const DeepCollectionEquality().hash(_this.fisherRoles),const DeepCollectionEquality().hash(_this.maintenanceTypes),const DeepCollectionEquality().hash(_this.customerTypes),const DeepCollectionEquality().hash(_this.jobTitles));
 }
 
 @override
 String toString() {
   final _this = this as Lookups;
-  return 'Lookups(species: ${_this.species}, ports: ${_this.ports}, gearTypes: ${_this.gearTypes}, tripTypes: ${_this.tripTypes}, paymentMethods: ${_this.paymentMethods})';
+  return 'Lookups(species: ${_this.species}, ports: ${_this.ports}, gearTypes: ${_this.gearTypes}, tripTypes: ${_this.tripTypes}, paymentMethods: ${_this.paymentMethods}, boatCategories: ${_this.boatCategories}, boatTypes: ${_this.boatTypes}, idTypes: ${_this.idTypes}, fisherRoles: ${_this.fisherRoles}, maintenanceTypes: ${_this.maintenanceTypes}, customerTypes: ${_this.customerTypes}, jobTitles: ${_this.jobTitles})';
 }
 
 
@@ -54,7 +54,7 @@ abstract mixin class $LookupsCopyWith<$Res>  {
   factory $LookupsCopyWith(Lookups value, $Res Function(Lookups) _then) = _$LookupsCopyWithImpl;
 @useResult
 $Res call({
- List<Species> species, List<Port> ports, List<IdName> gearTypes, List<IdName> tripTypes, List<IdName> paymentMethods
+ List<Species> species, List<Port> ports, List<IdName> gearTypes, List<IdName> tripTypes, List<IdName> paymentMethods, List<IdName> boatCategories, List<IdName> boatTypes, List<IdName> idTypes, List<IdName> fisherRoles, List<IdName> maintenanceTypes, List<IdName> customerTypes, List<IdName> jobTitles
 });
 
 
@@ -71,13 +71,20 @@ class _$LookupsCopyWithImpl<$Res>
 
 /// Create a copy of Lookups
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? species = null,Object? ports = null,Object? gearTypes = null,Object? tripTypes = null,Object? paymentMethods = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? species = null,Object? ports = null,Object? gearTypes = null,Object? tripTypes = null,Object? paymentMethods = null,Object? boatCategories = null,Object? boatTypes = null,Object? idTypes = null,Object? fisherRoles = null,Object? maintenanceTypes = null,Object? customerTypes = null,Object? jobTitles = null,}) {
   return _then(Lookups(
 species: null == species ? _self.species : species // ignore: cast_nullable_to_non_nullable
 as List<Species>,ports: null == ports ? _self.ports : ports // ignore: cast_nullable_to_non_nullable
 as List<Port>,gearTypes: null == gearTypes ? _self.gearTypes : gearTypes // ignore: cast_nullable_to_non_nullable
 as List<IdName>,tripTypes: null == tripTypes ? _self.tripTypes : tripTypes // ignore: cast_nullable_to_non_nullable
 as List<IdName>,paymentMethods: null == paymentMethods ? _self.paymentMethods : paymentMethods // ignore: cast_nullable_to_non_nullable
+as List<IdName>,boatCategories: null == boatCategories ? _self.boatCategories : boatCategories // ignore: cast_nullable_to_non_nullable
+as List<IdName>,boatTypes: null == boatTypes ? _self.boatTypes : boatTypes // ignore: cast_nullable_to_non_nullable
+as List<IdName>,idTypes: null == idTypes ? _self.idTypes : idTypes // ignore: cast_nullable_to_non_nullable
+as List<IdName>,fisherRoles: null == fisherRoles ? _self.fisherRoles : fisherRoles // ignore: cast_nullable_to_non_nullable
+as List<IdName>,maintenanceTypes: null == maintenanceTypes ? _self.maintenanceTypes : maintenanceTypes // ignore: cast_nullable_to_non_nullable
+as List<IdName>,customerTypes: null == customerTypes ? _self.customerTypes : customerTypes // ignore: cast_nullable_to_non_nullable
+as List<IdName>,jobTitles: null == jobTitles ? _self.jobTitles : jobTitles // ignore: cast_nullable_to_non_nullable
 as List<IdName>,
   ));
 }
@@ -163,10 +170,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( List<Species> species,  List<Port> ports,  List<IdName> gearTypes,  List<IdName> tripTypes,  List<IdName> paymentMethods)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( List<Species> species,  List<Port> ports,  List<IdName> gearTypes,  List<IdName> tripTypes,  List<IdName> paymentMethods,  List<IdName> boatCategories,  List<IdName> boatTypes,  List<IdName> idTypes,  List<IdName> fisherRoles,  List<IdName> maintenanceTypes,  List<IdName> customerTypes,  List<IdName> jobTitles)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Lookups() when $default != null:
-return $default(_that.species,_that.ports,_that.gearTypes,_that.tripTypes,_that.paymentMethods);case _:
+return $default(_that.species,_that.ports,_that.gearTypes,_that.tripTypes,_that.paymentMethods,_that.boatCategories,_that.boatTypes,_that.idTypes,_that.fisherRoles,_that.maintenanceTypes,_that.customerTypes,_that.jobTitles);case _:
   return orElse();
 
 }
@@ -184,10 +191,10 @@ return $default(_that.species,_that.ports,_that.gearTypes,_that.tripTypes,_that.
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( List<Species> species,  List<Port> ports,  List<IdName> gearTypes,  List<IdName> tripTypes,  List<IdName> paymentMethods)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( List<Species> species,  List<Port> ports,  List<IdName> gearTypes,  List<IdName> tripTypes,  List<IdName> paymentMethods,  List<IdName> boatCategories,  List<IdName> boatTypes,  List<IdName> idTypes,  List<IdName> fisherRoles,  List<IdName> maintenanceTypes,  List<IdName> customerTypes,  List<IdName> jobTitles)  $default,) {final _that = this;
 switch (_that) {
 case _Lookups():
-return $default(_that.species,_that.ports,_that.gearTypes,_that.tripTypes,_that.paymentMethods);case _:
+return $default(_that.species,_that.ports,_that.gearTypes,_that.tripTypes,_that.paymentMethods,_that.boatCategories,_that.boatTypes,_that.idTypes,_that.fisherRoles,_that.maintenanceTypes,_that.customerTypes,_that.jobTitles);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -204,10 +211,10 @@ return $default(_that.species,_that.ports,_that.gearTypes,_that.tripTypes,_that.
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( List<Species> species,  List<Port> ports,  List<IdName> gearTypes,  List<IdName> tripTypes,  List<IdName> paymentMethods)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( List<Species> species,  List<Port> ports,  List<IdName> gearTypes,  List<IdName> tripTypes,  List<IdName> paymentMethods,  List<IdName> boatCategories,  List<IdName> boatTypes,  List<IdName> idTypes,  List<IdName> fisherRoles,  List<IdName> maintenanceTypes,  List<IdName> customerTypes,  List<IdName> jobTitles)?  $default,) {final _that = this;
 switch (_that) {
 case _Lookups() when $default != null:
-return $default(_that.species,_that.ports,_that.gearTypes,_that.tripTypes,_that.paymentMethods);case _:
+return $default(_that.species,_that.ports,_that.gearTypes,_that.tripTypes,_that.paymentMethods,_that.boatCategories,_that.boatTypes,_that.idTypes,_that.fisherRoles,_that.maintenanceTypes,_that.customerTypes,_that.jobTitles);case _:
   return null;
 
 }
@@ -219,7 +226,7 @@ return $default(_that.species,_that.ports,_that.gearTypes,_that.tripTypes,_that.
 @JsonSerializable()
 
 class _Lookups implements Lookups {
-  const _Lookups({ List<Species> species = const <Species>[],  List<Port> ports = const <Port>[],  List<IdName> gearTypes = const <IdName>[],  List<IdName> tripTypes = const <IdName>[],  List<IdName> paymentMethods = const <IdName>[]}): _species = species,_ports = ports,_gearTypes = gearTypes,_tripTypes = tripTypes,_paymentMethods = paymentMethods;
+  const _Lookups({ List<Species> species = const <Species>[],  List<Port> ports = const <Port>[],  List<IdName> gearTypes = const <IdName>[],  List<IdName> tripTypes = const <IdName>[],  List<IdName> paymentMethods = const <IdName>[],  List<IdName> boatCategories = const <IdName>[],  List<IdName> boatTypes = const <IdName>[],  List<IdName> idTypes = const <IdName>[],  List<IdName> fisherRoles = const <IdName>[],  List<IdName> maintenanceTypes = const <IdName>[],  List<IdName> customerTypes = const <IdName>[],  List<IdName> jobTitles = const <IdName>[]}): _species = species,_ports = ports,_gearTypes = gearTypes,_tripTypes = tripTypes,_paymentMethods = paymentMethods,_boatCategories = boatCategories,_boatTypes = boatTypes,_idTypes = idTypes,_fisherRoles = fisherRoles,_maintenanceTypes = maintenanceTypes,_customerTypes = customerTypes,_jobTitles = jobTitles;
   factory _Lookups.fromJson(Map<String, dynamic> json) => _$LookupsFromJson(json);
 
  final  List<Species> _species;
@@ -257,6 +264,55 @@ class _Lookups implements Lookups {
   return EqualUnmodifiableListView(_paymentMethods);
 }
 
+ final  List<IdName> _boatCategories;
+@override@JsonKey() List<IdName> get boatCategories {
+  if (_boatCategories is EqualUnmodifiableListView) return _boatCategories;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_boatCategories);
+}
+
+ final  List<IdName> _boatTypes;
+@override@JsonKey() List<IdName> get boatTypes {
+  if (_boatTypes is EqualUnmodifiableListView) return _boatTypes;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_boatTypes);
+}
+
+ final  List<IdName> _idTypes;
+@override@JsonKey() List<IdName> get idTypes {
+  if (_idTypes is EqualUnmodifiableListView) return _idTypes;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_idTypes);
+}
+
+ final  List<IdName> _fisherRoles;
+@override@JsonKey() List<IdName> get fisherRoles {
+  if (_fisherRoles is EqualUnmodifiableListView) return _fisherRoles;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_fisherRoles);
+}
+
+ final  List<IdName> _maintenanceTypes;
+@override@JsonKey() List<IdName> get maintenanceTypes {
+  if (_maintenanceTypes is EqualUnmodifiableListView) return _maintenanceTypes;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_maintenanceTypes);
+}
+
+ final  List<IdName> _customerTypes;
+@override@JsonKey() List<IdName> get customerTypes {
+  if (_customerTypes is EqualUnmodifiableListView) return _customerTypes;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_customerTypes);
+}
+
+ final  List<IdName> _jobTitles;
+@override@JsonKey() List<IdName> get jobTitles {
+  if (_jobTitles is EqualUnmodifiableListView) return _jobTitles;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_jobTitles);
+}
+
 
 /// Create a copy of Lookups
 /// with the given fields replaced by the non-null parameter values.
@@ -271,18 +327,18 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-    return identical(this, other) || (other.runtimeType == runtimeType&&other is _Lookups&&const DeepCollectionEquality().equals(other.species, _species)&&const DeepCollectionEquality().equals(other.ports, _ports)&&const DeepCollectionEquality().equals(other.gearTypes, _gearTypes)&&const DeepCollectionEquality().equals(other.tripTypes, _tripTypes)&&const DeepCollectionEquality().equals(other.paymentMethods, _paymentMethods));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _Lookups&&const DeepCollectionEquality().equals(other.species, _species)&&const DeepCollectionEquality().equals(other.ports, _ports)&&const DeepCollectionEquality().equals(other.gearTypes, _gearTypes)&&const DeepCollectionEquality().equals(other.tripTypes, _tripTypes)&&const DeepCollectionEquality().equals(other.paymentMethods, _paymentMethods)&&const DeepCollectionEquality().equals(other.boatCategories, _boatCategories)&&const DeepCollectionEquality().equals(other.boatTypes, _boatTypes)&&const DeepCollectionEquality().equals(other.idTypes, _idTypes)&&const DeepCollectionEquality().equals(other.fisherRoles, _fisherRoles)&&const DeepCollectionEquality().equals(other.maintenanceTypes, _maintenanceTypes)&&const DeepCollectionEquality().equals(other.customerTypes, _customerTypes)&&const DeepCollectionEquality().equals(other.jobTitles, _jobTitles));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
 int get hashCode {
-    return Object.hash(runtimeType,const DeepCollectionEquality().hash(_species),const DeepCollectionEquality().hash(_ports),const DeepCollectionEquality().hash(_gearTypes),const DeepCollectionEquality().hash(_tripTypes),const DeepCollectionEquality().hash(_paymentMethods));
+    return Object.hash(runtimeType,const DeepCollectionEquality().hash(_species),const DeepCollectionEquality().hash(_ports),const DeepCollectionEquality().hash(_gearTypes),const DeepCollectionEquality().hash(_tripTypes),const DeepCollectionEquality().hash(_paymentMethods),const DeepCollectionEquality().hash(_boatCategories),const DeepCollectionEquality().hash(_boatTypes),const DeepCollectionEquality().hash(_idTypes),const DeepCollectionEquality().hash(_fisherRoles),const DeepCollectionEquality().hash(_maintenanceTypes),const DeepCollectionEquality().hash(_customerTypes),const DeepCollectionEquality().hash(_jobTitles));
 }
 
 @override
 String toString() {
-    return 'Lookups(species: $species, ports: $ports, gearTypes: $gearTypes, tripTypes: $tripTypes, paymentMethods: $paymentMethods)';
+    return 'Lookups(species: $species, ports: $ports, gearTypes: $gearTypes, tripTypes: $tripTypes, paymentMethods: $paymentMethods, boatCategories: $boatCategories, boatTypes: $boatTypes, idTypes: $idTypes, fisherRoles: $fisherRoles, maintenanceTypes: $maintenanceTypes, customerTypes: $customerTypes, jobTitles: $jobTitles)';
 }
 
 
@@ -293,7 +349,7 @@ abstract mixin class _$LookupsCopyWith<$Res> implements $LookupsCopyWith<$Res> {
   factory _$LookupsCopyWith(_Lookups value, $Res Function(_Lookups) _then) = __$LookupsCopyWithImpl;
 @override @useResult
 $Res call({
- List<Species> species, List<Port> ports, List<IdName> gearTypes, List<IdName> tripTypes, List<IdName> paymentMethods
+ List<Species> species, List<Port> ports, List<IdName> gearTypes, List<IdName> tripTypes, List<IdName> paymentMethods, List<IdName> boatCategories, List<IdName> boatTypes, List<IdName> idTypes, List<IdName> fisherRoles, List<IdName> maintenanceTypes, List<IdName> customerTypes, List<IdName> jobTitles
 });
 
 
@@ -310,13 +366,20 @@ class __$LookupsCopyWithImpl<$Res>
 
 /// Create a copy of Lookups
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? species = null,Object? ports = null,Object? gearTypes = null,Object? tripTypes = null,Object? paymentMethods = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? species = null,Object? ports = null,Object? gearTypes = null,Object? tripTypes = null,Object? paymentMethods = null,Object? boatCategories = null,Object? boatTypes = null,Object? idTypes = null,Object? fisherRoles = null,Object? maintenanceTypes = null,Object? customerTypes = null,Object? jobTitles = null,}) {
   return _then(_Lookups(
 species: null == species ? _self._species : species // ignore: cast_nullable_to_non_nullable
 as List<Species>,ports: null == ports ? _self._ports : ports // ignore: cast_nullable_to_non_nullable
 as List<Port>,gearTypes: null == gearTypes ? _self._gearTypes : gearTypes // ignore: cast_nullable_to_non_nullable
 as List<IdName>,tripTypes: null == tripTypes ? _self._tripTypes : tripTypes // ignore: cast_nullable_to_non_nullable
 as List<IdName>,paymentMethods: null == paymentMethods ? _self._paymentMethods : paymentMethods // ignore: cast_nullable_to_non_nullable
+as List<IdName>,boatCategories: null == boatCategories ? _self._boatCategories : boatCategories // ignore: cast_nullable_to_non_nullable
+as List<IdName>,boatTypes: null == boatTypes ? _self._boatTypes : boatTypes // ignore: cast_nullable_to_non_nullable
+as List<IdName>,idTypes: null == idTypes ? _self._idTypes : idTypes // ignore: cast_nullable_to_non_nullable
+as List<IdName>,fisherRoles: null == fisherRoles ? _self._fisherRoles : fisherRoles // ignore: cast_nullable_to_non_nullable
+as List<IdName>,maintenanceTypes: null == maintenanceTypes ? _self._maintenanceTypes : maintenanceTypes // ignore: cast_nullable_to_non_nullable
+as List<IdName>,customerTypes: null == customerTypes ? _self._customerTypes : customerTypes // ignore: cast_nullable_to_non_nullable
+as List<IdName>,jobTitles: null == jobTitles ? _self._jobTitles : jobTitles // ignore: cast_nullable_to_non_nullable
 as List<IdName>,
   ));
 }

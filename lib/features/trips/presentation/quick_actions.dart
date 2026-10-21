@@ -10,6 +10,7 @@ import '../../../core/widgets/actions.dart';
 import '../../../core/widgets/ltr_text.dart';
 import '../../../core/widgets/stat_tile.dart';
 import '../../../core/widgets/status_chip.dart';
+import '../../contacts/presentation/contacts_screens.dart';
 import '../../home/data/dashboard_providers.dart';
 import '../data/trip.dart';
 import '../data/trips_repository.dart';
@@ -205,6 +206,14 @@ class _QuickActionsSheetState extends ConsumerState<_QuickActionsSheet> {
                 none: l.noTripsForSale,
                 run: (trip) async => router.push(Routes.newConsignment(trip.id)),
               ),
+            ),
+            _QuickRow(
+              icon: Icons.person_add_alt_outlined,
+              label: l.newCustomer,
+              onTap: () {
+                Navigator.of(context).pop();
+                router.push(Routes.newContact(ContactKind.customer));
+              },
             ),
           ],
         ),

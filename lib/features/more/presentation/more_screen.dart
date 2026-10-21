@@ -9,11 +9,13 @@ import '../../../core/theme/tokens.dart';
 import '../../../core/widgets/avatar.dart';
 import '../../../core/widgets/hud_card.dart';
 import '../../../core/widgets/section_head.dart';
+import '../../contacts/presentation/contacts_screens.dart';
+import '../../fleet/data/fleet.dart';
 import '../../notifications/data/notifications_providers.dart';
 import 'account_actions.dart';
 
 /// المزيد: section headings with rows, no captions. Each phase adds its
-/// tiles here as they ship (fleet and the other contacts come with M4).
+/// tiles here as they ship.
 class MoreScreen extends ConsumerWidget {
   const MoreScreen({super.key});
 
@@ -43,6 +45,36 @@ class MoreScreen extends ConsumerWidget {
                 ],
               ),
             ),
+          const SizedBox(height: Hud.gap),
+          SectionHead(title: l.groupFleet, icon: Icons.directions_boat_outlined),
+          const SizedBox(height: 8),
+          HudCard(
+            padding: EdgeInsets.zero,
+            child: Column(
+              children: [
+                MenuRow(
+                  icon: Icons.directions_boat_outlined,
+                  label: l.boatsTitle,
+                  onTap: () => context.push(Routes.boats),
+                ),
+                MenuRow(
+                  icon: Icons.person_pin_outlined,
+                  label: l.captainsTitle,
+                  onTap: () => context.push(Routes.fishers(FisherKind.captain)),
+                ),
+                MenuRow(
+                  icon: Icons.groups_outlined,
+                  label: l.crewTitle,
+                  onTap: () => context.push(Routes.fishers(FisherKind.crew)),
+                ),
+                MenuRow(
+                  icon: Icons.build_outlined,
+                  label: l.maintenanceTitle,
+                  onTap: () => context.push(Routes.maintenance()),
+                ),
+              ],
+            ),
+          ),
           const SizedBox(height: Hud.gap),
           SectionHead(title: l.groupStockCatch, icon: Icons.set_meal_outlined),
           const SizedBox(height: 8),
@@ -78,10 +110,29 @@ class MoreScreen extends ConsumerWidget {
           const SizedBox(height: 8),
           HudCard(
             padding: EdgeInsets.zero,
-            child: MenuRow(
-              icon: Icons.storefront_outlined,
-              label: l.dalalsTitle,
-              onTap: () => context.push(Routes.dalals),
+            child: Column(
+              children: [
+                MenuRow(
+                  icon: Icons.people_outline,
+                  label: l.customersTitle,
+                  onTap: () => context.push(Routes.contacts(ContactKind.customer)),
+                ),
+                MenuRow(
+                  icon: Icons.storefront_outlined,
+                  label: l.dalalsTitle,
+                  onTap: () => context.push(Routes.dalals),
+                ),
+                MenuRow(
+                  icon: Icons.local_gas_station_outlined,
+                  label: l.vendorsTitle,
+                  onTap: () => context.push(Routes.contacts(ContactKind.vendor)),
+                ),
+                MenuRow(
+                  icon: Icons.badge_outlined,
+                  label: l.employeesTitle,
+                  onTap: () => context.push(Routes.contacts(ContactKind.employee)),
+                ),
+              ],
             ),
           ),
           const SizedBox(height: Hud.gap),

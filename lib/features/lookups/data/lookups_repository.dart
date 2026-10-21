@@ -53,7 +53,7 @@ Future<List<Boat>> ownerBoats(Ref ref) async {
 }
 
 @riverpod
-Future<List<Captain>> ownerCaptains(Ref ref) async {
+Future<List<Fisher>> ownerCaptains(Ref ref) async {
   final json = await ref.read(apiClientProvider).get('/owner/captains', query: {'per_page': 100});
-  return [for (final row in (json['data'] as List).cast<Map>()) Captain.fromJson(row.cast<String, dynamic>())];
+  return [for (final row in (json['data'] as List).cast<Map>()) Fisher.fromJson(row.cast<String, dynamic>())];
 }

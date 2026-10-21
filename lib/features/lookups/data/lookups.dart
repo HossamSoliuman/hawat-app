@@ -6,6 +6,7 @@ part 'lookups.freezed.dart';
 part 'lookups.g.dart';
 
 /// `GET /lookups`: every reference list in one response, cached on the device.
+/// A saved copy from before M4 lacks the fleet lists; they arrive with the refresh.
 @freezed
 abstract class Lookups with _$Lookups {
   const factory Lookups({
@@ -14,6 +15,13 @@ abstract class Lookups with _$Lookups {
     @Default(<IdName>[]) List<IdName> gearTypes,
     @Default(<IdName>[]) List<IdName> tripTypes,
     @Default(<IdName>[]) List<IdName> paymentMethods,
+    @Default(<IdName>[]) List<IdName> boatCategories,
+    @Default(<IdName>[]) List<IdName> boatTypes,
+    @Default(<IdName>[]) List<IdName> idTypes,
+    @Default(<IdName>[]) List<IdName> fisherRoles,
+    @Default(<IdName>[]) List<IdName> maintenanceTypes,
+    @Default(<IdName>[]) List<IdName> customerTypes,
+    @Default(<IdName>[]) List<IdName> jobTitles,
   }) = _Lookups;
 
   factory Lookups.fromJson(Map<String, dynamic> json) => _$LookupsFromJson(json);

@@ -1186,4 +1186,420 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get photoRemoved => 'أُزيلت الصورة';
+
+  @override
+  String get groupFleet => 'الأسطول';
+
+  @override
+  String get addAction => 'إضافة';
+
+  @override
+  String get editAction => 'تعديل';
+
+  @override
+  String get deleteAction => 'حذف';
+
+  @override
+  String get moreActions => 'إجراءات';
+
+  @override
+  String get savedDone => 'حُفظ';
+
+  @override
+  String get deletedDone => 'حُذف';
+
+  @override
+  String deleteTitle(String name) {
+    return 'حذف $name؟';
+  }
+
+  @override
+  String get deleteBody => 'لا يمكن التراجع عن الحذف.';
+
+  @override
+  String get statusLabel => 'الحالة';
+
+  @override
+  String get allStatuses => 'كل الحالات';
+
+  @override
+  String get expired => 'منتهية';
+
+  @override
+  String get expiringSoon => 'تنتهي قريبًا';
+
+  @override
+  String get overdue => 'متأخر';
+
+  @override
+  String get expiryBeforeStart => 'الانتهاء لا يسبق البداية';
+
+  @override
+  String get dateRequired => 'اختر التاريخ';
+
+  @override
+  String get portLabel => 'الميناء';
+
+  @override
+  String get choosePort => 'اختر الميناء';
+
+  @override
+  String get portRequired => 'الميناء مطلوب';
+
+  @override
+  String get noBoat => 'بلا قارب';
+
+  @override
+  String get tripsLabel => 'الرحلات';
+
+  @override
+  String get totalCatchLabel => 'إجمالي المصيد';
+
+  @override
+  String get sectionIdentity => 'التعريف';
+
+  @override
+  String get sectionSpecs => 'المواصفات';
+
+  @override
+  String get sectionLicense => 'الرخصة';
+
+  @override
+  String get sectionDocuments => 'الإقامة والرخصة';
+
+  @override
+  String get sectionAssignment => 'القارب والميناء';
+
+  @override
+  String get sectionContact => 'البيانات';
+
+  @override
+  String meters(String value) {
+    return '$value م';
+  }
+
+  @override
+  String tons(String value) {
+    return '$value طن';
+  }
+
+  @override
+  String yearsCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count سنة',
+      many: '$count سنة',
+      few: '$count سنوات',
+      two: 'سنتان',
+      one: 'سنة واحدة',
+      zero: 'لا خبرة مسجّلة',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get boatsTitle => 'القوارب';
+
+  @override
+  String get boatTitle => 'القارب';
+
+  @override
+  String get newBoat => 'قارب جديد';
+
+  @override
+  String get editBoat => 'تعديل القارب';
+
+  @override
+  String get searchBoats => 'ابحث بالاسم أو رقم القارب';
+
+  @override
+  String get noBoats => 'لا قوارب بعد';
+
+  @override
+  String get boatNameLabel => 'اسم القارب';
+
+  @override
+  String get boatNumberLabel => 'رقم القارب';
+
+  @override
+  String get boatNumberRequired => 'أدخل رقم القارب';
+
+  @override
+  String get fieldNameEn => 'الاسم بالإنجليزية';
+
+  @override
+  String get fieldCategory => 'الفئة';
+
+  @override
+  String get fieldBoatType => 'النوع';
+
+  @override
+  String get fieldLength => 'الطول (م)';
+
+  @override
+  String get fieldWidth => 'العرض (م)';
+
+  @override
+  String get fieldCapacity => 'الحمولة (طن)';
+
+  @override
+  String get fieldCrewCapacity => 'سعة الطاقم';
+
+  @override
+  String get fieldColor => 'اللون';
+
+  @override
+  String get fieldHull => 'رقم الهيكل';
+
+  @override
+  String get fieldBodyType => 'نوع البدن';
+
+  @override
+  String get fieldSerial => 'الرقم التسلسلي';
+
+  @override
+  String get fieldEngineType => 'نوع المحرك';
+
+  @override
+  String get fieldEnginePower => 'قوة المحرك';
+
+  @override
+  String get fieldEngineStatus => 'حالة المحرك';
+
+  @override
+  String get fieldCallSign => 'رمز النداء';
+
+  @override
+  String get fieldNextInspection => 'الفحص القادم';
+
+  @override
+  String get fieldLicenseType => 'نوع الرخصة';
+
+  @override
+  String get fieldLicenseStatus => 'حالة الرخصة';
+
+  @override
+  String get fieldLicenseProcess => 'إجراء الترخيص';
+
+  @override
+  String get fieldLicenseArea => 'منطقة الترخيص';
+
+  @override
+  String get fieldLicenseDate => 'بداية الرخصة';
+
+  @override
+  String get fieldLicenseExpiry => 'انتهاء الرخصة';
+
+  @override
+  String get statusSetByTrips => 'تتغيّر الحالة حين تنتهي الرحلة.';
+
+  @override
+  String get noSpecs => 'لا مواصفات مسجّلة';
+
+  @override
+  String get deleteBoatBody => 'لا يُحذف قارب له رحلات. لا يمكن التراجع عن الحذف.';
+
+  @override
+  String get readinessTitle => 'جاهزية القارب';
+
+  @override
+  String get boatReady => 'القارب جاهز للرحلات';
+
+  @override
+  String get setupReady => 'جاهز';
+
+  @override
+  String setupMissingCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'ينقصه $count شيئًا',
+      few: 'ينقصه $count أشياء',
+      two: 'ينقصه شيئان',
+      one: 'ينقصه شيء',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String setupWarningsCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count تنبيهًا',
+      few: '$count تنبيهات',
+      two: 'تنبيهان',
+      one: 'تنبيه واحد',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get fixAssignCaptain => 'إسناد كابتن';
+
+  @override
+  String get fixOpenCaptain => 'عرض الكابتن';
+
+  @override
+  String get fixAddCrew => 'إضافة طاقم';
+
+  @override
+  String get fixReviewCrew => 'مراجعة الطاقم';
+
+  @override
+  String get fixRenewLicense => 'تحديث الرخصة';
+
+  @override
+  String get fixEditBoat => 'تعديل الحالة';
+
+  @override
+  String get captainsTitle => 'الكباتن';
+
+  @override
+  String get captainTitle => 'كابتن';
+
+  @override
+  String get newCaptain => 'كابتن جديد';
+
+  @override
+  String get editCaptain => 'تعديل الكابتن';
+
+  @override
+  String get crewTitle => 'الطاقم';
+
+  @override
+  String get crewMemberTitle => 'فرد طاقم';
+
+  @override
+  String get newCrewMember => 'فرد طاقم جديد';
+
+  @override
+  String get editCrewMember => 'تعديل فرد الطاقم';
+
+  @override
+  String get searchFishers => 'ابحث بالاسم أو الجوال أو الهوية';
+
+  @override
+  String get noCaptains => 'لا كباتن بعد';
+
+  @override
+  String get noCrew => 'لا طاقم بعد';
+
+  @override
+  String get nationalIdLabel => 'رقم الهوية';
+
+  @override
+  String get nationalIdRequired => 'أدخل رقم الهوية';
+
+  @override
+  String get idTypeLabel => 'نوع الهوية';
+
+  @override
+  String get nationalityLabel => 'الجنسية';
+
+  @override
+  String get experienceLabel => 'سنوات الخبرة';
+
+  @override
+  String get crewRoleLabel => 'المهمة';
+
+  @override
+  String get iqamaIssueLabel => 'بداية الإقامة';
+
+  @override
+  String get iqamaExpiryLabel => 'انتهاء الإقامة';
+
+  @override
+  String get fishingLicenseLabel => 'رقم رخصة الصيد';
+
+  @override
+  String get portOrBoatRequired => 'اختر القارب أو الميناء';
+
+  @override
+  String get documentExpired => 'وثيقة منتهية';
+
+  @override
+  String get deleteCaptainBody => 'يُرفع عن قاربه، ويبقى اسمه على رحلاته السابقة. لا يمكن التراجع عن الحذف.';
+
+  @override
+  String get maintenanceTitle => 'الصيانة';
+
+  @override
+  String get newMaintenance => 'صيانة جديدة';
+
+  @override
+  String get editMaintenance => 'تعديل الصيانة';
+
+  @override
+  String get noMaintenance => 'لا صيانة مسجّلة';
+
+  @override
+  String get maintenanceTypeLabel => 'نوع الصيانة';
+
+  @override
+  String get technicianLabel => 'الفني أو الورشة';
+
+  @override
+  String get estimatedCostLabel => 'التكلفة المتوقعة';
+
+  @override
+  String get actualCostLabel => 'التكلفة الفعلية';
+
+  @override
+  String get descriptionLabel => 'الوصف';
+
+  @override
+  String get maintenanceExpenseHint => 'حين تُحفظ مكتملة بتكلفة تُسجَّل مصروفًا على القارب.';
+
+  @override
+  String get maintenanceExpensePosted => 'سُجّلت مصروفًا';
+
+  @override
+  String get deleteMaintenanceTitle => 'حذف سجل الصيانة؟';
+
+  @override
+  String get customersTitle => 'العملاء';
+
+  @override
+  String get vendorsTitle => 'الموردون';
+
+  @override
+  String get employeesTitle => 'الموظفون';
+
+  @override
+  String get editCustomer => 'تعديل الزبون';
+
+  @override
+  String get newVendor => 'مورد جديد';
+
+  @override
+  String get editVendor => 'تعديل المورد';
+
+  @override
+  String get newEmployee => 'موظف جديد';
+
+  @override
+  String get editEmployee => 'تعديل الموظف';
+
+  @override
+  String get searchContacts => 'ابحث بالاسم أو الجوال';
+
+  @override
+  String get noCustomers => 'لا عملاء بعد';
+
+  @override
+  String get noVendors => 'لا موردين بعد';
+
+  @override
+  String get noEmployees => 'لا موظفين بعد';
+
+  @override
+  String get customerTypeLabel => 'نوع الزبون';
+
+  @override
+  String get jobTitleLabel => 'المسمى الوظيفي';
+
+  @override
+  String get idNumberLabel => 'رقم الهوية';
 }

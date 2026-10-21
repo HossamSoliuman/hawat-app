@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:image_picker/image_picker.dart';
 
 import '../../../app/router.dart';
 import '../../../core/api/api_exception.dart';
 import '../../../core/auth/auth_repository.dart';
 import '../../../core/auth/session.dart';
 import '../../../core/l10n.dart';
+import '../../../core/media/avatar_picker.dart';
 import '../../../core/theme/tokens.dart';
 import '../../../core/widgets/actions.dart';
 import '../../../core/widgets/avatar.dart';
@@ -30,57 +29,19 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
 
   Future<void> _changePhoto(bool hasPhoto) async {
     final l = context.l10n;
-    final choice = await showModalBottomSheet<String>(
-      context: context,
-      builder: (context) => SafeArea(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            ListTile(
-              leading: const Icon(Icons.photo_library_outlined),
-              title: Text(l.pickFromGallery),
-              onTap: () => Navigator.pop(context, 'gallery'),
-            ),
-            ListTile(
-              leading: const Icon(Icons.photo_camera_outlined),
-              title: Text(l.takePhoto),
-              onTap: () => Navigator.pop(context, 'camera'),
-            ),
-            if (hasPhoto)
-              ListTile(
-                leading: Icon(Icons.delete_outline, color: HawatColors.of(context).danger),
-                title: Text(l.removePhoto),
-                onTap: () => Navigator.pop(context, 'remove'),
-              ),
-          ],
-        ),
-      ),
-    );
+    final choice = await showPhotoChoices(context, hasPhoto: hasPhoto);
     if (choice == null || !mounted) return;
 
     final auth = ref.read(authRepositoryProvider);
     setState(() => _uploading = true);
     try {
-      if (choice == 'remove') {
+      if (choice == PhotoChoice.remove) {
         await ref.read(sessionProvider.notifier).updateUser(await auth.removeAvatar());
         if (mounted) showSnack(context, l.photoRemoved);
         return;
       }
-      final file = await ImagePicker().pickImage(
-        source: choice == 'camera' ? ImageSource.camera : ImageSource.gallery,
-        maxWidth: 512,
-        maxHeight: 512,
-      );
-      if (file == null) return;
-      // At most 512px a side (picked that size), re-encoded as a small JPEG so the
-      // upload survives a weak signal at the port.
-      final bytes = await FlutterImageCompress.compressWithList(
-        await file.readAsBytes(),
-        minWidth: 512,
-        minHeight: 512,
-        quality: 82,
-        format: CompressFormat.jpeg,
-      );
+      final bytes = await pickAvatar(choice);
+      if (bytes == null) return;
       await ref.read(sessionProvider.notifier).updateUser(await auth.uploadAvatar(bytes, 'avatar.jpg'));
       if (mounted) showSnack(context, l.photoUpdated);
     } on ValidationException catch (e) {

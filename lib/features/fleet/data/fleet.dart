@@ -5,7 +5,7 @@ import '../../../core/models/refs.dart';
 part 'fleet.freezed.dart';
 part 'fleet.g.dart';
 
-/// A boat as the trip form needs it: its captain, port, crew, licence and setup.
+/// A boat (`/owner/boats`): identity, specs, licence, its captain and setup.
 @freezed
 abstract class Boat with _$Boat {
   const Boat._();
@@ -13,23 +13,60 @@ abstract class Boat with _$Boat {
   const factory Boat({
     required int id,
     required String name,
+    String? nameEn,
     String? boatNumber,
     String? status,
     IdName? port,
+    IdName? category,
+    IdName? type,
     PersonRef? captain,
+    double? lengthM,
+    double? widthM,
+    String? color,
+    String? hullNumber,
+    String? bodyType,
+    String? engineType,
+    String? enginePower,
+    String? engineStatus,
+    String? callSign,
+    String? serialNumber,
+    double? capacity,
     @Default(0) int crewCount,
+    int? crewCapacity,
     BoatLicense? license,
+    DateTime? nextInspectionDate,
     BoatSetup? setup,
+    @Default(0) int tripsCount,
+    @Default(0) double totalCatchKg,
+    int? version,
   }) = _Boat;
 
   factory Boat.fromJson(Map<String, dynamic> json) => _$BoatFromJson(json);
 
-  bool get isActive => status == null || status == 'نشط';
+  bool get isActive => status == null || status == statusActive;
+
+  bool get atSea => status == statusAtSea;
+
+  static const statusActive = 'نشط';
+  static const statusAtSea = 'في البحر';
+
+  /// What the owner can pick; في البحر is set by trips alone.
+  static const editableStatuses = ['نشط', 'غير نشط', 'صيانة'];
+
+  static const licenseStatuses = ['سارية', 'منتهية', 'قيد التجديد'];
 }
 
 @freezed
 abstract class BoatLicense with _$BoatLicense {
-  const factory BoatLicense({String? number, DateTime? expiry}) = _BoatLicense;
+  const factory BoatLicense({
+    String? type,
+    String? number,
+    String? status,
+    String? process,
+    String? area,
+    DateTime? date,
+    DateTime? expiry,
+  }) = _BoatLicense;
 
   factory BoatLicense.fromJson(Map<String, dynamic> json) => _$BoatLicenseFromJson(json);
 }
@@ -53,15 +90,89 @@ abstract class SetupItem with _$SetupItem {
   factory SetupItem.fromJson(Map<String, dynamic> json) => _$SetupItemFromJson(json);
 }
 
-/// A captain record (`/owner/captains`): a fisher without an account.
+/// Captains and crew are the same record on the server (a fisher without an
+/// account); only the path and the crew role differ.
+enum FisherKind {
+  captain('/owner/captains'),
+  crew('/owner/crew');
+
+  const FisherKind(this.path);
+
+  final String path;
+
+  static FisherKind parse(String? value) => value == 'crew' ? crew : captain;
+}
+
+/// A captain or crew member (`/owner/captains`, `/owner/crew`).
 @freezed
-abstract class Captain with _$Captain {
-  const Captain._();
+abstract class Fisher with _$Fisher {
+  const Fisher._();
 
-  const factory Captain({required int id, required String name, String? phone, String? status, IdName? boat}) =
-      _Captain;
+  const factory Fisher({
+    required int id,
+    required String name,
+    @Default(false) bool isCaptain,
+    String? phone,
+    String? email,
+    String? avatarUrl,
+    String? nationalId,
+    String? nationality,
+    IdName? idType,
+    DateTime? iqamaIssueDate,
+    DateTime? iqamaExpiryDate,
+    IdName? role,
+    IdName? boat,
+    IdName? port,
+    String? licenseNumber,
+    String? licenseStatus,
+    DateTime? licenseDate,
+    DateTime? licenseExpiry,
+    @Default(0) int experienceYears,
+    @Default(0) int tripsCount,
+    String? status,
+    int? version,
+  }) = _Fisher;
 
-  factory Captain.fromJson(Map<String, dynamic> json) => _$CaptainFromJson(json);
+  factory Fisher.fromJson(Map<String, dynamic> json) => _$FisherFromJson(json);
 
-  bool get isActive => status == null || status == 'نشط';
+  bool get isActive => status == null || status == statusActive;
+
+  FisherKind get kind => isCaptain ? FisherKind.captain : FisherKind.crew;
+
+  static const statusActive = 'نشط';
+  static const statuses = ['نشط', 'غير نشط'];
+}
+
+/// A maintenance record (`/owner/maintenance`). Saved "مكتملة" with a cost,
+/// the server posts it as an expense.
+@freezed
+abstract class Maintenance with _$Maintenance {
+  const factory Maintenance({
+    required int id,
+    IdName? boat,
+    IdName? type,
+    DateTime? date,
+    String? technician,
+    double? estimatedCost,
+    double? actualCost,
+    String? description,
+    String? status,
+    MaintenanceExpense? expense,
+  }) = _Maintenance;
+
+  factory Maintenance.fromJson(Map<String, dynamic> json) => _$MaintenanceFromJson(json);
+
+  static const statuses = ['معلقة', 'مكتملة', 'ملغاة'];
+}
+
+@freezed
+abstract class MaintenanceExpense with _$MaintenanceExpense {
+  const factory MaintenanceExpense({
+    required int id,
+    String? expenseNumber,
+    @Default(0) double total,
+    @Default(0) double paidAmount,
+  }) = _MaintenanceExpense;
+
+  factory MaintenanceExpense.fromJson(Map<String, dynamic> json) => _$MaintenanceExpenseFromJson(json);
 }

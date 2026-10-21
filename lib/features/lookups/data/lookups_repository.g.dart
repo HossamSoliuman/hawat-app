@@ -111,11 +111,11 @@ final ownerCaptainsProvider = OwnerCaptainsProvider._();
 final class OwnerCaptainsProvider
     extends
         $FunctionalProvider<
-          AsyncValue<List<Captain>>,
-          List<Captain>,
-          FutureOr<List<Captain>>
+          AsyncValue<List<Fisher>>,
+          List<Fisher>,
+          FutureOr<List<Fisher>>
         >
-    with $FutureModifier<List<Captain>>, $FutureProvider<List<Captain>> {
+    with $FutureModifier<List<Fisher>>, $FutureProvider<List<Fisher>> {
   OwnerCaptainsProvider._()
     : super(
         from: null,
@@ -132,14 +132,14 @@ final class OwnerCaptainsProvider
 
   @$internal
   @override
-  $FutureProviderElement<List<Captain>> $createElement(
+  $FutureProviderElement<List<Fisher>> $createElement(
     $ProviderPointer pointer,
   ) => $FutureProviderElement(pointer);
 
   @override
-  FutureOr<List<Captain>> create(Ref ref) {
+  FutureOr<List<Fisher>> create(Ref ref) {
     return ownerCaptains(ref);
   }
 }
 
-String _$ownerCaptainsHash() => r'9cc0a481d0cd3e037e2153668a9eed0eae06dd3a';
+String _$ownerCaptainsHash() => r'4784b8ffe7c96b7ecaa1c67a93c6e99a64b9d1c7';

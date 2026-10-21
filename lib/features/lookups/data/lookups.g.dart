@@ -32,6 +32,41 @@ _Lookups _$LookupsFromJson(Map<String, dynamic> json) => _Lookups(
           ?.map((e) => IdName.fromJson(e as Map<String, dynamic>))
           .toList() ??
       const <IdName>[],
+  boatCategories:
+      (json['boat_categories'] as List<dynamic>?)
+          ?.map((e) => IdName.fromJson(e as Map<String, dynamic>))
+          .toList() ??
+      const <IdName>[],
+  boatTypes:
+      (json['boat_types'] as List<dynamic>?)
+          ?.map((e) => IdName.fromJson(e as Map<String, dynamic>))
+          .toList() ??
+      const <IdName>[],
+  idTypes:
+      (json['id_types'] as List<dynamic>?)
+          ?.map((e) => IdName.fromJson(e as Map<String, dynamic>))
+          .toList() ??
+      const <IdName>[],
+  fisherRoles:
+      (json['fisher_roles'] as List<dynamic>?)
+          ?.map((e) => IdName.fromJson(e as Map<String, dynamic>))
+          .toList() ??
+      const <IdName>[],
+  maintenanceTypes:
+      (json['maintenance_types'] as List<dynamic>?)
+          ?.map((e) => IdName.fromJson(e as Map<String, dynamic>))
+          .toList() ??
+      const <IdName>[],
+  customerTypes:
+      (json['customer_types'] as List<dynamic>?)
+          ?.map((e) => IdName.fromJson(e as Map<String, dynamic>))
+          .toList() ??
+      const <IdName>[],
+  jobTitles:
+      (json['job_titles'] as List<dynamic>?)
+          ?.map((e) => IdName.fromJson(e as Map<String, dynamic>))
+          .toList() ??
+      const <IdName>[],
 );
 
 Map<String, dynamic> _$LookupsToJson(_Lookups instance) => <String, dynamic>{
@@ -40,6 +75,15 @@ Map<String, dynamic> _$LookupsToJson(_Lookups instance) => <String, dynamic>{
   'gear_types': instance.gearTypes.map((e) => e.toJson()).toList(),
   'trip_types': instance.tripTypes.map((e) => e.toJson()).toList(),
   'payment_methods': instance.paymentMethods.map((e) => e.toJson()).toList(),
+  'boat_categories': instance.boatCategories.map((e) => e.toJson()).toList(),
+  'boat_types': instance.boatTypes.map((e) => e.toJson()).toList(),
+  'id_types': instance.idTypes.map((e) => e.toJson()).toList(),
+  'fisher_roles': instance.fisherRoles.map((e) => e.toJson()).toList(),
+  'maintenance_types': instance.maintenanceTypes
+      .map((e) => e.toJson())
+      .toList(),
+  'customer_types': instance.customerTypes.map((e) => e.toJson()).toList(),
+  'job_titles': instance.jobTitles.map((e) => e.toJson()).toList(),
 };
 
 _Species _$SpeciesFromJson(Map<String, dynamic> json) => _Species(

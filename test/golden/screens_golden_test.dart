@@ -9,7 +9,16 @@ import 'package:hawat_app/features/catch_log/presentation/catch_log_screen.dart'
 import 'package:hawat_app/features/consignments/presentation/consign_screen.dart';
 import 'package:hawat_app/features/consignments/presentation/consignment_screen.dart';
 import 'package:hawat_app/features/consignments/presentation/consignments_screen.dart';
+import 'package:hawat_app/features/contacts/presentation/contact_form_screen.dart';
+import 'package:hawat_app/features/contacts/presentation/contacts_screens.dart';
 import 'package:hawat_app/features/dalals/presentation/dalals_screen.dart';
+import 'package:hawat_app/features/fleet/data/fleet.dart';
+import 'package:hawat_app/features/fleet/presentation/boat_form_screen.dart';
+import 'package:hawat_app/features/fleet/presentation/boat_screen.dart';
+import 'package:hawat_app/features/fleet/presentation/fisher_form_screen.dart';
+import 'package:hawat_app/features/fleet/presentation/fisher_screen.dart';
+import 'package:hawat_app/features/fleet/presentation/fleet_lists.dart';
+import 'package:hawat_app/features/fleet/presentation/maintenance_form_screen.dart';
 import 'package:hawat_app/features/home/presentation/home_screen.dart';
 import 'package:hawat_app/features/more/presentation/more_screen.dart';
 import 'package:hawat_app/features/notifications/presentation/notifications_screen.dart';
@@ -241,5 +250,41 @@ void main() {
         await tester.tap(find.text('دلال القطيف'));
       },
     ),
+  );
+
+  // M4: fleet and contacts.
+  testWidgets('boats', (tester) => shot(tester, 'boats', const BoatsScreen(), height: 1000));
+  testWidgets('boat setup', (tester) => shot(tester, 'boat', const BoatScreen(id: 4), height: 1500));
+  testWidgets(
+    'boat setup dark',
+    (tester) => shot(tester, 'boat_dark', const BoatScreen(id: 4), dark: true, height: 1500),
+  );
+  testWidgets('boat ready', (tester) => shot(tester, 'boat_ready', const BoatScreen(id: 1), height: 1800));
+  testWidgets('boat form', (tester) => shot(tester, 'boat_form', const BoatFormScreen(id: 1), height: 2900));
+  testWidgets('crew', (tester) => shot(tester, 'crew', const FishersScreen(kind: FisherKind.crew)));
+  testWidgets(
+    'crew member',
+    (tester) => shot(tester, 'fisher', const FisherScreen(kind: FisherKind.crew, id: 8), height: 1300),
+  );
+  testWidgets(
+    'new crew member',
+    (tester) => shot(tester, 'fisher_form', const FisherFormScreen(kind: FisherKind.crew, boatId: 1), height: 1900),
+  );
+  testWidgets('maintenance', (tester) => shot(tester, 'maintenance', const MaintenanceScreen()));
+  testWidgets(
+    'maintenance form',
+    (tester) => shot(
+      tester,
+      'maintenance_form',
+      MaintenanceFormScreen(
+        record: Maintenance.fromJson((fixture('maintenance')['data'] as List).first as Map<String, dynamic>),
+      ),
+      height: 1200,
+    ),
+  );
+  testWidgets('customers', (tester) => shot(tester, 'customers', const CustomersScreen()));
+  testWidgets(
+    'employee',
+    (tester) => shot(tester, 'employee', const ContactFormScreen(kind: ContactKind.employee, id: 1), height: 1300),
   );
 }

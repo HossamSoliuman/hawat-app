@@ -13,7 +13,16 @@ import '../features/catch_log/presentation/catch_log_screen.dart';
 import '../features/consignments/presentation/consign_screen.dart';
 import '../features/consignments/presentation/consignment_screen.dart';
 import '../features/consignments/presentation/consignments_screen.dart';
+import '../features/contacts/presentation/contact_form_screen.dart';
+import '../features/contacts/presentation/contacts_screens.dart';
 import '../features/dalals/presentation/dalals_screen.dart';
+import '../features/fleet/data/fleet.dart';
+import '../features/fleet/presentation/boat_form_screen.dart';
+import '../features/fleet/presentation/boat_screen.dart';
+import '../features/fleet/presentation/fisher_form_screen.dart';
+import '../features/fleet/presentation/fisher_screen.dart';
+import '../features/fleet/presentation/fleet_lists.dart';
+import '../features/fleet/presentation/maintenance_form_screen.dart';
 import '../features/home/presentation/home_screen.dart';
 import '../features/more/presentation/more_screen.dart';
 import '../features/notifications/presentation/notifications_screen.dart';
@@ -53,6 +62,9 @@ abstract final class Routes {
   static const consignments = '/consignments';
   static const stock = '/stock';
   static const dalals = '/dalals';
+  static const boats = '/boats';
+  static const newBoat = '/boat/new';
+  static const editMaintenance = '/maintenance/edit';
 
   static String tripsAt(TripStage stage) => '$trips?stage=${stage.apiValue}';
   static String unpaidSales() => '$sales?unpaid=1';
@@ -65,6 +77,25 @@ abstract final class Routes {
   static String consignment(int id) => '/consignment/$id';
   static String stockMovements({int? speciesId}) =>
       speciesId == null ? '$stock/movements' : '$stock/movements?species=$speciesId';
+
+  static String boat(int id) => '/boat/$id';
+  static String editBoat(int id) => '/boat/$id/edit';
+  static String fishers(FisherKind kind, {int? boatId}) =>
+      _withBoat(kind == FisherKind.captain ? '/captains' : '/crew', boatId);
+  static String newFisher(FisherKind kind, {int? boatId}) => _withBoat('/fisher/${kind.name}/new', boatId);
+  static String fisher(FisherKind kind, int id) => '/fisher/${kind.name}/$id';
+  static String editFisher(FisherKind kind, int id) => '/fisher/${kind.name}/$id/edit';
+  static String maintenance({int? boatId}) => _withBoat('/maintenance', boatId);
+  static String newMaintenance({int? boatId}) => _withBoat('/maintenance/new', boatId);
+  static String contacts(ContactKind kind) => switch (kind) {
+    ContactKind.customer => '/customers',
+    ContactKind.vendor => '/vendors',
+    ContactKind.employee => '/employees',
+  };
+  static String newContact(ContactKind kind) => '/contact/${kind.name}/new';
+  static String contact(ContactKind kind, int id) => '/contact/${kind.name}/$id';
+
+  static String _withBoat(String path, int? boatId) => boatId == null ? path : '$path?boat=$boatId';
 
   static const _outside = {splash, login, gate, update};
 }
@@ -181,6 +212,67 @@ GoRouter router(Ref ref) {
         ],
       ),
       GoRoute(path: Routes.dalals, builder: (_, _) => const DalalsScreen()),
+      GoRoute(path: Routes.boats, builder: (_, _) => const BoatsScreen()),
+      GoRoute(path: Routes.newBoat, builder: (_, _) => const BoatFormScreen()),
+      GoRoute(
+        path: '/boat/:id',
+        builder: (_, state) => BoatScreen(id: _id(state)),
+        routes: [
+          GoRoute(
+            path: 'edit',
+            builder: (_, state) => BoatFormScreen(id: _id(state)),
+          ),
+        ],
+      ),
+      GoRoute(
+        path: '/captains',
+        builder: (_, _) => const FishersScreen(kind: FisherKind.captain),
+      ),
+      GoRoute(
+        path: '/crew',
+        builder: (_, state) => FishersScreen(kind: FisherKind.crew, boatId: _query(state, 'boat')),
+      ),
+      GoRoute(
+        path: '/fisher/:kind/new',
+        builder: (_, state) => FisherFormScreen(kind: _fisherKind(state), boatId: _query(state, 'boat')),
+      ),
+      GoRoute(
+        path: '/fisher/:kind/:id',
+        builder: (_, state) => FisherScreen(kind: _fisherKind(state), id: _id(state)),
+        routes: [
+          GoRoute(
+            path: 'edit',
+            builder: (_, state) => FisherFormScreen(kind: _fisherKind(state), id: _id(state)),
+          ),
+        ],
+      ),
+      GoRoute(
+        path: '/maintenance',
+        builder: (_, state) => MaintenanceScreen(boatId: _query(state, 'boat')),
+        routes: [
+          GoRoute(
+            path: 'new',
+            builder: (_, state) => MaintenanceFormScreen(boatId: _query(state, 'boat')),
+          ),
+          // The row comes with the push; opened without it there is nothing to edit.
+          GoRoute(
+            path: 'edit',
+            redirect: (_, state) => state.extra is Maintenance ? null : '/maintenance',
+            builder: (_, state) => MaintenanceFormScreen(record: state.extra! as Maintenance),
+          ),
+        ],
+      ),
+      GoRoute(path: '/customers', builder: (_, _) => const CustomersScreen()),
+      GoRoute(path: '/vendors', builder: (_, _) => const VendorsScreen()),
+      GoRoute(path: '/employees', builder: (_, _) => const EmployeesScreen()),
+      GoRoute(
+        path: '/contact/:kind/new',
+        builder: (_, state) => ContactFormScreen(kind: ContactKind.parse(state.pathParameters['kind'])),
+      ),
+      GoRoute(
+        path: '/contact/:kind/:id',
+        builder: (_, state) => ContactFormScreen(kind: ContactKind.parse(state.pathParameters['kind']), id: _id(state)),
+      ),
     ],
   );
   ref.onDispose(router.dispose);
@@ -188,5 +280,7 @@ GoRouter router(Ref ref) {
 }
 
 int _id(GoRouterState state) => int.tryParse(state.pathParameters['id'] ?? '') ?? 0;
+
+FisherKind _fisherKind(GoRouterState state) => FisherKind.parse(state.pathParameters['kind']);
 
 int? _query(GoRouterState state, String key) => int.tryParse(state.uri.queryParameters[key] ?? '');

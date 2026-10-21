@@ -73,8 +73,10 @@ class SellingActions {
   Future<Customer> addCustomer({required String name, String? phone, required String idempotencyKey}) async {
     final customer = await _ref
         .read(customersRepositoryProvider)
-        .create(name: name, phone: phone, idempotencyKey: idempotencyKey);
-    _ref.invalidate(activeCustomersProvider);
+        .quickCreate(name: name, phone: phone, idempotencyKey: idempotencyKey);
+    _ref
+      ..invalidate(activeCustomersProvider)
+      ..invalidate(customersListProvider);
     return customer;
   }
 
