@@ -36,8 +36,8 @@ jobs:
         run: flutter analyze
 
       - name: Tests
-        # Goldens are rendered on Windows; e2e needs a test server.
-        run: flutter test --exclude-tags golden,e2e
+        # Goldens are rendered on Windows; e2e needs a test server; screens are written on demand.
+        run: flutter test --exclude-tags golden,e2e,screens
 
       - name: Staging APK
         run: flutter build apk --flavor staging --dart-define-from-file=env/staging.json

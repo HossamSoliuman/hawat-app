@@ -344,12 +344,6 @@ class AppLocalizationsAr extends AppLocalizations {
   String get statActiveBoats => 'القوارب النشطة';
 
   @override
-  String get statUnpaid => 'غير المحصّل';
-
-  @override
-  String get indicatorsTitle => 'المؤشرات';
-
-  @override
   String get pipelineTitle => 'مسار الرحلات';
 
   @override
@@ -363,9 +357,6 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get pipeForSale => 'للبيع';
-
-  @override
-  String get activeTripsTitle => 'الرحلات الجارية';
 
   @override
   String get noActiveTrips => 'لا رحلات جارية الآن';

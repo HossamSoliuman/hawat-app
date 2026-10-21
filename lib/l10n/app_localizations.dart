@@ -655,18 +655,6 @@ abstract class AppLocalizations {
   /// **'القوارب النشطة'**
   String get statActiveBoats;
 
-  /// No description provided for @statUnpaid.
-  ///
-  /// In ar, this message translates to:
-  /// **'غير المحصّل'**
-  String get statUnpaid;
-
-  /// No description provided for @indicatorsTitle.
-  ///
-  /// In ar, this message translates to:
-  /// **'المؤشرات'**
-  String get indicatorsTitle;
-
   /// No description provided for @pipelineTitle.
   ///
   /// In ar, this message translates to:
@@ -696,12 +684,6 @@ abstract class AppLocalizations {
   /// In ar, this message translates to:
   /// **'للبيع'**
   String get pipeForSale;
-
-  /// No description provided for @activeTripsTitle.
-  ///
-  /// In ar, this message translates to:
-  /// **'الرحلات الجارية'**
-  String get activeTripsTitle;
 
   /// No description provided for @noActiveTrips.
   ///

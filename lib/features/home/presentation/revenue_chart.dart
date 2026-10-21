@@ -7,7 +7,8 @@ import '../../../core/theme/tokens.dart';
 import '../data/dashboard.dart';
 
 /// Six months of revenue as bars: one series in the primary hue, so no legend
-/// (the section title names it); recessive grid; a tap shows the month's amount.
+/// (the section title names it), the current month solid and the rest faded;
+/// recessive grid; a tap shows the month's amount.
 class RevenueChart extends StatelessWidget {
   const RevenueChart({super.key, required this.points});
 
@@ -97,14 +98,9 @@ class RevenueChart extends StatelessWidget {
                   barRods: [
                     BarChartRodData(
                       toY: points[i].total,
-                      width: 18,
-                      color: c.primary,
+                      width: 20,
+                      color: i == points.length - 1 ? c.primary : c.primary.withValues(alpha: .4),
                       borderRadius: BorderRadius.zero,
-                      backDrawRodData: BackgroundBarChartRodData(
-                        show: true,
-                        toY: top,
-                        color: c.mutedSurface.withValues(alpha: .45),
-                      ),
                     ),
                   ],
                 ),

@@ -9,8 +9,8 @@ import '../features/home/data/dashboard_providers.dart';
 import '../features/notifications/data/notifications_providers.dart';
 import '../features/trips/presentation/quick_actions.dart';
 
-/// The bottom bar: الرئيسية · الرحلات · + · المبيعات · المزيد. The center +
-/// opens the quick actions, one tap from anywhere.
+/// The bottom bar: الرئيسية · الرحلات · + · المبيعات · المزيد. The round +
+/// in the middle opens the quick actions, one tap from anywhere.
 class AppShell extends ConsumerStatefulWidget {
   const AppShell({super.key, required this.shell});
 
@@ -55,67 +55,145 @@ class _AppShellState extends ConsumerState<AppShell> {
 
     return Scaffold(
       body: widget.shell,
-      bottomNavigationBar: DecoratedBox(
-        decoration: BoxDecoration(
-          color: c.panel,
-          border: Border(top: BorderSide(color: c.hair)),
-        ),
-        child: SafeArea(
-          top: false,
-          child: SizedBox(
-            height: 64,
-            child: Row(
-              children: [
-                _NavItem(
-                  icon: Icons.space_dashboard_outlined,
-                  activeIcon: Icons.space_dashboard,
-                  label: l.navHome,
-                  selected: index == 0,
-                  onTap: () => _goBranch(0),
-                ),
-                _NavItem(
-                  icon: Icons.sailing_outlined,
-                  activeIcon: Icons.sailing,
-                  label: l.navTrips,
-                  selected: index == 1,
-                  onTap: () => _goBranch(1),
-                ),
-                Expanded(
-                  child: Center(
+      bottomNavigationBar: Stack(
+        children: [
+          Positioned.fill(
+            top: _BarShape.lift,
+            child: CustomPaint(
+              painter: _BarShape(fill: c.panel, edge: c.border),
+            ),
+          ),
+          SafeArea(
+            top: false,
+            child: SizedBox(
+              height: _BarShape.lift + _BarShape.height,
+              child: Stack(
+                children: [
+                  Positioned.fill(
+                    top: _BarShape.lift,
+                    child: Row(
+                      children: [
+                        _NavItem(
+                          icon: Icons.space_dashboard_outlined,
+                          activeIcon: Icons.space_dashboard,
+                          label: l.navHome,
+                          selected: index == 0,
+                          onTap: () => _goBranch(0),
+                        ),
+                        _NavItem(
+                          icon: Icons.sailing_outlined,
+                          activeIcon: Icons.sailing,
+                          label: l.navTrips,
+                          selected: index == 1,
+                          onTap: () => _goBranch(1),
+                        ),
+                        const Spacer(),
+                        _NavItem(
+                          icon: Icons.receipt_long_outlined,
+                          activeIcon: Icons.receipt_long,
+                          label: l.navSales,
+                          selected: index == 2,
+                          onTap: () => _goBranch(2),
+                        ),
+                        _NavItem(
+                          icon: Icons.grid_view_outlined,
+                          activeIcon: Icons.grid_view_rounded,
+                          label: l.navMore,
+                          selected: index == 3,
+                          onTap: () => _goBranch(3),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Align(
+                    alignment: Alignment.topCenter,
                     child: Semantics(
                       button: true,
                       label: l.navAdd,
-                      child: Material(
-                        color: c.primary,
-                        child: InkWell(
-                          onTap: () => showQuickActions(context, ref),
-                          child: SizedBox.square(dimension: 48, child: Icon(Icons.add, color: c.onPrimary, size: 28)),
+                      child: DecoratedBox(
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          gradient: LinearGradient(
+                            begin: Alignment.topCenter,
+                            end: Alignment.bottomCenter,
+                            colors: [Color.lerp(c.primary, Colors.white, .12)!, c.primary],
+                          ),
+                          boxShadow: [
+                            BoxShadow(
+                              color: c.primary.withValues(alpha: c.isDark ? .45 : .30),
+                              blurRadius: 18,
+                              offset: const Offset(0, 6),
+                            ),
+                          ],
+                        ),
+                        child: Material(
+                          type: MaterialType.transparency,
+                          shape: const CircleBorder(),
+                          clipBehavior: Clip.antiAlias,
+                          child: InkWell(
+                            onTap: () => showQuickActions(context, ref),
+                            child: SizedBox.square(
+                              dimension: _BarShape.fab,
+                              child: Icon(Icons.add_rounded, color: c.onPrimary, size: 32),
+                            ),
+                          ),
                         ),
                       ),
                     ),
                   ),
-                ),
-                _NavItem(
-                  icon: Icons.receipt_long_outlined,
-                  activeIcon: Icons.receipt_long,
-                  label: l.navSales,
-                  selected: index == 2,
-                  onTap: () => _goBranch(2),
-                ),
-                _NavItem(
-                  icon: Icons.grid_view_outlined,
-                  activeIcon: Icons.grid_view_rounded,
-                  label: l.navMore,
-                  selected: index == 3,
-                  onTap: () => _goBranch(3),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
-        ),
+        ],
       ),
     );
   }
+}
+
+/// The bar: rounded top corners and a round notch cut around the + button,
+/// which rises [lift] above the bar's edge.
+class _BarShape extends CustomPainter {
+  const _BarShape({required this.fill, required this.edge});
+
+  static const lift = 10.0;
+  static const height = 68.0;
+  static const fab = 58.0;
+  static const _ring = 6.0;
+
+  final Color fill;
+  final Color edge;
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    // One pixel past the sides and the bottom, so only the top edge is outlined.
+    final bar = Path()
+      ..addRRect(
+        RRect.fromLTRBAndCorners(
+          -1,
+          0,
+          size.width + 1,
+          size.height + 1,
+          topLeft: const Radius.circular(22),
+          topRight: const Radius.circular(22),
+        ),
+      );
+    final notch = Path()
+      ..addOval(Rect.fromCircle(center: Offset(size.width / 2, fab / 2 - lift), radius: fab / 2 + _ring));
+    final shape = Path.combine(PathOperation.difference, bar, notch);
+    canvas
+      ..drawPath(shape, Paint()..color = fill)
+      ..drawPath(
+        shape,
+        Paint()
+          ..color = edge
+          ..style = PaintingStyle.stroke
+          ..strokeWidth = 1,
+      );
+  }
+
+  @override
+  bool shouldRepaint(_BarShape oldDelegate) => oldDelegate.fill != fill || oldDelegate.edge != edge;
 }
 
 class _NavItem extends StatelessWidget {
@@ -136,7 +214,7 @@ class _NavItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final c = HawatColors.of(context);
-    final color = selected ? c.primary : c.muted;
+    final color = selected ? c.toneText(Tone.primary) : c.muted;
     return Expanded(
       child: Semantics(
         selected: selected,
@@ -144,23 +222,25 @@ class _NavItem extends StatelessWidget {
         child: InkWell(
           onTap: onTap,
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               AnimatedContainer(
                 duration: Hud.fast,
-                width: 22,
-                height: 2,
-                margin: const EdgeInsets.only(bottom: 6),
-                color: selected ? c.primary : Colors.transparent,
+                width: 30,
+                height: 3,
+                margin: const EdgeInsets.only(bottom: 8),
+                decoration: BoxDecoration(
+                  color: selected ? c.primary : Colors.transparent,
+                  borderRadius: const BorderRadius.vertical(bottom: Radius.circular(3)),
+                ),
               ),
-              Icon(selected ? activeIcon : icon, color: color, size: 23),
-              const SizedBox(height: 3),
+              Icon(selected ? activeIcon : icon, color: color, size: 25),
+              const SizedBox(height: 4),
               Text(
                 label,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
-                style: Theme.of(context).textTheme.labelSmall
-                    ?.copyWith(color: color, fontWeight: selected ? FontWeight.w700 : FontWeight.w500),
+                style: Theme.of(context).textTheme.labelMedium
+                    ?.copyWith(color: color, fontWeight: selected ? FontWeight.w800 : FontWeight.w500),
               ),
             ],
           ),

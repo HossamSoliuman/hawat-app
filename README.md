@@ -71,11 +71,14 @@ lib/
 ## Tests
 
 ```
-flutter test --exclude-tags golden
+flutter test --exclude-tags golden,e2e,screens
 flutter test --tags golden
+flutter test --tags screens --dart-define=FLAVOR=production
 ```
 
 Unit and widget tests run against fixtures captured from a real server (`test/fixtures`). The golden tests render every screen at 360dp in light and dark mode with the real fonts (`test/golden/goldens`); they are rendered on Windows, so CI skips them. Refresh them with `--update-goldens` after a deliberate design change.
+
+The screens run writes every screen in a phone frame, light and dark, to `docs/screens/` (long screens also scrolled, numbered `-1`, `-2`…), for sharing the app's look.
 
 ## Fonts
 

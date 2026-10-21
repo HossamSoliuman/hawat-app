@@ -13,7 +13,6 @@ import '../../../core/widgets/ltr_text.dart';
 import '../../../core/widgets/section_head.dart';
 import '../../../core/widgets/stat_tile.dart';
 import '../../../core/widgets/states.dart';
-import '../../../core/widgets/status_chip.dart';
 import '../../../core/widgets/step_progress.dart';
 import '../../notifications/data/notifications_providers.dart';
 import '../../sales/presentation/sale_tile.dart';
@@ -77,16 +76,14 @@ class HomeScreen extends ConsumerWidget {
     return [
       _NeedsAction(dashboard: d),
       gap,
-      _Indicators(dashboard: d, period: period),
+      _Summary(kpis: d.kpis, period: period),
       gap,
-      _Pipeline(kpis: d.kpis),
-      gap,
-      _ActiveTrips(trips: d.activeTrips),
+      _Trips(kpis: d.kpis, trips: d.activeTrips),
       gap,
       _Stock(lines: d.stock),
       gap,
       HudCard(
-        padding: const EdgeInsets.fromLTRB(12, 8, 12, 12),
+        padding: const EdgeInsets.fromLTRB(14, 8, 14, 12),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
@@ -115,43 +112,54 @@ class _TopBar extends ConsumerWidget {
     final greeting = DateTime.now().hour < 12 ? l.greetingMorning(name) : l.greetingEvening(name);
 
     return Padding(
-      padding: const EdgeInsets.fromLTRB(Hud.gutter, 10, 8, 10),
+      padding: const EdgeInsets.fromLTRB(Hud.gutter, 14, Hud.gutter, 12),
       child: Row(
         children: [
           Expanded(
             child: Text(
               greeting,
-              style: Theme.of(context).textTheme.titleLarge,
+              style: Theme.of(context).textTheme.headlineSmall?.copyWith(fontSize: 21),
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
             ),
           ),
-          IconButton(
-            tooltip: l.notificationsTitle,
-            onPressed: () => context.push(Routes.notifications),
-            icon: Stack(
-              clipBehavior: Clip.none,
-              children: [
-                const Icon(Icons.notifications_outlined, size: 26),
-                if (unread > 0)
-                  PositionedDirectional(
-                    top: -6,
-                    end: -8,
+          const SizedBox(width: 12),
+          Stack(
+            clipBehavior: Clip.none,
+            children: [
+              IconButton(
+                tooltip: l.notificationsTitle,
+                onPressed: () => context.push(Routes.notifications),
+                style: IconButton.styleFrom(
+                  backgroundColor: c.panel,
+                  side: BorderSide(color: c.border),
+                  fixedSize: const Size.square(Hud.minTouch),
+                ),
+                icon: const Icon(Icons.notifications_outlined, size: 24),
+              ),
+              if (unread > 0)
+                PositionedDirectional(
+                  top: -6,
+                  end: -6,
+                  child: IgnorePointer(
                     child: Container(
-                      constraints: const BoxConstraints(minWidth: 18),
-                      height: 18,
-                      padding: const EdgeInsets.symmetric(horizontal: 4),
+                      constraints: const BoxConstraints(minWidth: 22),
+                      height: 22,
+                      padding: const EdgeInsets.symmetric(horizontal: 5),
                       alignment: Alignment.center,
-                      color: c.danger,
+                      decoration: BoxDecoration(
+                        color: c.danger,
+                        border: Border.all(color: c.background, width: 2),
+                      ),
                       child: Text(
                         unread > 99 ? '99+' : '$unread',
                         style: Theme.of(context).textTheme.labelSmall
-                            ?.copyWith(color: Colors.white, fontSize: 10.5, height: 1),
+                            ?.copyWith(color: Colors.white, fontSize: 11, fontWeight: FontWeight.w800, height: 1),
                       ),
                     ),
                   ),
-              ],
-            ),
+                ),
+            ],
           ),
         ],
       ),
@@ -174,21 +182,26 @@ class _NeedsAction extends ConsumerWidget {
     final scheduled = dashboard.scheduledTrips.take(3).toList();
 
     return HudCard(
-      padding: const EdgeInsets.fromLTRB(14, 8, 14, 8),
+      padding: const EdgeInsets.fromLTRB(14, 8, 14, 4),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           SectionHead(title: l.needsAction, icon: Icons.bolt),
           if (!dashboard.hasPendingActions)
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 14),
+            Container(
+              padding: const EdgeInsets.symmetric(vertical: 12),
+              decoration: BoxDecoration(
+                border: Border(top: BorderSide(color: c.hair)),
+              ),
               child: Row(
                 children: [
-                  Icon(Icons.task_alt, color: c.success, size: 22),
-                  const SizedBox(width: 10),
-                  Text(
-                    l.nothingPending,
-                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.w600),
+                  const ToneIcon(icon: Icons.task_alt, tone: Tone.success, size: 38, iconSize: 20),
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: Text(
+                      l.nothingPending,
+                      style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.w700),
+                    ),
                   ),
                 ],
               ),
@@ -201,7 +214,19 @@ class _NeedsAction extends ConsumerWidget {
               count: items.tripsToStart,
               onTap: () => openTrips(context, ref, TripStage.scheduled),
             ),
-            for (final trip in scheduled) _ScheduledTripRow(trip: trip),
+            if (scheduled.isNotEmpty)
+              Padding(
+                padding: const EdgeInsetsDirectional.only(start: 50, bottom: 12),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    for (var i = 0; i < scheduled.length; i++) ...[
+                      if (i > 0) const SizedBox(height: 8),
+                      _ScheduledTripRow(trip: scheduled[i]),
+                    ],
+                  ],
+                ),
+              ),
           ],
           if (items.tripsToSell > 0)
             _ActionRow(
@@ -226,6 +251,7 @@ class _NeedsAction extends ConsumerWidget {
   }
 }
 
+/// One task: what it is (and how much, for money) at the start, how many at the end.
 class _ActionRow extends StatelessWidget {
   const _ActionRow({
     required this.icon,
@@ -247,28 +273,47 @@ class _ActionRow extends StatelessWidget {
   Widget build(BuildContext context) {
     final c = HawatColors.of(context);
     final text = Theme.of(context).textTheme;
+    final color = c.tone(tone);
     return InkWell(
       onTap: onTap,
       child: Container(
-        constraints: const BoxConstraints(minHeight: 52),
-        padding: const EdgeInsets.symmetric(vertical: 8),
+        constraints: const BoxConstraints(minHeight: 62),
+        padding: const EdgeInsets.symmetric(vertical: 10),
         decoration: BoxDecoration(
           border: Border(top: BorderSide(color: c.hair)),
         ),
         child: Row(
           children: [
-            ToneIcon(icon: icon, tone: tone, size: 30, iconSize: 17),
+            ToneIcon(icon: icon, tone: tone, size: 38, iconSize: 20),
             const SizedBox(width: 12),
             Expanded(
-              child: Text(label, style: text.bodyLarge?.copyWith(fontWeight: FontWeight.w700)),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(label, style: text.bodyLarge?.copyWith(fontWeight: FontWeight.w700)),
+                  if (amount != null)
+                    Text(amount!, style: text.labelLarge?.copyWith(color: c.toneText(tone), height: 1.4)),
+                ],
+              ),
             ),
-            if (amount != null) ...[
-              Text(amount!, style: text.labelLarge?.copyWith(color: c.toneText(tone))),
-              const SizedBox(width: 10),
-            ],
-            CountBadge(count: count, tone: tone),
-            const SizedBox(width: 4),
-            Icon(Icons.chevron_right, color: c.muted),
+            const SizedBox(width: 10),
+            Container(
+              constraints: const BoxConstraints(minWidth: 32),
+              height: 28,
+              padding: const EdgeInsets.symmetric(horizontal: 8),
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                color: color.withValues(alpha: .12),
+                border: Border.all(color: color.withValues(alpha: .45)),
+              ),
+              child: LtrText(
+                Fmt.count(count),
+                style: text.labelLarge?.copyWith(color: c.toneText(tone), fontWeight: FontWeight.w800, height: 1),
+              ),
+            ),
+            const SizedBox(width: 2),
+            Icon(Icons.chevron_right, color: c.muted, size: 22),
           ],
         ),
       ),
@@ -276,6 +321,7 @@ class _ActionRow extends StatelessWidget {
   }
 }
 
+/// A trip waiting to sail, under its row: boat, then captain and time, and ابدأ.
 class _ScheduledTripRow extends ConsumerWidget {
   const _ScheduledTripRow({required this.trip});
 
@@ -284,57 +330,73 @@ class _ScheduledTripRow extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l = context.l10n;
+    final c = HawatColors.of(context);
     final text = Theme.of(context).textTheme;
-    return InkWell(
-      onTap: () => context.push(Routes.trip(trip.id)),
-      child: Padding(
-        padding: const EdgeInsetsDirectional.only(start: 42, top: 2, bottom: 8),
-        child: Row(
-          children: [
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    boatAndCaptain(trip),
-                    style: text.bodyMedium?.copyWith(fontWeight: FontWeight.w600),
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                  Text(
-                    trip.departureTime == null ? Fmt.ltr(trip.tripNumber) : l.when(trip.departureTime!),
-                    style: text.bodySmall,
-                  ),
-                ],
+    final details = [
+      trip.captain?.name,
+      if (trip.departureTime != null) l.when(trip.departureTime!),
+    ].whereType<String>().where((s) => s.isNotEmpty).join(' · ');
+
+    return Material(
+      color: c.mutedSurface.withValues(alpha: c.isDark ? .6 : .75),
+      shape: BorderDirectional(start: BorderSide(color: c.primary, width: 2)),
+      child: InkWell(
+        onTap: () => context.push(Routes.trip(trip.id)),
+        child: Padding(
+          padding: const EdgeInsetsDirectional.fromSTEB(12, 8, 8, 8),
+          child: Row(
+            children: [
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      trip.boat?.name ?? Fmt.ltr(trip.tripNumber),
+                      style: text.bodyMedium?.copyWith(fontWeight: FontWeight.w700),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    Text(
+                      details.isEmpty ? Fmt.ltr(trip.tripNumber) : details,
+                      style: text.bodySmall,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ],
+                ),
               ),
-            ),
-            const SizedBox(width: 8),
-            FilledButton.icon(
-              onPressed: () => startTripFlow(context, ref, trip),
-              style: FilledButton.styleFrom(
-                minimumSize: const Size(84, 40),
-                padding: const EdgeInsets.symmetric(horizontal: 12),
+              const SizedBox(width: 8),
+              FilledButton.icon(
+                onPressed: () => startTripFlow(context, ref, trip),
+                style: FilledButton.styleFrom(
+                  minimumSize: const Size(80, 40),
+                  padding: const EdgeInsetsDirectional.fromSTEB(10, 0, 14, 0),
+                ),
+                icon: const Icon(Icons.play_arrow_rounded, size: 20),
+                label: Text(l.startShort),
               ),
-              icon: const Icon(Icons.play_arrow, size: 18),
-              label: Text(l.startShort),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
   }
 }
 
-class _Indicators extends ConsumerWidget {
-  const _Indicators({required this.dashboard, required this.period});
+/// The period's money and catch: revenue large, catch and the fleet beside it.
+/// The period switch sits on the revenue label it changes.
+class _Summary extends StatelessWidget {
+  const _Summary({required this.kpis, required this.period});
 
-  final Dashboard dashboard;
+  final DashboardKpis kpis;
   final DashboardPeriod period;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     final l = context.l10n;
-    final k = dashboard.kpis;
+    final c = HawatColors.of(context);
+    final text = Theme.of(context).textTheme;
+    final rule = c.edgeOf(Tone.primary).withValues(alpha: .35);
     final revenueLabel = switch (period) {
       DashboardPeriod.today => l.statRevenueToday,
       DashboardPeriod.month => l.statRevenueMonth,
@@ -346,65 +408,122 @@ class _Indicators extends ConsumerWidget {
       DashboardPeriod.year => l.statCatchYear,
     };
 
-    Widget pair(Widget a, Widget b) => IntrinsicHeight(
-      child: Row(
+    return HudCard(
+      color: c.washOf(Tone.primary),
+      padding: const EdgeInsets.fromLTRB(14, 12, 14, 0),
+      child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Expanded(child: a),
-          const SizedBox(width: 10),
-          Expanded(child: b),
+          Row(
+            children: [
+              Expanded(
+                child: Text(
+                  revenueLabel,
+                  style: text.titleSmall?.copyWith(color: c.muted),
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+              const SizedBox(width: 10),
+              _PeriodSwitch(period: period),
+            ],
+          ),
+          const SizedBox(height: 12),
+          FittedBox(
+            fit: BoxFit.scaleDown,
+            alignment: AlignmentDirectional.centerStart,
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.baseline,
+              textBaseline: TextBaseline.alphabetic,
+              children: [
+                LtrText(Fmt.money(kpis.revenue), style: text.displaySmall?.copyWith(fontSize: 34, height: 1.1)),
+                const SizedBox(width: 8),
+                Text(l.currencySar, style: text.titleMedium?.copyWith(color: c.muted)),
+              ],
+            ),
+          ),
+          const SizedBox(height: 14),
+          Divider(color: rule),
+          IntrinsicHeight(
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Expanded(
+                  child: _MiniStat(
+                    icon: Icons.set_meal_outlined,
+                    label: catchLabel,
+                    value: Fmt.kg(kpis.catchKg),
+                    unit: l.unitKg,
+                  ),
+                ),
+                VerticalDivider(width: 29, indent: 12, endIndent: 12, color: rule),
+                Expanded(
+                  child: _MiniStat(
+                    icon: Icons.directions_boat_outlined,
+                    label: l.statActiveBoats,
+                    value: '${kpis.activeBoats} / ${kpis.boats}',
+                  ),
+                ),
+              ],
+            ),
+          ),
         ],
       ),
     );
+  }
+}
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        Row(
-          children: [
-            const ToneIcon(icon: Icons.insights, size: 28, iconSize: 15),
-            const SizedBox(width: 10),
-            Expanded(
-              child: Text(
-                l.indicatorsTitle,
-                style: Theme.of(context).textTheme.titleSmall,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
+class _MiniStat extends StatelessWidget {
+  const _MiniStat({required this.icon, required this.label, required this.value, this.unit});
+
+  final IconData icon;
+  final String label;
+  final String value;
+  final String? unit;
+
+  @override
+  Widget build(BuildContext context) {
+    final c = HawatColors.of(context);
+    final text = Theme.of(context).textTheme;
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 12),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Icon(icon, size: 16, color: c.muted),
+              const SizedBox(width: 6),
+              Expanded(
+                child: Text(
+                  label,
+                  style: text.labelMedium?.copyWith(color: c.muted),
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                ),
               ),
+            ],
+          ),
+          const SizedBox(height: 6),
+          FittedBox(
+            fit: BoxFit.scaleDown,
+            alignment: AlignmentDirectional.centerStart,
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.baseline,
+              textBaseline: TextBaseline.alphabetic,
+              children: [
+                LtrText(value, style: text.titleLarge?.copyWith(fontSize: 20, height: 1.15)),
+                if (unit != null) ...[
+                  const SizedBox(width: 5),
+                  Text(unit!, style: text.labelMedium?.copyWith(color: c.muted)),
+                ],
+              ],
             ),
-            const SizedBox(width: 8),
-            _PeriodSwitch(period: period),
-          ],
-        ),
-        const SizedBox(height: 8),
-        pair(
-          StatTile(
-            label: revenueLabel,
-            value: Fmt.money(k.revenue),
-            unit: l.currencySar,
-            icon: Icons.payments_outlined,
-            tone: Tone.success,
           ),
-          StatTile(label: catchLabel, value: Fmt.kg(k.catchKg), unit: l.unitKg, icon: Icons.set_meal_outlined),
-        ),
-        const SizedBox(height: 10),
-        pair(
-          StatTile(
-            label: l.statActiveBoats,
-            value: '${k.activeBoats} / ${k.boats}',
-            icon: Icons.directions_boat_outlined,
-            tone: Tone.info,
-          ),
-          StatTile(
-            label: l.statUnpaid,
-            value: Fmt.money(k.unpaid),
-            unit: l.currencySar,
-            icon: Icons.request_quote_outlined,
-            tone: Tone.warning,
-            onTap: k.unpaid > 0 ? () => openSales(context, ref, unpaidOnly: true) : null,
-          ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
@@ -426,7 +545,11 @@ class _PeriodSwitch extends ConsumerWidget {
     };
 
     return Container(
-      decoration: BoxDecoration(border: Border.all(color: c.border)),
+      padding: const EdgeInsets.all(3),
+      decoration: BoxDecoration(
+        color: c.panel,
+        border: Border.all(color: c.border),
+      ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -438,13 +561,16 @@ class _PeriodSwitch extends ConsumerWidget {
                 onTap: () => ref.read(homePeriodProvider.notifier).select(entry.key),
                 child: AnimatedContainer(
                   duration: Hud.fast,
-                  constraints: const BoxConstraints(minHeight: 36, minWidth: 52),
+                  constraints: const BoxConstraints(minHeight: 34, minWidth: 50),
                   padding: const EdgeInsets.symmetric(horizontal: 10),
                   alignment: Alignment.center,
                   color: entry.key == period ? c.primary : Colors.transparent,
                   child: Text(
                     entry.value,
-                    style: text.labelMedium?.copyWith(color: entry.key == period ? c.onPrimary : c.muted),
+                    style: text.labelMedium?.copyWith(
+                      color: entry.key == period ? c.onPrimary : c.muted,
+                      fontWeight: entry.key == period ? FontWeight.w700 : FontWeight.w600,
+                    ),
                   ),
                 ),
               ),
@@ -455,7 +581,61 @@ class _PeriodSwitch extends ConsumerWidget {
   }
 }
 
-/// Four counted stages; each opens the trips list on its tab.
+/// مسار الرحلات: the four counted stages, then the trips under way with
+/// what each one waits for.
+class _Trips extends ConsumerWidget {
+  const _Trips({required this.kpis, required this.trips});
+
+  final DashboardKpis kpis;
+  final List<Trip> trips;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final l = context.l10n;
+    final c = HawatColors.of(context);
+    final shown = trips.take(3).toList();
+
+    return HudCard(
+      padding: const EdgeInsets.fromLTRB(14, 8, 14, 4),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          SectionHead(
+            title: l.pipelineTitle,
+            icon: Icons.route_outlined,
+            action: shown.isEmpty ? null : l.viewAll,
+            onAction: () => openTrips(context, ref, TripStage.inProgress),
+          ),
+          const SizedBox(height: 6),
+          _Pipeline(kpis: kpis),
+          const SizedBox(height: 12),
+          if (shown.isEmpty)
+            Container(
+              padding: const EdgeInsets.symmetric(vertical: 14),
+              decoration: BoxDecoration(
+                border: Border(top: BorderSide(color: c.hair)),
+              ),
+              child: Row(
+                children: [
+                  Icon(Icons.sailing_outlined, color: c.muted, size: 20),
+                  const SizedBox(width: 10),
+                  Expanded(
+                    child: Text(
+                      l.noActiveTrips,
+                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: c.muted),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          for (final trip in shown) _ActiveTripRow(trip: trip),
+        ],
+      ),
+    );
+  }
+}
+
+/// Four counted stages; each opens the trips list on its tab. An empty stage fades.
 class _Pipeline extends ConsumerWidget {
   const _Pipeline({required this.kpis});
 
@@ -467,192 +647,158 @@ class _Pipeline extends ConsumerWidget {
     final c = HawatColors.of(context);
     final text = Theme.of(context).textTheme;
     final stages = [
-      (l.pipeScheduled, kpis.tripsScheduled, Tone.muted, TripStage.scheduled),
+      (l.pipeScheduled, kpis.tripsScheduled, Tone.primary, TripStage.scheduled),
       (l.pipeAtSea, kpis.tripsAtSea, Tone.info, TripStage.inProgress),
       (l.pipeCounting, kpis.tripsAwaitingCount, Tone.warning, TripStage.inProgress),
       (l.pipeForSale, kpis.tripsForSale, Tone.success, TripStage.forSale),
     ];
 
-    return HudCard(
-      padding: const EdgeInsets.fromLTRB(14, 8, 14, 14),
-      child: Column(
+    return IntrinsicHeight(
+      child: Row(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          SectionHead(title: l.pipelineTitle, icon: Icons.route_outlined),
-          const SizedBox(height: 8),
-          IntrinsicHeight(
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                for (var i = 0; i < stages.length; i++) ...[
-                  if (i > 0) const SizedBox(width: 6),
-                  Expanded(
-                    child: InkWell(
-                      onTap: () => openTrips(context, ref, stages[i].$4),
-                      child: Container(
-                        padding: const EdgeInsets.fromLTRB(6, 10, 6, 10),
-                        decoration: BoxDecoration(
-                          color: c.tone(stages[i].$3).withValues(alpha: stages[i].$2 > 0 ? .07 : .03),
-                          border: Border(top: BorderSide(color: c.tone(stages[i].$3), width: 3)),
+          for (final (i, (label, count, tone, stage)) in stages.indexed) ...[
+            if (i > 0) const SizedBox(width: 6),
+            Expanded(
+              child: Material(
+                color: count > 0 ? c.tone(tone).withValues(alpha: .09) : c.mutedSurface.withValues(alpha: .45),
+                shape: Border(top: BorderSide(color: count > 0 ? c.tone(tone) : c.border, width: 3)),
+                child: InkWell(
+                  onTap: () => openTrips(context, ref, stage),
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(4, 10, 4, 10),
+                    child: Column(
+                      children: [
+                        LtrText(
+                          Fmt.count(count),
+                          style: text.headlineSmall?.copyWith(color: count > 0 ? c.foreground : c.muted),
                         ),
-                        child: Column(
-                          children: [
-                            LtrText(
-                              Fmt.count(stages[i].$2),
-                              style: text.headlineSmall?.copyWith(color: stages[i].$2 > 0 ? c.foreground : c.muted),
-                            ),
-                            const SizedBox(height: 4),
-                            Text(
-                              stages[i].$1,
-                              style: text.labelSmall?.copyWith(color: c.muted),
-                              textAlign: TextAlign.center,
-                            ),
-                          ],
+                        const SizedBox(height: 2),
+                        Text(
+                          label,
+                          style: text.labelSmall?.copyWith(color: count > 0 ? c.toneText(tone) : c.muted),
+                          textAlign: TextAlign.center,
                         ),
-                      ),
+                      ],
                     ),
                   ),
-                ],
-              ],
+                ),
+              ),
             ),
-          ),
+          ],
         ],
       ),
     );
   }
 }
 
-class _ActiveTrips extends ConsumerWidget {
-  const _ActiveTrips({required this.trips});
-
-  final List<Trip> trips;
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final l = context.l10n;
-    final width = (MediaQuery.sizeOf(context).width * .8).clamp(260.0, 340.0);
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        SectionHead(
-          title: l.activeTripsTitle,
-          icon: Icons.sailing_outlined,
-          action: trips.isEmpty ? null : l.viewAll,
-          onAction: () => openTrips(context, ref, TripStage.inProgress),
-        ),
-        const SizedBox(height: 8),
-        if (trips.isEmpty)
-          HudCard(
-            child: EmptyState(icon: Icons.sailing_outlined, title: l.noActiveTrips, compact: true),
-          )
-        else
-          SizedBox(
-            height: 196,
-            child: ListView.separated(
-              scrollDirection: Axis.horizontal,
-              clipBehavior: Clip.none,
-              itemCount: trips.length,
-              separatorBuilder: (_, _) => const SizedBox(width: 10),
-              itemBuilder: (context, i) => SizedBox(
-                width: width,
-                child: _ActiveTripCard(trip: trips[i]),
-              ),
-            ),
-          ),
-      ],
-    );
-  }
-}
-
-class _ActiveTripCard extends ConsumerWidget {
-  const _ActiveTripCard({required this.trip});
+/// A trip under way: boat and phase, captain and number, its five-step bar
+/// in the phase's tone, then the next move (log the catch) or what it waits for.
+class _ActiveTripRow extends StatelessWidget {
+  const _ActiveTripRow({required this.trip});
 
   final Trip trip;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     final l = context.l10n;
     final c = HawatColors.of(context);
     final text = Theme.of(context).textTheme;
     final phase = trip.phase;
-    final steps = tripStepLabels(l);
+    final details = [
+      trip.captain?.name,
+      Fmt.ltr(trip.tripNumber),
+    ].whereType<String>().where((s) => s.isNotEmpty).join(' · ');
 
-    final Widget next = switch (phase) {
-      TripPhase.atSea => OutlinedButton.icon(
-        onPressed: () => context.push(Routes.submitCatch(trip.id)),
-        style: OutlinedButton.styleFrom(
-          minimumSize: const Size.fromHeight(44),
-          side: BorderSide(color: c.primary),
-        ),
-        icon: const Icon(Icons.scale_outlined, size: 18),
-        label: Text(l.quickSubmitCatch, overflow: TextOverflow.ellipsis),
+    final (String, IconData)? hint = switch (phase) {
+      TripPhase.forSale when trip.captainInputKg != null || trip.actualWeightKg != null => (
+        '${l.countedLabel} ${l.kg(trip.actualWeightKg ?? trip.captainInputKg!)}',
+        Icons.check_circle_outline,
       ),
-      TripPhase.forSale when trip.captainInputKg != null || trip.actualWeightKg != null => _Hint(
-        text: '${l.countedLabel} ${l.kg(trip.actualWeightKg ?? trip.captainInputKg!)}',
-        tone: Tone.success,
+      TripPhase.awaitingCounter => (
+        trip.countingPort == null ? l.waitingCounter : l.waitingCounterAt(trip.countingPort!),
+        Icons.hourglass_top_rounded,
       ),
-      TripPhase.awaitingCounter => _Hint(
-        text: trip.countingPort == null ? l.waitingCounter : l.waitingCounterAt(trip.countingPort!),
-        tone: Tone.warning,
-      ),
-      TripPhase.counting => _Hint(text: l.countingNow, tone: Tone.warning),
-      _ => const SizedBox.shrink(),
+      TripPhase.counting => (l.countingNow, Icons.scale_outlined),
+      _ => null,
     };
 
-    return HudCard(
+    return InkWell(
       onTap: () => context.push(Routes.trip(trip.id)),
-      padding: const EdgeInsets.all(12),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Row(
-            children: [
-              Expanded(
-                child: LtrText(trip.tripNumber, style: text.labelMedium?.copyWith(color: c.muted)),
+      child: Container(
+        padding: const EdgeInsets.symmetric(vertical: 12),
+        decoration: BoxDecoration(
+          border: Border(top: BorderSide(color: c.hair)),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        trip.boat?.name ?? '—',
+                        style: text.bodyLarge?.copyWith(fontWeight: FontWeight.w700),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      Text(details, style: text.bodySmall, maxLines: 1, overflow: TextOverflow.ellipsis),
+                    ],
+                  ),
+                ),
+                const SizedBox(width: 8),
+                Padding(
+                  padding: const EdgeInsets.only(top: 2),
+                  child: TripPhaseChip(trip: trip, dense: true),
+                ),
+              ],
+            ),
+            const SizedBox(height: 10),
+            SegmentProgress(current: phase.step, allDone: phase.isFinished, tone: c.tone(phase.tone)),
+            if (phase == TripPhase.atSea) ...[
+              const SizedBox(height: 10),
+              Align(
+                alignment: AlignmentDirectional.centerEnd,
+                child: OutlinedButton.icon(
+                  onPressed: () => context.push(Routes.submitCatch(trip.id)),
+                  style: OutlinedButton.styleFrom(
+                    minimumSize: const Size(0, 40),
+                    foregroundColor: c.toneText(Tone.primary),
+                    side: BorderSide(color: c.primary),
+                  ),
+                  icon: const Icon(Icons.scale_outlined, size: 18),
+                  label: Text(l.quickSubmitCatch),
+                ),
               ),
-              TripPhaseChip(trip: trip, dense: true),
+            ] else if (hint != null) ...[
+              const SizedBox(height: 8),
+              Row(
+                children: [
+                  Icon(hint.$2, size: 16, color: c.toneText(phase.tone)),
+                  const SizedBox(width: 6),
+                  Expanded(
+                    child: Text(
+                      hint.$1,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: text.labelMedium?.copyWith(color: c.toneText(phase.tone)),
+                    ),
+                  ),
+                ],
+              ),
             ],
-          ),
-          const SizedBox(height: 8),
-          Text(trip.boat?.name ?? '—', style: text.titleMedium, maxLines: 1, overflow: TextOverflow.ellipsis),
-          Text(trip.captain?.name ?? '', style: text.bodySmall, maxLines: 1, overflow: TextOverflow.ellipsis),
-          const Spacer(),
-          SegmentProgress(current: phase.step, allDone: phase.isFinished),
-          const SizedBox(height: 6),
-          Text(steps[phase.step.clamp(0, steps.length - 1)], style: text.labelSmall?.copyWith(color: c.muted)),
-          const SizedBox(height: 10),
-          next,
-        ],
+          ],
+        ),
       ),
     );
   }
 }
 
-class _Hint extends StatelessWidget {
-  const _Hint({required this.text, required this.tone});
-
-  final String text;
-  final Tone tone;
-
-  @override
-  Widget build(BuildContext context) {
-    final c = HawatColors.of(context);
-    return Container(
-      constraints: const BoxConstraints(minHeight: 44),
-      padding: const EdgeInsets.symmetric(horizontal: 10),
-      alignment: AlignmentDirectional.centerStart,
-      color: c.tone(tone).withValues(alpha: .08),
-      child: Text(
-        text,
-        maxLines: 1,
-        overflow: TextOverflow.ellipsis,
-        style: Theme.of(context).textTheme.labelMedium?.copyWith(color: c.toneText(tone)),
-      ),
-    );
-  }
-}
-
-/// الأسماك المتوفرة: kg per species with a bar proportional to the largest.
+/// الأسماك المتوفرة: one line per species, its kg on a bar against the largest.
 class _Stock extends StatelessWidget {
   const _Stock({required this.lines});
 
@@ -664,11 +810,11 @@ class _Stock extends StatelessWidget {
     final c = HawatColors.of(context);
     final text = Theme.of(context).textTheme;
     final shown = [...lines]..sort((a, b) => b.weightKg.compareTo(a.weightKg));
-    final top = shown.take(6).toList();
+    final top = shown.take(5).toList();
     final max = top.isEmpty ? 1.0 : top.first.weightKg;
 
     return HudCard(
-      padding: const EdgeInsets.fromLTRB(14, 8, 14, 12),
+      padding: const EdgeInsets.fromLTRB(14, 8, 14, 14),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
@@ -685,27 +831,40 @@ class _Stock extends StatelessWidget {
             ),
           for (final line in top)
             Padding(
-              padding: const EdgeInsets.only(top: 10),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
+              padding: const EdgeInsets.only(top: 12),
+              child: Row(
                 children: [
-                  Row(
-                    children: [
-                      Expanded(
-                        child: Text(line.species ?? '—', style: text.bodyMedium?.copyWith(fontWeight: FontWeight.w600)),
-                      ),
-                      Text(l.kg(line.weightKg), style: text.labelLarge),
-                    ],
+                  Expanded(
+                    flex: 3,
+                    child: Text(
+                      line.species ?? '—',
+                      style: text.bodyMedium?.copyWith(fontWeight: FontWeight.w600),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
                   ),
-                  const SizedBox(height: 6),
-                  LayoutBuilder(
-                    builder: (context, constraints) => Align(
-                      alignment: AlignmentDirectional.centerStart,
-                      child: Container(
-                        height: 6,
-                        width: constraints.maxWidth * (max <= 0 ? 0 : (line.weightKg / max).clamp(.02, 1)),
-                        color: c.primary,
+                  const SizedBox(width: 10),
+                  Expanded(
+                    flex: 4,
+                    child: LayoutBuilder(
+                      builder: (context, constraints) => Container(
+                        height: 8,
+                        color: c.mutedSurface,
+                        alignment: AlignmentDirectional.centerStart,
+                        child: Container(
+                          width: constraints.maxWidth * (max <= 0 ? 0 : (line.weightKg / max).clamp(.02, 1)),
+                          color: c.primary,
+                        ),
                       ),
+                    ),
+                  ),
+                  const SizedBox(width: 10),
+                  SizedBox(
+                    width: 92,
+                    child: FittedBox(
+                      fit: BoxFit.scaleDown,
+                      alignment: AlignmentDirectional.centerEnd,
+                      child: Text(l.kg(line.weightKg), style: text.labelLarge),
                     ),
                   ),
                 ],
@@ -760,27 +919,13 @@ class _HomeSkeleton extends StatelessWidget {
       padding: EdgeInsets.fromLTRB(Hud.gutter, 4, Hud.gutter, Hud.gutter),
       child: Column(
         children: [
-          SkeletonBox(height: 120),
+          SkeletonBox(height: 150),
           SizedBox(height: Hud.gap),
-          Row(
-            children: [
-              Expanded(child: SkeletonBox(height: 96)),
-              SizedBox(width: 10),
-              Expanded(child: SkeletonBox(height: 96)),
-            ],
-          ),
-          SizedBox(height: 10),
-          Row(
-            children: [
-              Expanded(child: SkeletonBox(height: 96)),
-              SizedBox(width: 10),
-              Expanded(child: SkeletonBox(height: 96)),
-            ],
-          ),
+          SkeletonBox(height: 180),
           SizedBox(height: Hud.gap),
-          SkeletonBox(height: 110),
+          SkeletonBox(height: 260),
           SizedBox(height: Hud.gap),
-          SkeletonBox(height: 190),
+          SkeletonBox(height: 170),
         ],
       ),
     ),

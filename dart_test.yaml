@@ -3,3 +3,5 @@ tags:
     description: Screenshots compared pixel by pixel; rendered on Windows, skipped in CI.
   e2e:
     description: Runs the trip cycle against a real test server (HAWAT_E2E_API); skipped otherwise.
+  screens:
+    description: Writes every screen in a phone frame to docs/screens/; run on demand.

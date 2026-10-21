@@ -38,41 +38,6 @@ void main() {
     await loadAppFonts();
   });
 
-  /// The captured dashboard with a month of sales, so every home section has content.
-  FakeApi busyOwner() {
-    final api = ownerApi();
-    final dashboard = fixture('dashboard');
-    final data = dashboard['data'] as Map<String, dynamic>;
-    (data['kpis'] as Map)
-      ..['revenue'] = 48250
-      ..['catch_kg'] = 1840.5
-      ..['unpaid'] = 6300;
-    data['action_items'] = {'trips_to_start': 1, 'trips_to_sell': 7, 'unpaid_sales': 3, 'unpaid_total': 6300};
-    final months = data['revenue_by_month'] as List;
-    const totals = [12400, 18900, 9800, 22350, 31200, 48250];
-    for (var i = 0; i < months.length; i++) {
-      (months[i] as Map)['total'] = totals[i];
-    }
-    final sales = fixture('sales')['data'] as List;
-    data['recent_sales'] = [
-      for (var i = 0; i < 4; i++)
-        {
-          ...(sales.first as Map<String, dynamic>),
-          'id': 100 + i,
-          'invoice_number': '26-10-00012${4 - i}',
-          'total': [4800, 1250.5, 9600, 2300][i],
-          'paid_amount': [4800, 0, 6000, 2300][i],
-          'remaining': [0, 1250.5, 3600, 0][i],
-          'customer': {
-            'id': i,
-            'name': ['سوق القطيف المركزي', 'محل أبو خالد للأسماك', 'مطعم البحر', 'سالم الدوسري'][i],
-            'phone': null,
-          },
-        },
-    ];
-    return api..json('GET', '/owner/dashboard', dashboard);
-  }
-
   Future<void> shot(
     WidgetTester tester,
     String name,
@@ -107,15 +72,15 @@ void main() {
     'login dark',
     (tester) => shot(tester, 'login_dark', const LoginScreen(), dark: true, session: const SignedOut()),
   );
-  testWidgets('home', (tester) => shot(tester, 'home', const HomeScreen(), api: busyOwner(), height: 2300));
+  testWidgets('home', (tester) => shot(tester, 'home', const HomeScreen(), api: busyOwnerApi(), height: 2300));
   testWidgets(
     'home dark',
-    (tester) => shot(tester, 'home_dark', const HomeScreen(), api: busyOwner(), dark: true, height: 2300),
+    (tester) => shot(tester, 'home_dark', const HomeScreen(), api: busyOwnerApi(), dark: true, height: 2300),
   );
-  testWidgets('home first screen', (tester) => shot(tester, 'home_fold', const HomeScreen(), api: busyOwner()));
+  testWidgets('home first screen', (tester) => shot(tester, 'home_fold', const HomeScreen(), api: busyOwnerApi()));
   testWidgets(
     'home text 1.3',
-    (tester) => shot(tester, 'home_text_1_3', const HomeScreen(), api: busyOwner(), height: 2700, textScale: 1.3),
+    (tester) => shot(tester, 'home_text_1_3', const HomeScreen(), api: busyOwnerApi(), height: 2700, textScale: 1.3),
   );
   testWidgets(
     'trips',
