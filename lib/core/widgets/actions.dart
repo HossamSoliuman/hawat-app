@@ -21,13 +21,13 @@ class PinnedAction extends StatelessWidget {
       ),
       child: SafeArea(
         top: false,
-        child: Padding(padding: const EdgeInsets.fromLTRB(Hud.gutter, 10, Hud.gutter, 10), child: child),
+        child: Padding(padding: const EdgeInsets.fromLTRB(Hud.gutter, 8, Hud.gutter, 8), child: child),
       ),
     );
   }
 }
 
-/// A full-width 52dp button that shows a spinner while [busy].
+/// A full-width 48dp button that shows a spinner while [busy].
 class PrimaryButton extends StatelessWidget {
   const PrimaryButton({
     super.key,
@@ -54,13 +54,13 @@ class PrimaryButton extends StatelessWidget {
     );
     final child = busy
         ? SizedBox.square(
-            dimension: 22,
-            child: CircularProgressIndicator(strokeWidth: 2.4, color: danger ? Colors.white : c.onPrimary),
+            dimension: 20,
+            child: CircularProgressIndicator(strokeWidth: 2.2, color: danger ? Colors.white : c.onPrimary),
           )
         : Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              if (icon != null) ...[Icon(icon, size: 20), const SizedBox(width: 8)],
+              if (icon != null) ...[Icon(icon, size: 18), const SizedBox(width: 8)],
               Flexible(child: Text(label, overflow: TextOverflow.ellipsis)),
             ],
           );
@@ -108,7 +108,7 @@ Future<bool> showConfirmSheet(
               const SizedBox(height: 8),
               OutlinedButton(
                 onPressed: () => Navigator.of(context).pop(false),
-                style: OutlinedButton.styleFrom(minimumSize: const Size.fromHeight(Hud.minTouch)),
+                style: OutlinedButton.styleFrom(minimumSize: const Size.fromHeight(Hud.buttonHeight)),
                 child: Text(context.l10n.back),
               ),
             ],

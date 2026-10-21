@@ -249,7 +249,7 @@ class _ConsignScreenState extends ConsumerState<ConsignScreen> {
             ),
           OutlinedButton.icon(
             onPressed: _addLine,
-            style: OutlinedButton.styleFrom(minimumSize: const Size.fromHeight(Hud.minTouch)),
+            style: OutlinedButton.styleFrom(minimumSize: const Size.fromHeight(Hud.buttonHeight)),
             icon: const Icon(Icons.add),
             label: Text(l.addSpecies),
           ),
@@ -405,7 +405,7 @@ class _SummarySheetState extends ConsumerState<_SummarySheet> {
               const SizedBox(height: 8),
               OutlinedButton(
                 onPressed: _busy ? null : () => Navigator.of(context).pop(),
-                style: OutlinedButton.styleFrom(minimumSize: const Size.fromHeight(Hud.minTouch)),
+                style: OutlinedButton.styleFrom(minimumSize: const Size.fromHeight(Hud.buttonHeight)),
                 child: Text(l.editCatch),
               ),
             ],

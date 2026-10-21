@@ -87,7 +87,7 @@ class _ActionSheetState extends State<_ActionSheet> {
             const SizedBox(height: 8),
             OutlinedButton(
               onPressed: _busy ? null : () => Navigator.of(context).pop(false),
-              style: OutlinedButton.styleFrom(minimumSize: const Size.fromHeight(Hud.minTouch)),
+              style: OutlinedButton.styleFrom(minimumSize: const Size.fromHeight(Hud.buttonHeight)),
               child: Text(context.l10n.back),
             ),
           ],

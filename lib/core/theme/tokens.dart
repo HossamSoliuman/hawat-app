@@ -205,7 +205,8 @@ abstract final class Hud {
   static const bracketLength = 11.0;
   static const bracketThickness = 1.5;
   static const minTouch = 48.0;
-  static const primaryButtonHeight = 52.0;
+  static const buttonHeight = 44.0;
+  static const primaryButtonHeight = 48.0;
   static const fast = Duration(milliseconds: 160);
   static const medium = Duration(milliseconds: 200);
 }

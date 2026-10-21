@@ -262,7 +262,7 @@ class _CatchScreenState extends ConsumerState<CatchScreen> {
                 ),
               OutlinedButton.icon(
                 onPressed: _addLine,
-                style: OutlinedButton.styleFrom(minimumSize: const Size.fromHeight(Hud.minTouch)),
+                style: OutlinedButton.styleFrom(minimumSize: const Size.fromHeight(Hud.buttonHeight)),
                 icon: const Icon(Icons.add),
                 label: Text(l.addSpecies),
               ),
@@ -299,7 +299,7 @@ class _LineCard extends StatelessWidget {
 
     return HudCard(
       brackets: false,
-      padding: const EdgeInsets.fromLTRB(12, 10, 6, 12),
+      padding: const EdgeInsets.fromLTRB(12, 10, 6, 8),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
@@ -309,7 +309,7 @@ class _LineCard extends StatelessWidget {
               Container(
                 width: 26,
                 height: 26,
-                margin: const EdgeInsets.only(top: 12),
+                margin: const EdgeInsets.only(top: 9),
                 alignment: Alignment.center,
                 color: c.mutedSurface,
                 child: Text('${index + 1}', style: Theme.of(context).textTheme.labelSmall),
@@ -352,11 +352,11 @@ class _LineCard extends StatelessWidget {
               ),
               SizedBox(
                 width: 40,
-                height: 52,
+                height: 44,
                 child: IconButton(
                   tooltip: l.removeLine,
                   onPressed: canRemove ? onRemove : null,
-                  icon: Icon(Icons.close, color: canRemove ? c.muted : c.border),
+                  icon: Icon(Icons.close, size: 20, color: canRemove ? c.muted : c.border),
                 ),
               ),
             ],
@@ -378,10 +378,12 @@ class _LineCard extends StatelessWidget {
                         onChanged();
                       },
                       style: TextButton.styleFrom(
-                        minimumSize: const Size(48, 40),
+                        minimumSize: const Size(48, 36),
+                        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                         padding: const EdgeInsets.symmetric(horizontal: 6),
+                        textStyle: Theme.of(context).textTheme.labelMedium?.copyWith(fontWeight: FontWeight.w700),
                       ),
-                      icon: const Icon(Icons.add, size: 18),
+                      icon: const Icon(Icons.add, size: 16),
                       label: Text(l.addNote),
                     ),
                   ),
@@ -487,7 +489,7 @@ class _SummarySheetState extends ConsumerState<_SummarySheet> {
               const SizedBox(height: 8),
               OutlinedButton(
                 onPressed: _busy ? null : () => Navigator.of(context).pop(false),
-                style: OutlinedButton.styleFrom(minimumSize: const Size.fromHeight(Hud.minTouch)),
+                style: OutlinedButton.styleFrom(minimumSize: const Size.fromHeight(Hud.buttonHeight)),
                 child: Text(l.editCatch),
               ),
             ],

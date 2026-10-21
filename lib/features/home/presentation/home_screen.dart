@@ -112,13 +112,13 @@ class _TopBar extends ConsumerWidget {
     final greeting = DateTime.now().hour < 12 ? l.greetingMorning(name) : l.greetingEvening(name);
 
     return Padding(
-      padding: const EdgeInsets.fromLTRB(Hud.gutter, 14, Hud.gutter, 12),
+      padding: const EdgeInsets.fromLTRB(Hud.gutter, 12, Hud.gutter, 10),
       child: Row(
         children: [
           Expanded(
             child: Text(
               greeting,
-              style: Theme.of(context).textTheme.headlineSmall?.copyWith(fontSize: 21),
+              style: Theme.of(context).textTheme.titleLarge?.copyWith(fontSize: 19),
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
             ),
@@ -133,9 +133,9 @@ class _TopBar extends ConsumerWidget {
                 style: IconButton.styleFrom(
                   backgroundColor: c.panel,
                   side: BorderSide(color: c.border),
-                  fixedSize: const Size.square(Hud.minTouch),
+                  fixedSize: const Size.square(42),
                 ),
-                icon: const Icon(Icons.notifications_outlined, size: 24),
+                icon: const Icon(Icons.notifications_outlined, size: 21),
               ),
               if (unread > 0)
                 PositionedDirectional(
@@ -143,8 +143,8 @@ class _TopBar extends ConsumerWidget {
                   end: -6,
                   child: IgnorePointer(
                     child: Container(
-                      constraints: const BoxConstraints(minWidth: 22),
-                      height: 22,
+                      constraints: const BoxConstraints(minWidth: 20),
+                      height: 20,
                       padding: const EdgeInsets.symmetric(horizontal: 5),
                       alignment: Alignment.center,
                       decoration: BoxDecoration(
@@ -154,7 +154,7 @@ class _TopBar extends ConsumerWidget {
                       child: Text(
                         unread > 99 ? '99+' : '$unread',
                         style: Theme.of(context).textTheme.labelSmall
-                            ?.copyWith(color: Colors.white, fontSize: 11, fontWeight: FontWeight.w800, height: 1),
+                            ?.copyWith(color: Colors.white, fontSize: 10.5, fontWeight: FontWeight.w800, height: 1),
                       ),
                     ),
                   ),
@@ -195,7 +195,7 @@ class _NeedsAction extends ConsumerWidget {
               ),
               child: Row(
                 children: [
-                  const ToneIcon(icon: Icons.task_alt, tone: Tone.success, size: 38, iconSize: 20),
+                  const ToneIcon(icon: Icons.task_alt, tone: Tone.success, size: 34, iconSize: 18),
                   const SizedBox(width: 12),
                   Expanded(
                     child: Text(
@@ -216,7 +216,7 @@ class _NeedsAction extends ConsumerWidget {
             ),
             if (scheduled.isNotEmpty)
               Padding(
-                padding: const EdgeInsetsDirectional.only(start: 50, bottom: 12),
+                padding: const EdgeInsetsDirectional.only(start: 46, bottom: 10),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
@@ -277,14 +277,14 @@ class _ActionRow extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       child: Container(
-        constraints: const BoxConstraints(minHeight: 62),
-        padding: const EdgeInsets.symmetric(vertical: 10),
+        constraints: const BoxConstraints(minHeight: 54),
+        padding: const EdgeInsets.symmetric(vertical: 8),
         decoration: BoxDecoration(
           border: Border(top: BorderSide(color: c.hair)),
         ),
         child: Row(
           children: [
-            ToneIcon(icon: icon, tone: tone, size: 38, iconSize: 20),
+            ToneIcon(icon: icon, tone: tone, size: 34, iconSize: 18),
             const SizedBox(width: 12),
             Expanded(
               child: Column(
@@ -293,14 +293,14 @@ class _ActionRow extends StatelessWidget {
                 children: [
                   Text(label, style: text.bodyLarge?.copyWith(fontWeight: FontWeight.w700)),
                   if (amount != null)
-                    Text(amount!, style: text.labelLarge?.copyWith(color: c.toneText(tone), height: 1.4)),
+                    Text(amount!, style: text.labelMedium?.copyWith(color: c.toneText(tone), height: 1.4)),
                 ],
               ),
             ),
             const SizedBox(width: 10),
             Container(
-              constraints: const BoxConstraints(minWidth: 32),
-              height: 28,
+              constraints: const BoxConstraints(minWidth: 28),
+              height: 24,
               padding: const EdgeInsets.symmetric(horizontal: 8),
               alignment: Alignment.center,
               decoration: BoxDecoration(
@@ -309,11 +309,11 @@ class _ActionRow extends StatelessWidget {
               ),
               child: LtrText(
                 Fmt.count(count),
-                style: text.labelLarge?.copyWith(color: c.toneText(tone), fontWeight: FontWeight.w800, height: 1),
+                style: text.labelMedium?.copyWith(color: c.toneText(tone), fontWeight: FontWeight.w800, height: 1),
               ),
             ),
             const SizedBox(width: 2),
-            Icon(Icons.chevron_right, color: c.muted, size: 22),
+            Icon(Icons.chevron_right, color: c.muted, size: 20),
           ],
         ),
       ),
@@ -343,7 +343,7 @@ class _ScheduledTripRow extends ConsumerWidget {
       child: InkWell(
         onTap: () => context.push(Routes.trip(trip.id)),
         child: Padding(
-          padding: const EdgeInsetsDirectional.fromSTEB(12, 8, 8, 8),
+          padding: const EdgeInsetsDirectional.fromSTEB(10, 4, 6, 4),
           child: Row(
             children: [
               Expanded(
@@ -369,10 +369,11 @@ class _ScheduledTripRow extends ConsumerWidget {
               FilledButton.icon(
                 onPressed: () => startTripFlow(context, ref, trip),
                 style: FilledButton.styleFrom(
-                  minimumSize: const Size(80, 40),
-                  padding: const EdgeInsetsDirectional.fromSTEB(10, 0, 14, 0),
+                  minimumSize: const Size(64, 34),
+                  padding: const EdgeInsetsDirectional.fromSTEB(8, 0, 12, 0),
+                  textStyle: text.labelMedium?.copyWith(fontWeight: FontWeight.w700),
                 ),
-                icon: const Icon(Icons.play_arrow_rounded, size: 20),
+                icon: const Icon(Icons.play_arrow_rounded, size: 18),
                 label: Text(l.startShort),
               ),
             ],
@@ -428,7 +429,7 @@ class _Summary extends StatelessWidget {
               _PeriodSwitch(period: period),
             ],
           ),
-          const SizedBox(height: 12),
+          const SizedBox(height: 8),
           FittedBox(
             fit: BoxFit.scaleDown,
             alignment: AlignmentDirectional.centerStart,
@@ -437,13 +438,13 @@ class _Summary extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.baseline,
               textBaseline: TextBaseline.alphabetic,
               children: [
-                LtrText(Fmt.money(kpis.revenue), style: text.displaySmall?.copyWith(fontSize: 34, height: 1.1)),
+                LtrText(Fmt.money(kpis.revenue), style: text.displaySmall?.copyWith(fontSize: 30, height: 1.1)),
                 const SizedBox(width: 8),
-                Text(l.currencySar, style: text.titleMedium?.copyWith(color: c.muted)),
+                Text(l.currencySar, style: text.titleSmall?.copyWith(color: c.muted)),
               ],
             ),
           ),
-          const SizedBox(height: 14),
+          const SizedBox(height: 12),
           Divider(color: rule),
           IntrinsicHeight(
             child: Row(
@@ -487,13 +488,13 @@ class _MiniStat extends StatelessWidget {
     final c = HawatColors.of(context);
     final text = Theme.of(context).textTheme;
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 12),
+      padding: const EdgeInsets.symmetric(vertical: 10),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
             children: [
-              Icon(icon, size: 16, color: c.muted),
+              Icon(icon, size: 15, color: c.muted),
               const SizedBox(width: 6),
               Expanded(
                 child: Text(
@@ -505,7 +506,7 @@ class _MiniStat extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(height: 6),
+          const SizedBox(height: 4),
           FittedBox(
             fit: BoxFit.scaleDown,
             alignment: AlignmentDirectional.centerStart,
@@ -514,7 +515,7 @@ class _MiniStat extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.baseline,
               textBaseline: TextBaseline.alphabetic,
               children: [
-                LtrText(value, style: text.titleLarge?.copyWith(fontSize: 20, height: 1.15)),
+                LtrText(value, style: text.titleLarge?.copyWith(fontSize: 18, height: 1.15)),
                 if (unit != null) ...[
                   const SizedBox(width: 5),
                   Text(unit!, style: text.labelMedium?.copyWith(color: c.muted)),
@@ -561,8 +562,8 @@ class _PeriodSwitch extends ConsumerWidget {
                 onTap: () => ref.read(homePeriodProvider.notifier).select(entry.key),
                 child: AnimatedContainer(
                   duration: Hud.fast,
-                  constraints: const BoxConstraints(minHeight: 34, minWidth: 50),
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  constraints: const BoxConstraints(minHeight: 30, minWidth: 44),
+                  padding: const EdgeInsets.symmetric(horizontal: 8),
                   alignment: Alignment.center,
                   color: entry.key == period ? c.primary : Colors.transparent,
                   child: Text(
@@ -666,12 +667,12 @@ class _Pipeline extends ConsumerWidget {
                 child: InkWell(
                   onTap: () => openTrips(context, ref, stage),
                   child: Padding(
-                    padding: const EdgeInsets.fromLTRB(4, 10, 4, 10),
+                    padding: const EdgeInsets.fromLTRB(4, 8, 4, 8),
                     child: Column(
                       children: [
                         LtrText(
                           Fmt.count(count),
-                          style: text.headlineSmall?.copyWith(color: count > 0 ? c.foreground : c.muted),
+                          style: text.titleLarge?.copyWith(fontSize: 19, color: count > 0 ? c.foreground : c.muted),
                         ),
                         const SizedBox(height: 2),
                         Text(
@@ -726,7 +727,7 @@ class _ActiveTripRow extends StatelessWidget {
     return InkWell(
       onTap: () => context.push(Routes.trip(trip.id)),
       child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 12),
+        padding: const EdgeInsets.symmetric(vertical: 10),
         decoration: BoxDecoration(
           border: Border(top: BorderSide(color: c.hair)),
         ),
@@ -757,7 +758,7 @@ class _ActiveTripRow extends StatelessWidget {
                 ),
               ],
             ),
-            const SizedBox(height: 10),
+            const SizedBox(height: 8),
             SegmentProgress(current: phase.step, allDone: phase.isFinished, tone: c.tone(phase.tone)),
             if (phase == TripPhase.atSea) ...[
               const SizedBox(height: 10),
@@ -766,11 +767,13 @@ class _ActiveTripRow extends StatelessWidget {
                 child: OutlinedButton.icon(
                   onPressed: () => context.push(Routes.submitCatch(trip.id)),
                   style: OutlinedButton.styleFrom(
-                    minimumSize: const Size(0, 40),
+                    minimumSize: const Size(0, 34),
+                    padding: const EdgeInsets.symmetric(horizontal: 12),
                     foregroundColor: c.toneText(Tone.primary),
                     side: BorderSide(color: c.primary),
+                    textStyle: text.labelMedium?.copyWith(fontWeight: FontWeight.w700),
                   ),
-                  icon: const Icon(Icons.scale_outlined, size: 18),
+                  icon: const Icon(Icons.scale_outlined, size: 16),
                   label: Text(l.quickSubmitCatch),
                 ),
               ),
@@ -831,7 +834,7 @@ class _Stock extends StatelessWidget {
             ),
           for (final line in top)
             Padding(
-              padding: const EdgeInsets.only(top: 12),
+              padding: const EdgeInsets.only(top: 10),
               child: Row(
                 children: [
                   Expanded(
@@ -864,7 +867,7 @@ class _Stock extends StatelessWidget {
                     child: FittedBox(
                       fit: BoxFit.scaleDown,
                       alignment: AlignmentDirectional.centerEnd,
-                      child: Text(l.kg(line.weightKg), style: text.labelLarge),
+                      child: Text(l.kg(line.weightKg), style: text.labelMedium?.copyWith(fontWeight: FontWeight.w700)),
                     ),
                   ),
                 ],

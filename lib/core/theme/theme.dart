@@ -58,8 +58,9 @@ abstract final class HawatTheme {
         elevation: 0,
         scrolledUnderElevation: 0,
         centerTitle: false,
+        toolbarHeight: 52,
         titleSpacing: Hud.gutter,
-        titleTextStyle: text.titleLarge,
+        titleTextStyle: text.titleMedium?.copyWith(fontSize: 16),
         systemOverlayStyle: brightness == Brightness.light
             ? SystemUiOverlayStyle.dark.copyWith(statusBarColor: Colors.transparent)
             : SystemUiOverlayStyle.light.copyWith(statusBarColor: Colors.transparent),
@@ -77,8 +78,9 @@ abstract final class HawatTheme {
           foregroundColor: c.onPrimary,
           disabledBackgroundColor: c.mutedSurface,
           disabledForegroundColor: c.muted,
-          minimumSize: const Size(64, Hud.minTouch),
-          padding: const EdgeInsets.symmetric(horizontal: 18),
+          minimumSize: const Size(64, Hud.buttonHeight),
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          iconSize: 18,
           shape: sharp,
           textStyle: text.labelLarge,
           elevation: 0,
@@ -87,8 +89,9 @@ abstract final class HawatTheme {
       outlinedButtonTheme: OutlinedButtonThemeData(
         style: OutlinedButton.styleFrom(
           foregroundColor: c.foreground,
-          minimumSize: const Size(64, Hud.minTouch),
-          padding: const EdgeInsets.symmetric(horizontal: 16),
+          minimumSize: const Size(64, Hud.buttonHeight),
+          padding: const EdgeInsets.symmetric(horizontal: 14),
+          iconSize: 18,
           side: BorderSide(color: c.border),
           shape: sharp,
           textStyle: text.labelLarge,
@@ -97,8 +100,9 @@ abstract final class HawatTheme {
       textButtonTheme: TextButtonThemeData(
         style: TextButton.styleFrom(
           foregroundColor: c.primary,
-          minimumSize: const Size(48, Hud.minTouch),
-          padding: const EdgeInsets.symmetric(horizontal: 12),
+          minimumSize: const Size(48, 40),
+          padding: const EdgeInsets.symmetric(horizontal: 10),
+          iconSize: 18,
           shape: sharp,
           textStyle: text.labelLarge,
         ),
@@ -113,8 +117,12 @@ abstract final class HawatTheme {
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
         fillColor: c.panel,
-        isDense: false,
-        contentPadding: const EdgeInsets.symmetric(horizontal: 14, vertical: 14),
+        isDense: true,
+        contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+        prefixIconConstraints: const BoxConstraints(minWidth: 40, minHeight: 40),
+        suffixIconConstraints: const BoxConstraints(minWidth: 40, minHeight: 40),
+        prefixIconColor: c.muted,
+        suffixIconColor: c.muted,
         hintStyle: text.bodyMedium?.copyWith(color: c.muted.withValues(alpha: .8)),
         labelStyle: text.bodyMedium?.copyWith(color: c.muted),
         floatingLabelStyle: text.bodyMedium?.copyWith(color: c.primary, fontWeight: FontWeight.w600),
@@ -191,13 +199,13 @@ abstract final class HawatTheme {
         shape: const RoundedRectangleBorder(),
         labelStyle: text.labelMedium,
         showCheckmark: false,
-        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
       ),
       listTileTheme: ListTileThemeData(
         iconColor: c.muted,
         textColor: c.foreground,
         titleTextStyle: text.bodyLarge,
-        minVerticalPadding: 12,
+        minVerticalPadding: 10,
         contentPadding: const EdgeInsets.symmetric(horizontal: Hud.gutter),
       ),
       progressIndicatorTheme: ProgressIndicatorThemeData(color: c.primary, linearTrackColor: c.mutedSurface),
@@ -243,17 +251,17 @@ abstract final class HawatTheme {
     );
 
     return TextTheme(
-      displaySmall: s(26, FontWeight.w700, height: 1.2),
-      headlineSmall: s(22, FontWeight.w700, height: 1.25),
-      titleLarge: s(18, FontWeight.w700, height: 1.3),
-      titleMedium: s(16, FontWeight.w700),
-      titleSmall: s(14, FontWeight.w700),
-      bodyLarge: s(15, FontWeight.w500),
-      bodyMedium: s(14, FontWeight.w400),
-      bodySmall: s(12.5, FontWeight.w400, color: c.muted),
-      labelLarge: s(15, FontWeight.w700, height: 1.2),
-      labelMedium: s(13, FontWeight.w600, height: 1.25),
-      labelSmall: s(11.5, FontWeight.w600, height: 1.25),
+      displaySmall: s(24, FontWeight.w700, height: 1.2),
+      headlineSmall: s(20, FontWeight.w700, height: 1.25),
+      titleLarge: s(17, FontWeight.w700, height: 1.3),
+      titleMedium: s(15, FontWeight.w700),
+      titleSmall: s(13.5, FontWeight.w700),
+      bodyLarge: s(14, FontWeight.w500),
+      bodyMedium: s(13.5, FontWeight.w400),
+      bodySmall: s(12, FontWeight.w400, color: c.muted),
+      labelLarge: s(14, FontWeight.w700, height: 1.2),
+      labelMedium: s(12.5, FontWeight.w600, height: 1.25),
+      labelSmall: s(11, FontWeight.w600, height: 1.25),
     );
   }
 }

@@ -441,7 +441,7 @@ class _SaleFormScreenState extends ConsumerState<SaleFormScreen> {
         ),
       OutlinedButton.icon(
         onPressed: _addLine,
-        style: OutlinedButton.styleFrom(minimumSize: const Size.fromHeight(Hud.minTouch)),
+        style: OutlinedButton.styleFrom(minimumSize: const Size.fromHeight(Hud.buttonHeight)),
         icon: const Icon(Icons.add),
         label: Text(l.addSpecies),
       ),

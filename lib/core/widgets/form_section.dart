@@ -21,13 +21,13 @@ class FormSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => HudCard(
-    padding: const EdgeInsets.fromLTRB(14, 8, 14, 16),
+    padding: const EdgeInsets.fromLTRB(14, 6, 14, 14),
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         SectionHead(title: title, icon: icon),
-        const SizedBox(height: 8),
-        for (var i = 0; i < children.length; i++) ...[if (i > 0) const SizedBox(height: 14), children[i]],
+        const SizedBox(height: 6),
+        for (var i = 0; i < children.length; i++) ...[if (i > 0) const SizedBox(height: 12), children[i]],
       ],
     ),
   );
@@ -117,10 +117,15 @@ class DateField extends StatelessWidget {
         decoration: InputDecoration(
           hintText: l.notSet,
           errorText: error,
-          prefixIcon: const Icon(Icons.event_outlined),
+          prefixIcon: const Icon(Icons.event_outlined, size: 20),
           suffixIcon: value == null
               ? null
-              : IconButton(tooltip: l.clearValue, icon: const Icon(Icons.close), onPressed: () => onChanged(null)),
+              : IconButton(
+                  tooltip: l.clearValue,
+                  visualDensity: VisualDensity.compact,
+                  icon: const Icon(Icons.close, size: 18),
+                  onPressed: () => onChanged(null),
+                ),
         ),
         child: value == null ? null : Text(Fmt.date(value!), style: Theme.of(context).textTheme.bodyLarge),
       ),

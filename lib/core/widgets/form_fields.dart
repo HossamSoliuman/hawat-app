@@ -19,7 +19,7 @@ class FieldLabel extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         Padding(
-          padding: const EdgeInsets.only(bottom: 6),
+          padding: const EdgeInsets.only(bottom: 5),
           child: Text.rich(
             TextSpan(
               text: label,
@@ -92,7 +92,7 @@ class SearchSelect<T> extends StatelessWidget {
           hintText: hint,
           errorText: errorText,
           enabled: enabled,
-          suffixIcon: Icon(Icons.expand_more, color: c.muted),
+          suffixIcon: Icon(Icons.expand_more, size: 20, color: c.muted),
         ),
         child: shown == null
             ? null
@@ -234,8 +234,8 @@ class _SearchSheetState<T> extends State<_SearchSheet<T>> {
     return InkWell(
       onTap: onTap,
       child: Container(
-        constraints: const BoxConstraints(minHeight: 52),
-        padding: const EdgeInsets.symmetric(horizontal: Hud.gutter, vertical: 10),
+        constraints: const BoxConstraints(minHeight: 48),
+        padding: const EdgeInsets.symmetric(horizontal: Hud.gutter, vertical: 8),
         decoration: BoxDecoration(
           color: selected ? c.primary.withValues(alpha: .08) : null,
           border: Border(bottom: BorderSide(color: c.hair)),

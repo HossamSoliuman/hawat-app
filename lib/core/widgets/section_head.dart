@@ -17,10 +17,10 @@ class SectionHead extends StatelessWidget {
   Widget build(BuildContext context) {
     final c = HawatColors.of(context);
     return SizedBox(
-      height: 40,
+      height: 38,
       child: Row(
         children: [
-          ToneIcon(icon: icon, size: 28, iconSize: 15),
+          ToneIcon(icon: icon, size: 26, iconSize: 14),
           const SizedBox(width: 10),
           Flexible(
             flex: 4,
@@ -49,7 +49,7 @@ class SectionHead extends StatelessWidget {
             TextButton(
               onPressed: onAction,
               style: TextButton.styleFrom(
-                minimumSize: const Size(48, 40),
+                minimumSize: const Size(48, 36),
                 padding: const EdgeInsets.symmetric(horizontal: 8),
                 textStyle: Theme.of(context).textTheme.labelMedium,
               ),

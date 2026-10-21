@@ -128,7 +128,7 @@ class _CancelSheetState extends ConsumerState<_CancelSheet> {
             const SizedBox(height: 8),
             OutlinedButton(
               onPressed: _busy ? null : () => Navigator.of(context).pop(false),
-              style: OutlinedButton.styleFrom(minimumSize: const Size.fromHeight(Hud.minTouch)),
+              style: OutlinedButton.styleFrom(minimumSize: const Size.fromHeight(Hud.buttonHeight)),
               child: Text(l.keepTrip),
             ),
           ],

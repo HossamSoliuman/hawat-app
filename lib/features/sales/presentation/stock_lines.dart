@@ -133,7 +133,7 @@ class StockLineCard extends StatelessWidget {
               Container(
                 width: 26,
                 height: 26,
-                margin: const EdgeInsets.only(top: 12),
+                margin: const EdgeInsets.only(top: 9),
                 alignment: Alignment.center,
                 color: c.mutedSurface,
                 child: Text('${index + 1}', style: text.labelSmall),
@@ -163,11 +163,11 @@ class StockLineCard extends StatelessWidget {
               ),
               SizedBox(
                 width: 40,
-                height: 52,
+                height: 44,
                 child: IconButton(
                   tooltip: l.removeLine,
                   onPressed: canRemove ? onRemove : null,
-                  icon: Icon(Icons.close, color: canRemove ? c.muted : c.border),
+                  icon: Icon(Icons.close, size: 20, color: canRemove ? c.muted : c.border),
                 ),
               ),
             ],
@@ -194,7 +194,10 @@ class StockLineCard extends StatelessWidget {
                           ? null
                           : TextButton(
                               onPressed: () => _onWeight(Fmt.plain(limit)),
-                              style: TextButton.styleFrom(minimumSize: const Size(44, 40)),
+                              style: TextButton.styleFrom(
+                                minimumSize: const Size(40, 32),
+                                textStyle: text.labelMedium?.copyWith(fontWeight: FontWeight.w700),
+                              ),
                               child: Text(l.useAll),
                             ),
                     ),
@@ -240,7 +243,7 @@ class StockLineCard extends StatelessWidget {
                 children: [
                   Text(l.totalLabel, style: text.bodySmall),
                   const Spacer(),
-                  Text(l.sar(line.total), style: text.labelLarge),
+                  Text(l.sar(line.total), style: text.labelMedium?.copyWith(fontWeight: FontWeight.w700)),
                 ],
               ),
             ),
