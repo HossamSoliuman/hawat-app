@@ -23,9 +23,12 @@ import '../data/trips_providers.dart';
 /// captain, port, crew and licence as defaults, and shows its setup warnings
 /// (advisory only: the server never refuses a trip for them).
 class TripFormScreen extends ConsumerStatefulWidget {
-  const TripFormScreen({super.key, this.tripId});
+  const TripFormScreen({super.key, this.tripId, this.boatId});
 
   final int? tripId;
+
+  /// A new trip for this boat (from its card on the home); its captain follows it.
+  final int? boatId;
 
   @override
   ConsumerState<TripFormScreen> createState() => _TripFormScreenState();
@@ -38,7 +41,7 @@ class _TripFormScreenState extends ConsumerState<TripFormScreen> {
   final _notes = TextEditingController();
   final _idempotencyKey = ApiClient.newIdempotencyKey();
 
-  int? _boatId;
+  late int? _boatId = widget.boatId;
   int? _captainId;
   int? _departurePortId;
   int? _returnPortId;

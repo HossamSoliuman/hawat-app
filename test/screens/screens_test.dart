@@ -261,6 +261,7 @@ void screen(
             tokenStoreProvider.overrideWithValue(MemoryTokenStore()),
             sessionProvider.overrideWith(() => FakeSession(session)),
             appVersionProvider.overrideWithValue(version),
+            clockProvider.overrideWithValue(() => testNow),
           ],
           child: Builder(
             builder: (context) {

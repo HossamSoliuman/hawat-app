@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 import '../theme/tokens.dart';
 import 'stat_tile.dart';
 
-/// A section heading: an icon box, the title, and a hairline that fills the
-/// rest of the row and fades out. An optional action sits at the end.
+/// A section heading: an icon box (when given), the title, and a hairline that
+/// fills the rest of the row and fades out. An optional action sits at the end.
 class SectionHead extends StatelessWidget {
-  const SectionHead({super.key, required this.title, required this.icon, this.action, this.onAction});
+  const SectionHead({super.key, required this.title, this.icon, this.action, this.onAction});
 
   final String title;
-  final IconData icon;
+  final IconData? icon;
   final String? action;
   final VoidCallback? onAction;
 
@@ -20,8 +20,7 @@ class SectionHead extends StatelessWidget {
       height: 38,
       child: Row(
         children: [
-          ToneIcon(icon: icon, size: 26, iconSize: 14),
-          const SizedBox(width: 10),
+          if (icon != null) ...[ToneIcon(icon: icon!, size: 26, iconSize: 14), const SizedBox(width: 10)],
           Flexible(
             flex: 4,
             child: Text(

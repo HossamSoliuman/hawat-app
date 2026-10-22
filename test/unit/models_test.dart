@@ -161,6 +161,31 @@ void main() {
     expect(d.actionItems.tripsToSell, d.kpis.tripsForSale);
     expect(d.revenueByMonth, hasLength(6));
     expect(d.scheduledTrips.every((t) => t.phase == TripPhase.scheduled), isTrue);
+    expect(d.fleet, isNotEmpty);
+    expect(d.fleet!.where((b) => b.trip != null).every((b) => b.trip!.boat?.id == b.id), isTrue);
+    expect(d.catchToSell.every((t) => t.phase == TripPhase.forSale), isTrue);
+    expect(d.catchToSell.first.availableLines, isNotEmpty);
+    expect(d.kpis.previousRevenue, isNotNull);
+  });
+
+  test('from a server before 1.10.0 the boats list and the home trips stand in', () {
+    final json = fixtureData<Map<String, dynamic>>('dashboard')
+      ..remove('fleet')
+      ..remove('trips_to_sell')
+      ..remove('unpaid_sales');
+    final d = Dashboard.fromJson(json);
+    expect(d.fleet, isNull);
+    expect(d.kpis.collected, isNotNull);
+
+    final boats = [for (final b in fixtureData<List<dynamic>>('boats')) Boat.fromJson(b as Map<String, dynamic>)];
+    final fleet = d.fleetFrom(boats);
+    expect(fleet.map((b) => b.id), containsAll(boats.map((b) => b.id)));
+    // درة فرسان has trip 5 at sea and trip 9 at the counter: at sea wins.
+    expect(fleet.firstWhere((b) => b.id == 6).trip?.id, 5);
+    expect(fleet.firstWhere((b) => b.id == 1).trip?.id, 16);
+    expect(fleet.firstWhere((b) => b.id == 2).trip, isNull);
+    expect(d.catchToSell, isNotEmpty);
+    expect(d.catchToSell.every((t) => t.phase == TripPhase.forSale), isTrue);
   });
 
   test('a trip detail brings its catch lines and what is left to sell', () {

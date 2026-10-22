@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 
 import 'fake_api.dart';
+import 'harness.dart';
 
 /// Every owner endpoint the app reads, answered from the captured fixtures.
 /// Trip lists honour `stage` the way the server does.
@@ -102,36 +103,106 @@ FakeApi ownerApi() {
   return api;
 }
 
-/// [ownerApi] with a month of sales on the dashboard, so every home section has content.
+/// [ownerApi] on a busy morning ([testNow]): a boat back late, one about to
+/// sail, one at sea, one at the counter, catch waiting days to be sold,
+/// invoices left unpaid, and the month ahead of the last one.
 FakeApi busyOwnerApi() {
   final api = ownerApi();
   final dashboard = fixture('dashboard');
   final data = dashboard['data'] as Map<String, dynamic>;
+  String ago(Duration d) => testNow.subtract(d).toUtc().toIso8601String();
+  String ahead(Duration d) => testNow.add(d).toUtc().toIso8601String();
+  final trips = {for (final t in (fixture('trips')['data'] as List).cast<Map<String, dynamic>>()) t['id'] as int: t};
+  final boats = {
+    for (final b in (fixture('boats')['data'] as List).cast<Map<String, dynamic>>())
+      b['id'] as int: {'id': b['id'], 'name': b['name'], 'boat_number': b['boat_number'], 'status': b['status']},
+  };
+  Map<String, dynamic> boatRef(int id) => {
+    'id': id,
+    'name': boats[id]!['name'],
+    'boat_number': boats[id]!['boat_number'],
+  };
+
   (data['kpis'] as Map)
     ..['revenue'] = 48250
+    ..['previous_revenue'] = 41200
+    ..['collected'] = 41950
+    ..['uncollected'] = 6300
     ..['catch_kg'] = 1840.5
     ..['unpaid'] = 6300;
-  data['action_items'] = {'trips_to_start': 1, 'trips_to_sell': 7, 'unpaid_sales': 3, 'unpaid_total': 6300};
+  data['action_items'] = {'trips_to_start': 1, 'trips_to_sell': 4, 'unpaid_sales': 3, 'unpaid_total': 6300};
   final months = data['revenue_by_month'] as List;
   const totals = [12400, 18900, 9800, 22350, 31200, 48250];
   for (var i = 0; i < months.length; i++) {
     (months[i] as Map)['total'] = totals[i];
   }
-  final sales = fixture('sales')['data'] as List;
-  data['recent_sales'] = [
-    for (var i = 0; i < 4; i++)
+
+  data['fleet'] = [
+    {
+      ...boats[6]!,
+      'trip': {...trips[5]!, 'started_at': ago(const Duration(days: 6, hours: 2)), 'planned_days': 4},
+    },
+    {
+      ...boats[1]!,
+      'status': 'نشط',
+      'trip': {...trips[16]!, 'departure_time': ahead(const Duration(hours: 7))},
+    },
+    {
+      ...boats[5]!,
+      'trip': {...trips[15]!, 'started_at': ago(const Duration(days: 2, hours: 3)), 'planned_days': 5},
+    },
+    {
+      ...boats[3]!,
+      'trip': {...trips[8]!, 'catch_submitted_at': ago(const Duration(hours: 5))},
+    },
+    {...boats[2]!, 'status': 'نشط', 'trip': null},
+    {...boats[4]!, 'status': 'صيانة', 'trip': null},
+  ];
+
+  data['trips_to_sell'] = [
+    {
+      ...trips[13]!,
+      'counted_at': ago(const Duration(days: 3, hours: 4)),
+      'available_stock': [
+        {'species_id': 5, 'species': 'الحريد', 'available_kg': 420},
+        {'species_id': 1, 'species': 'الهامور', 'available_kg': 380},
+      ],
+    },
+    {
+      ...trips[12]!,
+      'counted_at': ago(const Duration(days: 1, hours: 2)),
+      'available_stock': [
+        {'species_id': 3, 'species': 'الكنعد', 'available_kg': 1240},
+        {'species_id': 2, 'species': 'الشعري', 'available_kg': 860},
+      ],
+    },
+    {
+      ...trips[11]!,
+      'boat': boatRef(3),
+      'counted_at': ago(const Duration(hours: 6)),
+      'available_stock': [
+        {'species_id': 4, 'species': 'الناجل', 'available_kg': 640},
+        {'species_id': 3, 'species': 'الكنعد', 'available_kg': 310},
+      ],
+    },
+  ];
+
+  final sale = (fixture('sales')['data'] as List).first as Map<String, dynamic>;
+  data['unpaid_sales'] = [
+    for (final (i, (name, phone, total, paid, age)) in const [
+      ('محل أبو خالد للأسماك', '0551234567', 1250.5, 0, Duration(days: 12)),
+      ('مطعم البحر', '0559876543', 9600, 6000, Duration(days: 3)),
+      ('سالم الدوسري', null, 1449.5, 0, Duration(hours: 20)),
+    ].indexed)
       {
-        ...(sales.first as Map<String, dynamic>),
-        'id': 100 + i,
-        'invoice_number': '26-10-00012${4 - i}',
-        'total': [4800, 1250.5, 9600, 2300][i],
-        'paid_amount': [4800, 0, 6000, 2300][i],
-        'remaining': [0, 1250.5, 3600, 0][i],
-        'customer': {
-          'id': i,
-          'name': ['سوق القطيف المركزي', 'محل أبو خالد للأسماك', 'مطعم البحر', 'سالم الدوسري'][i],
-          'phone': null,
-        },
+        ...sale,
+        'id': 101 + i,
+        'invoice_number': '26-10-000${120 + i}',
+        'total': total,
+        'paid_amount': paid,
+        'remaining': total - paid,
+        'sold_at': ago(age),
+        'customer': {'id': 11 + i, 'name': name, 'phone': phone},
       },
   ];
   return api..json('GET', '/owner/dashboard', dashboard);

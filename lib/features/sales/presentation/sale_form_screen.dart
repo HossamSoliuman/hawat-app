@@ -34,9 +34,12 @@ import 'stock_lines.dart';
 /// (never more than the trip has), the payment, then a review and
 /// "إنهاء البيع". The running total stays pinned at the bottom.
 class SaleFormScreen extends ConsumerStatefulWidget {
-  const SaleFormScreen({super.key, required this.tripId});
+  const SaleFormScreen({super.key, required this.tripId, this.speciesId});
 
   final int tripId;
+
+  /// The first line starts on this species (selling it from the home's stock).
+  final int? speciesId;
 
   @override
   ConsumerState<SaleFormScreen> createState() => _SaleFormScreenState();
@@ -54,7 +57,7 @@ class _SaleFormScreenState extends ConsumerState<SaleFormScreen> {
   final List<Customer> _addedCustomers = [];
   String? _customerError;
 
-  final List<StockLineDraft> _lines = [StockLineDraft()];
+  late final List<StockLineDraft> _lines = [StockLineDraft()..speciesId = widget.speciesId];
   String? _linesError;
 
   /// The lines of the last submit, in the order sent, so `items.N` finds its card.

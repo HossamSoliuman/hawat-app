@@ -15,6 +15,11 @@ LocalStore localStore(Ref ref) => MemoryLocalStore();
 @Riverpod(keepAlive: true)
 TokenStore tokenStore(Ref ref) => const SecureTokenStore();
 
+/// The time now. Screens that say "منذ يومين" or "متأخرة ساعتين" read it, so
+/// tests and screenshots pin it.
+@Riverpod(keepAlive: true)
+DateTime Function() clock(Ref ref) => DateTime.now;
+
 /// The installed version (`1.0.0`), read once in `main` from the package info.
 @Riverpod(keepAlive: true)
 String appVersion(Ref ref) => '1.0.0';

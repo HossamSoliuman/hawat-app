@@ -67,12 +67,14 @@ abstract final class Routes {
   static const editMaintenance = '/maintenance/edit';
 
   static String tripsAt(TripStage stage) => '$trips?stage=${stage.apiValue}';
+  static String newTripFor(int boatId) => '$newTrip?boat=$boatId';
   static String unpaidSales() => '$sales?unpaid=1';
   static String trip(int id) => '/trip/$id';
   static String editTrip(int id) => '/trip/$id/edit';
   static String submitCatch(int id) => '/trip/$id/catch';
   static String sale(int id) => '/sale/$id';
-  static String newSale(int tripId) => '/sale/new?trip=$tripId';
+  static String newSale(int tripId, {int? speciesId}) =>
+      '/sale/new?trip=$tripId${speciesId == null ? '' : '&species=$speciesId'}';
   static String newConsignment(int tripId) => '/consign/new?trip=$tripId';
   static String consignment(int id) => '/consignment/$id';
   static String stockMovements({int? speciesId}) =>
@@ -168,7 +170,10 @@ GoRouter router(Ref ref) {
       GoRoute(path: Routes.editProfile, builder: (_, _) => const EditProfileScreen()),
       GoRoute(path: Routes.changePassword, builder: (_, _) => const ChangePasswordScreen()),
       GoRoute(path: Routes.catchLog, builder: (_, _) => const CatchLogScreen()),
-      GoRoute(path: Routes.newTrip, builder: (_, _) => const TripFormScreen()),
+      GoRoute(
+        path: Routes.newTrip,
+        builder: (_, state) => TripFormScreen(boatId: _query(state, 'boat')),
+      ),
       GoRoute(
         path: '/trip/:id',
         builder: (_, state) => TripScreen(id: _id(state)),
@@ -186,7 +191,7 @@ GoRouter router(Ref ref) {
       // Before '/sale/:id', or "new" would be read as an invoice id.
       GoRoute(
         path: '/sale/new',
-        builder: (_, state) => SaleFormScreen(tripId: _query(state, 'trip') ?? 0),
+        builder: (_, state) => SaleFormScreen(tripId: _query(state, 'trip') ?? 0, speciesId: _query(state, 'species')),
       ),
       GoRoute(
         path: '/sale/:id',

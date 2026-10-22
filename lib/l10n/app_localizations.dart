@@ -211,6 +211,12 @@ abstract class AppLocalizations {
   /// **'أمس {time}'**
   String yesterdayAt(String time);
 
+  /// No description provided for @tomorrowAt.
+  ///
+  /// In ar, this message translates to:
+  /// **'غدًا {time}'**
+  String tomorrowAt(String time);
+
   /// No description provided for @errorNetwork.
   ///
   /// In ar, this message translates to:
@@ -571,24 +577,6 @@ abstract class AppLocalizations {
   /// **'لا شيء بانتظارك'**
   String get nothingPending;
 
-  /// No description provided for @actionTripsToStart.
-  ///
-  /// In ar, this message translates to:
-  /// **'بانتظار الانطلاق'**
-  String get actionTripsToStart;
-
-  /// No description provided for @actionTripsToSell.
-  ///
-  /// In ar, this message translates to:
-  /// **'جاهزة للبيع'**
-  String get actionTripsToSell;
-
-  /// No description provided for @actionUnpaid.
-  ///
-  /// In ar, this message translates to:
-  /// **'فواتير لم تُحصَّل'**
-  String get actionUnpaid;
-
   /// No description provided for @startShort.
   ///
   /// In ar, this message translates to:
@@ -649,48 +637,6 @@ abstract class AppLocalizations {
   /// **'مصيد السنة'**
   String get statCatchYear;
 
-  /// No description provided for @statActiveBoats.
-  ///
-  /// In ar, this message translates to:
-  /// **'القوارب النشطة'**
-  String get statActiveBoats;
-
-  /// No description provided for @pipelineTitle.
-  ///
-  /// In ar, this message translates to:
-  /// **'مسار الرحلات'**
-  String get pipelineTitle;
-
-  /// No description provided for @pipeScheduled.
-  ///
-  /// In ar, this message translates to:
-  /// **'مجدولة'**
-  String get pipeScheduled;
-
-  /// No description provided for @pipeAtSea.
-  ///
-  /// In ar, this message translates to:
-  /// **'في البحر'**
-  String get pipeAtSea;
-
-  /// No description provided for @pipeCounting.
-  ///
-  /// In ar, this message translates to:
-  /// **'عند العداد'**
-  String get pipeCounting;
-
-  /// No description provided for @pipeForSale.
-  ///
-  /// In ar, this message translates to:
-  /// **'للبيع'**
-  String get pipeForSale;
-
-  /// No description provided for @noActiveTrips.
-  ///
-  /// In ar, this message translates to:
-  /// **'لا رحلات جارية الآن'**
-  String get noActiveTrips;
-
   /// No description provided for @stockTitle.
   ///
   /// In ar, this message translates to:
@@ -703,23 +649,197 @@ abstract class AppLocalizations {
   /// **'لا مصيد متاح للبيع بعد'**
   String get noStock;
 
-  /// No description provided for @revenueTitle.
-  ///
-  /// In ar, this message translates to:
-  /// **'الإيرادات'**
-  String get revenueTitle;
-
-  /// No description provided for @recentSalesTitle.
-  ///
-  /// In ar, this message translates to:
-  /// **'آخر المبيعات'**
-  String get recentSalesTitle;
-
   /// No description provided for @noSalesYet.
   ///
   /// In ar, this message translates to:
   /// **'لا مبيعات بعد'**
   String get noSalesYet;
+
+  /// No description provided for @fleetTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'الأسطول'**
+  String get fleetTitle;
+
+  /// No description provided for @fleetEmpty.
+  ///
+  /// In ar, this message translates to:
+  /// **'أضف قاربك الأول لتتابع رحلاته من هنا'**
+  String get fleetEmpty;
+
+  /// No description provided for @boatDeparts.
+  ///
+  /// In ar, this message translates to:
+  /// **'تنطلق {when}'**
+  String boatDeparts(String when);
+
+  /// No description provided for @boatLate.
+  ///
+  /// In ar, this message translates to:
+  /// **'متأخرة عن الانطلاق'**
+  String get boatLate;
+
+  /// No description provided for @boatAtSeaDay.
+  ///
+  /// In ar, this message translates to:
+  /// **'يوم {day} من {planned}'**
+  String boatAtSeaDay(int day, int planned);
+
+  /// No description provided for @boatOverdue.
+  ///
+  /// In ar, this message translates to:
+  /// **'تجاوزت مدتها'**
+  String get boatOverdue;
+
+  /// No description provided for @boatAtCounter.
+  ///
+  /// In ar, this message translates to:
+  /// **'عند العداد'**
+  String get boatAtCounter;
+
+  /// No description provided for @boatCounting.
+  ///
+  /// In ar, this message translates to:
+  /// **'جارٍ العد'**
+  String get boatCounting;
+
+  /// No description provided for @boatInPort.
+  ///
+  /// In ar, this message translates to:
+  /// **'في الميناء'**
+  String get boatInPort;
+
+  /// No description provided for @boatInMaintenance.
+  ///
+  /// In ar, this message translates to:
+  /// **'في الصيانة'**
+  String get boatInMaintenance;
+
+  /// No description provided for @boatInactive.
+  ///
+  /// In ar, this message translates to:
+  /// **'غير نشط'**
+  String get boatInactive;
+
+  /// No description provided for @sinceDuration.
+  ///
+  /// In ar, this message translates to:
+  /// **'منذ {duration}'**
+  String sinceDuration(String duration);
+
+  /// No description provided for @durationMinutes.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =1{دقيقة} =2{دقيقتين} few{{count} دقائق} many{{count} دقيقة} other{{count} دقيقة}}'**
+  String durationMinutes(int count);
+
+  /// No description provided for @durationHours.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =1{ساعة} =2{ساعتين} few{{count} ساعات} many{{count} ساعة} other{{count} ساعة}}'**
+  String durationHours(int count);
+
+  /// No description provided for @durationDays.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =1{يوم} =2{يومين} few{{count} أيام} many{{count} يومًا} other{{count} يوم}}'**
+  String durationDays(int count);
+
+  /// No description provided for @logCatchShort.
+  ///
+  /// In ar, this message translates to:
+  /// **'سجّل المصيد'**
+  String get logCatchShort;
+
+  /// No description provided for @startNewTrip.
+  ///
+  /// In ar, this message translates to:
+  /// **'ابدأ رحلة'**
+  String get startNewTrip;
+
+  /// No description provided for @sellShort.
+  ///
+  /// In ar, this message translates to:
+  /// **'بيع'**
+  String get sellShort;
+
+  /// No description provided for @collectShort.
+  ///
+  /// In ar, this message translates to:
+  /// **'حصّل'**
+  String get collectShort;
+
+  /// No description provided for @toSellTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'مصيد جاهز للبيع'**
+  String get toSellTitle;
+
+  /// No description provided for @toCollectTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'فواتير لم تُحصَّل'**
+  String get toCollectTitle;
+
+  /// No description provided for @leftKg.
+  ///
+  /// In ar, this message translates to:
+  /// **'متبقٍ {kg}'**
+  String leftKg(String kg);
+
+  /// No description provided for @leftSar.
+  ///
+  /// In ar, this message translates to:
+  /// **'متبقٍ {amount}'**
+  String leftSar(String amount);
+
+  /// No description provided for @remindWhatsapp.
+  ///
+  /// In ar, this message translates to:
+  /// **'تذكير عبر واتساب'**
+  String get remindWhatsapp;
+
+  /// No description provided for @reminderMessage.
+  ///
+  /// In ar, this message translates to:
+  /// **'السلام عليكم {name}، نذكّركم بالمبلغ المتبقي {amount} على الفاتورة {invoice}. شكرًا لكم.'**
+  String reminderMessage(String name, String amount, String invoice);
+
+  /// No description provided for @vsYesterday.
+  ///
+  /// In ar, this message translates to:
+  /// **'عن أمس'**
+  String get vsYesterday;
+
+  /// No description provided for @vsLastMonth.
+  ///
+  /// In ar, this message translates to:
+  /// **'عن الشهر الماضي'**
+  String get vsLastMonth;
+
+  /// No description provided for @vsLastYear.
+  ///
+  /// In ar, this message translates to:
+  /// **'عن العام الماضي'**
+  String get vsLastYear;
+
+  /// No description provided for @collectedLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'محصّل'**
+  String get collectedLabel;
+
+  /// No description provided for @uncollectedLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'متبقٍ'**
+  String get uncollectedLabel;
+
+  /// No description provided for @lastSixMonths.
+  ///
+  /// In ar, this message translates to:
+  /// **'آخر 6 أشهر'**
+  String get lastSixMonths;
 
   /// No description provided for @phaseScheduled.
   ///

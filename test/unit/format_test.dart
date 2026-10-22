@@ -37,6 +37,7 @@ void main() {
       final now = DateTime(2026, 10, 18, 20);
       expect(ar.when(DateTime(2026, 10, 18, 9, 5), now: now), contains('اليوم'));
       expect(ar.when(DateTime(2026, 10, 17, 9, 5), now: now), contains('أمس'));
+      expect(ar.when(DateTime(2026, 10, 19, 9, 5), now: now), contains('غدًا'));
       expect(ar.when(DateTime(2026, 9, 2, 9, 5), now: now), startsWith('2 سبتمبر'));
     });
 
@@ -49,6 +50,22 @@ void main() {
     test('amounts read naturally', () {
       expect(ar.sar(1300), '${Fmt.ltr('1,300')} ر.س');
       expect(ar.kg(160.5), '${Fmt.ltr('160.5')} كجم');
+    });
+
+    test('headline sums drop the halalas', () {
+      expect(Fmt.wholeMoney(33994.5), '33,995');
+      expect(Fmt.wholeMoney(29392.25), '29,392');
+      expect(ar.sarWhole(48250), '${Fmt.ltr('48,250')} ر.س');
+    });
+
+    test('how long ago, in the largest whole unit', () {
+      expect(ar.since(const Duration(seconds: 20)), 'منذ دقيقة');
+      expect(ar.since(const Duration(minutes: 20)), 'منذ 20 دقيقة');
+      expect(ar.since(const Duration(hours: 2, minutes: 50)), 'منذ ساعتين');
+      expect(ar.since(const Duration(hours: 5)), 'منذ 5 ساعات');
+      expect(ar.since(const Duration(days: 1, hours: 23)), 'منذ يوم');
+      expect(ar.since(const Duration(days: 3)), 'منذ 3 أيام');
+      expect(ar.since(const Duration(days: 12)), 'منذ 12 يومًا');
     });
   });
 

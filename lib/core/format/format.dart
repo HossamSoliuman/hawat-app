@@ -11,6 +11,9 @@ abstract final class Fmt {
   /// 5215 → "5,215", 5215.5 → "5,215.5".
   static String money(num value) => _money.format(value);
 
+  /// A headline sum in whole riyals: 33994.5 → "33,995". Invoices keep their halalas.
+  static String wholeMoney(num value) => _int.format(value.round());
+
   static String kg(num value) => _kg.format(value);
 
   static String count(num value) => _int.format(value);

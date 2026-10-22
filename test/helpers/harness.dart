@@ -51,6 +51,9 @@ Future<void> loadAppFonts() async {
   }
 }
 
+/// The time every test and screenshot sees, as on the phone frames (9:41).
+final testNow = DateTime(2026, 10, 22, 9, 41);
+
 const owner = AppUser(
   id: 1,
   name: 'محمود الزهراني',
@@ -162,6 +165,7 @@ class TestApp {
             ),
           ),
           localStoreProvider.overrideWithValue(store),
+          clockProvider.overrideWithValue(() => testNow),
           tokenStoreProvider.overrideWithValue(tokens),
           if (!realSession)
             sessionProvider.overrideWith(() => FakeSession(user == null ? const SignedOut() : SignedIn(user!))),

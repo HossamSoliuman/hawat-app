@@ -114,6 +114,11 @@ class AppLocalizationsAr extends AppLocalizations {
   }
 
   @override
+  String tomorrowAt(String time) {
+    return 'غدًا $time';
+  }
+
+  @override
   String get errorNetwork => 'تعذّر الاتصال بالخادم. تحقق من الإنترنت ثم أعد المحاولة.';
 
   @override
@@ -302,15 +307,6 @@ class AppLocalizationsAr extends AppLocalizations {
   String get nothingPending => 'لا شيء بانتظارك';
 
   @override
-  String get actionTripsToStart => 'بانتظار الانطلاق';
-
-  @override
-  String get actionTripsToSell => 'جاهزة للبيع';
-
-  @override
-  String get actionUnpaid => 'فواتير لم تُحصَّل';
-
-  @override
   String get startShort => 'ابدأ';
 
   @override
@@ -341,40 +337,151 @@ class AppLocalizationsAr extends AppLocalizations {
   String get statCatchYear => 'مصيد السنة';
 
   @override
-  String get statActiveBoats => 'القوارب النشطة';
-
-  @override
-  String get pipelineTitle => 'مسار الرحلات';
-
-  @override
-  String get pipeScheduled => 'مجدولة';
-
-  @override
-  String get pipeAtSea => 'في البحر';
-
-  @override
-  String get pipeCounting => 'عند العداد';
-
-  @override
-  String get pipeForSale => 'للبيع';
-
-  @override
-  String get noActiveTrips => 'لا رحلات جارية الآن';
-
-  @override
   String get stockTitle => 'الأسماك المتوفرة';
 
   @override
   String get noStock => 'لا مصيد متاح للبيع بعد';
 
   @override
-  String get revenueTitle => 'الإيرادات';
-
-  @override
-  String get recentSalesTitle => 'آخر المبيعات';
-
-  @override
   String get noSalesYet => 'لا مبيعات بعد';
+
+  @override
+  String get fleetTitle => 'الأسطول';
+
+  @override
+  String get fleetEmpty => 'أضف قاربك الأول لتتابع رحلاته من هنا';
+
+  @override
+  String boatDeparts(String when) {
+    return 'تنطلق $when';
+  }
+
+  @override
+  String get boatLate => 'متأخرة عن الانطلاق';
+
+  @override
+  String boatAtSeaDay(int day, int planned) {
+    return 'يوم $day من $planned';
+  }
+
+  @override
+  String get boatOverdue => 'تجاوزت مدتها';
+
+  @override
+  String get boatAtCounter => 'عند العداد';
+
+  @override
+  String get boatCounting => 'جارٍ العد';
+
+  @override
+  String get boatInPort => 'في الميناء';
+
+  @override
+  String get boatInMaintenance => 'في الصيانة';
+
+  @override
+  String get boatInactive => 'غير نشط';
+
+  @override
+  String sinceDuration(String duration) {
+    return 'منذ $duration';
+  }
+
+  @override
+  String durationMinutes(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count دقيقة',
+      many: '$count دقيقة',
+      few: '$count دقائق',
+      two: 'دقيقتين',
+      one: 'دقيقة',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String durationHours(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count ساعة',
+      many: '$count ساعة',
+      few: '$count ساعات',
+      two: 'ساعتين',
+      one: 'ساعة',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String durationDays(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count يوم',
+      many: '$count يومًا',
+      few: '$count أيام',
+      two: 'يومين',
+      one: 'يوم',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get logCatchShort => 'سجّل المصيد';
+
+  @override
+  String get startNewTrip => 'ابدأ رحلة';
+
+  @override
+  String get sellShort => 'بيع';
+
+  @override
+  String get collectShort => 'حصّل';
+
+  @override
+  String get toSellTitle => 'مصيد جاهز للبيع';
+
+  @override
+  String get toCollectTitle => 'فواتير لم تُحصَّل';
+
+  @override
+  String leftKg(String kg) {
+    return 'متبقٍ $kg';
+  }
+
+  @override
+  String leftSar(String amount) {
+    return 'متبقٍ $amount';
+  }
+
+  @override
+  String get remindWhatsapp => 'تذكير عبر واتساب';
+
+  @override
+  String reminderMessage(String name, String amount, String invoice) {
+    return 'السلام عليكم $name، نذكّركم بالمبلغ المتبقي $amount على الفاتورة $invoice. شكرًا لكم.';
+  }
+
+  @override
+  String get vsYesterday => 'عن أمس';
+
+  @override
+  String get vsLastMonth => 'عن الشهر الماضي';
+
+  @override
+  String get vsLastYear => 'عن العام الماضي';
+
+  @override
+  String get collectedLabel => 'محصّل';
+
+  @override
+  String get uncollectedLabel => 'متبقٍ';
+
+  @override
+  String get lastSixMonths => 'آخر 6 أشهر';
 
   @override
   String get phaseScheduled => 'مجدولة';
